@@ -1,1 +1,0 @@
-<h3><?php echo esc_html( $field->text() ); ?></h3>
