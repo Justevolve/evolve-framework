@@ -1,0 +1,24 @@
+@mixin ev_icon_reset() {
+
+	.ev-icon {
+		line-height: 1;
+		font-size: inherit;
+		font-weight: 400;
+		font-style: normal;
+		text-transform: none;
+		text-rendering: auto;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+}
+
+// -----------------------------------------------------------------------------
+// $Utilities
+// -----------------------------------------------------------------------------
+
+@mixin ev_icon( $icon, $char ) {
+	[data-icon="#{$icon}"]:before {
+		content: "#{$char}";
+	}
+}

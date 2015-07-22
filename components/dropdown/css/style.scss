@@ -1,0 +1,36 @@
+@mixin ev_dropdown_reset() {
+
+	.ev-dropdown {
+		position: relative;
+
+		.ev-trigger {}
+	}
+
+	.ev-dropdown-content {
+		z-index: 10;
+		position: absolute;
+		display: none;
+	}
+
+	// Positioning
+	// -------------------------------------------------------------------------
+
+	.ev-dropdown-left .ev-dropdown-content {
+		right: 100%;
+		top: 0;
+	}
+
+	.ev-dropdown-right .ev-dropdown-content {
+		left: 100%;
+		top: 0;
+	}
+
+	.ev-dropdown-top .ev-dropdown-content {
+		bottom: 100%;
+	}
+
+	.ev-dropdown-bottom .ev-dropdown-content {
+		top: 100%;
+	}
+
+}

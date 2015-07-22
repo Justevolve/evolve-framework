@@ -1,0 +1,44 @@
+// -----------------------------------------------------------------------------
+// $FLUID GRID SYSTEM
+// -----------------------------------------------------------------------------
+// Return the column size value
+// -----------------------------------------------------------------------------
+// Specify only the column ratio i.e. 1/3
+@function _ev_col( $size ) {
+	 @return $size*100%;
+}
+
+// -----------------------------------------------------------------------------
+// Return a width column property
+// -----------------------------------------------------------------------------
+// Specify the column ratio i.e. 1/3 and optionally the gutter value
+@mixin ev_col( $size, $gutter: false ) {
+	width: _ev_col( $size );
+
+	@if $gutter != false {
+		padding-left: $gutter/2;
+		padding-right: $gutter/2;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $FIXED GRID SYSTEM
+// -----------------------------------------------------------------------------
+// Return the dimension of the column without gutter
+// -----------------------------------------------------------------------------
+@function _ev_fixed_col( $size ) {
+   @return $size * $container;
+}
+
+// -----------------------------------------------------------------------------
+// Return a grid column
+// -----------------------------------------------------------------------------
+// Specify the column ratio i.e. 1/3 and optionally the gutter value
+@mixin ev_fixed_col( $size, $gutter: false ) {
+	width: $size * $container;
+
+	@if $gutter != false {
+		padding-left: $gutter/2;
+		padding-right: $gutter/2;
+	}
+}

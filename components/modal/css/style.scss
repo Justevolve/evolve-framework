@@ -1,0 +1,27 @@
+@mixin ev_modal_reset() {
+
+	.ev-modal-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background: rgba( #000, 0.7 );
+		z-index: 10000;
+	}
+
+	.ev-modal-wrapper {
+		position: absolute;
+	}
+
+	@include ev_icon( "ev-modal-close", "\f335" );
+
+	.ev-modal-close {
+		font-family: "dashicons";
+		position: absolute;
+		top: 0;
+		right: 0;
+		text-decoration: none;
+	}
+
+}

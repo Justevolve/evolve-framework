@@ -1,0 +1,87 @@
+@mixin ev_tabs_reset() {
+
+	.ev-tabs {
+		@extend %clearfix !optional;
+	}
+
+	.ev-tabs-nav {
+		@extend %clearfix !optional;
+		font-size: 0.01em;
+
+		li {
+			display: inline-block;
+			list-style: none;
+			font-size: 100em;
+		}
+
+		&.ev-align-right,
+		.rtl & {
+			text-align: right;
+		}
+
+		&.ev-align-left {
+			text-align: left;
+		}
+
+		&.ev-align-center {
+			text-align: center;
+		}
+
+		.ev-tab-trigger {
+			display: block;
+			outline: none;
+		}
+
+		// Vertical tabs nav
+		&.ev-vertical {
+			float: left;
+
+			li {
+				display: block;
+			}
+
+			&.ev-align-right,
+			.rtl & {
+				float: right;
+			}
+
+			&.ev-align-right {
+				text-align: left;
+
+				.rtl & {
+					text-align: right;
+				}
+			}
+
+			&.ev-align-left {
+				float: left;
+
+				.rtl & {
+					text-align: right;
+				}
+			}
+
+			&.ev-align-center {
+				float: none;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+
+	}
+
+	.ev-tab-container {
+		@extend %clearfix !optional;
+		overflow: hidden;
+	}
+
+	.ev-tab {
+		display: none;
+	}
+
+	// Active style
+	.ev-tab.ev-active {
+		display: block;
+	}
+
+}

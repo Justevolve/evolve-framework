@@ -1,0 +1,1456 @@
+// -----------------------------------------------------------------------------
+// $Import
+// -----------------------------------------------------------------------------
+
+@import "bourbon";
+@import "components-libs";
+
+// -----------------------------------------------------------------------------
+// $Config
+// -----------------------------------------------------------------------------
+
+// Dimensions
+
+$baseline       : 24px;
+$gutter         : 20px;
+$radius         : 2px;
+$transition_time: .1s;
+
+// Icons
+
+$icons: "dashicons";
+
+// Colors
+
+$white          : #fff;
+$text           : #222;
+$text_light     : #999;
+$red            : #f76d5e;
+$green          : #76ba5f;
+$blue_dark      : #0074a2;
+$blue_medium    : #2ea2cc;
+$blue_light     : #f7fcfe;
+$blue_light_text: #314e59;
+$border_color   : #e5e5e5;
+$grey_light     : #e0e0e0;
+$grey_light_1   : #f1f1f1;
+$grey_light_2   : #f7f7f7;
+$yellow_light   : #fff6bf;
+$yellow_text    : #595643;
+
+// WordPress admin media queries
+
+$media_tablet: "only screen and (max-width: 960px)";
+$media_mobile: "only screen and (max-width: 782px)";
+
+// Resources
+
+$handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4zwABjDACQwCqAEkZsggAb94CBcYDBvUAAAAASUVORK5CYII=";
+
+// -----------------------------------------------------------------------------
+// $Utils, mixins and extends
+// -----------------------------------------------------------------------------
+
+@import "_utils.scss";
+
+// -----------------------------------------------------------------------------
+// $Selectize
+// -----------------------------------------------------------------------------
+
+@import "selectize/selectize.scss";
+
+// -----------------------------------------------------------------------------
+// $Minicolors
+// -----------------------------------------------------------------------------
+
+@import "minicolors/jquery.minicolors.scss";
+
+// -----------------------------------------------------------------------------
+// $Reset
+// -----------------------------------------------------------------------------
+
+.ev {
+	h1, h2, h3, h4, h5, h6 {
+		margin: 0;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $General
+// -----------------------------------------------------------------------------
+
+.ev-admin-page {
+	@include box-sizing( border-box );
+	margin-left: 20px;
+	margin-right: 40px;
+	padding-top: $baseline;
+
+	@include ev-media( $media_mobile ) {
+		margin-right: 10px;
+		margin-left: 0;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Page heading
+// -----------------------------------------------------------------------------
+
+.ev-admin-page-heading {
+	margin-bottom: $baseline*2;
+
+	h2 {
+		line-height: 1;
+		font-weight: 300;
+		font-size: 2em;
+
+		span {
+			font-weight: bold;
+		}
+
+		+ div {
+			margin-top: $baseline/2 !important;
+		}
+	}
+
+	p {
+		margin-top: $baseline/3;
+		font-style: italic;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Horizonal navigation for option page
+// -----------------------------------------------------------------------------
+
+.ev-admin-page .ev-admin-page-group-nav {
+	margin-bottom: $baseline*2;
+
+	ul {
+		font-size: 0.01em;
+		border: 1px solid $border_color;
+		background-color: $white;
+		border-radius: $radius;
+
+		li {
+			display: inline-block;
+			list-style: none;
+			font-size: 100em;
+			margin-bottom: 0;
+
+			&:first-child a {
+				border-top-left-radius: $radius;
+				border-bottom-left-radius: $radius;
+			}
+
+			&:last-child a {
+				border-top-right-radius: $radius;
+				border-bottom-right-radius: $radius;
+			}
+
+			a {
+				display: block;
+				position: relative;
+				background-color: $white;
+				font-size: 13px;
+				padding: $baseline/2 $gutter/1.5;
+				text-decoration: none;
+				color: $text_light;
+				border-right: 1px solid $border_color;
+
+				&:focus {
+					@include box-shadow( none );
+				}
+
+				&.ev-active {
+					font-weight: bold;
+					background-color: $blue_dark;
+					color: $white;
+				}
+			}
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Vertical navigation for option page
+// -----------------------------------------------------------------------------
+
+@include ev_tabs_reset();
+
+.ev-admin-page .ev-tabs-nav.ev-vertical {
+	width: 20%;
+	max-width: 220px;
+	margin-right: 20px;
+
+	@include ev-media( $media_mobile ) {
+		width: 100%;
+		margin-right: 0;
+		margin-bottom: $baseline;
+		max-width: none;
+	}
+
+	li {
+		margin-bottom: 0;
+
+		&:first-child {
+			a {
+				border-top-right-radius: $radius;
+				border-top-left-radius: $radius;
+				border-top: 1px solid $border_color;
+			}
+		}
+
+		&:last-child {
+			a {
+				border-bottom-right-radius: $radius;
+				border-bottom-left-radius: $radius;
+			}
+		}
+
+		a {
+			display: block;
+			position: relative;
+			background-color: $white;
+			font-size: 13px;
+			padding: $baseline/2 $gutter/1.5;
+			text-decoration: none;
+			color: $text_light;
+			border-left: 1px solid $border_color;
+			border-right: 1px solid $border_color;
+			border-bottom: 1px solid $border_color;
+
+			&:focus {
+				@include box-shadow( none );
+			}
+
+			&.ev-active {
+				font-weight: bold;
+				background-color: $blue_light;
+				color: $text;
+
+				&:before {
+					content: "";
+					display: block;
+					@include position( absolute, 0 null 0 0 );
+					width: 4px;
+					height: 100%;
+					background-color: $blue_medium;
+				}
+			}
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Vertical navigation for Metabox
+// -----------------------------------------------------------------------------
+
+.ev-metabox {
+	@include vertical_tab_style;
+}
+
+// -----------------------------------------------------------------------------
+// $Options tab container
+// -----------------------------------------------------------------------------
+
+.ev-tab-container {
+	background-color: $white;
+
+	.ev-tab {
+		@include clearfix;
+	}
+}
+
+.ev-tabs-nav + .ev-tab-container {
+	border-left: 1px solid $border_color;
+}
+
+// -----------------------------------------------------------------------------
+// $Options tab saving container
+// -----------------------------------------------------------------------------
+
+.ev-form-submit-container {
+	@include clearfix;
+	@include box-sizing( border-box );
+	display: inline-block;
+	width: 100%;
+	clear: both;
+	padding: $baseline/2 $gutter;
+	margin-top: $baseline/2;
+	border-top: 1px solid $border_color;
+}
+
+.ev-save {
+	@extend %btn;
+
+	input[type="submit"] {
+		display: none;
+	}
+
+	.ev-btn-message {
+		color: $green;
+
+		&:before {
+			@include icon( "\f147" );
+			display: inline-block;
+			font-size: 20px;
+			position: relative;
+			top: 5px;
+			margin-right: $gutter/4;
+		}
+	}
+
+	.ev-btn-action {
+		color: $white;
+		background-color: $green;
+		@include transition( background-color $transition_time*1.5 ease, width $transition_time*2.5 ease, padding $transition_time*2.5 $ease-out-back );
+		cursor: pointer;
+
+		&:after {
+			@include position( absolute, 50% $gutter/2 null null );
+			@include spinner( 12px, 2px, $white );
+			@include opacity( 0 );
+			visibility: hidden;
+			@include transition( visibility $transition_time*1.5 linear, opacity $transition_time*1.5 ease );
+		}
+
+		&:hover {
+			background-color: darken( $green, 10 );
+		}
+	}
+
+	&.ev-saving {
+		.ev-btn-action {
+			cursor: default;
+			background-color: lighten( $green, 10 );
+			padding-right: $gutter + 16px + $gutter/2;
+
+			&:after {
+				@include opacity( 100 );
+				visibility: visible;
+			}
+		}
+	}
+
+	&.ev-saved {
+		.ev-btn-action {
+			background-color: lighten( $green, 10 );
+			cursor: default;
+		}
+
+		.ev-btn-message {
+			@include opacity( 100 );
+			visibility: visible;
+			margin-left: $gutter;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Messages
+// -----------------------------------------------------------------------------
+
+.ev-persistent-messages-container {
+	@include position( fixed, ( 32px + $baseline ) $gutter*2 null ( 160px + $gutter*2 ) );
+	z-index: 100;
+
+	@include ev-media( $media_mobile ) {
+		right: 10px;
+		left: 10px;
+	}
+
+	.folded & {
+		left: 36px + $gutter*2;
+
+		@include ev-media( $media_mobile ) {
+			left: 10px;
+		}
+	}
+
+	.admin-bar & {
+		@include ev-media( $media_mobile ) {
+			top: 46px + $baseline;
+		}
+	}
+}
+
+.ev-persistent-message {
+	padding: $baseline/2;
+	@include box-shadow( 0 2px 5px rgba( #000, .2 ) );
+
+	+ .ev-persistent-message {
+		margin-top: $baseline/2;
+	}
+
+	> h3 {
+		text-transform: uppercase;
+		font-size: 12px;
+		margin-bottom: $baseline/2;
+	}
+
+	p {
+		margin: 0;
+
+		a {
+			font-weight: bold;
+		}
+
+		+ p {
+			margin-top: $baseline;
+		}
+	}
+
+	.ev-close-persistent-message {
+		float: right;
+		@include opacity( 100 );
+		@include transition( opacity $transition_time ease );
+
+		&:hover {
+			@include opacity( 60 );
+		}
+
+		&:before {
+			@include icon( "\f153" );
+			font-size: 18px;
+			cursor: pointer;
+		}
+	}
+
+	&.ev-error {
+		background-color: $red;
+		color: $white;
+
+		> h3 {
+			color: $white;
+		}
+
+		a {
+			color: $white;
+
+			&:hover {
+				color: rgba( $white, .7 );
+			}
+		}
+	}
+
+	&.ev-warning {
+		background-color: $yellow_light;
+		color: $yellow_text;
+
+		> h3 {
+			color: $yellow_text;
+		}
+
+		a {
+			color: $yellow_text;
+
+			&:hover {
+				color: rgba( $yellow_text, .7 );
+			}
+		}
+	}
+
+	&.ev-notice {
+		background-color: $blue_medium;
+		color: $white;
+
+		> h3 {
+			color: $white;
+		}
+
+		a {
+			color: $white;
+
+			&:hover {
+				color: rgba( $white, .7 );
+			}
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Static message
+// -----------------------------------------------------------------------------
+
+.ev-admin-notice {
+	margin: $baseline/4 $gutter*2 $baseline/4 $gutter !important;
+	display: block;
+}
+
+.ev-static-notice {
+	display: block;
+	line-height: 19px;
+	padding: 1px 15px;
+	font-size: 14px;
+	text-align: left;
+	background-color: #fff;
+	border-left: 4px solid $blue_medium;
+	@include box-shadow( 0 1px 1px 0 rgba( #000, .1 ) );
+
+	p {
+		margin: .5em 0;
+  		padding: 2px;
+  		font-size: inherit;
+  		font-family: inherit;
+  		line-height: inherit;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Metabox style
+// -----------------------------------------------------------------------------
+
+.ev-metabox {
+	background-color: $grey_light_1;
+	margin: -6px -12px -12px;
+}
+
+// -----------------------------------------------------------------------------
+// $Fields
+// -----------------------------------------------------------------------------
+
+.ev-field {
+	display: block;
+	float: left;
+	@include box-sizing( border-box );
+	padding: $baseline/2 $gutter;
+
+	// 100% width
+	&.ev-field-size-full {
+		width: 100%;
+		clear: both;
+	}
+
+	// 1/2 width
+	&.ev-field-size-large {
+		width: _ev_col( 1/2 );
+
+		@include ev_media( $media_mobile ) {
+			width: _ev_col( 1/1 );
+		}
+	}
+
+	// 1/3 width
+	&.ev-field-size-medium {
+		width: _ev_col( 1/3 );
+
+		@include ev_media( $media_tablet ) {
+			width: _ev_col( 1/2 );
+		}
+
+		@include ev_media( $media_mobile ) {
+			width: _ev_col( 1/1 );
+		}
+	}
+
+	// 1/4 width
+	&.ev-field-size-small {
+		width: _ev_col( 1/4 );
+
+		@include ev_media( $media_tablet ) {
+			width: _ev_col( 1/2 );
+		}
+
+		@include ev_media( $media_mobile ) {
+			width: _ev_col( 1/1 );
+		}
+	}
+
+	// Break field
+	&.ev-field-break {
+		float: none;
+		clear: both;
+	}
+
+	.ev-field-inner {
+		p {
+			margin: 0;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Fields label
+// -----------------------------------------------------------------------------
+
+.ev-field-header {
+	.ev-label {
+		font-weight: bold;
+		font-size: 14px;
+		float: left;
+		color: $text;
+	}
+
+	&.ev-field-header-label-inline {
+		display: inline-block;
+		float: left;
+		margin-top: $baseline/6;
+		width: 30%;
+		max-width: 220px;
+
+		+ .ev-container {
+			display: inline-block;
+			width: 70%;
+			@include box-sizing( border-box );
+			padding-left: $gutter;
+		}
+	}
+
+	&.ev-field-header-label-block {
+		width: 100%;
+		@include clearfix;
+		margin-bottom: $baseline/2;
+
+		.ev-label {
+			display: block;
+		}
+	}
+
+	&.ev-field-header-label-hidden {
+		.ev-label {
+			display: none;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Help
+// -----------------------------------------------------------------------------
+
+.ev-help {
+
+	&.ev-help-tooltip,
+	&.ev-help-popup {
+		display: inline-block;
+	}
+
+	.ev-help-handle {
+		display: inline-block;
+		margin-left: $gutter/2;
+
+		&:before {
+			@include icon( "\f223" );
+			display: block;
+			float: left;
+			font-size: 20px;
+			margin-top: -2px;
+			color: $grey_light;
+		}
+
+		&:hover {
+			&:before {
+				color: $blue_dark;
+			}
+		}
+
+		span {
+			display: none;
+		}
+	}
+
+	&.ev-help-inline {
+		display: block;
+		clear: both;
+		@extend %label;
+		padding-top: $baseline/4;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Fields input styles
+// -----------------------------------------------------------------------------
+
+.ev-field {
+
+	input[type="text"],
+	input[type="number"],
+	textarea {
+		max-width: 100%;
+
+		@include ev_media( $media_tablet ) {
+			width: 100%;
+		}
+	}
+
+	select {
+		max-width: 100%;
+	}
+
+	// Radio
+	.ev-radio {
+		display: block;
+
+		+ .ev-radio {
+			margin-top: $baseline/4;
+
+			@include ev_media( $media_tablet ) {
+				margin-top: $baseline/2;
+			}
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Fields repeatable
+// -----------------------------------------------------------------------------
+
+.ev-repeatable-remove:before {
+	display: none;
+}
+
+.ev-repeatable {
+
+	.ev-repeatable-controls {
+		display: block;
+		margin-bottom: $baseline/2;
+
+		a + a {
+			margin-left: $gutter;
+		}
+	}
+
+	.ev-container-empty .ev-repeatable-controls {
+		display: none;
+	}
+
+	.ev-field-inner {
+		position: relative;
+		padding: $baseline/4 $baseline*1.25 $baseline/4 $baseline/2;
+		border: 1px solid $border_color;
+		border-bottom: 0;
+
+		&:last-child {
+			border-bottom: 1px solid $border_color;
+		}
+
+		&:hover {
+			background-color: rgba( $blue_light, .1 );
+			border-left-color: $blue_medium;
+			border-right-color: $blue_medium;
+
+			.ev-repeatable-remove:before {
+				@include opacity( 100 );
+			}
+
+			&:before,
+			&:after {
+				content: "";
+				display: block;
+				@include position( absolute, -1px null -1px null );
+				width: 1px;
+				background-color: $blue_medium;
+			}
+
+			&:before {
+				left: 0;
+			}
+
+			&:after {
+				right: 0;
+			}
+		}
+
+		+ .ev-field-inner {
+			border-top: 1px dashed $border_color;
+		}
+	}
+
+	.ev-repeatable-remove {
+		cursor: pointer;
+
+		&:before {
+			@extend %remove_icon;
+			margin-top: -9px;
+			@include position( absolute, 50% $baseline/4 null null );
+		}
+
+		&:hover:before {
+			color: darken( $red, 20 );
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Fields sortable
+// -----------------------------------------------------------------------------
+
+.ev-sortable {
+
+	.ev-field-inner {
+		padding-left: $gutter + 1;
+		float: left;
+		width: 100%;
+		clear: both;
+		@include box-sizing( border-box );
+
+		&:hover {
+			.ev-sortable-handle {
+				visibility: visible;
+			}
+		}
+
+		&.ui-sortable-helper {
+			border-top: 1px solid $border_color;
+			border-bottom: 1px solid $border_color;
+			background-color: $white;
+			@include box-shadow( 0 1px 10px rgba( #000, .1 ) );
+		}
+
+		&.ui-sortable-placeholder {
+			background-color: $grey_light_2;
+			visibility: visible !important;
+		}
+
+	}
+
+	.ev-sortable-handle {
+		@include ev_handle;
+		width: $gutter;
+		@include position( absolute, 0 null 0 0 );
+
+		&:before {
+			@include position( absolute, 50% null null 50% );
+			margin-left: -3px;
+			margin-top: -7px;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Empty state
+// -----------------------------------------------------------------------------
+
+.ev-empty-state {
+	display: none;
+	border: 1px solid $border_color;
+	background: $grey_light_2;
+	text-align: center;
+	font-size: 12px;
+	font-style: italic;
+	color: $text_light;
+	padding: $baseline/2 $gutter;
+
+	.ev-container-empty & {
+		display: block;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Image upload
+// -----------------------------------------------------------------------------
+
+$upload_size: 80px;
+
+.ev-image-size-select-container {
+	clear: both;
+	margin-top: $baseline/2;
+
+	p {
+		@extend %label;
+		padding-bottom: $baseline/6;
+	}
+}
+
+.ev-image-upload-container {
+	@include clearfix;
+	display: inline-block;
+	position: relative;
+	float: left;
+
+	& + .ev-image-upload-container {
+		margin-left: $gutter/2;
+	}
+}
+
+.ev-image-upload {
+	display: inline-block;
+
+	.ev-image-placeholder {
+		@include clearfix;
+		display: inline-block;
+		position: relative;
+		background-color: $grey_light_2;
+		@include size( $upload_size );
+		float: left;
+		margin-bottom: $gutter/4;
+
+		&:before {
+			@include icon( "\f128" );
+			font-size: 22px;
+			@include position( absolute, 50% null null 50% );
+			@include transform( translate3d( -50%, -50%, 0 ) );
+			color: $grey_light;
+		}
+
+		&:after {
+			content: "";
+			display: block;
+			@include position( absolute, 0 0 0 0 );
+			border: 1px solid $border_color;
+		}
+
+		img {
+			float: left;
+			display: none;
+		}
+	}
+
+	&[data-multiple] {
+		.ev-image-placeholder {
+			visibility: hidden;
+		}
+
+		.ev-image-placeholder-container {
+			position: relative;
+
+			&:before {
+				@include icon( "\f161" );
+				font-size: 22px;
+				line-height: $upload_size;
+				@include size( $upload_size );
+				text-align: center;
+				float: left;
+				margin-bottom: $gutter/4;
+				color: $grey_light;
+			}
+
+			&:after {
+				content: "";
+				display: block;
+				@include size( ($upload_size - 2px) );
+				@include position( absolute, 0 null null 0 );
+				border: 1px dashed $border_color;
+			}
+
+		}
+
+		&.ev-image-uploaded {
+
+			&[data-sortable] {
+				.ev-image-placeholder {
+					cursor: move;
+				}
+			}
+
+			.ev-image-placeholder-container {
+				&:before, &:after {
+					display: none;
+				}
+			}
+
+			.ev-image-placeholder {
+				visibility: visible;
+				margin-right: $gutter/4;
+
+				&.ui-sortable-helper {
+					@include box-shadow( 0 1px 10px rgba( #000, .1 ) );
+				}
+
+				&.ui-sortable-placeholder {
+					visibility: visible !important;
+
+					&:after {
+						border-color: $grey_light_2;
+					}
+				}
+			}
+
+		}
+	}
+
+	.ev-density-label,
+	.ev-breakpoint-label {
+		@extend %label;
+		padding-bottom: $baseline/6;
+	}
+
+	+ .ev-image-upload {
+		margin-left: $gutter/2;
+	}
+
+	.ev-image-upload-action {
+		clear: both;
+	}
+
+	.ev-edit-action {
+		display: none;
+	}
+
+	.ev-upload-action {
+		display: inline-block;
+	}
+
+	&.ev-image-uploaded {
+		+ .ev-image-upload-image-size-selection {
+			display: block;
+			margin-top: $baseline/6;
+		}
+
+		.ev-upload-remove {
+			cursor: pointer;
+
+			&:before {
+				@extend %remove_icon;
+				background-color: $white;
+				border-radius: 50%;
+				@include position( absolute, -3px -3px null null );
+			}
+		}
+
+		.ev-edit-action {
+			display: inline-block;
+		}
+
+		.ev-upload-action {
+			display: none;
+		}
+
+		.ev-image-placeholder {
+			@include size( auto );
+
+			&:hover {
+				.ev-upload-remove {
+					&:before {
+						@include opacity( 100 );
+					}
+
+					&:hover {
+						&:before {
+							color: darken( $red, 20 );
+						}
+					}
+				}
+
+				&:after {
+					border: 3px solid $blue_medium;
+					@include box-shadow( inset 0px 0px 0px 1px $white );
+				}
+			}
+
+			&:before {
+				display: none;
+			}
+
+			img {
+				display: block;
+				max-height: $upload_size;
+				width: auto;
+				height: $upload_size;
+			}
+		}
+	}
+}
+
+.ev-image-upload-image-size-selection {
+	display: none;
+
+	span {
+		display: block;
+		@extend %label;
+		padding-bottom: $baseline/6;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Divider
+// -----------------------------------------------------------------------------
+
+.ev-field-divider {
+	padding-left: $gutter;
+	padding-right: $gutter;
+	padding-bottom: 0;
+	margin-bottom: $baseline/2;
+
+	h3 {
+		display: inline-block;
+		padding: 0 0 $baseline/4 !important;
+		margin-bottom: -1px !important;
+		font-size: 14px !important;
+	}
+
+	// Section break
+	&.ev-divider-style-section_break {
+		border-bottom: 1px solid $border_color;
+
+		h3 {
+			background-color: $blue_dark;
+			color: $white;
+			border-top-left-radius: $radius;
+			border-top-right-radius: $radius;
+			padding: $baseline/4 $baseline/2 !important;
+		}
+	}
+
+	// In page divider
+	&.ev-divider-style-in_page {
+		padding-top: $baseline;
+
+		.ev-field-inner {
+			border-bottom: 1px solid $border_color;
+		}
+
+		h3 {
+			border-bottom: 4px solid $blue_dark;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Field description
+// -----------------------------------------------------------------------------
+
+.ev-field-description {
+
+	// Standard message
+	&.ev-description-style-standard {
+		.ev-container {}
+	}
+
+	// Blue info notice
+	&.ev-description-style-info {
+		.ev-container {
+			padding: $baseline/1.5 $gutter;
+			border-radius: $radius;
+			background-color: $blue_light;
+			color: $blue_light_text;
+		}
+	}
+
+	// Yellow important message
+	&.ev-description-style-important {
+		.ev-container {
+			padding: $baseline/1.5 $gutter;
+			border-radius: $radius;
+			background-color: $yellow_light;
+			color: $yellow_text;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Tooltip
+// -----------------------------------------------------------------------------
+
+#ev-tooltip {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: $text;
+	color: #fff;
+	max-width: 200px;
+	border-radius: $radius;
+	padding: $baseline/3 $baseline/2;
+	font-size: 12px;
+	margin-top: -10px;
+	@include box-shadow( 0 1px 4px rgba( #000, .2 ) );
+	@include ev-transition( visibility $transition_time*1.5 ease, opacity $transition_time*1.5 ease );
+	@include opacity( 0 );
+	visibility: hidden;
+	z-index: 20000;
+
+	&.ev-tooltip-active {
+		@include opacity( 100 );
+		visibility: visible;
+	}
+
+	&:after {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		margin-left: -8px;
+		margin-top: -2px;
+		content: "";
+		display: block;
+		@include triangle( 16px, $text, down );
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Icon picker
+// -----------------------------------------------------------------------------
+
+$rows: 6;
+$icon_size: 20 + ( $baseline/3 * 2 );
+
+.ev-icon-sets {
+	clear: both;
+	@include clearfix;
+
+	ul {
+		@include box-sizing( border-box );
+		display: none;
+		@include size( 100% ($icon_size*$rows) );
+		overflow-y: scroll;
+		overflow-x: hidden;
+		border: 1px solid $border_color;
+		margin: 0;
+
+		&.ev-on {
+			display: block;
+		}
+	}
+
+	li {
+		@include box-sizing( border-box );
+		float: left;
+		padding: $baseline/3;
+		font-size: 20px;
+		cursor: pointer;
+		line-height: 1;
+		@include size( $icon_size );
+		margin: 0;
+
+		&:hover {
+			background-color: $grey_light_1;
+		}
+
+		i.ev-selected {
+			color: $blue_medium;
+		}
+	}
+
+	&.ev-searching li i {
+		@include opacity( 30 );
+
+		&.ev-found {
+			@include opacity( 100 );
+		}
+	}
+}
+
+.ev-selected-icon-wrapper {
+	position: relative;
+	@include size( $baseline*2.25 );
+	border: 1px solid $border_color;
+	float: left;
+	text-align: center;
+
+	.ev-icon {
+		font-size: 32px;
+		line-height: $baseline*2.25;
+	}
+
+	&.ev-empty {
+		.ev-icon-remove {
+			display: none;
+		}
+	}
+
+	.ev-icon-remove {
+		cursor: pointer;
+		display: block;
+
+		&:before {
+			@extend %remove_icon;
+			background-color: $white;
+			border-radius: 50%;
+			@include position( absolute, -3px -3px null null );
+		}
+	}
+
+	&.ev-empty .ev-icon-remove {
+		display: none;
+	}
+
+	&:hover {
+		.ev-icon-remove {
+			&:before {
+				@include opacity( 100 );
+			}
+
+			&:hover {
+				&:before {
+					color: darken( $red, 20 );
+				}
+			}
+		}
+	}
+}
+
+.ev-icon-search-wrapper {
+	margin-left: $gutter/2;
+	float: left;
+}
+
+.ev-icon-search-results {
+	@extend %label;
+	padding-top: $baseline/4;
+}
+
+.ev-icon-set-select-wrapper {
+	clear: both;
+	background-color: $border_color;
+	padding: $baseline/3;
+	margin-top: $baseline;
+	float: left;
+	width: 100%;
+	@include box-sizing( border-box );
+}
+
+// -----------------------------------------------------------------------------
+// $Modal
+// -----------------------------------------------------------------------------
+
+$modal_header_height: $baseline*2;
+$modal_footer_height: $baseline + ($baseline + 13) + 1; // footer padding + button padding + button font size + border
+
+body.ev-modal-open {
+	overflow: hidden;
+}
+
+.ev-modal-wrapper {
+	top: 60px;
+	bottom: 60px;
+	left: 15%;
+	right: 15%;
+	background: $white;
+	overflow: hidden;
+
+	@include ev_media( $media_tablet ) {
+		left: 5%;
+		right: 5%;
+	}
+
+	@include ev_media( $media_mobile ) {
+		left: 0;
+		right: 0;
+	}
+
+	&.ev-loading {
+		&:before {
+			@include spinner( 20px, 3px, $text );
+			@include position( absolute, 50% null null 50% );
+			margin-left: -10px;
+			margin-top: -10px;
+		}
+	}
+}
+
+.ev-modal-header {
+	padding: $baseline/2 ($gutter*1.5 + $baseline) $baseline/2 $gutter;
+	min-height: $modal_header_height;
+	@include box-sizing( border-box );
+
+	h1 {
+		font-size: 16px;
+		line-height: $baseline;
+		margin: 0;
+		font-weight: bold;
+	}
+}
+
+.ev-modal {
+	border-top: 1px solid $border_color;
+
+	> .ev-tabs {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: $modal_footer_height;
+	}
+}
+
+.ev-modal-footer {
+	@include clearfix;
+	@include box-sizing( border-box );
+	display: inline-block;
+	width: 100%;
+	clear: both;
+	padding: $baseline/2 $gutter;
+	border-top: 1px solid $border_color;
+	@include position( absolute, null 0 0 0 );
+	z-index: 1;
+	background: #fff;
+
+	.ev-save {
+		float: right;
+
+		.ev-btn-action {
+			background-color: $blue_dark;
+
+			&:hover {
+				background-color: darken( $blue_dark, 10 );
+			}
+
+			&:after {
+				display: none;
+			}
+		}
+	}
+}
+
+.ev-modal-close {
+	position: relative;
+	font-size: $baseline;
+	@include size( $baseline );
+	line-height: $baseline;
+	padding-top: $baseline/2;
+	float: right;
+	margin-right: $gutter;
+	z-index: 10;
+	color: $text;
+
+	&:focus {
+		@include box-shadow( none );
+	}
+
+	&:hover {
+		color: $red;
+	}
+
+	i {
+		font-style: normal;
+	}
+}
+
+.ev-modal-back {
+	float: left;
+	@extend %btn;
+
+	.ev-btn-action {
+		color: $text;
+		background-color: $grey_light_1;
+		@include transition( background-color $transition_time*1.5 ease, width $transition_time*2.5 ease, padding $transition_time*2.5 $ease-out-back );
+		cursor: pointer;
+
+		&:before {
+			@include icon( "\f340" );
+			float: left;
+			margin-right: $gutter/4;
+		}
+
+		&:hover {
+			background-color: darken( $grey_light_1, 10 );
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Modal tabs
+// -----------------------------------------------------------------------------
+
+.ev-modal {
+	@include vertical_tab_style;
+
+	> .ev-tabs {
+		@include position( absolute, ($modal_header_height + 1) 0 $modal_footer_height 0 );
+		overflow-y: auto;
+		background: $grey_light_1;
+
+		.ev-tab-container {
+			min-height: 100%;
+		}
+	}
+
+	> .ev-tab-container {
+		@include position( absolute, ($modal_header_height + 1) 0 $modal_footer_height 0 );
+		overflow-y: auto;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Modal container
+// -----------------------------------------------------------------------------
+
+@include ev_modal_reset();
