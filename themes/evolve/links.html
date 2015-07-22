@@ -1,0 +1,17 @@
+{% if repo_url %}
+	<li class="repo">
+		{% if repo_name == 'GitHub' %}
+			<a class="github" href="{{ repo_url }}" title="Edit on GitHub"><span class="icon"></span>Edit on GitHub</a>
+		{% elif repo_name == 'Bitbucket' %}
+			<a class="bitbucket" href="{{ repo_url }}" title="Edit on BitBucket"><span class="icon"></span>Edit on BitBucket</a>
+		{% else %}
+			<a class="repository" href="{{ repo_url }}" title="Edit in Repository"><span class="icon"></span>Edit in Repository</a>
+		{% endif %}
+	</li>
+{% endif %}
+<li>
+	<a class="facebook" href="https://www.facebook.com/evolvesnc" title="Follow us on Facebook"><span class="icon"></span>Follow us on Facebook</a>
+</li>
+<li>
+	<a class="twitter" href="https://twitter.com/evolvesnc" title="Follow us on Twitter"><span class="icon"></span>Follow us on Twitter</a>
+</li>

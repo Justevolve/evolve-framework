@@ -1,0 +1,21 @@
+site_name: Evolve Framework
+site_description: A WordPress development framework.
+site_author: Evolve
+copyright: Copyright © 2015 – Evolve Snc
+repo_url: https://github.com/Justevolve/evolve-framework
+theme_dir: themes/evolve
+pages:
+- Introduction: 'index.md'
+- Getting started:
+    - 'Requirements and installation': 'install.md'
+    - 'Conventions': 'conventions.md'
+    - 'Themes and plugins': 'themes-plugins.md'
+    # - 'Frontend utilities': 'frontend.md'
+- Option framework:
+    - 'Data management': 'data.md'
+    - 'Data types': 'data-types.md'
+    - 'Option pages': 'option-page.md'
+    - 'Meta boxes': 'metabox.md'
+- Extra:
+    - 'Internationalization': 'i18n.md'
+    - 'Update': 'update.md'

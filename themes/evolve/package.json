@@ -1,0 +1,11 @@
+{
+	"name": "MkdocsTheme",
+	"title": "MkdocsTheme",
+	"version": "1.0.0",
+	"devDependencies": {
+		"node-bourbon": "1.2.3",
+		"grunt": "",
+		"grunt-contrib-sass": "",
+		"grunt-contrib-watch": ""
+	}
+}

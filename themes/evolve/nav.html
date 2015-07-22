@@ -1,0 +1,39 @@
+<div class="nav-wrapper">
+	<div class="search-container" role="search">
+		<!--
+		<form action="{{ base_url }}/search.html" method="get">
+			<input type="text" name="q" placeholder="Search docs" />
+		</form>
+		-->
+
+		<form id="content_search" action="{{ base_url }}/search.html">
+			<span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+			<input name="q" id="mkdocs-search-query" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+		</form>
+	</div>
+
+	<ul class="main-nav">
+		{% for nav_item in nav %}
+			{% if not nav_item.children %}
+				<li {% if nav_item.active %}class="active"{% endif %}>
+					<a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+				</li>
+			{% else %}
+				<li>
+					{{ nav_item.title }}
+					<ul>
+						{% for nav_item in nav_item.children %}
+							<li {% if nav_item.active %}class="active"{% endif %}>
+								<a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</div>
+
+<ul class="links">
+	{% include "links.html" %}
+</ul>

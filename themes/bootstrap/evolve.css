@@ -1,0 +1,200 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,300,400);
+
+/*
+ * Colors
+ *
+ * Primary: #66cc66;
+ * Text: #333;
+ * Light grey: #f7faf9;
+ */
+
+/* General */
+body {
+	font-size: 18px;
+	line-height: 1.5;
+	color: #333;
+	font-family: "Open Sans", sans-serif;
+	padding-top: 80px;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: "Open Sans", sans-serif;
+}
+
+a {
+	color: #66cc66;
+}
+a:hover {
+	color: #66cc66;
+	text-decoration: none;
+	border-bottom: 2px solid;
+}
+h1 {
+	font-size: 52px;
+	font-weight: 300;
+	margin-top: 48px !important;
+}
+h1, h2, h3 {
+	margin-top: 72px;
+	margin-bottom: 24px;
+}
+h2, h3 {
+	font-weight: bold;
+}
+p {
+	margin-bottom: 18px;
+}
+.form-control:focus {
+	border-color: #66cc66;
+	box-shadow: none;
+}
+h1[id]:before, h2[id]:before, h3[id]:before, h4[id]:before, h5[id]:before, h6[id]:before {
+	display: none;
+}
+
+/* Nav bar
+----------------------------------------------------------------------------- */
+.navbar-brand svg {
+	fill: #66cc66;
+	height: 40px;
+	width: 220px;
+	float: left;
+}
+.navbar-brand {
+	padding: 10px 15px;
+}
+.navbar-brand span {
+	display: none;
+}
+.navbar-default {
+	background-color: #333;
+	font-size: 14px;
+	border-bottom: none;
+}
+.navbar a {
+	border-bottom: none;
+}
+.navbar-right {
+	background-color: #000;
+}
+.navbar-right a span {
+	display: none;
+}
+@media (max-width: 767px) {
+	.navbar-collapse {
+		border-top: none;
+	}
+	.navbar-right {
+		margin-bottom: 0;
+	}
+	.navbar-right a span {
+		display: inline-block;
+	}
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+	color: #fff;
+	font-weight: normal;
+	background-color: #66cc66;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+	color: #66cc66;
+}
+
+@media (min-width: 768px) {
+	.navbar-nav.navbar-right:last-child {
+		margin-right: 0;
+	}
+}
+
+@media (min-width: 992px) {
+	.bs-sidebar.affix {
+		top: 128px;
+	}
+}
+
+/* Dropdown
+----------------------------------------------------------------------------- */
+.dropdown-menu {
+	border: none;
+}
+.dropdown-menu > li > a {
+	color: #999;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+	color: #333;
+	font-weight: normal;
+	background-color: #f7faf9;
+}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+	color: #fff;
+	font-weight: normal;
+	background-color: #66cc66;
+}
+
+/* Nav sidebar
+----------------------------------------------------------------------------- */
+.bs-sidebar {
+	border: none;
+	box-shadow: none;
+	background-color: #f7faf9;
+}
+.bs-sidenav {
+	border-radius: 4px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+.bs-sidebar .nav > .main a {
+	font-size: 18px;
+	color: #333;
+}
+.bs-sidebar .nav li {
+	font-size: 14px;
+}
+.bs-sidebar .nav > li > a {
+	color: #999;
+	padding: 6px 20px;
+}
+.bs-sidebar .nav > .active > a {
+	color: #fff;
+	font-weight: normal;
+	background-color: #66cc66;
+}
+.bs-sidebar .nav > li > a:hover,
+.bs-sidebar .nav > li > a:focus {
+	text-decoration: none;
+	border-bottom: none;
+	border-right: none;
+	color: #333;
+}
+.bs-sidebar .nav > .active:hover > a,
+.bs-sidebar .nav > .active:focus > a {
+	color: #fff;
+	font-weight: normal;
+	background-color: #66cc66;
+}
+
+/* Footer
+----------------------------------------------------------------------------- */
+footer {
+	font-size: 14px;
+	color: #999;
+	padding-top: 24px;
+	padding-bottom: 24px;
+	background-color: #f7faf9;
+}
+
+footer * + * {
+	margin-top: 6px;
+}
+
+/* Modal
+----------------------------------------------------------------------------- */
+.modal-content {
+	border-radius: 4px;
+	border: none;
+}
