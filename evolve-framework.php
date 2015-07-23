@@ -1,5 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) die( 'Forbidden' );
 
+global $wp_version;
+
 if ( ! ( version_compare( $wp_version, '4.0.0' ) >= 0 ) ) {
 	/**
 	 * Check if the framework meets the basic WordPress version requirement.
