@@ -5,7 +5,7 @@ Option pages are data fields containers. They can have a one-level structure, or
 To create a meta box you should refer to the `add_meta_box` method in the `Ev_AdminController` class; for example:
 
 ~~~
-thb_fw()->admin()->add_meta_box( "theme-options", __( "Theme options", "textdomain" ), array( "post", "page" ), array() );
+ev_fw()->admin()->add_meta_box( "theme-options", __( "Theme options", "textdomain" ), array( "post", "page" ), array() );
 ~~~
 
 The method is defined as follows:
@@ -22,7 +22,7 @@ To create a meta box you would write something like:
 
 ```
 function my_theme_options_meta_box() {
-    thb_fw()->admin()->add_meta_box( "options", __( "Options", "textdomain" ), array( "post", "page" ), array(
+    ev_fw()->admin()->add_meta_box( "options", __( "Options", "textdomain" ), array( "post", "page" ), array(
         array(
             "handle" => "copyright_text",
             "label" => __( "Copyright text", "textdomain" ),
@@ -38,7 +38,7 @@ To create a meta box that's organized in tabs:
 
 ```
 function my_tabbed_theme_options_meta_box() {
-    thb_fw()->admin()->add_meta_box( "options", __( "Options", "textdomain" ), array( "post", "page" ), array(
+    ev_fw()->admin()->add_meta_box( "options", __( "Options", "textdomain" ), array( "post", "page" ), array(
         array(
             "handle" => "first-tab",
             "label"  => __( "First tab", "textdomain" ),
