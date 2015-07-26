@@ -138,7 +138,7 @@
 					<h1 id="meta-boxes">Meta boxes</h1>
 <p>Option pages are data fields containers. They can have a one-level structure, or be divided in multiple subsections as tabs.</p>
 <p>To create a meta box you should refer to the <code>add_meta_box</code> method in the <code>Ev_AdminController</code> class; for example:</p>
-<pre><code>thb_fw()-&gt;admin()-&gt;add_meta_box( &quot;theme-options&quot;, __( &quot;Theme options&quot;, &quot;textdomain&quot; ), array( &quot;post&quot;, &quot;page&quot; ), array() );
+<pre><code>ev_fw()-&gt;admin()-&gt;add_meta_box( &quot;theme-options&quot;, __( &quot;Theme options&quot;, &quot;textdomain&quot; ), array( &quot;post&quot;, &quot;page&quot; ), array() );
 </code></pre>
 
 <p>The method is defined as follows:</p>
@@ -154,7 +154,7 @@
 <p>Check the <a href="../data-types/">data types documentation</a> for more information about what fields can be added to meta boxes.</p>
 <p>To create a meta box you would write something like:</p>
 <pre><code>function my_theme_options_meta_box() {
-    thb_fw()-&gt;admin()-&gt;add_meta_box( &quot;options&quot;, __( &quot;Options&quot;, &quot;textdomain&quot; ), array( &quot;post&quot;, &quot;page&quot; ), array(
+    ev_fw()-&gt;admin()-&gt;add_meta_box( &quot;options&quot;, __( &quot;Options&quot;, &quot;textdomain&quot; ), array( &quot;post&quot;, &quot;page&quot; ), array(
         array(
             &quot;handle&quot; =&gt; &quot;copyright_text&quot;,
             &quot;label&quot; =&gt; __( &quot;Copyright text&quot;, &quot;textdomain&quot; ),
@@ -168,7 +168,7 @@ add_action( &quot;init&quot;, &quot;my_theme_options_meta_box&quot; );
 
 <p>To create a meta box that's organized in tabs:</p>
 <pre><code>function my_tabbed_theme_options_meta_box() {
-    thb_fw()-&gt;admin()-&gt;add_meta_box( &quot;options&quot;, __( &quot;Options&quot;, &quot;textdomain&quot; ), array( &quot;post&quot;, &quot;page&quot; ), array(
+    ev_fw()-&gt;admin()-&gt;add_meta_box( &quot;options&quot;, __( &quot;Options&quot;, &quot;textdomain&quot; ), array( &quot;post&quot;, &quot;page&quot; ), array(
         array(
             &quot;handle&quot; =&gt; &quot;first-tab&quot;,
             &quot;label&quot;  =&gt; __( &quot;First tab&quot;, &quot;textdomain&quot; ),
