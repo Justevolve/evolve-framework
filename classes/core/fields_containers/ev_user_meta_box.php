@@ -40,8 +40,8 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 		parent::__construct( $handle, $title, $fields );
 
 		/* Register the user meta box in WordPress. */
-		add_action( 'show_user_profile', array( $this, 'render_meta_box' ) );
-		add_action( 'edit_user_profile', array( $this, 'render_meta_box' ) );
+		add_action( 'show_user_profile', array( $this, 'render' ) );
+		add_action( 'edit_user_profile', array( $this, 'render' ) );
 
 		/* Register the saving action. */
 		add_action( 'personal_options_update', array( $this, 'save' ) );
@@ -53,7 +53,13 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 	 *
 	 * @since 0.1.1
 	 */
-	public function render() {}
+	public function render() {
+		global $user_id;
+
+		if ( $user_id ) {
+			$this->render_meta_box( get_user_by( 'id', $user_id ) );
+		}
+	}
 
     /**
 	 * Render the user meta box in WordPress, associating it to the specified
