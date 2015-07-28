@@ -64,6 +64,28 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 	}
 
 	/**
+	 * Get the current page template.
+	 *
+	 * @since 0.1.1
+	 * @return string
+	 */
+	private function _get_page_template()
+	{
+		global $post;
+		$page_template = '';
+
+		if ( $post ) {
+			$page_template = get_post_meta( $post->ID, '_wp_page_template', true );
+		}
+
+		if ( empty( $page_template ) ) {
+			$page_template = 'default';
+		}
+
+		return $page_template;
+	}
+
+	/**
 	 * Register the meta box in WordPress, associating it to the specified
 	 * post types.
 	 *
@@ -75,9 +97,8 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 			$add = true;
 
 			if ( $post_type === 'page' ) {
-				global $post;
+				$page_template = $this->_get_page_template();
 
-				$page_template = get_post_meta( $post->ID, '_wp_page_template', true );
 				$add = apply_filters( "ev_metabox_display[post_type:{$post_type}][template:{$page_template}][metabox:{$this->handle()}]", true );
 			}
 
@@ -139,14 +160,14 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 	 */
 	public function elements()
 	{
-		global $post;
 		$current_screen = get_current_screen();
 		$post_type = $current_screen->post_type;
 
 		$fields = apply_filters( "ev[post_type:{$post_type}][metabox:{$this->handle()}]", $this->_fields );
 
 		if ( $post_type === 'page' ) {
-			$page_template = get_post_meta( $post->ID, '_wp_page_template', true );
+			$page_template = $this->_get_page_template();
+
 			$fields = apply_filters( "ev[post_type:{$post_type}][template:{$page_template}][metabox:{$this->handle()}]", $fields );
 		}
 
