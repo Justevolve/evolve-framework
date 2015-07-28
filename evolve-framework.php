@@ -340,6 +340,9 @@ class Ev_Framework {
 
 		/* Admin submenu page fields container. */
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_submenu_page.php' );
+
+		/* User meta box fields container. */
+		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_user_meta_box.php' );
 	}
 
 	/**
