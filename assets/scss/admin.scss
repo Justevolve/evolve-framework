@@ -352,10 +352,15 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 
 .ev-native-meta {
 	margin-top: $baseline;
-	@include vertical_tab_style;
 
 	> h3 {
 		margin-bottom: $baseline;
+	}
+
+	.ev-tabs {
+		@include vertical_tab_style;
+		background-color: $grey_light_2;
+		border: 1px solid $border_color;
 	}
 }
 
