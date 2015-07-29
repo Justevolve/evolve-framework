@@ -347,6 +347,19 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 }
 
 // -----------------------------------------------------------------------------
+// $User meta box
+// -----------------------------------------------------------------------------
+
+.ev-user-metabox {
+	margin-top: $baseline;
+	@include vertical_tab_style;
+
+	> h3 {
+		margin-bottom: $baseline;
+	}
+}
+
+// -----------------------------------------------------------------------------
 // $Messages
 // -----------------------------------------------------------------------------
 
@@ -714,6 +727,10 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 	}
 
 	.ev-field-inner {
+		float: left;
+		width: 100%;
+		clear: both;
+		@include box-sizing( border-box );
 		position: relative;
 		padding: $baseline/4 $baseline*1.25 $baseline/4 $baseline/2;
 		border: 1px solid $border_color;

@@ -96,6 +96,8 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 
 		echo '<div class="ev ev-user-metabox">';
 			wp_nonce_field( 'ev_user_meta_box', 'ev' );
+
+			printf( '<h3>%s</h3>', esc_html( $this->title() ) );
 			$this->render_elements();
 		echo '</div>';
 	}
