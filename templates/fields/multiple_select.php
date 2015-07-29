@@ -20,6 +20,14 @@
 	}
 
 	$data = json_encode( $structured_data );
+
+	$attrs = array();
+
+	if ( empty( $structured_data ) ) {
+		$attrs[] = 'disabled';
+	}
+
+	$attrs = array_map( 'esc_attr', $attrs );
 ?>
 
-<input type="hidden" data-options="<?php echo esc_attr( $data ); ?>" class="<?php echo esc_attr( $class ); ?>" name="<?php echo esc_attr( $field->handle() ); ?>" value="<?php echo esc_attr( $field->value() ); ?>">
+<input type="hidden" <?php echo implode( ' ', $attrs ); ?> data-options="<?php echo esc_attr( $data ); ?>" class="<?php echo esc_attr( $class ); ?>" name="<?php echo esc_attr( $field->handle() ); ?>" value="<?php echo esc_attr( $field->value() ); ?>">
