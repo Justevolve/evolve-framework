@@ -347,10 +347,10 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 }
 
 // -----------------------------------------------------------------------------
-// $User meta box
+// $Native meta boxes
 // -----------------------------------------------------------------------------
 
-.ev-user-metabox {
+.ev-native-meta {
 	margin-top: $baseline;
 	@include vertical_tab_style;
 

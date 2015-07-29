@@ -94,7 +94,7 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 			return;
 		}
 
-		echo '<div class="ev ev-user-metabox">';
+		echo '<div class="ev ev-native-meta ev-user-metabox">';
 			wp_nonce_field( 'ev_user_meta_box', 'ev' );
 
 			printf( '<h3>%s</h3>', esc_html( $this->title() ) );
