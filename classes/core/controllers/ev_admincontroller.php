@@ -195,13 +195,14 @@ class Ev_AdminController extends Ev_Controller {
 	{
 		if ( function_exists( 'wp_enqueue_media' ) ) {
 			global $pagenow;
+			global $wp_customize;
 
 			$edit_page = $pagenow == 'post.php' || $pagenow == 'post-new.php';
 			$post_type = isset( $_GET['post_type'] ) ? $_GET['post_type'] : ( isset( $_GET['post'] ) ? get_post_type( $_GET['post'] ) : 'post' );
 			$post_type_support = post_type_supports( $post_type, 'editor' ) || post_type_supports( $post_type, 'thumbnail' );
+			$is_customizer = function_exists( 'is_customize_preview' ) ? is_customize_preview() : isset( $wp_customize );
 
-			// TODO: filtrare customizer come in fotografia
-			if( ! $edit_page || ! $post_type_support ) {
+			if( ! $is_customizer && ( ! $edit_page || ! $post_type_support ) ) {
 				wp_enqueue_media();
 			}
 		}
