@@ -48,8 +48,9 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 		add_action( 'edit_user_profile_update', array( $this, 'save' ) );
 	}
 
-	/**
-	 * Display the fields container.
+    /**
+	 * Render the user meta box in WordPress, associating it to the specified
+	 * user roles.
 	 *
 	 * @since 0.1.1
 	 */
@@ -57,49 +58,43 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 		global $user_id;
 
 		if ( $user_id ) {
-			$this->render_meta_box( get_user_by( 'id', $user_id ) );
-		}
-	}
+			$user = get_user_by( 'id', $user_id );
 
-    /**
-	 * Render the user meta box in WordPress, associating it to the specified
-	 * user roles.
-	 *
-	 * @since 0.1.1
-	 * @param stdClass $user The user object.
-	 */
-	public function render_meta_box( $user )
-	{
-		/* Check if the meta box should be displayed for the current user's role. */
-		$check_current_user_role = true;
+			if ( ! $user ) {
+				return;
+			}
 
-		if ( ! empty( $this->_roles ) ) {
-			foreach ( (array) $this->_roles as $role ) {
-				$check_current_user_role = user_can( $user, $role );
+			/* Check if the meta box should be displayed for the current user's role. */
+			$check_current_user_role = true;
 
-				if ( $check_current_user_role ) {
-					break;
+			if ( ! empty( $this->_roles ) ) {
+				foreach ( (array) $this->_roles as $role ) {
+					$check_current_user_role = user_can( $user, $role );
+
+					if ( $check_current_user_role ) {
+						break;
+					}
 				}
 			}
+
+			if ( ! $check_current_user_role ) {
+				return;
+			}
+
+			/* Check if the current can edit the user. */
+			$check_current_user_can_edit_user = $user && current_user_can( 'edit_user', $user->ID );
+
+			if ( ! $check_current_user_can_edit_user ) {
+				return;
+			}
+
+			echo '<div class="ev ev-native-meta ev-user-metabox">';
+				wp_nonce_field( 'ev_user_meta_box', 'ev' );
+
+				printf( '<h3>%s</h3>', esc_html( $this->title() ) );
+				$this->render_elements();
+			echo '</div>';
 		}
-
-		if ( ! $check_current_user_role ) {
-			return;
-		}
-
-		/* Check if the current can edit the user. */
-		$check_current_user_can_edit_user = $user && current_user_can( 'edit_user', $user->ID );
-
-		if ( ! $check_current_user_can_edit_user ) {
-			return;
-		}
-
-		echo '<div class="ev ev-native-meta ev-user-metabox">';
-			wp_nonce_field( 'ev_user_meta_box', 'ev' );
-
-			printf( '<h3>%s</h3>', esc_html( $this->title() ) );
-			$this->render_elements();
-		echo '</div>';
 	}
 
    /**
