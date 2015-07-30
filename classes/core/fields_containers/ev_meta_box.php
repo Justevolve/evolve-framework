@@ -202,6 +202,10 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 	 */
 	private function _save_single_field( $post_id, $element, $value )
 	{
+		/* Escaping user-inserted slashes. */
+		$value = str_replace( '\\', '\\\\', $value );
+
+		/* Sanitizing the field value. */
 		$value = Ev_Field::sanitize( $element, $value );
 
 		update_post_meta( $post_id, $element['handle'], $value );

@@ -156,6 +156,10 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 	 */
 	private function _save_single_field( $user_id, $element, $value )
 	{
+		/* Escaping user-inserted slashes. */
+		$value = str_replace( '\\', '\\\\', $value );
+
+		/* Sanitizing the field value. */
 		$value = Ev_Field::sanitize( $element, $value );
 
 		update_user_meta( $user_id, $element['handle'], $value );
