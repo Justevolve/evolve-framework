@@ -7,8 +7,8 @@
  * administration.
  *
  * @package   EvolveFramework
- * @since 	  1.0.0
- * @version   1.0.0
+ * @since 	  0.1.0
+ * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
  * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
@@ -20,7 +20,7 @@ class Ev_MenuPage extends Ev_AdminPage {
 	/**
 	 * Get the position of the page in the administration menu.
 	 *
-	 * @since  1.0.0
+	 * @since  0.1.0
 	 * @return mixed The position index of the page in the administration menu.
 	 */
 	public function position()

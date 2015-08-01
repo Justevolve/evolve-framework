@@ -70,7 +70,7 @@ function ev_admin_pages_groups() {
  * Determines whether or not the current user has the ability to save meta data
  * associated with this user.
  *
- * @since 0.1.1
+ * @since 0.2.0
  * @param int $user_id The ID of the user being saved.
  * @param string $action The submitted nonce action.
  * @param string $nonce The submitted nonce key.

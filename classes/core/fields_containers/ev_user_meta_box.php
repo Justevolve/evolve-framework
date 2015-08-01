@@ -7,7 +7,7 @@
  *
  * @package   EvolveFramework
  * @since 	  0.1.1
- * @version   1.0.0
+ * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
  * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
@@ -30,7 +30,7 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 	 * @param string $title A human-readable definition of the user meta box.
 	 * @param array $roles An array of roles that should display the user meta box.
 	 * @param array $fields An array containing a default set of fields that belong to the user meta box.
-	 * @since 0.1.1
+	 * @since 0.2.0
 	 */
 	function __construct( $handle, $title, $roles = array(), $fields = array() )
 	{
@@ -52,7 +52,7 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 	 * Render the user meta box in WordPress, associating it to the specified
 	 * user roles.
 	 *
-	 * @since 0.1.1
+	 * @since 0.2.0
 	 */
 	public function render() {
 		global $user_id;
@@ -100,7 +100,7 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
    /**
 	* Set the value for a specific field inside the container.
 	*
-	* @since 0.1.1
+	* @since 0.2.0
 	* @param string $key The field key.
 	* @return mixed The value of the field. Returns boolean false if the field has no value.
 	*/
@@ -122,7 +122,7 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 	/**
 	 * Return the list of the elements that belong to the fields container.
 	 *
-	 * @since 0.1.1
+	 * @since 0.2.0
 	 * @return array An array of field data.
 	 */
 	public function elements()
@@ -149,7 +149,7 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 	/**
 	 * When the user information is saved, save a single custom data contained in the user meta box.
 	 *
-	 * @since 0.1.1
+	 * @since 0.2.0
 	 * @param int $user_id The ID of the user being saved.
 	 * @param array $element The element structure.
 	 * @param string|array $element_value The element value.
@@ -168,7 +168,7 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 	/**
 	 * When the user is saved, save the custom data contained in the user meta box.
 	 *
-	 * @since 0.1.1
+	 * @since 0.2.0
 	 * @param int $user_id The ID of the user being saved.
 	 */
 	public function save( $user_id )

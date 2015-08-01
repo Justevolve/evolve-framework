@@ -6,7 +6,7 @@
  *
  * @package   EvolveFramework
  * @since 	  0.1.0
- * @version   1.0.0
+ * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
  * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
@@ -109,7 +109,7 @@ class Ev_AdminController extends Ev_Controller {
 	 * Register and add a meta box to the user editing interface binding it to
 	 * one or more specific user roles.
 	 *
-	 * @since 0.1.1
+	 * @since 0.2.0
 	 * @param string $handle A slug-like definition of the user meta box.
 	 * @param string $title A human-readable definition of the user meta box.
 	 * @param string|array $roles A string or array of roles.

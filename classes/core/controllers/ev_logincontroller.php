@@ -5,8 +5,8 @@
  * of login and registration external resources as well as routing operations.
  *
  * @package   EvolveFramework
- * @since 	  1.0.0
- * @version   1.0.0
+ * @since 	  0.1.0
+ * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
  * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
