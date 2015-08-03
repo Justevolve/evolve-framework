@@ -76,7 +76,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 	 */
 	public function group( $groups )
 	{
-		if ( ! array_key_exists( $this->_args['group'], $groups ) ) {
+		if ( array_key_exists( $this->_args['group'], $groups ) ) {
 			return $groups;
 		}
 
@@ -180,7 +180,11 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 			$groups = ev_admin_pages_groups();
 
 			if ( isset( $groups[$this->_args['group']] ) ) {
-				$title = $groups[$this->_args['group']]['label'];
+				$group_title = apply_filters( 'ev_admin_pages_group_title', '', $this->_args['group'] );
+
+				if ( ! empty( $group_title ) ) {
+					$title = sprintf( "%s: %s", esc_html( $group_title ), esc_html( $title ) );
+				}
 			}
 		}
 
@@ -213,9 +217,9 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 						printf(
 							'<li><a href="%s" class="%s">%s</a></li>',
 							esc_attr( $page['url'] ),
-							isset( $_GET['page'] ) && $_GET['page'] === $page['handle'] ? 'ev-active' : '',
-							esc_html( $page['title']
-						) );
+							isset( $_GET['page'] ) && $_GET['page'] === $page['handle'] ? esc_attr( 'ev-active' ) : '',
+							esc_html( $page['title'] )
+						);
 					}
 				echo '</ul>';
 			echo '</div>';
