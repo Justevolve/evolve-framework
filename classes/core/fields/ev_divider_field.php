@@ -74,9 +74,11 @@ class Ev_DividerField extends Ev_Field {
 	 */
 	public static function validate_structure( $field )
 	{
+		$messages = array();
+
 		if ( ! array_key_exists( 'text', $field ) || empty( $field['text'] ) ) {
 			/* Ensuring that the field has a valid text. */
-			return false;
+			$messages[] = 'Field: missing label parameter.';
 		}
 		elseif ( array_key_exists( 'config', $field ) && array_key_exists( 'style', $field['config'] ) ) {
 			$allowed_styles = array(
@@ -89,15 +91,11 @@ class Ev_DividerField extends Ev_Field {
 
 			if ( empty( $field['config']['style'] ) || ! in_array( $field['config']['style'], $allowed_styles ) ) {
 				/* Ensuring that the field has a valid value for its style, if any. */
-				return false;
+				$messages[] = sprintf( 'Field "%s": invalid style parameter.', $field['handle'] );
 			}
 		}
-		elseif ( array_key_exists( 'capability', $field ) && empty( $field['capability'] ) ) {
-			/* Ensuring that the field has a valid capability, if any. */
-			return false;
-		}
 
-		return apply_filters( "ev_field_validate_structure[type:divider]", true, $field );
+		return apply_filters( "ev_field_validate_structure[type:divider]", $messages, $field );
 	}
 
 }

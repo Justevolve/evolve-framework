@@ -175,6 +175,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 
 		$title = $this->title();
+		$pre_title = '';
 
 		if ( isset( $this->_args['group'] ) ) {
 			$groups = ev_admin_pages_groups();
@@ -183,13 +184,16 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 				$group_title = apply_filters( 'ev_admin_pages_group_title', '', $this->_args['group'] );
 
 				if ( ! empty( $group_title ) ) {
-					$title = sprintf( "%s: %s", esc_html( $group_title ), esc_html( $title ) );
+					$pre_title = $group_title;
 				}
 			}
 		}
 
+		$pre_title = apply_filters( 'ev_admin_pages_pre_title', $pre_title );
+		$title = apply_filters( "ev_admin_page_title[page:{$this->handle()}]", $title );
+
 		echo '<div class="ev-admin-page-heading">';
-			printf( '<h1>%s <span>%s</span></h1>', esc_html( $theme ), esc_html( $title ) );
+			printf( '<h1>%s <span>%s</span></h1>', esc_html( $pre_title ), esc_html( $title ) );
 			do_action( "ev_admin_page_subheading" );
 			do_action( "ev_admin_page_subheading[page:{$this->handle()}]" );
 		echo '</div>';
@@ -257,7 +261,11 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 
 		/* Ensuring that the fields array is structurally sound. */
-		if ( ! self::_validate_fields_structure( $fields ) ) {
+		$valid = self::_validate_fields_structure( $fields );
+
+		if ( $valid !== true ) {
+			$this->_output_field_errors( $valid );
+
 			return false;
 		}
 

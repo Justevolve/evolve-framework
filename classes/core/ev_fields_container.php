@@ -304,19 +304,26 @@ abstract class Ev_FieldsContainer {
 	protected static function _validate_fields_structure( $elements )
 	{
 		$groups = 0;
+		$messages = array();
 
 		foreach ( $elements as $index => $element ) {
 			if ( isset( $element['type'] ) && $element['type'] === 'group' && array_key_exists( 'fields', $element ) && is_array( $element['fields'] ) ) {
 				$groups++;
 
 				if ( ! array_key_exists( 'handle', $element ) || empty( $element['handle'] ) ) {
-					return false;
+					$messages[] = 'Group is missing handle parameter.';
 				}
 				elseif ( ! array_key_exists( 'label', $element ) || empty( $element['label'] ) ) {
-					return false;
+					$messages[] = sprintf( 'Group "%s": missing label.', $element['handle'] );
 				}
-				elseif ( ! self::_validate_fields_structure( $element['fields'] ) ) {
-					return false;
+				else {
+					$field_messages = self::_validate_fields_structure( $element['fields'] );
+
+					if ( $field_messages !== true ) {
+						foreach ( $field_messages as $field_message ) {
+							$messages[] = $field_message;
+						}
+					}
 				}
 			}
 			else {
@@ -325,33 +332,73 @@ abstract class Ev_FieldsContainer {
 
 				if ( ! is_array( $element ) || empty( $element ) ) {
 					/* Ensuring that the field data structure is valid. */
-					return false;
+					$messages[] = 'Invalid field structure.';
 				}
 				elseif ( ! array_key_exists( 'type', $element ) || empty( $element['type'] ) ) {
 					/* Ensuring that the field has a type. */
-					return false;
+					if ( array_key_exists( 'handle', $element ) && ! empty( $element['handle'] ) ) {
+						$messages[] = sprintf( 'Field "%s": missing type parameter.', $element['handle'] );
+					}
+					else {
+						$messages[] = 'Field: missing type parameter.';
+					}
 				}
 				elseif ( array_search( $element['type'], $field_types_keys, true ) === false ) {
 					/* Ensuring that the field's type is valid. */
-					return false;
+					if ( array_key_exists( 'handle', $element ) && ! empty( $element['handle'] ) ) {
+						$messages[] = sprintf( 'Field "%s": invalid type.', $element['handle'] );
+					}
+					else {
+						$messages[] = sprintf( '%s field: invalid type.', $element['type'] );
+					}
+				}
+				elseif ( array_key_exists( 'capability', $element ) && empty( $element['capability'] ) ) {
+					/* Ensuring that the field has a valid capability, if any. */
+					if ( array_key_exists( 'handle', $element ) && ! empty( $element['handle'] ) ) {
+						$messages[] = sprintf( 'Field "%s": invalid capability.', $element['handle'] );
+					}
+					else {
+						$messages[] = sprintf( '%s field: invalid capability.', $element['type'] );
+					}
 				}
 				else {
 					$field_class = $field_types[$element['type']];
 
-					$validate_structure = call_user_func( array( $field_class, 'validate_structure' ), $element );
+					$field_messages = call_user_func( array( $field_class, 'validate_structure' ), $element );
 
-					if ( ! $validate_structure ) {
-						return false;
+					if ( $field_messages !== true ) {
+						foreach ( $field_messages as $field_message ) {
+							$messages[] = $field_message;
+						}
 					}
 				}
 			}
 		}
 
 		if ( $groups > 0 && $groups !== count( $elements ) ) {
-			return false;
+			return array(
+				'All first-level elements must be field groups.'
+			);
 		}
 
-		return true;
+		return ! empty( $messages ) ? $messages : true;
+	}
+
+	/**
+	 * Display fields syntax errors.
+	 *
+	 * @since 0.2.0
+	 * @param array $errors An array of error messages.
+	 */
+	protected function _output_field_errors( $errors )
+	{
+		echo '<pre>';
+
+		foreach ( $errors as $message ) {
+			printf( "* %s\n", esc_html( $message ) );
+		}
+
+		echo '</pre>';
 	}
 
 	/**

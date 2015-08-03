@@ -184,7 +184,11 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 		}
 
 		/* Ensuring that the fields array is structurally sound. */
-		if ( ! self::_validate_fields_structure( $fields ) ) {
+		$valid = self::_validate_fields_structure( $fields );
+
+		if ( $valid !== true ) {
+			$this->_output_field_errors( $valid );
+
 			return false;
 		}
 
