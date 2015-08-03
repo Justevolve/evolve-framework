@@ -189,7 +189,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 
 		echo '<div class="ev-admin-page-heading">';
-			printf( '<h2>%s <span>%s</span></h2>', esc_html( $theme ), esc_html( $title ) );
+			printf( '<h1>%s <span>%s</span></h1>', esc_html( $theme ), esc_html( $title ) );
 			do_action( "ev_admin_page_subheading" );
 			do_action( "ev_admin_page_subheading[page:{$this->handle()}]" );
 		echo '</div>';
