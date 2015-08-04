@@ -45,7 +45,7 @@ class Ev_DescriptionField extends Ev_DividerField {
 	{
 		if ( ! array_key_exists( 'text', $field ) || empty( $field['text'] ) ) {
 			/* Ensuring that the field has a valid text. */
-			$messages[] = 'Field: missing label parameter.';
+			$messages[] = 'Field: missing text parameter.';
 		}
 		elseif ( array_key_exists( 'config', $field ) && array_key_exists( 'style', $field['config'] ) ) {
 			$allowed_styles = array(
@@ -60,7 +60,7 @@ class Ev_DescriptionField extends Ev_DividerField {
 
 			if ( empty( $field['config']['style'] ) || ! in_array( $field['config']['style'], $allowed_styles ) ) {
 				/* Ensuring that the field has a valid value for its style, if any. */
-				$messages[] = sprintf( 'Field "%s": invalid style parameter.', $field['handle'] );
+				$messages[] = sprintf( 'Field "%s": invalid style parameter.', $field['type'] );
 			}
 		}
 

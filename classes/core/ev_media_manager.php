@@ -175,7 +175,7 @@ class Ev_MediaManager {
 			return 1;
 		}
 
-		return ( $a['order'] < $b['order'] ) ? -1 : 1;
+		return ( $a['order'] > $b['order'] ) ? -1 : 1;
 	}
 
 	/**
