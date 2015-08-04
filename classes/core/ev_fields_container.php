@@ -140,8 +140,9 @@ abstract class Ev_FieldsContainer {
 	 * @since 0.1.0
 	 * @param array $element The group data.
 	 * @param integer $index The group index.
+	 * @param integer $current_index The index of the current group.
 	 */
-	private function render_group( $group, $index )
+	private function render_group( $group, $index, $current_index = 0 )
 	{
 		$class = '';
 
@@ -150,7 +151,7 @@ abstract class Ev_FieldsContainer {
 				$class = 'ev-active';
 			}
 		}
-		elseif ( $index === 0 ) {
+		elseif ( $index == $current_index ) {
 			$class = 'ev-active';
 		}
 
@@ -205,8 +206,9 @@ abstract class Ev_FieldsContainer {
 		$elements = $this->elements();
 
 		if ( ! empty( $elements ) ) {
-
-			$is_grouped = $elements[0]['type'] == 'group';
+			$current_element = current( $elements );
+			$current_key = key( $elements );
+			$is_grouped = $current_element['type'] == 'group';
 			$has_tabs = $is_grouped && count( $elements ) > 1;
 
 			if ( $has_tabs ) {
@@ -222,7 +224,7 @@ abstract class Ev_FieldsContainer {
 								$class = 'ev-active';
 							}
 						}
-						elseif ( $index === 0 ) {
+						elseif ( $index == $current_key ) {
 							$class = 'ev-active';
 						}
 
@@ -242,14 +244,14 @@ abstract class Ev_FieldsContainer {
 
 				if ( $is_grouped ) {
 					foreach ( $elements as $index => $element ) {
-						$this->render_group( $element, $index );
+						$this->render_group( $element, $index, $current_key );
 					}
 				}
 				else {
 					$this->render_group( array(
 						'handle' => '_default',
 						'fields' => $elements
-					), 0 );
+					), 0, $current_key );
 				}
 
 			echo '</div>';
@@ -271,18 +273,22 @@ abstract class Ev_FieldsContainer {
 	 */
 	protected static function _parse_fields_structure( $elements )
 	{
-		$field_types = ev_field_types();
-
 		foreach ( $elements as $index => $element ) {
 			if ( ! ev_user_can_handle_data( $element ) ) {
 				unset( $elements[$index] );
 			}
+			else {
+				if ( isset( $element['fields'] ) && is_array( $element['fields'] ) ) {
+					if ( empty( $element['fields'] ) ) {
+						unset( $elements[$index] );
+					}
+					else {
+						$elements[$index]['fields'] = self::_parse_fields_structure( $element['fields'] );
 
-			if ( isset( $element['fields'] ) && is_array( $element['fields'] ) && ! empty( $element['fields'] ) ) {
-				$elements[$index]['fields'] = self::_parse_fields_structure( $element['fields'] );
-
-				if ( empty( $element['fields'] ) ) {
-					unset( $elements[$index] );
+						if ( empty( $elements[$index]['fields'] ) ) {
+							unset( $elements[$index] );
+						}
+					}
 				}
 			}
 		}
