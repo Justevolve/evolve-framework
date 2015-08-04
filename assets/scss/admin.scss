@@ -671,6 +671,11 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		clear: both;
 		@extend %label;
 		padding-top: $baseline/4;
+
+		strong,
+		b {
+			color: $text;
+		}
 	}
 }
 

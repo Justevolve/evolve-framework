@@ -532,7 +532,9 @@ abstract class Ev_Field {
 					case 'inline':
 					default:
 						$help_text = wp_kses( $help['text'], array(
-							'code' => array()
+							'code' => array(),
+							'strong' => array(),
+							'b' => array()
 						) );
 
 						echo $help_text;
