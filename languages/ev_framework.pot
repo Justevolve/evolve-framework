@@ -58,7 +58,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: classes/core/fields_containers/ev_admin_page.php:344
+#: classes/core/fields_containers/ev_admin_page.php:352
 msgid "All saved!"
 msgstr ""
 

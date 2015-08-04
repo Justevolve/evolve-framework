@@ -706,6 +706,11 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 			}
 		}
 	}
+
+	.ev-sub-label {
+		@extend %label;
+		padding-bottom: $baseline/6;
+	}
 }
 
 // -----------------------------------------------------------------------------
