@@ -736,6 +736,22 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 }
 
 // -----------------------------------------------------------------------------
+// $Color field
+// -----------------------------------------------------------------------------
+
+.ev-color-input-wrapper {
+	display: inline-block;
+
+	+ .ev-color-input-wrapper {
+		margin-left: $gutter;
+	}
+
+	.ev-sub-label {
+		display: block;
+	}
+}
+
+// -----------------------------------------------------------------------------
 // $Fields repeatable
 // -----------------------------------------------------------------------------
 

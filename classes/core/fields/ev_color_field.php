@@ -30,6 +30,11 @@ class Ev_ColorField extends Ev_Field {
 			$data['config'] = array();
 		}
 
+		$data['config'] = wp_parse_args( $data['config'], array(
+			/* Allows for multiple colors properties. */
+			'multiple' => false
+		) );
+
 		parent::__construct( $data );
 	}
 }
