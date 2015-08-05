@@ -1,6 +1,6 @@
 # Meta boxes
 
-Option pages are data fields containers. They can have a one-level structure, or be divided in multiple subsections as tabs.
+Meta boxes are data fields containers. They can have a one-level structure, or be divided in multiple subsections as tabs.
 
 To create a meta box you should refer to the `add_meta_box` method in the `Ev_AdminController` class; for example:
 
@@ -14,7 +14,7 @@ The method is defined as follows:
     - `handle`, a unique name for the meta box (no spaces, slug-like),
     - `title`, the meta box title that's shown in admin editing screens,
     - `post_types`, an array of post types that will display the meta box,
-    - `args`, an array of fields that composes the meta box.
+    - `fields`, an array of fields that composes the meta box.
 
 Check the [data types documentation](data-types.md) for more information about what fields can be added to meta boxes.
 

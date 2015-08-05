@@ -9,7 +9,7 @@ Currently the framework manages two types of data:
 
 These implementations are based on WordPress' [Options API](https://codex.wordpress.org/Options_API) and [Metadata API](https://codex.wordpress.org/Metadata_API) respectively.
 
-*Currently the framework doesn't manage data associated to users or taxonomies, but we'd love to do something about that in the future.*
+*Currently the framework doesn't manage data associated to taxonomies, but we'd love to do something about that in the future.*
 
 ## Data structure
 

@@ -16,6 +16,7 @@ pages:
     - 'Data types': 'data-types.md'
     - 'Option pages': 'option-page.md'
     - 'Meta boxes': 'metabox.md'
+    - 'User meta boxes': 'user.md'
 - Extra:
     - 'Internationalization': 'i18n.md'
     - 'Update': 'update.md'
