@@ -37,6 +37,29 @@ class Ev_ColorField extends Ev_Field {
 
 		parent::__construct( $data );
 	}
+
+	/**
+	 * Validate the field declaration structure.
+	 *
+	 * @static
+	 * @since 0.2.0
+	 * @param array $field The field declaration structure.
+	 * @return boolean
+	 */
+	public static function validate_structure( $field )
+	{
+		$messages = array();
+
+		if ( array_key_exists( 'config', $field ) && array_key_exists( 'multiple', $field['config'] ) ) {
+			if ( ! is_array( $field['config']['multiple'] ) || empty( $field['config']['multiple'] ) ) {
+				/* Ensuring that the field has a valid value for its style, if any. */
+				$messages[] = sprintf( 'Field "%s": multiple option must be a non-empty array.', $field['handle'] );
+			}
+		}
+
+		return apply_filters( "ev_field_validate_structure[type:color]", $messages, $field );
+	}
+
 }
 
 /**
