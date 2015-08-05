@@ -179,14 +179,17 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 
 .ev-admin-page .ev-tabs-nav.ev-vertical {
 	width: 20%;
-	max-width: 220px;
-	margin-right: 20px;
+	padding-right: 20px;
+	@include box-sizing( border-box );
+
+	@include ev-media( $media_tablet ) {
+		width: 25%;
+	}
 
 	@include ev-media( $media_mobile ) {
 		width: 100%;
-		margin-right: 0;
+		padding-right: 0;
 		margin-bottom: $baseline;
-		max-width: none;
 	}
 
 	li {
@@ -237,6 +240,20 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 					background-color: $blue_medium;
 				}
 			}
+		}
+	}
+
+	+ .ev-tab-container {
+		@include box-sizing( border-box );
+		width: 80%;
+		float: left;
+
+		@include ev-media( $media_tablet ) {
+			width: 75%;
+		}
+
+		@include ev-media( $media_mobile ) {
+			width: 100%;
 		}
 	}
 }
