@@ -6,8 +6,8 @@
  * representation.
  *
  * @package   EvolveFramework
- * @since 	  1.0.0
- * @version   1.0.0
+ * @since 	  0.1.0
+ * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
  * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
@@ -532,7 +532,9 @@ abstract class Ev_Field {
 					case 'inline':
 					default:
 						$help_text = wp_kses( $help['text'], array(
-							'code' => array()
+							'code' => array(),
+							'strong' => array(),
+							'b' => array()
 						) );
 
 						echo $help_text;
@@ -669,54 +671,53 @@ abstract class Ev_Field {
 	 */
 	public static function validate_structure( $field )
 	{
+		$messages = array();
 		$field_types = array_keys( ev_field_types() );
 
 		if ( ! is_array( $field ) || empty( $field ) ) {
 			/* Ensuring that the field data structure is valid. */
-			return false;
-		}
-		elseif ( ! array_key_exists( 'type', $field ) || empty( $field['type'] ) ) {
-			/* Ensuring that the field has a type. */
-			return false;
-		}
-		elseif ( array_search( $field['type'], $field_types, true ) === false ) {
-			/* Ensuring that the field's type is valid. */
-			return false;
+			$messages[] = 'Invalid field structure.';
 		}
 		elseif ( ! array_key_exists( 'handle', $field ) || empty( $field['handle'] ) ) {
 			/* Ensuring that the field has a valid handle. */
-			return false;
+			$messages[] = 'Field is missing handle parameter.';
+		}
+		elseif ( ! array_key_exists( 'type', $field ) || empty( $field['type'] ) ) {
+			/* Ensuring that the field has a type. */
+			$messages[] = sprintf( 'Field "%s": missing type parameter.', $field['handle'] );
+		}
+		elseif ( array_search( $field['type'], $field_types, true ) === false ) {
+			/* Ensuring that the field's type is valid. */
+			$messages[] = sprintf( 'Field "%s": invalid type.', $field['handle'] );
 		}
 		elseif ( ! array_key_exists( 'label', $field ) || empty( $field['label'] ) ) {
 			/* Ensuring that the field has a valid label. */
-			return false;
-		}
-		elseif ( array_key_exists( 'capability', $field ) && empty( $field['capability'] ) ) {
-			/* Ensuring that the field has a valid capability, if any. */
-			return false;
+			$messages[] = sprintf( 'Field "%s": missing label parameter.', $field['handle'] );
 		}
 		elseif ( array_key_exists( 'fields', $field ) && ! is_array( $field['fields'] ) ) {
 			/* Ensuring that the field has a valid set of fields, if any. */
-			return false;
+			$messages[] = sprintf( 'Field "%s": subfields must be in array form.', $field['handle'] );
 		}
 		elseif ( array_key_exists( 'config', $field ) && ! is_array( $field['config'] ) ) {
 			/* Ensuring that the field has a valid set of configuration options, if any. */
-			return false;
+			$messages[] = sprintf( 'Field "%s": config must be in array form.', $field['handle'] );
 		}
 		elseif ( array_key_exists( 'repeatable', $field ) && ( ! is_array( $field['repeatable'] ) && ! is_bool( $field['repeatable'] ) ) ) {
 			/* Ensuring that the field has a valid repeatable configuration. */
-			return false;
+			$messages[] = sprintf( 'Field "%s": repeatable parameter must be in array/boolean form.', $field['handle'] );
 		}
 		elseif ( array_key_exists( 'size', $field ) ) {
 			$allowed_sizes = array( 'full', 'large', 'medium', 'small' );
 
 			if ( ! empty( $field['size'] ) && ! in_array( $field['size'], $allowed_sizes ) ) {
 				/* Ensuring that the field has a valid value for its size, if any. */
-				return false;
+				$messages[] = sprintf( 'Field "%s": invalid size parameter.', $field['handle'] );
 			}
 		}
 
-		return apply_filters( "ev_field_validate_structure[type:{$field['type']}]", true, $field );
+		$messages = apply_filters( "ev_field_validate_structure[type:{$field['type']}]", $messages, $field );
+
+		return ! empty( $messages ) ? $messages : true;
 	}
 
 	/**

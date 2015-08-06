@@ -7,8 +7,8 @@
  * screens in the WordPress admininistration.
  *
  * @package   EvolveFramework
- * @since 	  1.0.0
- * @version   1.0.0
+ * @since 	  0.1.0
+ * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
  * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
@@ -64,6 +64,28 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 	}
 
 	/**
+	 * Get the current page template.
+	 *
+	 * @since 0.2.0
+	 * @return string
+	 */
+	private function _get_page_template()
+	{
+		global $post;
+		$page_template = '';
+
+		if ( $post ) {
+			$page_template = get_post_meta( $post->ID, '_wp_page_template', true );
+		}
+
+		if ( empty( $page_template ) ) {
+			$page_template = 'default';
+		}
+
+		return $page_template;
+	}
+
+	/**
 	 * Register the meta box in WordPress, associating it to the specified
 	 * post types.
 	 *
@@ -75,9 +97,8 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 			$add = true;
 
 			if ( $post_type === 'page' ) {
-				global $post;
+				$page_template = $this->_get_page_template();
 
-				$page_template = get_post_meta( $post->ID, '_wp_page_template', true );
 				$add = apply_filters( "ev_metabox_display[post_type:{$post_type}][template:{$page_template}][metabox:{$this->handle()}]", true );
 			}
 
@@ -139,14 +160,14 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 	 */
 	public function elements()
 	{
-		global $post;
 		$current_screen = get_current_screen();
 		$post_type = $current_screen->post_type;
 
 		$fields = apply_filters( "ev[post_type:{$post_type}][metabox:{$this->handle()}]", $this->_fields );
 
 		if ( $post_type === 'page' ) {
-			$page_template = get_post_meta( $post->ID, '_wp_page_template', true );
+			$page_template = $this->_get_page_template();
+
 			$fields = apply_filters( "ev[post_type:{$post_type}][template:{$page_template}][metabox:{$this->handle()}]", $fields );
 		}
 
@@ -163,7 +184,11 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 		}
 
 		/* Ensuring that the fields array is structurally sound. */
-		if ( ! self::_validate_fields_structure( $fields ) ) {
+		$valid = self::_validate_fields_structure( $fields );
+
+		if ( $valid !== true ) {
+			$this->_output_field_errors( $valid );
+
 			return false;
 		}
 
@@ -181,6 +206,10 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 	 */
 	private function _save_single_field( $post_id, $element, $value )
 	{
+		/* Escaping user-inserted slashes. */
+		$value = str_replace( '\\', '\\\\', $value );
+
+		/* Sanitizing the field value. */
 		$value = Ev_Field::sanitize( $element, $value );
 
 		update_post_meta( $post_id, $element['handle'], $value );

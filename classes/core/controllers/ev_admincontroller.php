@@ -5,8 +5,8 @@
  * of admin external resources as well as routing operations.
  *
  * @package   EvolveFramework
- * @since 	  1.0.0
- * @version   1.0.0
+ * @since 	  0.1.0
+ * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
  * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
@@ -106,6 +106,22 @@ class Ev_AdminController extends Ev_Controller {
 	}
 
 	/**
+	 * Register and add a meta box to the user editing interface binding it to
+	 * one or more specific user roles.
+	 *
+	 * @since 0.2.0
+	 * @param string $handle A slug-like definition of the user meta box.
+	 * @param string $title A human-readable definition of the user meta box.
+	 * @param string|array $roles A string or array of roles.
+	 * @param array $fields An array containing a default set of fields that belong to the user meta box.
+	 * @return Ev_UserMetaBox
+	 */
+	public function add_user_meta_box( $handle, $title, $roles = '', $fields = array() )
+	{
+		return new Ev_UserMetaBox( $handle, $title, $roles, $fields );
+	}
+
+	/**
 	 * Hook for custom admin notices.
 	 *
 	 * @since 0.1.0
@@ -179,12 +195,14 @@ class Ev_AdminController extends Ev_Controller {
 	{
 		if ( function_exists( 'wp_enqueue_media' ) ) {
 			global $pagenow;
+			global $wp_customize;
 
 			$edit_page = $pagenow == 'post.php' || $pagenow == 'post-new.php';
 			$post_type = isset( $_GET['post_type'] ) ? $_GET['post_type'] : ( isset( $_GET['post'] ) ? get_post_type( $_GET['post'] ) : 'post' );
 			$post_type_support = post_type_supports( $post_type, 'editor' ) || post_type_supports( $post_type, 'thumbnail' );
+			$is_customizer = function_exists( 'is_customize_preview' ) ? is_customize_preview() : isset( $wp_customize );
 
-			if( ! $edit_page || ! $post_type_support ) {
+			if( ! $is_customizer && ( ! $edit_page || ! $post_type_support ) ) {
 				wp_enqueue_media();
 			}
 		}

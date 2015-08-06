@@ -68,6 +68,27 @@ function ev_admin_pages_groups() {
 
 /**
  * Determines whether or not the current user has the ability to save meta data
+ * associated with this user.
+ *
+ * @since 0.2.0
+ * @param int $user_id The ID of the user being saved.
+ * @param string $action The submitted nonce action.
+ * @param string $nonce The submitted nonce key.
+ * @return boolean Whether or not the user has the ability to save this user information.
+ */
+function ev_user_can_save_user_meta( $user_id, $action = '', $nonce = 'ev' ) {
+	/* Verify the validity of the supplied nonce. */
+	$is_valid_nonce = isset( $_POST[$nonce] ) && wp_verify_nonce( $_POST[$nonce], $action );
+
+	/* Check the user has the capability to edit the user's information. */
+	$is_valid_cap = current_user_can( 'edit_user', $user_id );
+
+	/* Return true if the user is able to save; otherwise, false. */
+    return $is_valid_nonce && $is_valid_cap;
+}
+
+/**
+ * Determines whether or not the current user has the ability to save meta data
  * associated with this post.
  * Thanks to Tom McFarlin: https://gist.github.com/tommcfarlin/4468321
  *

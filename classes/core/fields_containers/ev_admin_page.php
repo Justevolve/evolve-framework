@@ -7,8 +7,8 @@
  * administration.
  *
  * @package   EvolveFramework
- * @since 	  1.0.0
- * @version   1.0.0
+ * @since 	  0.1.0
+ * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
  * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
@@ -76,7 +76,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 	 */
 	public function group( $groups )
 	{
-		if ( ! array_key_exists( $this->_args['group'], $groups ) ) {
+		if ( array_key_exists( $this->_args['group'], $groups ) ) {
 			return $groups;
 		}
 
@@ -120,7 +120,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 	/**
 	 * Get the capability that's required to access the page.
 	 *
-	 * @since  1.0.0
+	 * @since  0.1.0
 	 * @return string The capability that's required to access the page.
 	 */
 	public function capability()
@@ -175,17 +175,25 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 
 		$title = $this->title();
+		$pre_title = '';
 
 		if ( isset( $this->_args['group'] ) ) {
 			$groups = ev_admin_pages_groups();
 
 			if ( isset( $groups[$this->_args['group']] ) ) {
-				$title = $groups[$this->_args['group']]['label'];
+				$group_title = apply_filters( 'ev_admin_pages_group_title', '', $this->_args['group'] );
+
+				if ( ! empty( $group_title ) ) {
+					$pre_title = $group_title;
+				}
 			}
 		}
 
+		$pre_title = apply_filters( 'ev_admin_pages_pre_title', $pre_title );
+		$title = apply_filters( "ev_admin_page_title[page:{$this->handle()}]", $title );
+
 		echo '<div class="ev-admin-page-heading">';
-			printf( '<h2>%s <span>%s</span></h2>', esc_html( $theme ), esc_html( $title ) );
+			printf( '<h1>%s <span>%s</span></h1>', esc_html( $pre_title ), esc_html( $title ) );
 			do_action( "ev_admin_page_subheading" );
 			do_action( "ev_admin_page_subheading[page:{$this->handle()}]" );
 		echo '</div>';
@@ -213,9 +221,9 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 						printf(
 							'<li><a href="%s" class="%s">%s</a></li>',
 							esc_attr( $page['url'] ),
-							isset( $_GET['page'] ) && $_GET['page'] === $page['handle'] ? 'ev-active' : '',
-							esc_html( $page['title']
-						) );
+							isset( $_GET['page'] ) && $_GET['page'] === $page['handle'] ? esc_attr( 'ev-active' ) : '',
+							esc_html( $page['title'] )
+						);
 					}
 				echo '</ul>';
 			echo '</div>';
@@ -253,7 +261,11 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 
 		/* Ensuring that the fields array is structurally sound. */
-		if ( ! self::_validate_fields_structure( $fields ) ) {
+		$valid = self::_validate_fields_structure( $fields );
+
+		if ( $valid !== true ) {
+			$this->_output_field_errors( $valid );
+
 			return false;
 		}
 

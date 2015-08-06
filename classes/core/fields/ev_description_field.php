@@ -4,8 +4,8 @@
  * Description field class.
  *
  * @package   EvolveFramework
- * @since 	  1.0.0
- * @version   1.0.0
+ * @since 	  0.1.0
+ * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
  * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
@@ -45,7 +45,7 @@ class Ev_DescriptionField extends Ev_DividerField {
 	{
 		if ( ! array_key_exists( 'text', $field ) || empty( $field['text'] ) ) {
 			/* Ensuring that the field has a valid text. */
-			return false;
+			$messages[] = 'Field: missing text parameter.';
 		}
 		elseif ( array_key_exists( 'config', $field ) && array_key_exists( 'style', $field['config'] ) ) {
 			$allowed_styles = array(
@@ -60,15 +60,11 @@ class Ev_DescriptionField extends Ev_DividerField {
 
 			if ( empty( $field['config']['style'] ) || ! in_array( $field['config']['style'], $allowed_styles ) ) {
 				/* Ensuring that the field has a valid value for its style, if any. */
-				return false;
+				$messages[] = sprintf( 'Field "%s": invalid style parameter.', $field['type'] );
 			}
 		}
-		elseif ( array_key_exists( 'capability', $field ) && empty( $field['capability'] ) ) {
-			/* Ensuring that the field has a valid capability, if any. */
-			return false;
-		}
 
-		return apply_filters( "ev_field_validate_structure[type:description]", true, $field );
+		return apply_filters( "ev_field_validate_structure[type:description]", $messages, $field );
 	}
 
 }

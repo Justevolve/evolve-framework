@@ -7,8 +7,8 @@
  * meta boxes, other meta forms, or option pages.
  *
  * @package   EvolveFramework
- * @since 	  1.0.0
- * @version   1.0.0
+ * @since 	  0.1.0
+ * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
  * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
@@ -140,8 +140,9 @@ abstract class Ev_FieldsContainer {
 	 * @since 0.1.0
 	 * @param array $element The group data.
 	 * @param integer $index The group index.
+	 * @param integer $current_index The index of the current group.
 	 */
-	private function render_group( $group, $index )
+	private function render_group( $group, $index, $current_index = 0 )
 	{
 		$class = '';
 
@@ -150,7 +151,7 @@ abstract class Ev_FieldsContainer {
 				$class = 'ev-active';
 			}
 		}
-		elseif ( $index === 0 ) {
+		elseif ( $index == $current_index ) {
 			$class = 'ev-active';
 		}
 
@@ -205,8 +206,9 @@ abstract class Ev_FieldsContainer {
 		$elements = $this->elements();
 
 		if ( ! empty( $elements ) ) {
-
-			$is_grouped = $elements[0]['type'] == 'group';
+			$current_element = current( $elements );
+			$current_key = key( $elements );
+			$is_grouped = $current_element['type'] == 'group';
 			$has_tabs = $is_grouped && count( $elements ) > 1;
 
 			if ( $has_tabs ) {
@@ -222,7 +224,7 @@ abstract class Ev_FieldsContainer {
 								$class = 'ev-active';
 							}
 						}
-						elseif ( $index === 0 ) {
+						elseif ( $index == $current_key ) {
 							$class = 'ev-active';
 						}
 
@@ -242,14 +244,14 @@ abstract class Ev_FieldsContainer {
 
 				if ( $is_grouped ) {
 					foreach ( $elements as $index => $element ) {
-						$this->render_group( $element, $index );
+						$this->render_group( $element, $index, $current_key );
 					}
 				}
 				else {
 					$this->render_group( array(
 						'handle' => '_default',
 						'fields' => $elements
-					), 0 );
+					), 0, $current_key );
 				}
 
 			echo '</div>';
@@ -271,18 +273,22 @@ abstract class Ev_FieldsContainer {
 	 */
 	protected static function _parse_fields_structure( $elements )
 	{
-		$field_types = ev_field_types();
-
 		foreach ( $elements as $index => $element ) {
 			if ( ! ev_user_can_handle_data( $element ) ) {
 				unset( $elements[$index] );
 			}
+			else {
+				if ( isset( $element['fields'] ) && is_array( $element['fields'] ) ) {
+					if ( empty( $element['fields'] ) ) {
+						unset( $elements[$index] );
+					}
+					else {
+						$elements[$index]['fields'] = self::_parse_fields_structure( $element['fields'] );
 
-			if ( isset( $element['fields'] ) && is_array( $element['fields'] ) && ! empty( $element['fields'] ) ) {
-				$elements[$index]['fields'] = self::_parse_fields_structure( $element['fields'] );
-
-				if ( empty( $element['fields'] ) ) {
-					unset( $elements[$index] );
+						if ( empty( $elements[$index]['fields'] ) ) {
+							unset( $elements[$index] );
+						}
+					}
 				}
 			}
 		}
@@ -304,19 +310,26 @@ abstract class Ev_FieldsContainer {
 	protected static function _validate_fields_structure( $elements )
 	{
 		$groups = 0;
+		$messages = array();
 
 		foreach ( $elements as $index => $element ) {
 			if ( isset( $element['type'] ) && $element['type'] === 'group' && array_key_exists( 'fields', $element ) && is_array( $element['fields'] ) ) {
 				$groups++;
 
 				if ( ! array_key_exists( 'handle', $element ) || empty( $element['handle'] ) ) {
-					return false;
+					$messages[] = 'Group is missing handle parameter.';
 				}
 				elseif ( ! array_key_exists( 'label', $element ) || empty( $element['label'] ) ) {
-					return false;
+					$messages[] = sprintf( 'Group "%s": missing label.', $element['handle'] );
 				}
-				elseif ( ! self::_validate_fields_structure( $element['fields'] ) ) {
-					return false;
+				else {
+					$field_messages = self::_validate_fields_structure( $element['fields'] );
+
+					if ( $field_messages !== true ) {
+						foreach ( $field_messages as $field_message ) {
+							$messages[] = $field_message;
+						}
+					}
 				}
 			}
 			else {
@@ -325,33 +338,73 @@ abstract class Ev_FieldsContainer {
 
 				if ( ! is_array( $element ) || empty( $element ) ) {
 					/* Ensuring that the field data structure is valid. */
-					return false;
+					$messages[] = 'Invalid field structure.';
 				}
 				elseif ( ! array_key_exists( 'type', $element ) || empty( $element['type'] ) ) {
 					/* Ensuring that the field has a type. */
-					return false;
+					if ( array_key_exists( 'handle', $element ) && ! empty( $element['handle'] ) ) {
+						$messages[] = sprintf( 'Field "%s": missing type parameter.', $element['handle'] );
+					}
+					else {
+						$messages[] = 'Field: missing type parameter.';
+					}
 				}
 				elseif ( array_search( $element['type'], $field_types_keys, true ) === false ) {
 					/* Ensuring that the field's type is valid. */
-					return false;
+					if ( array_key_exists( 'handle', $element ) && ! empty( $element['handle'] ) ) {
+						$messages[] = sprintf( 'Field "%s": invalid type.', $element['handle'] );
+					}
+					else {
+						$messages[] = sprintf( '%s field: invalid type.', $element['type'] );
+					}
+				}
+				elseif ( array_key_exists( 'capability', $element ) && empty( $element['capability'] ) ) {
+					/* Ensuring that the field has a valid capability, if any. */
+					if ( array_key_exists( 'handle', $element ) && ! empty( $element['handle'] ) ) {
+						$messages[] = sprintf( 'Field "%s": invalid capability.', $element['handle'] );
+					}
+					else {
+						$messages[] = sprintf( '%s field: invalid capability.', $element['type'] );
+					}
 				}
 				else {
 					$field_class = $field_types[$element['type']];
 
-					$validate_structure = call_user_func( array( $field_class, 'validate_structure' ), $element );
+					$field_messages = call_user_func( array( $field_class, 'validate_structure' ), $element );
 
-					if ( ! $validate_structure ) {
-						return false;
+					if ( $field_messages !== true ) {
+						foreach ( $field_messages as $field_message ) {
+							$messages[] = $field_message;
+						}
 					}
 				}
 			}
 		}
 
 		if ( $groups > 0 && $groups !== count( $elements ) ) {
-			return false;
+			return array(
+				'All first-level elements must be field groups.'
+			);
 		}
 
-		return true;
+		return ! empty( $messages ) ? $messages : true;
+	}
+
+	/**
+	 * Display fields syntax errors.
+	 *
+	 * @since 0.2.0
+	 * @param array $errors An array of error messages.
+	 */
+	protected function _output_field_errors( $errors )
+	{
+		echo '<pre>';
+
+		foreach ( $errors as $message ) {
+			printf( "* %s\n", esc_html( $message ) );
+		}
+
+		echo '</pre>';
 	}
 
 	/**
