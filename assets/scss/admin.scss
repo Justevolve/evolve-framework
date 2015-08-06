@@ -272,14 +272,11 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 
 .ev-tab-container {
 	background-color: $white;
+	border: 1px solid $border_color;
 
 	.ev-tab {
 		@include clearfix;
 	}
-}
-
-.ev-tabs-nav + .ev-tab-container {
-	border-left: 1px solid $border_color;
 }
 
 // -----------------------------------------------------------------------------
