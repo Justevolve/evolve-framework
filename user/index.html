@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Internationalization - Evolve Framework</title>
+	<title>User meta boxes - Evolve Framework</title>
 	<link rel="shortcut icon" href="../img/favicon.ico">
 
 	<link rel="stylesheet" href="../css/highlight.css">
@@ -89,8 +89,8 @@
 								<a href="../metabox/">Meta boxes</a>
 							</li>
 						
-							<li >
-								<a href="../user/">User meta boxes</a>
+							<li class="active">
+								<a href="./">User meta boxes</a>
 							</li>
 						
 					</ul>
@@ -102,8 +102,8 @@
 					Extra
 					<ul>
 						
-							<li class="active">
-								<a href="./">Internationalization</a>
+							<li >
+								<a href="../i18n/">Internationalization</a>
 							</li>
 						
 							<li >
@@ -139,19 +139,59 @@
 		<main>
 			<div class="content">
 				
-					<h1 id="internationalization">Internationalization</h1>
-<p>The framework default language is English.</p>
-<p>The plugin text domain is <code>ev_framework</code> and the source file for strings translation, <code>ev_framework.pot</code>, is located under the plugin's <code>languages</code> folder.</p>
-<p>You can generate a <code>.po</code> file from the provided <code>.pot</code> file, which can be edited with an application such as <a href="https://poedit.net/">Poedit</a> that can produce the <code>.mo</code> file you need for the translation.</p>
-<p>The <code>.po</code> file should be named as follows: <code>ev_framework-$language_code.po</code>.</p>
-<p>After generating the <code>ev_framework-$language_code.mo</code> file, you should put it in the <code>wp-content/languages/plugins</code> folder of your WordPress installation.</p>
-<p><em>If a translation is already included in the framework package, that translation will have precedence over the one located under <code>wp-content/languages/plugins</code>.</em></p>
-<p>Unless you're already using a localized version of the software, in order for the translation to be active, you must download the relative WordPress language pack by selecting a particular language in "General" &gt; "Settings" &gt; "Site language" option, and save the settings.</p>
-<h2 id="updating-the-translation">Updating the translation</h2>
-<p>Following an update to the framework, new strings could be introduced in the code base that need translation.</p>
-<p>To update an existing translation, the <code>.po</code> file must be regenerated from the provided updated <code>.pot</code> file. This operation won't alter previously translated strings.</p>
-<h2 id="contributing-to-translation">Contributing to translation</h2>
-<p>Contributions to the framework translation are more than welcome. If you want to make yourself available for translation into a particular language, please <a href="https://github.com/Justevolve/evolve-framework">get in touch</a>!</p>
+					<h1 id="user-meta-boxes">User meta boxes</h1>
+<p>User meta boxes are data fields containers. They can have a one-level structure, or be divided in multiple subsections as tabs.</p>
+<p>To create a meta box you should refer to the <code>add_user_meta_box</code> method in the <code>Ev_AdminController</code> class; for example:</p>
+<pre><code>ev_fw()-&gt;admin()-&gt;add_user_meta_box( &quot;profile&quot;, __( &quot;Profile&quot;, &quot;textdomain&quot; ) );
+</code></pre>
+
+<p>The method is defined as follows:</p>
+<ul>
+<li><strong><code>add_user_meta_box( $handle, $title, $roles = '', $fields = array() )</code></strong><ul>
+<li><code>handle</code>, a unique name for the user meta box (no spaces, slug-like),</li>
+<li><code>title</code>, the user meta box title that's shown in admin editing screens,</li>
+<li><code>roles</code>, an array of capabilities/roles. Users with any of these capabilities will display the meta box,</li>
+<li><code>fields</code>, an array of fields that composes the user meta box.</li>
+</ul>
+</li>
+</ul>
+<p>Check the <a href="../data-types/">data types documentation</a> for more information about what fields can be added to meta boxes.</p>
+<p>To create a meta box you would write something like:</p>
+<pre><code>function my_theme_user_meta_box() {
+    ev_fw()-&gt;admin()-&gt;add_user_meta_box( &quot;profile&quot;, __( &quot;Profile&quot;, &quot;textdomain&quot; ), array( &quot;administrator&quot; ), array(
+        array(
+            &quot;handle&quot; =&gt; &quot;alt_avatar&quot;,
+            &quot;label&quot; =&gt; __( &quot;Alternative avatar&quot;, &quot;textdomain&quot; ),
+            &quot;type&quot; =&gt; &quot;image&quot;,
+        )
+    ) );
+}
+
+add_action( &quot;init&quot;, &quot;my_theme_user_meta_box&quot; );
+</code></pre>
+
+<p>To create a tabbed user meta box, please refer to the meta boxes/option pages documentation, since the syntax is exactly the same.</p>
+<p><em>If only one tab is defined, the meta box won't show the tabs navigation.</em></p>
+<p>Since the user meta box name is set to <code>profile</code>, its fields can also be manipulated using the following filters:</p>
+<ul>
+<li><code>ev_user_metabox[metabox:profile]</code></li>
+<li><code>ev_user_metabox[metabox:profile][group:{$group_handle}]</code></li>
+</ul>
+<h2 id="adding-a-user-meta-box-to-a-different-user-role">Adding a user meta box to a different user role</h2>
+<p>You can attach a previously declared user meta box to a different users group as well.</p>
+<p>In order to do it, you might use the following filter:</p>
+<pre><code>function my_custom_user_roles( $roles ) {
+    $roles[] = &quot;editor&quot;;
+
+    return $roles;
+}
+
+add_filter( &quot;ev_user_metabox_roles[metabox:profile]&quot;, &quot;my_custom_user_roles&quot; )
+</code></pre>
+
+<p>As a result, both Administrators and Editors will feature the Profile user meta box in the user profile editing screen.</p>
+<h2 id="validation">Validation</h2>
+<p>See the validation section in the documentation page about <a href="../option-page/">Options pages</a>.</p>
 				
 			</div>
 		</main>

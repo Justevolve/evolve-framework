@@ -89,6 +89,10 @@
 								<a href="../metabox/">Meta boxes</a>
 							</li>
 						
+							<li >
+								<a href="../user/">User meta boxes</a>
+							</li>
+						
 					</ul>
 				</li>
 			
@@ -143,7 +147,7 @@
 <li><code>meta</code> data associated to posts, pages and other Custom Post Types entries.</li>
 </ul>
 <p>These implementations are based on WordPress' <a href="https://codex.wordpress.org/Options_API">Options API</a> and <a href="https://codex.wordpress.org/Metadata_API">Metadata API</a> respectively.</p>
-<p><em>Currently the framework doesn't manage data associated to users or taxonomies, but we'd love to do something about that in the future.</em></p>
+<p><em>Currently the framework doesn't manage data associated to taxonomies, but we'd love to do something about that in the future.</em></p>
 <h2 id="data-structure">Data structure</h2>
 <p>Custom options are stored in the <code>wp_options</code> table of WordPress' database and are serialized under the <code>ev</code> option key. This turns out pretty useful when you want to batch-export all of the custom options in your installation.</p>
 <p>To retrieve the entire array of custom data options, you could use the standard WordPress function to retrieve options: <code>get_option( 'ev' )</code>.</p>

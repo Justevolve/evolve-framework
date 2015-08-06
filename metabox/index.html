@@ -89,6 +89,10 @@
 								<a href="./">Meta boxes</a>
 							</li>
 						
+							<li >
+								<a href="../user/">User meta boxes</a>
+							</li>
+						
 					</ul>
 				</li>
 			
@@ -136,7 +140,7 @@
 			<div class="content">
 				
 					<h1 id="meta-boxes">Meta boxes</h1>
-<p>Option pages are data fields containers. They can have a one-level structure, or be divided in multiple subsections as tabs.</p>
+<p>Meta boxes are data fields containers. They can have a one-level structure, or be divided in multiple subsections as tabs.</p>
 <p>To create a meta box you should refer to the <code>add_meta_box</code> method in the <code>Ev_AdminController</code> class; for example:</p>
 <pre><code>ev_fw()-&gt;admin()-&gt;add_meta_box( &quot;theme-options&quot;, __( &quot;Theme options&quot;, &quot;textdomain&quot; ), array( &quot;post&quot;, &quot;page&quot; ), array() );
 </code></pre>
@@ -147,7 +151,7 @@
 <li><code>handle</code>, a unique name for the meta box (no spaces, slug-like),</li>
 <li><code>title</code>, the meta box title that's shown in admin editing screens,</li>
 <li><code>post_types</code>, an array of post types that will display the meta box,</li>
-<li><code>args</code>, an array of fields that composes the meta box.</li>
+<li><code>fields</code>, an array of fields that composes the meta box.</li>
 </ul>
 </li>
 </ul>
