@@ -355,3 +355,65 @@ function ev_fields_insert_before( $field_to_insert, &$fields, $handle ) {
 
 	$fields[] = $field_to_insert;
 }
+
+/**
+ * Batch-export options and theme mods.
+ *
+ * @since 0.3.0
+ * @param array $export An array that determines what to export.
+ */
+function ev_export( $export = array() ) {
+	$export_options = true;
+	$export_mods = true;
+
+	if ( ! empty( $export ) ) {
+		$export_options = isset( $export['options'] ) && $export['options'] == true;
+		$export_mods = isset( $export['mods'] ) && $export['mods'] == true;
+	}
+
+	$data = array();
+	$filename = 'ev-export';
+
+	if ( $export_options ) {
+		$data['options'] = get_option( 'ev' );
+		$filename .= '-options';
+	}
+
+	if ( $export_mods ) {
+		$data['mods'] = get_theme_mods();
+		$filename .= '-mods';
+	}
+
+	$exp = base64_encode( serialize( $data ) );
+	$filename .= '.' . date('Y-m-d') . '.ev-backup';
+
+	header('Content-disposition: attachment; filename=' . $filename);
+	header('Content-type: text/plain');
+
+	ob_start();
+	echo $exp;
+	ob_end_flush();
+
+	die();
+}
+
+/**
+ * Import options and skin into the system.
+ *
+ * @since 0.3.0
+ * @param array $data The serialized data.
+ */
+function ev_import( $data = array() ) {
+	$data = maybe_unserialize( base64_decode( $data ) );
+	$import_options = isset( $data['options'] );
+	$import_mods = isset( $data['mods'] );
+
+	if( $import_options ) {
+		update_option( 'ev', $data['options'] );
+	}
+
+	if( $import_mods ) {
+		$theme = get_option( 'stylesheet' );
+		update_option( "theme_mods_$theme", $data['mods'] );
+	}
+}
