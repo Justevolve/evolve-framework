@@ -371,7 +371,9 @@ function ev_export( $export = array() ) {
 		$export_mods = isset( $export['mods'] ) && $export['mods'] == true;
 	}
 
-	$data = array();
+	$data = array(
+		'ev' => true
+	);
 	$filename = 'ev-export';
 
 	if ( $export_options ) {
@@ -385,10 +387,10 @@ function ev_export( $export = array() ) {
 	}
 
 	$exp = base64_encode( serialize( $data ) );
-	$filename .= '.' . date('Y-m-d') . '.ev-backup';
+	$filename .= '.' . date( 'Y-m-d' ) . '.txt';
 
-	header('Content-disposition: attachment; filename=' . $filename);
-	header('Content-type: text/plain');
+	header( 'Content-disposition: attachment; filename=' . $filename );
+	header( 'Content-type: text/plain' );
 
 	ob_start();
 	echo $exp;
@@ -405,8 +407,17 @@ function ev_export( $export = array() ) {
  */
 function ev_import( $data = array() ) {
 	$data = maybe_unserialize( base64_decode( $data ) );
+
+	if ( ! is_array( $data ) ) {
+		return;
+	}
+
 	$import_options = isset( $data['options'] );
 	$import_mods = isset( $data['mods'] );
+
+	if ( ! isset( $data['ev'] ) || ! $data['ev'] ) {
+		return;
+	}
 
 	if( $import_options ) {
 		update_option( 'ev', $data['options'] );

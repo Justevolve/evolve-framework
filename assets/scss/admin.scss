@@ -172,6 +172,17 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 }
 
 // -----------------------------------------------------------------------------
+// $Containers
+// -----------------------------------------------------------------------------
+
+.ev-page-container {
+	background-color: $white;
+	border: 1px solid $border_color;
+	padding: $baseline $gutter;
+	@include clearfix();
+}
+
+// -----------------------------------------------------------------------------
 // $Vertical navigation for option page
 // -----------------------------------------------------------------------------
 
