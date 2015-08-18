@@ -240,6 +240,26 @@ function ev_ajax_message( $message = '', $type = 'notice', $heading = '', $args 
 }
 
 /**
+ * Get the name of the key containing the options.
+ *
+ * @since 0.3.0
+ * @return string
+ */
+function ev_get_options_key() {
+	$key = 'ev_';
+
+	if ( is_child_theme() ) {
+		$theme = wp_get_theme();
+		$key .= $theme->Template;
+	}
+	else {
+		$key .= get_option( 'stylesheet' );
+	}
+
+	return apply_filters( 'ev_options_key', $key );
+}
+
+/**
  * Get a value of an option.
  *
  * @since 0.1.0
@@ -247,7 +267,8 @@ function ev_ajax_message( $message = '', $type = 'notice', $heading = '', $args 
  * @return mixed
  */
 function ev_get_option( $key ) {
-	$options = get_option( 'ev' );
+	$options_key = ev_get_options_key();
+	$options = get_option( $options_key );
 	$value = is_array( $options ) && isset( $options[$key] ) ? $options[$key] : false;
 	$value = apply_filters( "ev_get_option[key:{$key}]", $value );
 
@@ -261,11 +282,12 @@ function ev_get_option( $key ) {
  * @param string $key The option key.
  */
 function ev_delete_option( $key ) {
-	$options = get_option( 'ev' );
+	$options_key = ev_get_options_key();
+	$options = get_option( $options_key );
 
 	if ( is_array( $options ) && isset( $options[$key] ) ) {
 		unset( $options[$key] );
-		update_option( 'ev', $options );
+		update_option( $options_key, $options );
 	}
 }
 
@@ -276,14 +298,15 @@ function ev_delete_option( $key ) {
  * @param string $key The option key.
  */
 function ev_update_option( $key, $value ) {
-	$options = get_option( 'ev' );
+	$options_key = ev_get_options_key();
+	$options = get_option( $options_key );
 
 	if ( ! $options ) {
 		$options = array();
 	}
 
 	$options[$key] = $value;
-	update_option( 'ev', $options );
+	update_option( $options_key, $options );
 }
 
 /**
@@ -354,4 +377,79 @@ function ev_fields_insert_before( $field_to_insert, &$fields, $handle ) {
 	}
 
 	$fields[] = $field_to_insert;
+}
+
+/**
+ * Batch-export options and theme mods. Triggers file download.
+ *
+ * @since 0.3.0
+ * @param array $export An array that determines what to export.
+ */
+function ev_backup_configuration( $export = array() ) {
+	$export_options = true;
+	$export_mods = true;
+
+	if ( ! empty( $export ) ) {
+		$export_options = isset( $export['options'] ) && $export['options'] == true;
+		$export_mods = isset( $export['mods'] ) && $export['mods'] == true;
+	}
+
+	$data = array(
+		'ev' => true
+	);
+	$filename = 'ev-export';
+
+	if ( $export_options ) {
+		$options_key = ev_get_options_key();
+		$data['options'] = get_option( $options_key );
+		$filename .= '-options';
+	}
+
+	if ( $export_mods ) {
+		$data['mods'] = get_theme_mods();
+		$filename .= '-mods';
+	}
+
+	$exp = base64_encode( serialize( $data ) );
+	$filename .= '.' . date( 'Y-m-d' ) . '.txt';
+
+	header( 'Content-disposition: attachment; filename=' . $filename );
+	header( 'Content-type: text/plain' );
+
+	ob_start();
+	echo $exp;
+	ob_end_flush();
+
+	die();
+}
+
+/**
+ * Import options and skin into the system.
+ *
+ * @since 0.3.0
+ * @param array $data The serialized data.
+ */
+function ev_restore_configuration( $data = array() ) {
+	$data = maybe_unserialize( base64_decode( $data ) );
+
+	if ( ! is_array( $data ) ) {
+		return;
+	}
+
+	$import_options = isset( $data['options'] );
+	$import_mods = isset( $data['mods'] );
+
+	if ( ! isset( $data['ev'] ) || ! $data['ev'] ) {
+		return;
+	}
+
+	if ( $import_options ) {
+		$options_key = ev_get_options_key();
+		update_option( $options_key, $data['options'] );
+	}
+
+	if ( $import_mods ) {
+		$theme = get_option( 'stylesheet' );
+		update_option( "theme_mods_$theme", $data['mods'] );
+	}
 }
