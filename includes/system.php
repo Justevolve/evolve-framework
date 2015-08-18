@@ -380,6 +380,16 @@ function ev_fields_insert_before( $field_to_insert, &$fields, $handle ) {
 }
 
 /**
+ * Check if we're currently in the login/registration screen.
+ *
+ * @since 0.3.0
+ * @return boolean
+ */
+function ev_is_login_page() {
+	return in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ) );
+}
+
+/**
  * Batch-export options and theme mods. Triggers file download.
  *
  * @since 0.3.0
