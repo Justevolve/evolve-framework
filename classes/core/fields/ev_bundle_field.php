@@ -43,11 +43,17 @@ class Ev_BundleField extends Ev_Field {
 	public function render_inner( $field = false )
 	{
 		$field_types = ev_field_types();
-		$value = $field->value();
+		$value = $this->value();
+		$handle = $this->handle();
+
+		if ( $field !== false ) {
+			$value = $field->value();
+			$handle = $field->handle();
+		}
 
 		foreach ( $this->_fields as $index => $field_data ) {
 			$field_class = $field_types[$field_data['type']];
-			$field_data['bundle'] = $field->handle();
+			$field_data['bundle'] = $handle;
 
 			$fld = new $field_class( $field_data );
 
