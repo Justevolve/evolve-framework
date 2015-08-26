@@ -784,6 +784,161 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 }
 
 // -----------------------------------------------------------------------------
+// $Bundle
+// -----------------------------------------------------------------------------
+
+.ev-field-bundle {
+
+	.ev-bundle-fields-wrapper {
+		display: block;
+		position: relative;
+		float: left;
+		width: 100%;
+		@include box-sizing( border-box );
+
+		.ev-field {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+
+	// Repeatable bundles ------------------------------------------------------
+
+	&.ev-repeatable {
+		// Reset repeatable field style
+		.ev-field-inner {
+			border: none;
+			padding: 0;
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			.ev-repeatable-remove {
+				display: none;
+			}
+
+			&:hover {
+				background-color: transparent;
+
+				&:before,
+				&:after {
+					display: none;
+				}
+			}
+		}
+
+		.ev-field {
+			border: none;
+
+			+ .ev-field {
+				border-top: 1px dashed $border-color;
+			}
+		}
+
+		.ev-bundle-fields-wrapper {
+			border: 1px solid $border_color;
+			padding-right: $baseline*1.25;
+
+			+ .ev-bundle-fields-wrapper {
+				margin-top: $baseline/4;
+			}
+
+			.ev-field {
+				padding-left: $gutter;
+			}
+
+			&:hover {
+				border: 1px solid $blue_medium;
+
+				.ev-field {
+					background-color: rgba( $blue_light, .1 );
+				}
+
+				.ev-repeatable-remove:before {
+					@include opacity( 100 );
+				}
+
+				&:before,
+				&:after {
+					content: "";
+					display: block;
+					@include position( absolute, -1px null -1px null );
+					width: 1px;
+					background-color: $blue_medium;
+				}
+
+				&:before {
+					left: 0;
+				}
+
+				&:after {
+					right: 0;
+				}
+			}
+		}
+
+		// Remove icon
+		.ev-repeatable-remove {
+			cursor: pointer;
+
+			&:before {
+				@extend %remove_icon;
+				margin-top: -9px;
+				@include position( absolute, 50% $baseline/4 null null );
+			}
+
+			&:hover:before {
+				color: darken( $red, 20 );
+			}
+		}
+	}
+
+	// Sortable bundles --------------------------------------------------------
+
+	&.ev-sortable {
+		// Reset sortable field style
+		.ev-field-inner {
+			padding-left: 0;
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			.ev-sortable-handle {
+				display: none;
+			}
+		}
+
+		.ev-bundle-fields-wrapper {
+			padding-left: $baseline*1.25;
+
+			.ev-field {
+				padding-left: 0;
+			}
+
+			&:hover {
+				.ev-sortable-handle {
+					visibility: visible;
+				}
+			}
+
+			&.ui-sortable-helper {
+				border-top: 1px solid $border_color;
+				border-bottom: 1px solid $border_color;
+				background-color: $white;
+				@include box-shadow( 0 1px 10px rgba( #000, .1 ) );
+			}
+
+			&.ui-sortable-placeholder {
+				background-color: $grey_light_2;
+				visibility: visible !important;
+			}
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
 // $Fields repeatable
 // -----------------------------------------------------------------------------
 

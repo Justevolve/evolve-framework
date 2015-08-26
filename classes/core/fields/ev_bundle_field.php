@@ -51,18 +51,24 @@ class Ev_BundleField extends Ev_Field {
 			$handle = $field->handle();
 		}
 
-		foreach ( $this->_fields as $index => $field_data ) {
-			$field_class = $field_types[$field_data['type']];
-			$field_data['bundle'] = $handle;
+		echo '<div class="ev-bundle-fields-wrapper">';
+			echo '<span class="ev-sortable-handle"></span>';
 
-			$fld = new $field_class( $field_data );
+			foreach ( $this->_fields as $index => $field_data ) {
+				$field_class = $field_types[$field_data['type']];
+				$field_data['bundle'] = $handle;
 
-			if ( isset( $value[$field_data['handle']] ) ) {
-				$fld->value( $value[$field_data['handle']] );
+				$fld = new $field_class( $field_data );
+
+				if ( isset( $value[$field_data['handle']] ) ) {
+					$fld->value( $value[$field_data['handle']] );
+				}
+
+				$fld->render();
 			}
 
-			$fld->render();
-		}
+			echo '<span class="ev-repeatable-remove"></span>';
+		echo '</div>';
 	}
 }
 
