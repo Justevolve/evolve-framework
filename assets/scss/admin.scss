@@ -1706,3 +1706,22 @@ body.ev-modal-open {
 // -----------------------------------------------------------------------------
 
 @include ev_modal_reset();
+
+// -----------------------------------------------------------------------------
+// $TinyMCE
+// -----------------------------------------------------------------------------
+
+.ev-switch-editor {
+	float: left;
+	@include box-sizing( content-box );
+	position: relative;
+	top: 1px;
+	background: #EBEBEB;
+	color: #777;
+	cursor: pointer;
+	font: 13px/19px "Open Sans", sans-serif;
+	height: 20px;
+	margin: 5px 0 0 5px;
+	padding: 3px 8px 4px;
+	border: 1px solid #E5E5E5;
+}
