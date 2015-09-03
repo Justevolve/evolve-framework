@@ -28,7 +28,7 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: classes/core/ev_field.php:536
+#: classes/core/ev_field.php:527
 msgid "Need help?"
 msgstr ""
 
