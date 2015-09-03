@@ -520,15 +520,6 @@ abstract class Ev_Field {
 	{
 		$help = $this->help();
 
-		/**
-		 * Print content between the field label and field help. Useful for
-		 * outputting custom controls for the field.
-		 *
-		 * @since 0.3.0
-		 * @param Ev_Field
-		 */
-		do_action( 'ev_fw_before_field_help', $this );
-
 		if ( $help !== false && $help['text'] != '' ) {
 			printf( '<div class="ev-help ev-help-%s">', esc_attr( $help['type'] ) );
 				switch( $help['type'] ) {
