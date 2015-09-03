@@ -392,6 +392,7 @@
 
 	.ev-tab-container {
 		@extend %clearfix !optional;
+		// overflow: hidden;
 	}
 
 	.ev-tab {

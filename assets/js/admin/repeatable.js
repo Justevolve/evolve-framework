@@ -4,10 +4,10 @@
 	/**
 	 * Adding the sortable component to the UI building queue.
 	 */
-	$.evf.ui.add( ".ev-sortable .ev-container", function() {
+	$.evf.ui.add( ".ev-sortable .ev-container, .ev-sortable .ev-bundle-fields-wrapper", function() {
 		$( this ).sortable( {
 			handle: ".ev-sortable-handle",
-			items: "> .ev-field-inner"
+			items: "> .ev-field-inner, .ev-bundle-fields-wrapper"
 		} );
 	} );
 
@@ -16,8 +16,8 @@
 	 */
 	$.evf.delegate( ".ev-repeatable-remove", "click", "repeatable", function() {
 		var current_master_field = $( this ).parents( ".ev-field" ).first(),
-			container = $( ".ev-container", current_master_field ).first(),
-			current_field = $( this ).parents( ".ev-field-inner" ).first();
+			container = $( ".ev-container, .ev-bundle-fields-wrapper", current_master_field ).first(),
+			current_field = $( this ).parents( ".ev-field-inner, .ev-bundle-fields-wrapper" ).first();
 
 		current_field.remove();
 
@@ -87,24 +87,4 @@
 		return false;
 	} );
 
-
-	window.asd = function( tpl, sanitize_and_insert ) {
-
-		var data = [
-			"Genova",
-			"Milano",
-			"Torino"
-		];
-
-		$.each( data, function() {
-			var html = $( $.evf.template( tpl, {} ) ),
-				value = this;
-
-			$( "[name]", html ).each( function() {
-				$( this ).attr( "value", value );
-			} );
-
-			sanitize_and_insert( html );
-		} );
-	};
 } )( jQuery );

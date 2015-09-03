@@ -146,13 +146,23 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 	 */
 	public function render()
 	{
-		echo '<div class="ev ev-admin-page">';
+		$handle = $this->handle();
+
+		printf( '<div id="ev-admin-page-%s" class="ev ev-admin-page">', esc_attr( $handle ) );
 			wp_nonce_field( 'ev_admin_page', 'ev' );
 			$this->render_heading();
 
 			if ( isset( $this->_args['group'] ) ) {
 				$this->render_group_navigation();
 			}
+
+			/**
+			 * Hook before page elements are shown. Good for static pages or
+			 * pages that want to display a different kind of form.
+			 *
+			 * @since 0.3.0
+			 */
+			do_action( "ev_admin_page_content[page:{$handle}]" );
 
 			$this->render_elements();
 			echo '<div class="ev-persistent-messages-container"></div>';
