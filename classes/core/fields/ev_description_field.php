@@ -43,6 +43,8 @@ class Ev_DescriptionField extends Ev_DividerField {
 	 */
 	public static function validate_structure( $field )
 	{
+		$messages = array();
+
 		if ( ! array_key_exists( 'text', $field ) || empty( $field['text'] ) ) {
 			/* Ensuring that the field has a valid text. */
 			$messages[] = 'Field: missing text parameter.';

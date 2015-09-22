@@ -2,7 +2,7 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Evolve Framework 0.3.0\n"
+"Project-Id-Version: Evolve Framework 0.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/Justevolve/evolve-framework\n"
 "POT-Creation-Date: 2015-07-15 20:32:43+00:00\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: classes/core/ev_field.php:536
+#: classes/core/ev_field.php:527
 msgid "Need help?"
 msgstr ""
 
