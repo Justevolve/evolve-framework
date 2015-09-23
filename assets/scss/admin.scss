@@ -1088,6 +1088,100 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 }
 
 // -----------------------------------------------------------------------------
+// $Attachment upload
+// -----------------------------------------------------------------------------
+
+$attachment_upload_size: 80px;
+
+.ev-attachment-upload-action {
+	.ev-edit-action {
+		display: none;
+	}
+}
+
+.ev-attachment-uploaded .ev-attachment-upload-action {
+	.ev-edit-action {
+		display: inline;
+	}
+
+	.ev-upload-action {
+		display: none;
+	}
+}
+
+.ev-attachment-placeholder {
+	@include clearfix();
+	margin-bottom: $gutter/4;
+
+	.ev-attachment-placeholder-icon {
+		position: relative;
+		display: block;
+		@include size( $attachment_upload_size );
+		background-color: $grey_light_2;
+		float: left;
+
+		&:before {
+			@include icon( "\f128" );
+			font-size: 52px;
+			@include position( absolute, 50% null null 50% );
+			@include transform( translate3d( -50%, -50%, 0 ) );
+			color: $grey_light;
+		}
+
+		&:after {
+			content: "";
+			display: block;
+			@include position( absolute, 0 0 0 0 );
+			border: 1px solid $border_color;
+		}
+	}
+
+	&.ev-attachment-audio-placeholder .ev-attachment-placeholder-icon:before {
+		content: "\f500"
+	}
+
+	&.ev-attachment-video-placeholder .ev-attachment-placeholder-icon:before {
+		content: "\f490"
+	}
+
+	&.ev-attachment-application-placeholder .ev-attachment-placeholder-icon:before {
+		content: "\f491"
+	}
+
+	.ev-attachment-details {
+		float: left;
+		margin-left: $gutter/2;
+
+		.ev-attachment-title {
+			font-weight: bold;
+			font-style: normal;
+			color: $text;
+		}
+
+		li {
+			font-style: italic;
+			font-weight: normal;
+			color: $text_light;
+		}
+	}
+
+	.ev-upload-remove {
+		cursor: pointer;
+
+		&:before {
+			@extend %remove_icon;
+			background-color: $white;
+			border-radius: 50%;
+			@include position( absolute, -3px -3px null null );
+		}
+	}
+
+	&:hover .ev-upload-remove:before {
+		@include opacity( 100 );
+	}
+}
+
+// -----------------------------------------------------------------------------
 // $Image upload
 // -----------------------------------------------------------------------------
 

@@ -105,6 +105,7 @@ function get_modules_admin_scripts() {
 	scripts.push( "assets/js/admin/repeatable.js" );
 	scripts.push( "assets/js/admin/options.js" );
 	scripts.push( "assets/js/admin/image_upload.js" );
+	scripts.push( "assets/js/admin/attachment_upload.js" );
 	scripts.push( "assets/js/admin/multiple_select.js" );
 	scripts.push( "assets/js/admin/color.js" );
 	scripts.push( "assets/js/admin/editor.js" );

@@ -23,7 +23,7 @@ if ( ! ( version_compare( $wp_version, '4.0.0' ) >= 0 ) ) {
  * Plugin Name: Evolve Framework
  * Plugin URI: https://github.com/Justevolve/evolve-framework
  * Description: A WordPress development framework.
- * Version: 0.3.1
+ * Version: 0.4.0
  * Author: Evolve
  * Author URI: http://justevolve.it
  * Text Domain: ev_framework
@@ -108,7 +108,7 @@ class Ev_Framework {
 		define( 'EV_FW', true );
 
 		/* Framework version number. */
-		define( 'EV_FRAMEWORK_VERSION', '0.3.1' );
+		define( 'EV_FRAMEWORK_VERSION', '0.4.0' );
 
 		/* Theme folder. */
 		define( 'EV_THEME_FOLDER', trailingslashit( get_template_directory() ) );
@@ -317,6 +317,7 @@ class Ev_Framework {
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_multiple_select_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_select_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_image_field.php' );
+		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_attachment_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_divider_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_description_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_color_field.php' );

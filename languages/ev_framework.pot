@@ -2,7 +2,7 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Evolve Framework 0.3.1\n"
+"Project-Id-Version: Evolve Framework 0.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Justevolve/evolve-framework\n"
 "POT-Creation-Date: 2015-07-15 20:32:43+00:00\n"
 "MIME-Version: 1.0\n"
@@ -48,14 +48,20 @@ msgstr ""
 msgid "Large"
 msgstr ""
 
-#: classes/core/fields/ev_icon_field.php:63
-msgid "Nothing found"
-msgstr ""
-
-#: classes/core/fields/ev_image_field.php:89
+#: classes/core/fields/ev_attachment_field.php:120
+#: classes/core/fields/ev_attachment_field.php:129
+#: classes/core/fields/ev_attachment_field.php:140
+#: classes/core/fields/ev_attachment_field.php:151
+#: classes/core/fields/ev_image_field.php:89 templates/fields/attachment.php:38
+#: templates/fields/attachment.php:52 templates/fields/attachment.php:61
+#: templates/fields/attachment.php:70
 #: templates/fields/partials/image_upload.php:49
 #: templates/fields/partials/image_upload.php:62
 msgid "Remove"
+msgstr ""
+
+#: classes/core/fields/ev_icon_field.php:63
+msgid "Nothing found"
 msgstr ""
 
 #: classes/core/fields_containers/ev_admin_page.php:362
@@ -63,6 +69,7 @@ msgid "All saved!"
 msgstr ""
 
 #: classes/core/fields_containers/ev_modal.php:54
+#: templates/fields/attachment.php:81
 #: templates/fields/partials/image_upload.php:69
 msgid "Edit"
 msgstr ""
@@ -75,8 +82,13 @@ msgstr ""
 msgid "Evolve Framework not activated: at least WordPress 4.0 is required."
 msgstr ""
 
-#: evolve-framework.php:455
+#: evolve-framework.php:456
 msgid "Changelog"
+msgstr ""
+
+#: templates/fields/attachment.php:82
+#: templates/fields/partials/image_upload.php:70
+msgid "Upload"
 msgstr ""
 
 #: templates/fields/icon.php:22
@@ -85,10 +97,6 @@ msgstr ""
 
 #: templates/fields/image.php:98
 msgid "Image size"
-msgstr ""
-
-#: templates/fields/partials/image_upload.php:70
-msgid "Upload"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
