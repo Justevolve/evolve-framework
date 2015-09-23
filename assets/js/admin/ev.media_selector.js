@@ -83,7 +83,8 @@
 					displaySettings    : false,
 					displayUserSettings: false,
 					multiple           : window.ev_ms_obj.options.multiple,
-					type               : window.ev_ms_obj.options.type
+					library            : wp.media.query( { type: window.ev_ms_obj.options.type } )
+					// type               : window.ev_ms_obj.options.type
 				}, wp.media.controller.Library.prototype.defaults )
 			} );
 
