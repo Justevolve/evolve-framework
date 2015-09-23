@@ -160,7 +160,7 @@ class Ev_Query {
 	private function parse_args( $args )
 	{
 		$default_args = array(
-			'post_status' => 'publish'
+			// 'post_status' => 'publish'
 		);
 
 		$args = wp_parse_args( $args, $default_args );
