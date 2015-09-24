@@ -75,7 +75,8 @@
 			select: function( selection ) {
 				var value = "",
 					html = "",
-					controls = $( ".ev-attachment-upload-action", container );
+					controls = $( ".ev-attachment-upload-action", container ),
+					template = $( "script[type='text/template'][data-template='ev-attachment-placeholder']" );
 
 				$( ".ev-attachment-placeholder", container ).remove();
 
@@ -83,57 +84,37 @@
 					value = _.pluck( selection, "id" ).join( "," );
 
 					$.each( selection, function() {
-						var template = $( "script[type='text/template'][data-template='ev-attachment-" + this.type + "-placeholder']" );
+						var extension = this.url.split(/[\\/]/).pop() + " (" + this.filesizeHumanReadable + ")",
+							type = this.type;
 
-						if ( this.type === "image" ) {
-							var image_url = this.sizes.full.url;
-
-							if ( this.sizes[thumb_size] ) {
-								image_url = this.sizes[thumb_size].url;
-							}
-
-							controls.before( $.evf.template( template, {
-								"url": image_url,
-								"id": this.id
-							} ) );
+						if ( this.subtype ) {
+							type += "-" + this.subtype;
 						}
-						else {
-							var extension = this.url.split(/[\\/]/).pop() + " (" + this.filesizeHumanReadable + ")";
 
-							controls.before( $.evf.template( template, {
-								"id": this.id,
-								"title": this.title,
-								"extension": extension
-							} ) );
-						}
+						controls.before( $.evf.template( template, {
+							"type": type,
+							"id": this.id,
+							"title": this.title,
+							"extension": extension
+						} ) );
 					} );
 				}
 				else {
 					value = selection.id;
 
-					var template = $( "script[type='text/template'][data-template='ev-attachment-" + selection.type + "-placeholder']" );
+					var extension = selection.url.split(/[\\/]/).pop() + " (" + selection.filesizeHumanReadable + ")",
+						type = selection.type;
 
-					if ( selection.type === "image" ) {
-						var image_url = selection.sizes.full.url;
-
-						if ( selection.sizes[thumb_size] ) {
-							image_url = selection.sizes[thumb_size].url;
-						}
-
-						controls.before( $.evf.template( template, {
-							"url": image_url,
-							"id": value
-						} ) );
+					if ( selection.subtype ) {
+						type += "-" + selection.subtype;
 					}
-					else {
-						var extension = selection.url.split(/[\\/]/).pop() + " (" + selection.filesizeHumanReadable + ")";
 
-						controls.before( $.evf.template( template, {
-							"id": value,
-							"title": selection.title,
-							"extension": extension
-						} ) );
-					}
+					controls.before( $.evf.template( template, {
+						"type": type,
+						"id": value,
+						"title": selection.title,
+						"extension": extension
+					} ) );
 				}
 
 				container.addClass( "ev-attachment-uploaded" );

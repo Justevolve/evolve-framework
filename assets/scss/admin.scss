@@ -1091,7 +1091,17 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 // $Attachment upload
 // -----------------------------------------------------------------------------
 
-$attachment_upload_size: 80px;
+$attachment_upload_size: $gutter*2;
+$attachment_generic    : "\f498";
+$attachment_zip        : "\f501";
+$attachment_image      : "\f128";
+$attachment_audio      : "\f500";
+$attachment_video      : "\f490";
+$attachment_text       : "\f491";
+$attachment_doc        : "\f497";
+$attachment_interactive: "\f496";
+$attachment_code       : "\f499";
+$attachment_spreadsheet: "\f495";
 
 .ev-attachment-upload-action {
 	.ev-edit-action {
@@ -1111,58 +1121,19 @@ $attachment_upload_size: 80px;
 
 .ev-attachment-placeholder {
 	@include clearfix();
-	margin-bottom: $gutter/4;
+	position: relative;
+	margin-bottom: $baseline/2;
+	border: 1px solid $border_color;
+	padding: $baseline/2 ($gutter/2 + 18) $baseline/2 $gutter/2;
+	background-color: $white;
 
-	.ev-attachment-placeholder-icon {
-		position: relative;
-		display: block;
-		@include size( $attachment_upload_size );
+	&:hover {
+		border: 1px solid $blue_medium;
+	}
+
+	&.ui-sortable-placeholder {
 		background-color: $grey_light_2;
-		float: left;
-
-		&:before {
-			@include icon( "\f128" );
-			font-size: 52px;
-			@include position( absolute, 50% null null 50% );
-			@include transform( translate3d( -50%, -50%, 0 ) );
-			color: $grey_light;
-		}
-
-		&:after {
-			content: "";
-			display: block;
-			@include position( absolute, 0 0 0 0 );
-			border: 1px solid $border_color;
-		}
-	}
-
-	&.ev-attachment-audio-placeholder .ev-attachment-placeholder-icon:before {
-		content: "\f500"
-	}
-
-	&.ev-attachment-video-placeholder .ev-attachment-placeholder-icon:before {
-		content: "\f490"
-	}
-
-	&.ev-attachment-application-placeholder .ev-attachment-placeholder-icon:before {
-		content: "\f491"
-	}
-
-	.ev-attachment-details {
-		float: left;
-		margin-left: $gutter/2;
-
-		.ev-attachment-title {
-			font-weight: bold;
-			font-style: normal;
-			color: $text;
-		}
-
-		li {
-			font-style: italic;
-			font-weight: normal;
-			color: $text_light;
-		}
+		visibility: visible !important;
 	}
 
 	.ev-upload-remove {
@@ -1172,12 +1143,102 @@ $attachment_upload_size: 80px;
 			@extend %remove_icon;
 			background-color: $white;
 			border-radius: 50%;
-			@include position( absolute, -3px -3px null null );
+			margin-top: -9px;
+			@include position( absolute, 50% $gutter/2 null null );
 		}
 	}
 
 	&:hover .ev-upload-remove:before {
 		@include opacity( 100 );
+	}
+
+	.ev-attachment-details {
+		.ev-attachment-title {
+			font-weight: bold;
+			font-size: 14px;
+		}
+
+		.ev-attachment-extension {
+			display: block;
+			font-style: italic;
+			color: $text_light;
+			margin-top: $baseline/4;
+		}
+	}
+
+	.ev-attachment-placeholder-icon {
+		@include size( $attachment_upload_size );
+		float: left;
+		position: relative;
+		display: block;
+		margin-right: $gutter;
+		border-right: 1px solid $border_color;
+		padding-right: $gutter/2;
+
+		&:before {
+			color: $text_light;
+			@include size( $attachment_upload_size );
+			@include icon( $attachment_generic );
+			float: left;
+			line-height: $attachment_upload_size;
+			font-size: 32px;
+		}
+	}
+
+	&[class*="video"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_video;
+		}
+	}
+
+	&[class*="image"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_image;
+			font-size: 22px;
+		}
+	}
+
+	&[class*="audio"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_audio;
+		}
+	}
+
+	&[class*="zip"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_zip;
+		}
+	}
+
+	&[class*="text-plain"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_text;
+		}
+	}
+
+	&[class*="pdf"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_doc;
+		}
+	}
+
+	&[class*="text-html"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_code;
+		}
+	}
+
+	&[class*="keynote"],
+	&[class*="powerpoint"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_interactive;
+		}
+	}
+
+	&[class*="excel"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_spreadsheet;
+		}
 	}
 }
 

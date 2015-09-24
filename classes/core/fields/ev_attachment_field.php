@@ -68,36 +68,18 @@ function ev_register_attachment_field_type( $types ) {
 add_filter( 'ev_field_types', 'ev_register_attachment_field_type' );
 
 /**
- * Image upload placeholder template.
- *
- * @since 0.4.0
- * @return string
- */
-function ev_attachment_upload_image_placeholder_template() {
-	$placeholder_html = '<div class="ev-attachment-placeholder ev-attachment-image-placeholder">
-		<img data-id="%s" src="%s" alt="">
-		<a href="#" class="ev-upload-remove"><span class="screen-reader-text">%s</span></a>
-	</div>';
-
-	return $placeholder_html;
-}
-
-/**
  * Generic upload placeholder template.
  *
  * @since 0.4.0
  * @return string
  */
-function ev_attachment_upload_generic_placeholder_template( $type = '' ) {
-	$placeholder_html = '<div class="ev-attachment-placeholder ev-attachment-' . $type . '-placeholder">
-		<span class="ev-attachment-placeholder-icon" data-id="%s" alt="">
-			<a href="#" class="ev-upload-remove"><span class="screen-reader-text">%s</span></a>
-		</span>
+function ev_attachment_upload_generic_placeholder_template() {
+	$placeholder_html = '<div class="ev-attachment-placeholder ev-attachment-%s-placeholder">
+		<a href="#" class="ev-upload-remove"><span class="screen-reader-text">%s</span></a>
+		<span class="ev-attachment-placeholder-icon" data-id="%s" alt=""></span>
 		<div class="ev-attachment-details">
-			<ul>
-				<li class="ev-attachment-title">%s</li>
-				<li class="ev-attachment-extension">%s</li>
-			</ul>
+			<span class="ev-attachment-title">%s</span>
+			<span class="ev-attachment-extension">%s</span>
 		</div>
 	</div>';
 
@@ -112,43 +94,12 @@ function ev_attachment_upload_generic_placeholder_template( $type = '' ) {
  */
 function ev_attachment_upload_placeholder_templates() {
 	/* Image upload template. */
-	echo '<script type="text/template" data-template="ev-attachment-image-placeholder">';
+	echo '<script type="text/template" data-template="ev-attachment-placeholder">';
 		printf(
-			ev_attachment_upload_image_placeholder_template(),
-			'{{ id }}',
-			'{{ url }}',
-			__( 'Remove', 'ev_framework' )
-		);
-	echo '</script>';
-
-	/* Audio upload template */
-	echo '<script type="text/template" data-template="ev-attachment-audio-placeholder">';
-		printf(
-			ev_attachment_upload_generic_placeholder_template( 'audio' ),
-			'{{ id }}',
+			ev_attachment_upload_generic_placeholder_template(),
+			'{{ type }}',
 			__( 'Remove', 'ev_framework' ),
-			'{{ title }}',
-			'{{ extension }}'
-		);
-	echo '</script>';
-
-	/* Video upload template */
-	echo '<script type="text/template" data-template="ev-attachment-video-placeholder">';
-		printf(
-			ev_attachment_upload_generic_placeholder_template( 'video' ),
 			'{{ id }}',
-			__( 'Remove', 'ev_framework' ),
-			'{{ title }}',
-			'{{ extension }}'
-		);
-	echo '</script>';
-
-	/* Application upload template */
-	echo '<script type="text/template" data-template="ev-attachment-application-placeholder">';
-		printf(
-			ev_attachment_upload_generic_placeholder_template( 'application' ),
-			'{{ id }}',
-			__( 'Remove', 'ev_framework' ),
 			'{{ title }}',
 			'{{ extension }}'
 		);
