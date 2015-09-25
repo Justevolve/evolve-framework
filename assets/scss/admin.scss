@@ -1129,6 +1129,45 @@ $attachment_spreadsheet: "\f495";
 
 	&:hover {
 		border: 1px solid $blue_medium;
+
+		&:before,
+		&:after {
+			content: "";
+			display: block;
+			@include position( absolute, -1px null -1px null );
+			width: 1px;
+			background-color: $blue_medium;
+		}
+
+		&:before {
+			left: 0;
+		}
+
+		&:after {
+			right: 0;
+		}
+	}
+
+	.ui-sortable & {
+		cursor: move;
+
+		.ev-sortable-handle {
+			@include ev_handle;
+			width: $gutter;
+			@include position( absolute, 0 null 0 0 );
+
+			&:before {
+				@include position( absolute, 50% null null 50% );
+				margin-left: -3px;
+				margin-top: -7px;
+			}
+		}
+
+		&:hover {
+			.ev-sortable-handle {
+				visibility: visible;
+			}
+		}
 	}
 
 	&.ui-sortable-placeholder {
@@ -1210,6 +1249,7 @@ $attachment_spreadsheet: "\f495";
 		}
 	}
 
+	&[class*="txt"],
 	&[class*="text-plain"] {
 		.ev-attachment-placeholder-icon:before {
 			content: $attachment_text;
@@ -1222,12 +1262,14 @@ $attachment_spreadsheet: "\f495";
 		}
 	}
 
-	&[class*="text-html"] {
+	&[class*="html"] {
 		.ev-attachment-placeholder-icon:before {
 			content: $attachment_code;
 		}
 	}
 
+	&[class*="key"],
+	&[class*="ppt"],
 	&[class*="keynote"],
 	&[class*="powerpoint"] {
 		.ev-attachment-placeholder-icon:before {
@@ -1235,6 +1277,7 @@ $attachment_spreadsheet: "\f495";
 		}
 	}
 
+	&[class*="xls"],
 	&[class*="excel"] {
 		.ev-attachment-placeholder-icon:before {
 			content: $attachment_spreadsheet;

@@ -30,49 +30,41 @@ printf( '<div class="ev-attachment-upload-container %s" %s>', esc_attr( $contain
 	<?php
 		if ( ! empty( $value ) ) {
 			foreach ( explode( ',', $value ) as $id ) {
+				$title = get_the_title( $id );
+				$file = get_attached_file( $id );
+				$extension = basename( $file );
+				$size = size_format( filesize( $file ) );
+				$extension = sprintf( "%s (%s)", esc_html( $extension ), esc_html( $size ) );
+				$type = '';
+
 				if ( wp_attachment_is_image( $id ) ) {
-					printf(
-						ev_attachment_upload_image_placeholder_template(),
-						$id,
-						ev_fw_get_image( $id, $thumb_size ),
-						__( 'Remove', 'ev_framework' )
-					);
+					$type = 'image';
+				}
+				elseif ( wp_attachment_is( 'audio', $id ) ) {
+					$type = 'audio';
+				}
+				elseif ( wp_attachment_is( 'video', $id ) ) {
+					$type = 'video';
 				}
 				else {
-					$title = get_the_title( $id );
-					$extension = basename( get_attached_file( $id ) );
-					$size = size_format( filesize( get_attached_file( $id ) ) );
+					$check = wp_check_filetype( $file );
 
-					$extension = sprintf( "%s (%s)", $extension, $size );
-
-					if ( wp_attachment_is( 'audio', $id ) ) {
-						printf(
-							ev_attachment_upload_generic_placeholder_template( 'audio' ),
-							$id,
-							__( 'Remove', 'ev_framework' ),
-							$title,
-							$extension
-						);
-					}
-					elseif ( wp_attachment_is( 'video', $id ) ) {
-						printf(
-							ev_attachment_upload_generic_placeholder_template( 'video' ),
-							$id,
-							__( 'Remove', 'ev_framework' ),
-							$title,
-							$extension
-						);
+					if ( isset( $check['ext'] ) ) {
+						$type = $check['ext'];
 					}
 					else {
-						printf(
-							ev_attachment_upload_generic_placeholder_template( 'application' ),
-							$id,
-							__( 'Remove', 'ev_framework' ),
-							$title,
-							$extension
-						);
+						$type = 'unknown';
 					}
 				}
+
+				printf(
+					ev_attachment_upload_generic_placeholder_template(),
+					$type,
+					$id,
+					__( 'Remove', 'ev_framework' ),
+					$title,
+					$extension
+				);
 			}
 		}
 	?>
