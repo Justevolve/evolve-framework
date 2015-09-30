@@ -1,28 +1,47 @@
 ( function( $ ) {
 
-	var tooltip_container = "ev-tooltip",
+	var tooltip_container = "ev-tooltip-container",
 		tooltip_selector = ".ev-tooltip",
 		tooltip_attr = "title",
 		arrow_size = 16;
 
-	tooltip_selector += "[" + tooltip_attr + "]";
+	/**
+	 * Destroy a tooltip.
+	 */
+	window.ev_tooltip_destroy = function( tooltip ) {
+		var s = $( "body" ).get( 0 ).style,
+			transitionSupport = "transition" in s || "WebkitTransition" in s || "MozTransition" in s || "msTransition" in s || "OTransition" in s;
 
-	$( '<div id="' + tooltip_container + '"></div>' ).appendTo( "body" );
+		if ( transitionSupport ) {
+			var event_string = "transitionend.ev webkitTransitionEnd.ev oTransitionEnd.ev MSTransitionEnd.ev";
+
+			$( this ).one( event_string, function( e ) {
+				tooltip.remove();
+			} );
+		}
+		else {
+			tooltip.remove();
+		}
+
+		tooltip.removeClass( "ev-tooltip-active" );
+	};
 
 	/**
 	 * When hovering a tooltip market, show the related tooltip.
 	 */
 	$.evf.delegate( tooltip_selector, "mouseover", "tooltip", function() {
 		var $link = $( this ),
-			link_title = $( this ).attr( tooltip_attr );
+			link_title = $( this ).attr( "data-" + tooltip_attr ) || $( this ).attr( tooltip_attr );
 
 		if ( link_title == "" ) {
 			return false;
 		}
 
-		var $container = $( "#" + tooltip_container ),
+		var $container = $( '<div class="' + tooltip_container + '"></div>' ).appendTo( "body" ),
 			link_height = $link.outerHeight(),
 			link_width = $link.outerWidth();
+
+		$( this ).data( "ev-tooltip", $container );
 
 		$container
 			.html( link_title )
@@ -76,6 +95,8 @@
 	 * When moving away from a tooltip marker, hide the tooltip.
 	 */
 	$.evf.delegate( tooltip_selector, "mouseout", "tooltip", function() {
-		$( "#" + tooltip_container ).removeClass( 'ev-tooltip-active ev-tooltip-vertical ev-tooltip-horizontal ev-tooltip-expand-top ev-tooltip-expand-bottom ev-tooltip-expand-right ev-tooltip-expand-left' );
+		var tooltip = $( this ).data( "ev-tooltip" );
+
+		window.ev_tooltip_destroy( tooltip );
 	});
 } )( jQuery );
