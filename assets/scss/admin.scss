@@ -1581,6 +1581,8 @@ $upload_size: 80px;
 // $Tooltip
 // -----------------------------------------------------------------------------
 
+$tooltip_arrow_size: 16px;
+
 #ev-tooltip {
 	position: absolute;
 	top: 0;
@@ -1591,12 +1593,11 @@ $upload_size: 80px;
 	border-radius: $radius;
 	padding: $baseline/3 $baseline/2;
 	font-size: 12px;
-	margin-top: -10px;
 	@include box-shadow( 0 1px 4px rgba( #000, .2 ) );
 	@include ev-transition( visibility $transition_time*1.5 ease, opacity $transition_time*1.5 ease );
 	@include opacity( 0 );
 	visibility: hidden;
-	z-index: 20000;
+	z-index: 2000000;
 
 	&.ev-tooltip-active {
 		@include opacity( 100 );
@@ -1605,14 +1606,63 @@ $upload_size: 80px;
 
 	&:after {
 		position: absolute;
-		top: 100%;
-		left: 50%;
-		margin-left: -8px;
-		margin-top: -2px;
 		content: "";
 		display: block;
-		@include triangle( 16px, $text, down );
 	}
+
+	&.ev-tooltip-expand-top:after {
+		top: 100%;
+		left: 50%;
+		margin-left: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $text, down );
+	}
+
+	&.ev-tooltip-expand-bottom:after {
+		top: - $tooltip_arrow_size/2;
+		left: 50%;
+		margin-left: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $text, up );
+	}
+
+	&.ev-tooltip-expand-left:after {
+		left: 100%;
+		top: 50%;
+		margin-top: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $text, right );
+	}
+
+	&.ev-tooltip-expand-right:after {
+		left: 0;
+		top: 50%;
+		margin-top: - $tooltip_arrow_size/2;
+		margin-left: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $text, left );
+	}
+
+
+	// &.ev-tooltip-vertical {
+	// 	// margin-top: -10px;
+
+	// 	&:after {
+	// 		top: 100%;
+	// 		left: 50%;
+	// 		// margin-left: -8px;
+	// 		// margin-top: -2px;
+	// 		@include triangle( 16px, $text, down );
+	// 	}
+	// }
+
+	// &.ev-tooltip-horizontal {
+	// 	&:after {
+	// 		top: 50%;
+	// 		left: 0;
+	// 		// margin-left: -8px;
+	// 		// margin-top: -2px;
+	// 		margin-top: -8px;
+	// 		margin-left: -8px;
+	// 		@include triangle( 16px, $text, left );
+	// 	}
+	// }
 }
 
 // -----------------------------------------------------------------------------

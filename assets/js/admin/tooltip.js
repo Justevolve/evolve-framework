@@ -2,7 +2,8 @@
 
 	var tooltip_container = "ev-tooltip",
 		tooltip_selector = ".ev-tooltip",
-		tooltip_attr = "title";
+		tooltip_attr = "title",
+		arrow_size = 16;
 
 	tooltip_selector += "[" + tooltip_attr + "]";
 
@@ -33,19 +34,48 @@
 			.show();
 
 		var livetip_height = $container.outerHeight(),
-			livetip_width = $container.outerWidth();
+			livetip_width = $container.outerWidth(),
+			mode = "horizontal",
+			style = {};
+
+		if ( mode === "vertical" ) {
+			style.left = $link.offset().left - ( livetip_width / 2 ) + ( link_width / 2 );
+
+			livetip_height += ( arrow_size / 2 );
+
+			if ( livetip_height <= $link.offset().top ) {
+				$container.addClass( "ev-tooltip-expand-top" );
+				style.top = $link.offset().top - livetip_height;
+			}
+			else {
+				$container.addClass( "ev-tooltip-expand-bottom" );
+				style.top = $link.offset().top + link_height + ( arrow_size / 2 );
+			}
+		}
+		else {
+			style.top = $link.offset().top - ( livetip_height / 2 ) + ( link_height / 2 );
+
+			livetip_width += ( arrow_size / 2 );
+
+			if ( $( window ).width() >= $link.offset().left + link_width + livetip_width ) {
+				$container.addClass( "ev-tooltip-expand-right" );
+				style.left = $link.offset().left + link_width + ( arrow_size / 2 );
+			}
+			else {
+				$container.addClass( "ev-tooltip-expand-left" );
+				style.left = $link.offset().left - livetip_width;
+			}
+		}
 
 		$container
-			.css( {
-			top       : $link.offset().top - ( livetip_height ),
-			left      : $link.offset().left - ( livetip_width / 2 ) + ( link_width / 2 )
-		} );
+			.addClass( "ev-tooltip-" + mode )
+			.css( style );
 	});
 
 	/**
 	 * When moving away from a tooltip marker, hide the tooltip.
 	 */
 	$.evf.delegate( tooltip_selector, "mouseout", "tooltip", function() {
-		$( "#" + tooltip_container ).removeClass( 'ev-tooltip-active' );
+		$( "#" + tooltip_container ).removeClass( 'ev-tooltip-active ev-tooltip-vertical ev-tooltip-horizontal ev-tooltip-expand-top ev-tooltip-expand-bottom ev-tooltip-expand-right ev-tooltip-expand-left' );
 	});
 } )( jQuery );
