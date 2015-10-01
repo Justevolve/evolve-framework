@@ -59,6 +59,21 @@
 	} );
 
 	/**
+	 * Remove all uploaded attachments.
+	 */
+	$.evf.delegate( ".ev-attachment-upload-container .ev-remove-all-action", "click", "attachment_upload", function() {
+		var container = $( this ).parents( ".ev-attachment-upload-container" ).first(),
+			attachments = $( ".ev-attachment-placeholder", container ),
+			input = $( "input[data-id]", container );
+
+		attachments.remove();
+		container.removeClass( "ev-attachment-uploaded" );
+		input.val( "" );
+
+		return false;
+	} );
+
+	/**
 	 * When clicking on an attachment upload Upload/Edit button, open a Media Library
 	 * modal that allows the user to select an attachment to use.
 	 */
@@ -121,6 +136,8 @@
 				$( "input[data-id]", container ).val( value );
 			}
 		} );
+
+		console.log( input.split( "," ) );
 
 		media.open( input.split( "," ) );
 

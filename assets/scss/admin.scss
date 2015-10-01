@@ -1107,11 +1107,20 @@ $attachment_spreadsheet: "\f495";
 	.ev-edit-action {
 		display: none;
 	}
+
+	.ev-remove-all-action {
+		display: none;
+	}
 }
 
 .ev-attachment-uploaded .ev-attachment-upload-action {
 	.ev-edit-action {
 		display: inline;
+	}
+
+	.ev-remove-all-action {
+		display: inline;
+		margin-left: $gutter/2;
 	}
 
 	.ev-upload-action {
