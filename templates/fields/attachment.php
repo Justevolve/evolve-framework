@@ -59,11 +59,12 @@ printf( '<div class="ev-attachment-upload-container %s" %s>', esc_attr( $contain
 
 				printf(
 					ev_attachment_upload_generic_placeholder_template(),
-					$type,
-					$id,
-					__( 'Remove', 'ev_framework' ),
-					$title,
-					$extension
+					esc_attr( $type ),
+					esc_html( __( 'Remove', 'ev_framework' ) ),
+					esc_attr( $id ),
+					esc_html( $title ),
+					esc_attr( wp_get_attachment_url( $id ) ),
+					esc_html( $extension )
 				);
 			}
 		}

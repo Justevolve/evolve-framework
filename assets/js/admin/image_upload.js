@@ -65,6 +65,21 @@
 	} );
 
 	/**
+	 * Remove all uploaded attachments.
+	 */
+	$.evf.delegate( ".ev-image-upload .ev-remove-all-action", "click", "image_upload", function() {
+		var container = $( this ).parents( ".ev-image-upload" ).first(),
+			images = $( ".ev-image-placeholder", container ),
+			input = $( "input[data-id]", container );
+
+		images.remove();
+		container.removeClass( "ev-image-uploaded" );
+		input.val( "" );
+
+		return false;
+	} );
+
+	/**
 	 * When clicking on an image upload Upload/Edit button, open a Media Library
 	 * modal that allows the user to select an image to use.
 	 */

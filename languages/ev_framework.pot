@@ -49,7 +49,7 @@ msgid "Large"
 msgstr ""
 
 #: classes/core/fields/ev_attachment_field.php:103
-#: classes/core/fields/ev_image_field.php:89 templates/fields/attachment.php:64
+#: classes/core/fields/ev_image_field.php:89 templates/fields/attachment.php:63
 #: templates/fields/partials/image_upload.php:49
 #: templates/fields/partials/image_upload.php:62
 msgid "Remove"
@@ -64,7 +64,7 @@ msgid "All saved!"
 msgstr ""
 
 #: classes/core/fields_containers/ev_modal.php:54
-#: templates/fields/attachment.php:73
+#: templates/fields/attachment.php:74
 #: templates/fields/partials/image_upload.php:69
 msgid "Edit"
 msgstr ""
@@ -81,12 +81,12 @@ msgstr ""
 msgid "Changelog"
 msgstr ""
 
-#: templates/fields/attachment.php:74
+#: templates/fields/attachment.php:75
 #: templates/fields/partials/image_upload.php:70
 msgid "Upload"
 msgstr ""
 
-#: templates/fields/attachment.php:75
+#: templates/fields/attachment.php:76
 msgid "Remove all"
 msgstr ""
 

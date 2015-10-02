@@ -110,7 +110,8 @@
 							"type": type,
 							"id": this.id,
 							"title": this.title,
-							"extension": extension
+							"extension": extension,
+							"url": this.url
 						} ) );
 					} );
 				}

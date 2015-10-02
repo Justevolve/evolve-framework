@@ -1380,10 +1380,17 @@ $upload_size: 80px;
 				@include position( absolute, 0 null null 0 );
 				border: 1px dashed $border_color;
 			}
+		}
 
+		.ev-remove-all-action {
+			display: none;
 		}
 
 		&.ev-image-uploaded {
+			.ev-remove-all-action {
+				display: inline-block;
+				margin-left: $gutter/2;
+			}
 
 			&[data-sortable] {
 				.ev-image-placeholder {

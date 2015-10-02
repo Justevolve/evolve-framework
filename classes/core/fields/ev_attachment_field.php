@@ -80,7 +80,7 @@ function ev_attachment_upload_generic_placeholder_template() {
 		<span class="ev-attachment-placeholder-icon" data-id="%s" alt=""></span>
 		<div class="ev-attachment-details">
 			<span class="ev-attachment-title">%s</span>
-			<span class="ev-attachment-extension">%s</span>
+			<a href="%s" target="_blank" class="ev-attachment-extension">%s</a>
 		</div>
 	</div>';
 
@@ -103,6 +103,7 @@ function ev_attachment_upload_placeholder_templates() {
 			__( 'Remove', 'ev_framework' ),
 			'{{ id }}',
 			'{{ title }}',
+			'{{ url }}',
 			'{{ extension }}'
 		);
 	echo '</script>';
