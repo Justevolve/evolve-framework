@@ -54,7 +54,7 @@
 
 		var livetip_height = $container.outerHeight(),
 			livetip_width = $container.outerWidth(),
-			mode = "horizontal",
+			mode = "vertical",
 			style = {};
 
 		if ( mode === "vertical" ) {

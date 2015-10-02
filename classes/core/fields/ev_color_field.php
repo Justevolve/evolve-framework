@@ -32,7 +32,10 @@ class Ev_ColorField extends Ev_Field {
 
 		$data['config'] = wp_parse_args( $data['config'], array(
 			/* Allows for multiple colors properties. */
-			'multiple' => false
+			'multiple' => false,
+
+			/* A palette of colors to choose from. */
+			'palette' => false
 		) );
 
 		parent::__construct( $data );
@@ -76,3 +79,34 @@ function ev_register_color_field_type( $types ) {
 }
 
 add_filter( 'ev_field_types', 'ev_register_color_field_type' );
+
+/**
+ * Return the markup required to display a color palette.
+ *
+ * @since 0.4.0
+ * @param array $palette The palette array.
+ * @param string $value The current field value.
+ * @return string
+ */
+function ev_color_field_palette_html( $palette, $value ) {
+	if ( ! $palette ) {
+		return '';
+	}
+
+	$palette_html = '<ul class="ev-color-palette">';
+
+	foreach ( $palette as $hex => $color_label ) {
+		$color_class = $value == $hex ? 'ev-selected' : '';
+
+		$palette_html .= sprintf( '<li class="ev-color-palette-variant ev-tooltip %s" style="background-color: %s" data-color="%s" data-title="%s"></li>',
+			esc_attr( $color_class ),
+			esc_attr( $hex ),
+			esc_attr( $hex ),
+			esc_attr( $color_label )
+		);
+	}
+
+	$palette_html .= '</ul>';
+
+	return $palette_html;
+}

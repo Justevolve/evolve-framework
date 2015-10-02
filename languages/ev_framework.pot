@@ -87,6 +87,7 @@ msgid "Upload"
 msgstr ""
 
 #: templates/fields/attachment.php:76
+#: templates/fields/partials/image_upload.php:73
 msgid "Remove all"
 msgstr ""
 

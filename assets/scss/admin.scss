@@ -771,6 +771,27 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 // $Color field
 // -----------------------------------------------------------------------------
 
+.ev-color-palette {
+	@include clearfix;
+
+	.ev-color-palette-variant {
+		cursor: pointer;
+		width: $gutter;
+		height: $gutter;
+		display: inline-block;
+		border: 3px solid $white;
+
+		&.ev-selected {
+			border-color: $blue_medium;
+			@include box-shadow( inset 0px 0px 0px 1px $white );
+		}
+
+		+ .ev-color-palette-variant {
+			margin-left: $gutter/4;
+		}
+	}
+}
+
 .ev-color-input-wrapper {
 	display: inline-block;
 
