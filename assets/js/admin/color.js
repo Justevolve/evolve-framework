@@ -8,9 +8,15 @@
 		var container = $( this ).parents( ".ev-color-inner-wrapper" ).first(),
 			input = $( "input[name]", container );
 
-		$( ".ev-selected", container ).removeClass( "ev-selected" );
-		$( this ).addClass( "ev-selected" );
-		input.val( $( this ).attr( "data-color" ) );
+		if ( $( this ).hasClass( "ev-selected" ) ) {
+			$( this ).removeClass( "ev-selected" );
+			input.val( "" );
+		}
+		else {
+			$( ".ev-selected", container ).removeClass( "ev-selected" );
+			$( this ).addClass( "ev-selected" );
+			input.val( $( this ).attr( "data-color" ) );
+		}
 
 		return false;
 	} );
