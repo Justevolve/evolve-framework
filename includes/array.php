@@ -26,17 +26,14 @@ function ev_array_search_index( $array, $args = array() ) {
 	}
 
 	foreach ( $array as $k => $v ) {
-		$found = true;
+		$found = false;
 
-		foreach ( $args as $arg_k => $arg_v ) {
-			if ( ! array_key_exists( $arg_k, $array ) || $array[$arg_k] != $arg_v ) {
-				$found = false;
-				break;
+		if ( is_array( $v ) ) {
+			$found = count( array_intersect_assoc( $v, $args ) ) > 0;
+
+			if ( $found ) {
+				return (int) $k;
 			}
-		}
-
-		if ( $found ) {
-			return (int) $k;
 		}
 	}
 
