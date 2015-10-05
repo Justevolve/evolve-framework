@@ -11,3 +11,34 @@
 function ev_sprintf_array( $format, $markers ) {
     return call_user_func_array( 'sprintf', array_merge( (array) $format, $markers ) );
 }
+
+/**
+ * Search a subvalue in an array based on a collection of parameters.
+ *
+ * @since 0.4.0
+ * @param $array array The array.
+ * @param $args array The search parameters.
+ * @return integer The index of the element. Return -1 if nothing was found.
+ */
+function ev_array_search_index( $array, $args = array() ) {
+	if ( empty( $args ) ) {
+		return -1;
+	}
+
+	foreach ( $array as $k => $v ) {
+		$found = true;
+
+		foreach ( $args as $arg_k => $arg_v ) {
+			if ( ! array_key_exists( $arg_k, $array ) || $array[$arg_k] != $arg_v ) {
+				$found = false;
+				break;
+			}
+		}
+
+		if ( $found ) {
+			return (int) $k;
+		}
+	}
+
+	return -1;
+}

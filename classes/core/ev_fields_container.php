@@ -173,9 +173,9 @@ abstract class Ev_FieldsContainer {
 			printf( '<input type="hidden" name="context" value="%s">', esc_attr( $this->handle() ) );
 		}
 
-			foreach ( $group['fields'] as $index => $field ) {
-				$this->render_field( $field );
-			}
+		foreach ( $group['fields'] as $index => $field ) {
+			$this->render_field( $field );
+		}
 
 		if ( $this->_groups_with_form === true ) {
 			$group_callback = 'ev_save_options_tab';
