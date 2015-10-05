@@ -64,7 +64,24 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 		/* Bind the enqueue of scripts and stylesheets. */
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), apply_filters( 'ev_frontend_enqueue_scripts_priority', 20 ) );
 
+		/* Register the components scripts. */
+		$this->_register_components_scripts();
+
 		parent::__construct();
+	}
+
+	/**
+	 * Register the components scripts.
+	 *
+	 * @since 0.4.0
+	 */
+	private function _register_components_scripts()
+	{
+		/* Base file for event bindings. */
+		$this->register_script( 'ev-base', EV_FRAMEWORK_URI . 'assets/js/base.js' );
+
+		/* Tabs. */
+		$this->register_script( 'ev-tabs', EV_FRAMEWORK_URI . 'components/tabs/js/script.js', array( 'ev-base' ) );
 	}
 
 	/**
@@ -135,9 +152,12 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 				'in_footer' => $in_footer,
 				'enqueue' 	=> true
 			);
-		}
 
-		$this->_scripts[$handle] = $script_data;
+			$this->_scripts[$handle] = $script_data;
+		}
+		elseif ( isset( $this->_scripts[$handle] ) ) {
+			$this->_scripts[$handle]['enqueue'] = true;
+		}
 	}
 
 	/**
