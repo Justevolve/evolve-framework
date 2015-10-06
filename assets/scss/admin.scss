@@ -606,6 +606,8 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 	}
 
 	.ev-field-inner {
+		@include clearfix();
+
 		p {
 			margin: 0;
 		}
@@ -772,6 +774,8 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 // -----------------------------------------------------------------------------
 
 .ev-color-palette {
+	margin: 0;
+	padding: 0;
 	@include clearfix;
 
 	.ev-color-palette-variant {
@@ -779,15 +783,15 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		width: $gutter;
 		height: $gutter;
 		display: inline-block;
-		border: 3px solid $white;
+		border: 3px solid $border_color;
+		@include box-shadow( inset 0px 0px 0px 1px $white );
 
 		&.ev-selected {
 			border-color: $blue_medium;
-			@include box-shadow( inset 0px 0px 0px 1px $white );
 		}
 
 		+ .ev-color-palette-variant {
-			margin-left: $gutter/4;
+			margin-left: $gutter/2;
 		}
 	}
 }
