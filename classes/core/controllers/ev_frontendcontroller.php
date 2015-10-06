@@ -161,6 +161,37 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 	}
 
 	/**
+	 * Add a style to be registered, enqueued and included in the page.
+	 * Essentially this method is a wrapper for the WordPress core functions
+	 * 'wp_register_script'; as such, the method accepts the very same
+	 * set of parameters.
+	 *
+	 * @since 0.1.0
+	 * @see http://codex.wordpress.org/Function_Reference/wp_register_script
+	 * @param string 	$handle 	Name of the style. Should be unique.
+	 * @param string 	$src 		URL to the style.
+	 * @param array 	$deps 		Array of the handles of all the registered styles that this style depends on, that is, the styles that must be loaded before this style.
+	 * @param string 	$ver 		String specifying the style version number, if it has one.
+	 * @param string 	$media 	String specifying the media for which this stylesheet has been defined.
+	 */
+	public function register_style( $handle, $src = null, $deps = array(), $ver = '', $media = 'all' )
+	{
+		$style_data = false;
+
+		if ( $src ) {
+			$style_data = array(
+				'src'     => $src,
+				'deps'    => $deps,
+				'ver'     => $ver,
+				'media'   => $media,
+				'enqueue' => false
+			);
+		}
+
+		$this->_styles[$handle] = $style_data;
+	}
+
+	/**
 	 * Add a stylesheet to be registered, enqueued and included in the page.
 	 * Essentially this method is a wrapper for the WordPress core functions
 	 * 'wp_register_style' and 'wp_enqueue_style', with the only differences
@@ -185,14 +216,18 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 
 		if ( $src ) {
 			$style_data = array(
-				'src'   => $src,
-				'deps'  => $deps,
-				'ver'   => $ver,
-				'media' => $media,
+				'src'     => $src,
+				'deps'    => $deps,
+				'ver'     => $ver,
+				'media'   => $media,
+				'enqueue' => true
 			);
-		}
 
-		$this->_styles[$handle] = $style_data;
+			$this->_styles[$handle] = $style_data;
+		}
+		elseif ( isset( $this->_styles[$handle] ) ) {
+			$this->_styles[$handle]['enqueue'] = true;
+		}
 	}
 
 	/**
@@ -256,7 +291,9 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 				wp_register_style( $handle, $style_data['src'], $style_data['deps'], $style_data['ver'], $style_data['media'] );
 			}
 
-			$styles_to_be_enqueued[] = $handle;
+			if ( $style_data['enqueue'] === true ) {
+				$styles_to_be_enqueued[] = $handle;
+			}
 		}
 
 		/* Deregister stylesheets, if needed. */
