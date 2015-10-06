@@ -780,18 +780,17 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 
 	.ev-color-palette-variant {
 		cursor: pointer;
-		width: $gutter;
-		height: $gutter;
+		width: $gutter*1.5;
+		height: $gutter*1.5;
+		margin-right: $gutter/4;
+		margin-bottom: $gutter/4;
 		display: inline-block;
+		float: left;
 		border: 3px solid $border_color;
 		@include box-shadow( inset 0px 0px 0px 1px $white );
 
 		&.ev-selected {
 			border-color: $blue_medium;
-		}
-
-		+ .ev-color-palette-variant {
-			margin-left: $gutter/2;
 		}
 	}
 }
