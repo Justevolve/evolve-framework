@@ -56,7 +56,10 @@
 	$.evf.modal = function( key, data, config ) {
 		config = $.extend( {
 			/* Callback function fired after the drawer transition starts. */
-			save: function() {}
+			save: function() {},
+
+			/* Wait for the save function to be completed before closing the modal. */
+			wait: false
 		}, config );
 
 		var self = this;
@@ -75,8 +78,13 @@
 		 * @param {Object} data The modal serialized data.
 		 */
 		this.save = function( data ) {
-			config.save( data );
-			this.close();
+			if ( config.wait ) {
+				config.save( data, this.close );
+			}
+			else {
+				config.save( data );
+				this.close();
+			}
 		};
 
 		/**
