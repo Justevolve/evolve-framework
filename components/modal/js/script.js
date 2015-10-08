@@ -128,7 +128,7 @@
 			var origin = ".ev-modal-container[data-key='" + key + "']",
 				save_btn = origin + " .ev-modal-footer .ev-save",
 				form = origin + " form",
-				modal_namespace = namespace + "-form";
+				modal_namespace = namespace + "-form-" + key;
 
 			$.evf.undelegate( "submit", modal_namespace );
 			$.evf.undelegate( "click", modal_namespace );
