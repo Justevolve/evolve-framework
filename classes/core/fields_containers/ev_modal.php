@@ -56,6 +56,9 @@ class Ev_Modal extends Ev_FieldsContainer {
 			/* Text of the close button for the modal. */
 			'button' => __( 'OK', 'ev_framework' ),
 
+			/* Nonce of the close button for the modal. */
+			'button_nonce' => wp_create_nonce( "ev_modal_$handle" ),
+
 			/* Additional footer content. */
 			'footer_content' => ''
 		) );
@@ -86,9 +89,11 @@ class Ev_Modal extends Ev_FieldsContainer {
 				$elements = $this->elements();
 
 				if ( ! empty( $elements ) ) {
-					echo '<div class="ev-btn ev-save">';
+					printf( '<div class="ev-btn ev-save" data-nonce="%s">', esc_attr( $this->_config['button_nonce'] ) );
 						echo '<input type="submit" value="">';
-						printf( '<span class="ev-btn-action">%s</span>', esc_html( $this->_config['button'] ) );
+						printf( '<span class="ev-btn-action">%s</span>',
+							esc_html( $this->_config['button'] )
+						);
 					echo '</div>';
 				}
 			echo '</div>';

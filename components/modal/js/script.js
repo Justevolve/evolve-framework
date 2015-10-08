@@ -78,11 +78,15 @@
 		 * @param {Object} data The modal serialized data.
 		 */
 		this.save = function( data ) {
+			var origin = ".ev-modal-container[data-key='" + key + "']",
+				save_btn = origin + " .ev-modal-footer .ev-save",
+				nonce = $( save_btn ).attr( "data-nonce" );
+
 			if ( config.wait ) {
-				config.save( data, this.close );
+				config.save( data, this.close, nonce );
 			}
 			else {
-				config.save( data );
+				config.save( data, null, nonce );
 				this.close();
 			}
 		};
@@ -113,35 +117,43 @@
 			$( html ).appendTo( $( "body" ) );
 			$( "body" ).addClass( "ev-modal-open" );
 
-			var save_btn = origin + " .ev-modal-footer .ev-save",
-				form = origin + " form";
-
-			namespace += "-form";
-
-			$.evf.delegate( save_btn, "click", namespace, function() {
-				$( form ).trigger( "submit." + namespace );
-
-				return false;
-			} );
-
-			$.evf.delegate( form, "submit", namespace, function() {
-				if ( typeof tinymce !== 'undefined' ) {
-					tinymce.triggerSave();
-				}
-
-				self.save( $( form ).serializeObject() );
-
-				$.evf.undelegate( "submit", namespace );
-				$.evf.undelegate( "click", namespace );
-
-				return false;
-			} );
-
 			content(
 				$( origin + " .ev-modal-wrapper-inner" ),
 				key,
 				data
 			);
 		};
+
+		this.init = function() {
+			var origin = ".ev-modal-container[data-key='" + key + "']",
+				save_btn = origin + " .ev-modal-footer .ev-save",
+				form = origin + " form",
+				modal_namespace = namespace + "-form";
+
+			$.evf.undelegate( "click", namespace );
+			$.evf.undelegate( "submit", modal_namespace );
+			$.evf.undelegate( "click", modal_namespace );
+
+			$.evf.delegate( save_btn, "click", modal_namespace, function() {
+				$( form ).trigger( "submit." + modal_namespace );
+
+				return false;
+			} );
+
+			$.evf.delegate( form, "submit", modal_namespace, function() {
+				if ( typeof tinymce !== 'undefined' ) {
+					tinymce.triggerSave();
+				}
+
+				self.save( $( form ).serializeObject() );
+
+				$.evf.undelegate( "submit", modal_namespace );
+				$.evf.undelegate( "click", modal_namespace );
+
+				return false;
+			} );
+		};
+
+		this.init();
 	};
 } )( jQuery );
