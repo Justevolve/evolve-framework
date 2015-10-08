@@ -25,7 +25,12 @@
 	 */
 	$.evf.delegate( ".ev-modal-close", "click", namespace, function( e ) {
 		$( this ).parents( ".ev-modal-container" ).first().remove();
-		$( "body" ).removeClass( "ev-modal-open" );
+
+		var modals = $( ".ev-modal-container" );
+
+		if ( ! modals.length ) {
+			$( "body" ).removeClass( "ev-modal-open" );
+		}
 
 		return false;
 	} );
@@ -40,7 +45,10 @@
 
 		if ( modals.length ) {
 			modals.last().remove();
-			$( "body" ).removeClass( "ev-modal-open" );
+
+			if ( ! modals.length ) {
+				$( "body" ).removeClass( "ev-modal-open" );
+			}
 
 			return false;
 		}
@@ -69,7 +77,12 @@
 		 */
 		this.close = function() {
 			$( ".ev-modal-container[data-key='" + key + "']" ).remove();
-			$( "body" ).removeClass( "ev-modal-open" );
+
+			var modals = $( ".ev-modal-container" );
+
+			if ( ! modals.length ) {
+				$( "body" ).removeClass( "ev-modal-open" );
+			}
 		};
 
 		/**
@@ -114,8 +127,13 @@
 				html += '</div>';
 			html += '</div>';
 
-			$( html ).appendTo( $( "body" ) );
-			$( "body" ).addClass( "ev-modal-open" );
+			if ( ! $( "body" ).hasClass( "ev-modal-open" ) ) {
+				$( html ).appendTo( $( "body" ) );
+				$( "body" ).addClass( "ev-modal-open" );
+			}
+			else {
+				$( ".ev-modal-container" ).last().after( $( html ) );
+			}
 
 			content(
 				$( origin + " .ev-modal-wrapper-inner" ),

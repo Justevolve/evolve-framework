@@ -1838,6 +1838,21 @@ body.ev-modal-open {
 	overflow: hidden;
 }
 
+.ev-modal-container + .ev-modal-container {
+	top: 60px;
+	bottom: 60px;
+	left: 15%;
+	right: 15%;
+	background: rgba( #000, 0.5 );
+
+	.ev-modal-wrapper {
+		top: $baseline;
+		bottom: $baseline;
+		left: $baseline;
+		right: $baseline;
+	}
+}
+
 .ev-modal-wrapper {
 	top: 60px;
 	bottom: 60px;
