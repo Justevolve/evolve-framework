@@ -1912,9 +1912,11 @@ body.ev-modal-open {
 			&:hover {
 				background-color: darken( $blue_dark, 10 );
 			}
+		}
 
-			&:after {
-				display: none;
+		&.ev-saving {
+			.ev-btn-action {
+				background-color: darken( $blue_dark, 10 );
 			}
 		}
 	}

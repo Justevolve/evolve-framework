@@ -130,7 +130,6 @@
 				form = origin + " form",
 				modal_namespace = namespace + "-form";
 
-			$.evf.undelegate( "click", namespace );
 			$.evf.undelegate( "submit", modal_namespace );
 			$.evf.undelegate( "click", modal_namespace );
 
@@ -145,6 +144,7 @@
 					tinymce.triggerSave();
 				}
 
+				$(save_btn).addClass( "ev-saving");
 				self.save( $( form ).serializeObject() );
 
 				$.evf.undelegate( "submit", modal_namespace );
