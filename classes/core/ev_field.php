@@ -376,6 +376,35 @@ abstract class Ev_Field {
 	}
 
 	/**
+	 * Return a set of attributes to be applied when the field is rendered to
+	 * screen.
+	 *
+	 * @since 0.4.0
+	 * @return array An array of attributes.
+	 */
+	private function attrs()
+	{
+		$attrs = array(
+			'data-type=' . $this->_type
+		);
+
+		$slave = $this->config( 'visible' );
+		$controller = $this->config( 'controller' );
+		$controller_types = array( 'select', 'checkbox' );
+
+		if ( is_array( $slave ) ) {
+			$attrs[] = sprintf( 'data-slave=%s', key( $slave ) );
+			$attrs[] = sprintf( 'data-controller-value=%s', current( $slave ) );
+		}
+
+		if ( ! empty( $controller ) && in_array( $this->_type, $controller_types ) ) {
+			$attrs[] = "data-controller={$this->_handle}";
+		}
+
+		return implode( ' ', array_map( 'esc_attr', $attrs ) );
+	}
+
+	/**
 	 * Return a set of CSS classes to be applied when the field is rendered to
 	 * screen.
 	 *
@@ -404,6 +433,10 @@ abstract class Ev_Field {
 			if ( isset( $this->_repeatable['append'] ) && $this->_repeatable['append'] === false ) {
 				$classes[] = 'ev-repeatable-prepend';
 			}
+		}
+
+		if ( isset( $this->_data['config']['visible'] ) && $this->_data['config']['visible'] === false ) {
+			$classes[] = 'ev-hidden';
 		}
 
 		$classes = apply_filters( "ev_field_classes[type:{$this->_type}]", (array) $classes, $this );
@@ -631,26 +664,6 @@ abstract class Ev_Field {
 		printf( '<script type="text/template" data-template="%s">', esc_attr( $this->_handle ) );
 			$this->render_inner( $field );
 		echo '</script>';
-	}
-
-	// TODO: ripassarci
-	private function attrs()
-	{
-		$slave = $this->config( 'visible' );
-		$controller = $this->config( 'controller' );
-
-		$attrs = array();
-
-		if ( $slave ) {
-			$attrs[] = sprintf( "data-slave=%s", key( $slave ) );
-			$attrs[] = sprintf( "data-controller-value=%s", current( $slave ) );
-		}
-
-		if ( $controller ) {
-			$attrs[] = "data-controller={$this->_handle}";
-		}
-
-		return implode( ' ', array_map( 'esc_attr', $attrs ) );
 	}
 
 	/**

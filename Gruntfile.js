@@ -143,14 +143,14 @@ module.exports = function( grunt ) {
 
 		// Concat
 		concat: {
-			js_admin_dev: {
-				options: {
-					separator: ';\n',
-					banner: '',
-				},
-				src: get_modules_admin_scripts(),
-				dest: "assets/js/min/admin.min.js"
-			},
+			// js_admin_dev: {
+			// 	options: {
+			// 		separator: ';\n',
+			// 		banner: '',
+			// 	},
+			// 	src: get_modules_admin_scripts(),
+			// 	dest: "assets/js/min/admin.min.js"
+			// },
 			prod: {
 				options: {
 					separator: '\n\n',
@@ -288,6 +288,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "start", [
 		"string-replace:framework-info",
 		"concat",
+		"uglify",
 		"makepot",
 		"notify:start",
 		"watch"

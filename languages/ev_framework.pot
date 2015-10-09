@@ -24,11 +24,11 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: classes/core/ev_field.php:477
+#: classes/core/ev_field.php:506
 msgid "Add"
 msgstr ""
 
-#: classes/core/ev_field.php:537
+#: classes/core/ev_field.php:566
 msgid "Need help?"
 msgstr ""
 
