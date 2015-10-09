@@ -110,6 +110,7 @@ function get_modules_admin_scripts() {
 	scripts.push( "assets/js/admin/color.js" );
 	scripts.push( "assets/js/admin/editor.js" );
 	scripts.push( "assets/js/admin/icon.js" );
+	scripts.push( "assets/js/admin/field.js" );
 
 	return scripts;
 }
@@ -194,7 +195,7 @@ module.exports = function( grunt ) {
 		watch: {
 			admin_js_dev: {
 				files: get_modules_admin_scripts(),
-				tasks: [ "concat:js_admin_dev", "notify:done" ],
+				tasks: [ "uglify", /*"concat:js_admin_dev",*/ "notify:done" ],
 				options: {
 					spawn: false
 				}

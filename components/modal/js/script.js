@@ -46,7 +46,7 @@
 		if ( modals.length ) {
 			modals.last().remove();
 
-			if ( ! modals.length ) {
+			if ( ! $( ".ev-modal-container" ).length ) {
 				$( "body" ).removeClass( "ev-modal-open" );
 			}
 

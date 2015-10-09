@@ -520,6 +520,16 @@ abstract class Ev_Field {
 	{
 		$help = $this->help();
 
+		/**
+		 * Print content between the field label and field help. Useful for
+		 * outputting custom controls for the field.
+		 *
+		 * @since 0.4.0
+		 * @param Ev_Field
+		 */
+		do_action( 'ev_fw_before_field_help', $this );
+		do_action( "ev_fw_before_field_help[type:$this->_type]", $this );
+
 		if ( $help !== false && $help['text'] != '' ) {
 			printf( '<div class="ev-help ev-help-%s">', esc_attr( $help['type'] ) );
 				switch( $help['type'] ) {
@@ -623,6 +633,26 @@ abstract class Ev_Field {
 		echo '</script>';
 	}
 
+	// TODO: ripassarci
+	private function attrs()
+	{
+		$slave = $this->config( 'visible' );
+		$controller = $this->config( 'controller' );
+
+		$attrs = array();
+
+		if ( $slave ) {
+			$attrs[] = sprintf( "data-slave=%s", key( $slave ) );
+			$attrs[] = sprintf( "data-controller-value=%s", current( $slave ) );
+		}
+
+		if ( $controller ) {
+			$attrs[] = "data-controller={$this->_handle}";
+		}
+
+		return implode( ' ', array_map( 'esc_attr', $attrs ) );
+	}
+
 	/**
 	 * Render the field interface.
 	 *
@@ -632,7 +662,7 @@ abstract class Ev_Field {
 	{
 		$label = $this->label();
 
-		printf( '<div class="%s">', esc_attr( implode( ' ', $this->classes() ) ) );
+		printf( '<div class="%s" %s>', esc_attr( implode( ' ', $this->classes() ) ), $this->attrs() );
 			echo '<div class="ev-field-header ev-field-header-label-' . esc_attr( $label["type"] ) . '">';
 				$this->_render_label();
 				$this->_render_help();

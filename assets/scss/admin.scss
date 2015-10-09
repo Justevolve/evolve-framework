@@ -258,6 +258,7 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		@include box-sizing( border-box );
 		width: 80%;
 		float: left;
+		position: relative;
 
 		@include ev-media( $media_tablet ) {
 			width: 75%;
@@ -284,6 +285,23 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 .ev-tab-container {
 	background-color: $white;
 	border: 1px solid $border_color;
+
+	&.ev-tab-container-loaded {
+		&:before {
+			@include opacity( 0 );
+			z-index: -1;
+		}
+	}
+
+	&:before {
+		content: "";
+		display: block;
+		z-index: 100;
+		background: $white;
+		@include opacity( 100 );
+		@include position( absolute, 0 0 0 0 );
+		@include transition( opacity $transition_time, z-index $transition_time );
+	}
 
 	.ev-tab {
 		@include clearfix;
@@ -557,6 +575,10 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 	float: left;
 	@include box-sizing( border-box );
 	padding: $baseline/2 $gutter;
+
+	&.ev-hidden {
+		display: none;
+	}
 
 	// 100% width
 	&.ev-field-size-full {

@@ -31,6 +31,10 @@ if ( typeof jQuery === "undefined" ) {
 
 			signature: "ev-ui",
 
+			components_count: 0,
+
+			components_built: 0,
+
 			/**
 			 * Add a complex UI component to the building queue.
 			 *
@@ -38,7 +42,17 @@ if ( typeof jQuery === "undefined" ) {
 			 * @param  {Function} The UI component creation callback.
 			 */
 			add: function( selector, callback ) {
+				$.evf.ui.components_count++;
+
 				$( window ).on( $.evf.resolveEventName( $.evf.ui.event, $.evf.namespace ), function() {
+					$.evf.ui.components_built++;
+
+					if ( $.evf.ui.components_count === $.evf.ui.components_built ) {
+						setTimeout( function() {
+							$( ".ev-tab-container" ).addClass( "ev-tab-container-loaded" );
+						}, 5 );
+					}
+
 					var elements = $( selector );
 
 					elements = elements.filter( function() {
@@ -61,6 +75,8 @@ if ( typeof jQuery === "undefined" ) {
 			 * Triggers a "ui-build.evf" event on the $( window ) object.
 			 */
 			build: function() {
+				$.evf.ui.components_built = 0;
+
 				$( window ).trigger( $.evf.resolveEventName( $.evf.ui.event, $.evf.namespace ) );
 			},
 		},
