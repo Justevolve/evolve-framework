@@ -748,6 +748,11 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		max-width: 100%;
 	}
 
+	input[type=checkbox],
+	input[type=radio] {
+		margin-top: 0;
+	}
+
 	// Radio
 	.ev-radio {
 		display: block;
