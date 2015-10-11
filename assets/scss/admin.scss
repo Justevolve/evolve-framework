@@ -1587,13 +1587,14 @@ $upload_size: 80px;
 
 	// Section break
 	&.ev-divider-style-section_break {
-		border-bottom: 1px solid $border_color;
+		border-bottom: 1px solid $blue_dark;
+		background-color: $blue_dark;
 
 		h3 {
-			background-color: $blue_dark;
+			// background-color: $blue_dark;
 			color: $white;
-			border-top-left-radius: $radius;
-			border-top-right-radius: $radius;
+			// border-top-left-radius: $radius;
+			// border-top-right-radius: $radius;
 			padding: $baseline/4 $baseline/2 !important;
 		}
 	}
@@ -1603,11 +1604,16 @@ $upload_size: 80px;
 		padding-top: $baseline;
 
 		.ev-field-inner {
-			border-bottom: 1px solid $border_color;
+			border-bottom: 1px solid $blue_dark;
 		}
 
 		h3 {
-			border-bottom: 4px solid $blue_dark;
+			background-color: $blue_dark;
+			color: $white;
+			border-top-left-radius: $radius;
+			border-top-right-radius: $radius;
+			padding: $baseline/4 $baseline/2 !important;
+			// border-bottom: 4px solid $blue_dark;
 		}
 	}
 }
