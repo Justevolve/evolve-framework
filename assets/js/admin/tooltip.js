@@ -57,6 +57,10 @@
 			mode = "vertical",
 			style = {};
 
+		if ( $link.attr( "data-horizontal" ) ) {
+			mode = "horizontal";
+		}
+
 		if ( mode === "vertical" ) {
 			style.left = $link.offset().left - ( livetip_width / 2 ) + ( link_width / 2 );
 
@@ -94,9 +98,11 @@
 	/**
 	 * When moving away from a tooltip marker, hide the tooltip.
 	 */
-	$.evf.delegate( tooltip_selector, "mouseout", "tooltip", function() {
+	$.evf.delegate( tooltip_selector, "mouseout click", "tooltip", function() {
 		var tooltip = $( this ).data( "ev-tooltip" );
 
-		window.ev_tooltip_destroy( tooltip );
+		if ( tooltip ) {
+			window.ev_tooltip_destroy( tooltip );
+		}
 	});
 } )( jQuery );

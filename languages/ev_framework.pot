@@ -24,11 +24,11 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: classes/core/ev_field.php:506
+#: classes/core/ev_field.php:510
 msgid "Add"
 msgstr ""
 
-#: classes/core/ev_field.php:566
+#: classes/core/ev_field.php:570
 msgid "Need help?"
 msgstr ""
 
@@ -53,6 +53,10 @@ msgstr ""
 #: templates/fields/partials/image_upload.php:49
 #: templates/fields/partials/image_upload.php:62
 msgid "Remove"
+msgstr ""
+
+#: classes/core/fields/ev_color_field.php:97
+msgid "Transparent"
 msgstr ""
 
 #: classes/core/fields/ev_icon_field.php:63

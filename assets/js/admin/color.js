@@ -8,7 +8,7 @@
 		var container = $( this ).parents( ".ev-color-inner-wrapper" ).first(),
 			input = $( "input[name]", container );
 
-		if ( $( this ).hasClass( "ev-selected" ) ) {
+		if ( $( this ).hasClass( "ev-selected" ) && $( this ).attr( "data-color" ) != "" ) {
 			$( this ).removeClass( "ev-selected" );
 			input.val( "" );
 		}

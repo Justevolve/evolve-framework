@@ -93,6 +93,10 @@ function ev_color_field_palette_html( $palette, $value ) {
 		return '';
 	}
 
+	$palette = array_reverse( $palette, true );
+	$palette[''] = __( 'Transparent', 'ev_framework' );
+	$palette = array_reverse( $palette, true );
+
 	$palette_html = '<ul class="ev-color-palette">';
 
 	foreach ( $palette as $hex => $color_label ) {

@@ -1,11 +1,11 @@
 <?php
 
-$multiple = $field->config( 'multiple' );
-$size = $field->config( 'size' );
-$palette = $field->config( 'palette' );
-$value = $field->value();
-$handle = $field->handle();
-$input_type = 'text';
+$multiple    = $field->config( 'multiple' );
+$size        = $field->config( 'size' );
+$palette     = $field->config( 'palette' );
+$value       = $field->value();
+$handle      = $field->handle();
+$input_type  = 'text';
 $input_class = 'ev-color-input';
 $has_palette = is_array( $palette );
 
