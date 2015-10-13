@@ -6,7 +6,6 @@
 	 */
 	$.evf.ui.add( ".ev-sortable .ev-container, .ev-sortable .ev-bundle-fields-wrapper", function() {
 		$( this ).sortable( {
-			placeholder: "ev-sortable-placeholder",
 			handle: ".ev-sortable-handle",
 			items: "> .ev-field-inner, .ev-bundle-fields-wrapper"
 		} );
