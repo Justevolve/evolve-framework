@@ -51,6 +51,18 @@ function ev_get_image_sizes_for_select() {
  * @return string The attachment ID image size URL.
  **/
 function ev_fw_get_image( $id, $size = 'full' ) {
+	return ev_get_image( $id, $size );
+}
+
+/**
+ * Return the image size from its attachment ID.
+ *
+ * @since 0.4.0
+ * @param integer|string $id The attachment ID.
+ * @param string $size The desired image size; defaults to 'full'.
+ * @return string The attachment ID image size URL.
+ */
+function ev_get_image( $id, $size = 'full' ) {
 	if ( ! empty( $id ) && is_array( $image = wp_get_attachment_image_src( $id, $size ) ) ) {
 		return esc_url( current( $image ) );
 	}

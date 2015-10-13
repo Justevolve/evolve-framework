@@ -39,7 +39,7 @@
 		<?php if ( $multiple ) : ?>
 			<?php foreach ( $id as $_id ) : ?>
 				<?php
-					$image_url = ev_fw_get_image( $_id, $thumb_size );
+					$image_url = ev_get_image( $_id, $thumb_size );
 
 					printf(
 						$placeholder_html,
@@ -52,7 +52,7 @@
 			<?php endforeach; ?>
 		<?php else : ?>
 			<?php
-				$image_url = ev_fw_get_image( $id, $thumb_size );
+				$image_url = ev_get_image( $id, $thumb_size );
 
 				printf(
 					$placeholder_html,
