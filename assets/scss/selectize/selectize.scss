@@ -384,12 +384,12 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 // -----------------------------------------------------------------------------
 
 .selectize-control.plugin-drag_drop {
-	&.multi > .selectize-input > div.ev-sortable-placeholder {
+	&.multi > .selectize-input > div.ui-sortable-placeholder {
 		visibility: visible !important;
 		background: $grey_light_2 !important;
 	}
 
-	.ev-sortable-placeholder::after {
+	.ui-sortable-placeholder::after {
 		content: '!';
 		visibility: hidden;
 	}
