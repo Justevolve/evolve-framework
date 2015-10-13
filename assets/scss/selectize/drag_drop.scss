@@ -1,11 +1,11 @@
 .selectize-control.plugin-drag_drop {
-	&.multi > .selectize-input > div.ui-sortable-placeholder {
+	&.multi > .selectize-input > div.ev-sortable-placeholder {
 		visibility: visible !important;
 		background: $grey_light_2 !important;
 		// border: 0 none !important;
 	}
 
-	.ui-sortable-placeholder::after {
+	.ev-sortable-placeholder::after {
 		content: '!';
 		visibility: hidden;
 	}
