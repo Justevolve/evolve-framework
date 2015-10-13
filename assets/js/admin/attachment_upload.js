@@ -6,7 +6,6 @@
 	 */
 	$.evf.ui.add( ".ev-attachment-upload-container[data-multiple][data-sortable]", function() {
 		$( this ).sortable( {
-			placeholder: "ev-sortable-placeholder",
 			items: "> .ev-attachment-placeholder",
 			update: function( event, ui ) {
 				var container = $( event.target ),

@@ -6,7 +6,6 @@
 	 */
 	$.evf.ui.add( ".ev-image-upload[data-multiple][data-sortable] .ev-image-placeholder-container", function() {
 		$( this ).sortable( {
-			placeholder: "ev-sortable-placeholder",
 			items: "> .ev-image-placeholder",
 			update: function( event, ui ) {
 				var upload = $( event.target ).parents( ".ev-image-upload" ).first(),
