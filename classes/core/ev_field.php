@@ -386,7 +386,8 @@ abstract class Ev_Field {
 	private function attrs()
 	{
 		$attrs = array(
-			'data-type=' . $this->_type
+			'data-type=' . $this->_type,
+			'data-handle=' . $this->_handle
 		);
 
 		$slave = $this->config( 'visible' );
@@ -441,6 +442,14 @@ abstract class Ev_Field {
 		}
 
 		$classes = apply_filters( "ev_field_classes[type:{$this->_type}]", (array) $classes, $this );
+
+		if ( isset( $this->_data['config']['class'] ) && ! empty( $this->_data['config']['class'] ) ) {
+			$cl = $this->_data['config']['class'];
+
+			$classes[] = 'ev-class-' . $cl;
+			$classes = apply_filters( "ev_field_classes[type:{$this->_type}][class:{$cl}]", (array) $classes, $this );
+		}
+
 
 		return array_map( 'esc_attr', $classes );
 	}
