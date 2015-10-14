@@ -25,8 +25,9 @@
 	 * Handle a slave field display.
 	 */
 	function ev_handle_slave_field_display( field ) {
-		var ctrl_key = field.attr( "data-slave" ),
-			ctrl = $( "[data-controller='" + ctrl_key + "']" ),
+		var container = field.parents( ".ev-tab-container" ).first(),
+			ctrl_key = field.attr( "data-slave" ),
+			ctrl = $( "[data-controller='" + ctrl_key + "']", container ),
 			ctrl_field = ev_controller_field_get( ctrl );
 
 		if ( ! ctrl_field ) {
@@ -38,11 +39,11 @@
 
 		if ( expected_value != ctrl_value || ctrl.hasClass( "ev-hidden" ) ) {
 			field.addClass( "ev-hidden" );
-			$( "[data-slave='" + field.attr( "data-controller" ) + "']" ).addClass( "ev-hidden" );
+			$( "[data-slave='" + field.attr( "data-controller" ) + "']", container ).addClass( "ev-hidden" );
 		}
 		else {
 			field.removeClass( "ev-hidden" );
-			$( "[data-slave='" + field.attr( "data-controller" ) + "']" ).removeClass( "ev-hidden" );
+			$( "[data-slave='" + field.attr( "data-controller" ) + "']", container ).removeClass( "ev-hidden" );
 		}
 
 		if ( field.is( "[data-controller]" ) ) {
@@ -66,11 +67,12 @@
 		var field = $( this ).parents( ".ev-field" ).first();
 
 		if ( $( this ).is( ev_controller_field_get( field ) ) ) {
-			var controller_value = $( this ).val(),
+			var container = field.parents( ".ev-tab-container" ).first(),
+				controller_value = $( this ).val(),
 				controller = $( this ).parents( "[data-controller]" ).first(),
 				controller_key = controller.attr( "data-controller" );
 
-			$( "[data-slave='" + controller_key + "']" ).each( function() {
+			$( "[data-slave='" + controller_key + "']", container ).each( function() {
 				ev_handle_slave_field_display( $( this ) );
 			} );
 		}
