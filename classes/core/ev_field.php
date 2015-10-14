@@ -446,7 +446,7 @@ abstract class Ev_Field {
 		if ( isset( $this->_data['config']['class'] ) && ! empty( $this->_data['config']['class'] ) ) {
 			$cl = $this->_data['config']['class'];
 
-			$classes[] = 'ev-class-' . $cl;
+			$classes[] = $cl;
 			$classes = apply_filters( "ev_field_classes[type:{$this->_type}][class:{$cl}]", (array) $classes, $this );
 		}
 
