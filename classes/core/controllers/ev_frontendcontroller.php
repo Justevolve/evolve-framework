@@ -82,6 +82,7 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 
 		/* Tabs. */
 		$this->register_script( 'ev-tabs', EV_FRAMEWORK_URI . 'components/tabs/js/script.js', array( 'ev-base' ) );
+		$this->register_script( 'ev-accordion', EV_FRAMEWORK_URI . 'components/accordion/js/script.js', array( 'ev-base' ) );
 
 		/* Inview. */
 		$this->register_script( 'ev-inview-lib', EV_FRAMEWORK_URI . 'components/inview/js/jquery.inview.min.js', array( 'ev-base' ) );

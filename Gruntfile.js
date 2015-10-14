@@ -9,6 +9,7 @@ var modules = [
 	"components/utilities",
 	"components/grid",
 	"components/tabs",
+	"components/accordion",
 	"components/dropdown",
 	"components/icon",
 	"components/modal",

@@ -199,5 +199,6 @@ if ( typeof jQuery === "undefined" ) {
 	$( document ).on( "ready", function() {
 		$.evf.ui.build();
 		$.evf.tabs( ".ev-tabs" + $.evf.componentID );
+		$.evf.accordion( ".ev-accordion" + $.evf.componentID );
 	} );
 } )( jQuery );

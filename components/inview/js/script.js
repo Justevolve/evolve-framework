@@ -1,15 +1,23 @@
 ( function( $ ) {
 	"use strict";
 
+	/**
+	 * Inview controller.
+	 */
 	$.evf.inview = new function() {
 
 		var self = this;
 
+		/* The class associated to elements entering the viewport. */
 		this.inview_class = "ev-inview";
 
+		/* A list of CSS selectors attached to the inview controller. */
 		this.selectors = [];
 
-		this.register = function( selector, callback ) {
+		/**
+		 * Register a selector to perform an action when entering the viewport.
+		 */
+		this.register = function( selector, callback, toggle ) {
 			$( selector ).on( "inview", function( event, isInView, visiblePartX, visiblePartY ) {
 				if ( isInView ) {
 					$( this ).addClass( self.inview_class );
@@ -17,6 +25,9 @@
 					if ( callback ) {
 						callback( $( this ) );
 					}
+				}
+				else if ( toggle ) {
+					$( this ).removeClass( self.inview_class );
 				}
 			} );
 		};
