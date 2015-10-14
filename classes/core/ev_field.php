@@ -192,6 +192,7 @@ abstract class Ev_Field {
 		$label_types = array(
 			'inline',
 			'block',
+			'inline-hidden',
 			'hidden'
 		);
 

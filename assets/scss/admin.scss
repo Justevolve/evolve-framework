@@ -648,7 +648,8 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		color: $text;
 	}
 
-	&.ev-field-header-label-inline {
+	&.ev-field-header-label-inline,
+	&.ev-field-header-label-inline-hidden {
 		display: inline-block;
 		float: left;
 		margin-top: $baseline/6;
@@ -663,6 +664,10 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		}
 	}
 
+	&.ev-field-header-label-inline-hidden {
+		margin-top: 0;
+	}
+
 	&.ev-field-header-label-block {
 		width: 100%;
 		@include clearfix;
@@ -673,6 +678,7 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		}
 	}
 
+	&.ev-field-header-label-inline-hidden,
 	&.ev-field-header-label-hidden {
 		.ev-label {
 			display: none;
