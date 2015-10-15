@@ -99,6 +99,30 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	-webkit-font-smoothing: $selectize-font-smoothing;
 }
 
+.ev-multiple-select-input-ajax {
+	&.selectize-dropdown [data-selectable] .highlight {
+		margin-right: 0;
+
+		&:after {
+			display: none;
+		}
+	}
+
+	.selectize-input {
+		color: $text;
+
+		> input {
+			padding: 0 !important;
+		}
+
+		&.full {
+			> input {
+				display: inline-block !important;
+			}
+		}
+	}
+}
+
 .selectize-input,
 .selectize-control.single .selectize-input.input-active {
 	background: $selectize-color-input;

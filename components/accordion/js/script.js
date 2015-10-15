@@ -28,7 +28,10 @@
 			activeClass: "ev-active",
 
 			/* Event trigger. */
-			eventTrigger: "click focus"
+			eventTrigger: "click focus",
+
+			/* Mode */
+			mode: false
 		}, config );
 
 		/**
@@ -49,7 +52,8 @@
 				container = triggerEl.parents( root ).first();
 			}
 
-			var triggers = $( config.triggersClass, container ),
+			var mode = config.mode !== false ? config.mode : container.attr( "data-mode" ),
+				triggers = $( config.triggersClass, container ),
 				toggles = $( config.toggleClass, container ),
 				index = 0;
 
@@ -73,19 +77,28 @@
 			/* Pre-switch hook. */
 			container.trigger( $.evf.resolveEventName( "switch", config.namespace ) );
 
-			triggers
-				.removeAttr( "aria-selected" );
-
-			toggles
-				.removeClass( config.activeClass )
-				.attr( "aria-hidden", "true" );
-
-			triggerEl
-				.attr( "aria-selected", "true" );
-
-			toggles.eq( index )
-				.addClass( config.activeClass )
-				.removeAttr( "aria-hidden" );
+			if ( mode !== "toggle" ) {
+				if ( triggerEl.attr( "aria-selected" ) == "true" ) {
+					triggerEl.removeAttr( "aria-selected" );
+					toggles.eq( index ).removeClass( config.activeClass ).attr( "aria-hidden", "true" );
+				}
+				else {
+					triggers.removeAttr( "aria-selected" );
+					triggerEl.attr( "aria-selected", "true" );
+					toggles.removeClass( config.activeClass ).attr( "aria-hidden", "true" );
+					toggles.eq( index ).addClass( config.activeClass ).removeAttr( "aria-hidden" );
+				}
+			}
+			else {
+				if ( triggerEl.attr( "aria-selected" ) == "true" ) {
+					triggerEl.removeAttr( "aria-selected" );
+					toggles.eq( index ).removeClass( config.activeClass ).attr( "aria-hidden", "true" );
+				}
+				else {
+					triggerEl.attr( "aria-selected", "true" );
+					toggles.eq( index ).addClass( config.activeClass ).removeAttr( "aria-hidden" );
+				}
+			}
 
 			/* Post-switch hook. */
 			container.trigger( $.evf.resolveEventName( "switched", config.namespace ) );

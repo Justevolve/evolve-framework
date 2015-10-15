@@ -73,6 +73,47 @@ function ev_select( $name, $options, $selected = '' ) {
 }
 
 /**
+ * Output an HTML multiple select control whose data is populated via an AJAX request.
+ *
+ * @since 0.4.0
+ * @param string $name The multiple select control name attribute.
+ * @param string $action The name of the action called to retrieve the data.
+ * @param string $selected The multiple select selected values.
+ * @param array $args The multiple select arguments.
+ */
+function ev_multiple_select_ajax( $name, $action, $selected = '', $args = array() ) {
+	$class = 'ev-multiple-select-input-ajax';
+	$value_field = isset( $args['value_field'] ) && ! empty( $args['value_field'] ) ? $args['value_field'] : 'id';
+	$label_field = isset( $args['label_field'] ) && ! empty( $args['label_field'] ) ? $args['label_field'] : 'text';
+	$search_field = isset( $args['search_field'] ) && ! empty( $args['search_field'] ) ? $args['search_field'] : 'text';
+
+	$attrs = array(
+		'data-action=' . $action,
+		'data-value-field=' . $value_field,
+		'data-label-field=' . $label_field,
+		'data-search-field=' . $search_field,
+		'data-nonce=' . wp_create_nonce( 'ev_multiple_select_ajax' )
+	);
+
+	printf( '<select %s class="%s" name="%s">',
+		implode( ' ', array_map( 'esc_attr', $attrs ) ),
+		esc_attr( $class ),
+		esc_attr( $name )
+	);
+
+	if ( $selected ) {
+		$selected_data = $args['data_callback']( $selected );
+
+		printf( '<option selected="selected" data-data="%s" value="%s"></option>',
+			htmlspecialchars( json_encode( $selected_data ), ENT_QUOTES, 'UTF-8' ),
+			esc_attr( $selected )
+		);
+	}
+
+	echo '</select>';
+}
+
+/**
  * Output an HTML multiple select control.
  *
  * @since 0.2.0
@@ -109,10 +150,8 @@ function ev_multiple_select( $name, $data, $selected = '', $args = array() ) {
 		$attrs[] = 'disabled';
 	}
 
-	$attrs = array_map( 'esc_attr', $attrs );
-
 	printf( '<input type="hidden" %s data-options="%s" class="%s" name="%s" value="%s">',
-		implode( ' ', $attrs ),
+		implode( ' ', array_map( 'esc_attr', $attrs ) ),
 		esc_attr( $data ),
 		esc_attr( $class ),
 		esc_attr( $name ),

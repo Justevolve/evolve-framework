@@ -2,6 +2,74 @@
 	"use strict";
 
 	/**
+	 * Adding the AJAX-variant of the multiple select component to the UI building queue.
+	 */
+	$.evf.ui.add( "select.ev-multiple-select-input-ajax", function() {
+		$( this ).each( function() {
+			var action = $( this ).attr( "data-action" ),
+				value = $( this ).attr( "data-value-field" ),
+				label = $( this ).attr( "data-label-field" ),
+				search = $( this ).attr( "data-search-field" ),
+				nonce = $( this ).attr( "data-nonce" );
+
+			$( this ).selectize( {
+				valueField: value,
+				labelField: label,
+				searchField: [ search ],
+				dropdownParent: "body",
+				create: false,
+				load: function( query, callback ) {
+					if ( ! query.length ) {
+						return callback();
+					}
+
+					$.ajax( {
+						url: ajaxurl,
+						type: 'POST',
+						data: {
+							action: action,
+							search: query,
+							nonce: nonce
+						},
+						error: function() {
+							callback();
+						},
+						success: function( res ) {
+							callback( $.parseJSON( res ) );
+						}
+					} );
+				},
+				render: {
+					item: function( item, escape ) {
+						var html = '<div>';
+
+						// if ( item.id && item.id !== "" ) {
+						// 	html += '<span>' + escape( item.id ) + '</span>';
+						// }
+
+						html += escape( item.text );
+						html += '</div>';
+
+						return html;
+					},
+					option: function( item, escape ) {
+						var html = '<div>';
+
+						// if ( item.id && item.id !== "" ) {
+						// 	html += '<span>' + escape( item.id ) + '</span>';
+						// }
+
+						html += escape( item.text );
+						html += '</div>';
+
+						return html;
+					}
+				}
+			} );
+		} );
+	} );
+
+	/**
 	 * Adding the multiple select component to the UI building queue.
 	 */
 	$.evf.ui.add( "input.ev-multiple-select-input", function() {
@@ -16,6 +84,7 @@
 				searchField: [ 'label' ],
 				dropdownParent: "body",
 				maxItems: options.length + 1,
+				create: false,
 				render: {
 					item: function( item, escape ) {
 						var html = '<div>';
