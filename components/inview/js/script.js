@@ -20,10 +20,12 @@
 		this.register = function( selector, callback, toggle ) {
 			$( selector ).on( "inview", function( event, isInView, visiblePartX, visiblePartY ) {
 				if ( isInView ) {
-					$( this ).addClass( self.inview_class );
+					if ( ! $( this ).hasClass( self.inview_class ) ) {
+						$( this ).addClass( self.inview_class );
 
-					if ( callback ) {
-						callback( $( this ) );
+						if ( callback ) {
+							callback( $( this ) );
+						}
 					}
 				}
 				else if ( toggle ) {
