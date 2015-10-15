@@ -599,10 +599,6 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 	&.ev-field-size-medium {
 		width: _ev_col( 1/3 );
 
-		@include ev_media( $media_tablet ) {
-			width: _ev_col( 1/2 );
-		}
-
 		@include ev_media( $media_mobile ) {
 			width: _ev_col( 1/1 );
 		}
@@ -888,8 +884,18 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		.ev-field {
 			border: none;
 
-			+ .ev-field {
-				border-top: 1px dashed $border-color;
+			&.ev-field-size-full {
+				+ .ev-field.ev-field-size-full {
+					border-top: 1px dashed $border-color;
+				}
+			}
+
+			@include ev_media( $media_mobile ) {
+				width: _ev_col( 1/1 );
+
+				+ .ev-field {
+					border-top: 1px dashed $border-color;
+				}
 			}
 		}
 

@@ -417,6 +417,10 @@
 
 	.ev-toggle-trigger {
 		@extend %clearfix !optional;
+
+		.rtl & {
+			text-align: right;
+		}
 	}
 
 	.ev-toggle-content {
