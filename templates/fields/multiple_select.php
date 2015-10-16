@@ -5,5 +5,19 @@
 		$args['vertical'] = true;
 	}
 
-	ev_multiple_select( $field->handle(), $field->config( 'data' ), $field->value(), $args );
+	$data = $field->config( 'data' );
+
+	if ( is_array( $data ) ) {
+		ev_multiple_select( $field->handle(), $data, $field->value(), $args );
+	}
+	elseif ( is_string( $data ) ) {
+		$data_callback = $field->config( 'data_callback' );
+
+		if ( $data_callback && is_callable( $data_callback ) ) {
+			$args['data_callback'] = $data_callback;
+
+			ev_multiple_select_ajax( $field->handle(), $data, $field->value(), $args );
+		}
+	}
+
 ?>

@@ -824,6 +824,14 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 	}
 }
 
+@include ev_media( $media_mobile ) {
+	.ev-field-color {
+		.minicolors-swatch {
+			top: 9px;
+		}
+	}
+}
+
 .ev-color-input-wrapper {
 	display: inline-block;
 
@@ -848,11 +856,6 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		float: left;
 		width: 100%;
 		@include box-sizing( border-box );
-
-		.ev-field {
-			padding-left: 0;
-			padding-right: 0;
-		}
 	}
 
 	// Repeatable bundles ------------------------------------------------------
@@ -885,8 +888,21 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 			border: none;
 
 			&.ev-field-size-full {
+				padding-left: 0;
+				padding-right: 0;
+
 				+ .ev-field.ev-field-size-full {
 					border-top: 1px dashed $border-color;
+				}
+			}
+
+			&:not( .ev-field-size-full ) {
+				padding-left: $gutter/2;
+				padding-right: $gutter/2;
+
+				@include ev_media( $media_mobile ) {
+					padding-left: 0;
+					padding-right: 0;
 				}
 			}
 
@@ -901,13 +917,17 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 
 		.ev-bundle-fields-wrapper {
 			border: 1px solid $border_color;
-			padding-right: $baseline*1.25;
+			padding-right: $gutter;
+
+			@include ev_media( $media_mobile ) {
+				padding-right: $gutter*1.5;
+			}
 
 			+ .ev-bundle-fields-wrapper {
 				margin-top: $baseline/4;
 			}
 
-			.ev-field {
+			.ev-field-size-full {
 				padding-left: $gutter;
 			}
 
@@ -974,9 +994,13 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		}
 
 		.ev-bundle-fields-wrapper {
-			padding-left: $baseline*1.25;
+			padding-left: $gutter;
 
-			.ev-field {
+			@include ev_media( $media_mobile ) {
+				padding-left: $gutter*1.5;
+			}
+
+			.ev-field-size-full {
 				padding-left: 0;
 			}
 
