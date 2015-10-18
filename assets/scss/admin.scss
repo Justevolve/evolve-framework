@@ -637,6 +637,8 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 // -----------------------------------------------------------------------------
 
 .ev-field-header {
+	@include box-sizing( border-box );
+
 	.ev-label {
 		font-weight: bold;
 		font-size: 14px;
@@ -662,6 +664,7 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 
 	&.ev-field-header-label-inline-hidden {
 		margin-top: 0;
+		min-height: 1px;
 	}
 
 	&.ev-field-header-label-block {
@@ -849,6 +852,21 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 // -----------------------------------------------------------------------------
 
 .ev-field-bundle {
+	&:not( .ev-repeatable ),
+	&:not( .ev-sortable ) {
+		padding-right: 0;
+
+		> .ev-container {
+			padding-left: 0;
+		}
+
+		> .ev-field-header-label-hidden,
+		> .ev-field-header-label-block {
+			+ .ev-container {
+				margin-left: -$gutter;
+			}
+		}
+	}
 
 	.ev-bundle-fields-wrapper {
 		display: block;
@@ -918,14 +936,15 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		.ev-bundle-fields-wrapper {
 			border: 1px solid $border_color;
 			padding-right: $gutter;
+			margin-top: $baseline/4;
 
 			@include ev_media( $media_mobile ) {
 				padding-right: $gutter*1.5;
 			}
 
-			+ .ev-bundle-fields-wrapper {
-				margin-top: $baseline/4;
-			}
+			// + .ev-bundle-fields-wrapper {
+			// 	margin-top: $baseline/4;
+			// }
 
 			.ev-field-size-full {
 				padding-left: $gutter;
@@ -1037,7 +1056,7 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 
 	.ev-repeatable-controls {
 		display: block;
-		margin-bottom: $baseline/2;
+		margin-bottom: $baseline/4;
 
 		a + a {
 			margin-left: $gutter;
@@ -1913,6 +1932,16 @@ body.ev-modal-open {
 	left: 15%;
 	right: 15%;
 	background: rgba( #000, 0.5 );
+
+	@include ev_media( $media_tablet ) {
+		left: 5%;
+		right: 5%;
+	}
+
+	@include ev_media( $media_mobile ) {
+		left: 0;
+		right: 0;
+	}
 
 	.ev-modal-wrapper {
 		top: $baseline;
