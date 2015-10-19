@@ -37,14 +37,29 @@
 		var ctrl_value = ctrl_field.val(),
 			expected_value = field.attr( "data-controller-value" );
 
-		if ( expected_value != ctrl_value || ctrl.hasClass( "ev-hidden" ) ) {
-			field.addClass( "ev-hidden" );
-			$( "[data-slave='" + field.attr( "data-controller" ) + "']", container ).addClass( "ev-hidden" );
+		if ( expected_value.indexOf( ',' ) != -1 ) {
+			expected_value = expected_value.split( ',' );
+
+			if ( ( expected_value.indexOf( ctrl_value ) == -1 ) || ctrl.hasClass( "ev-hidden" ) ) {
+				field.addClass( "ev-hidden" );
+				$( "[data-slave='" + field.attr( "data-controller" ) + "']", container ).addClass( "ev-hidden" );
+			}
+			else {
+				field.removeClass( "ev-hidden" );
+				$( "[data-slave='" + field.attr( "data-controller" ) + "']", container ).removeClass( "ev-hidden" );
+			}
 		}
 		else {
-			field.removeClass( "ev-hidden" );
-			$( "[data-slave='" + field.attr( "data-controller" ) + "']", container ).removeClass( "ev-hidden" );
+			if ( expected_value != ctrl_value || ctrl.hasClass( "ev-hidden" ) ) {
+				field.addClass( "ev-hidden" );
+				$( "[data-slave='" + field.attr( "data-controller" ) + "']", container ).addClass( "ev-hidden" );
+			}
+			else {
+				field.removeClass( "ev-hidden" );
+				$( "[data-slave='" + field.attr( "data-controller" ) + "']", container ).removeClass( "ev-hidden" );
+			}
 		}
+
 
 		if ( field.is( "[data-controller]" ) ) {
 			ev_controller_field_get( field ).trigger( "change" );

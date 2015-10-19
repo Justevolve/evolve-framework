@@ -396,7 +396,13 @@ abstract class Ev_Field {
 
 		if ( is_array( $slave ) ) {
 			$attrs[] = sprintf( 'data-slave=%s', key( $slave ) );
-			$attrs[] = sprintf( 'data-controller-value=%s', current( $slave ) );
+
+			if ( is_array( current( $slave ) ) ) {
+				$slave_value = implode( ',', current( $slave ) );
+				$attrs[] = sprintf( 'data-controller-value=%s', $slave_value );
+			} else {
+				$attrs[] = sprintf( 'data-controller-value=%s', current( $slave ) );
+			}
 		}
 
 		if ( ! empty( $controller ) && in_array( $this->_type, $controller_types ) ) {
