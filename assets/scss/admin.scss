@@ -1797,14 +1797,22 @@ $tooltip_arrow_size: 16px;
 // $Icon picker
 // -----------------------------------------------------------------------------
 
-$rows: 6;
+$rows: 3;
 $icon_size: 20 + ( $baseline/3 * 2 );
+
+.ev-icon-outer-wrapper {
+	display: none;
+
+	&.ev-active {
+		display: block;
+	}
+}
 
 .ev-icon-sets {
 	clear: both;
 	@include clearfix;
 
-	ul {
+	> div {
 		@include box-sizing( border-box );
 		display: none;
 		@include size( 100% ($icon_size*$rows) );
@@ -1818,7 +1826,7 @@ $icon_size: 20 + ( $baseline/3 * 2 );
 		}
 	}
 
-	li {
+	i {
 		@include box-sizing( border-box );
 		float: left;
 		padding: $baseline/3;
@@ -1832,16 +1840,35 @@ $icon_size: 20 + ( $baseline/3 * 2 );
 			background-color: $grey_light_1;
 		}
 
-		i.ev-selected {
+		&.ev-selected {
 			color: $blue_medium;
 		}
 	}
 
-	&.ev-searching li i {
-		@include opacity( 30 );
+	// li {
+	// 	@include box-sizing( border-box );
+	// 	float: left;
+	// 	padding: $baseline/3;
+	// 	font-size: 20px;
+	// 	cursor: pointer;
+	// 	line-height: 1;
+	// 	@include size( $icon_size );
+	// 	margin: 0;
+
+	// 	&:hover {
+	// 		background-color: $grey_light_1;
+	// 	}
+
+	// 	i.ev-selected {
+	// 		color: $blue_medium;
+	// 	}
+	// }
+
+	&.ev-searching i {
+		display: none;
 
 		&.ev-found {
-			@include opacity( 100 );
+			display: block;
 		}
 	}
 }

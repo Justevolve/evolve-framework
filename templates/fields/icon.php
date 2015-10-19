@@ -18,52 +18,53 @@
 	<span class="ev-remove ev-icon-remove"></span>
 </div>
 
-<div class="ev-icon-search-wrapper">
-	<input type="text" placeholder="<?php esc_attr_e( 'Search for an icon', 'ev_framework' ); ?>" data-icon-search>
-	<p class="ev-icon-search-results"></p>
-</div>
-
-<div class="ev-icon-set-select-wrapper">
-	<?php
-		$font_sets = array();
-
-		foreach ( $icon_fonts as $font ) {
-			$font_sets[$font['name']] = $font['label'];
-		}
-
-		ev_select(
-			'',
-			$font_sets,
-			$set
-		);
-
-	?>
-</div>
-
-<div class="ev-icon-sets">
-	<?php foreach ( $icon_fonts as $index => $font ) : ?>
+<div class="ev-icon-outer-wrapper">
+	<div class="ev-icon-set-select-wrapper">
 		<?php
-			$set_class = 'ev-icon-set-' . $font['name'];
+			$font_sets = array();
 
-			if ( $font['name'] == $set || $set == '' && $index == 0 ) {
-				$set_class .= ' ev-on';
+			foreach ( $icon_fonts as $font ) {
+				$font_sets[$font['name']] = $font['label'];
 			}
+
+			ev_select(
+				'',
+				$font_sets,
+				$set
+			);
 		?>
-		<ul class="<?php echo esc_attr( $set_class ); ?>">
-			<?php foreach ( $font['mapping'] as $set_icon ) : ?>
-				<?php
-					$icon_class = $font['prefix'] . ' ' . $set_icon . ' ev-icon ev-component';
 
-					if ( $set_icon == $icon ) {
-						$icon_class .= ' ev-selected';
-					}
+		<div class="ev-icon-search-wrapper">
+			<input type="text" placeholder="<?php esc_attr_e( 'Search for an icon', 'ev_framework' ); ?>" data-icon-search>
+			<p class="ev-icon-search-results"></p>
+		</div>
+	</div>
 
-					$set_icon_stripped = strstr( $set_icon, '-' );
-				?>
-				<li><i data-prefix="<?php echo esc_attr( $font['prefix'] ); ?>" data-set="<?php echo esc_attr( $font['name'] ); ?>" data-icon-name="<?php echo esc_attr( $set_icon ); ?>" data-icon-stripped="<?php echo esc_attr( $set_icon_stripped ); ?>" class="<?php echo esc_attr( $icon_class ); ?>" aria-hidden="true"></i></li>
-			<?php endforeach; ?>
-		</ul>
-	<?php endforeach; ?>
+	<div class="ev-icon-sets">
+		<?php foreach ( $icon_fonts as $index => $font ) : ?>
+			<?php
+				$set_class = 'ev-icon-set-' . $font['name'];
+
+				if ( $font['name'] == $set || $set == '' && $index == 0 ) {
+					$set_class .= ' ev-on';
+				}
+			?>
+			<div class="<?php echo esc_attr( $set_class ); ?>">
+				<?php foreach ( $font['mapping'] as $set_icon ) : ?>
+					<?php
+						$icon_class = $font['prefix'] . ' ' . $set_icon . ' ev-icon ev-component';
+
+						if ( $set_icon == $icon ) {
+							$icon_class .= ' ev-selected';
+						}
+
+						$set_icon_stripped = strstr( $set_icon, '-' );
+					?>
+					<i data-prefix="<?php echo esc_attr( $font['prefix'] ); ?>" data-set="<?php echo esc_attr( $font['name'] ); ?>" data-icon-name="<?php echo esc_attr( $set_icon ); ?>" data-icon-stripped="<?php echo esc_attr( $set_icon_stripped ); ?>" class="<?php echo esc_attr( $icon_class ); ?>" aria-hidden="true"></i>
+				<?php endforeach; ?>
+			</div>
+		<?php endforeach; ?>
+	</div>
 </div>
 
 <input type="hidden" data-prefix name="<?php echo esc_attr( $field->handle() ); ?>[prefix]" value="<?php echo esc_attr( $prefix ); ?>">

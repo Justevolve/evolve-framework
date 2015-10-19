@@ -4,12 +4,24 @@
 	/**
 	 * Switch between the available icon sets.
 	 */
+	$.evf.delegate( ".ev-selected-icon-wrapper", "click", "icon", function() {
+		var field = $( this ).parents( ".ev-field" ).first(),
+			wrapper = $( ".ev-icon-outer-wrapper", field );
+
+		wrapper.toggleClass( "ev-active" );
+
+		return false;
+	} );
+
+	/**
+	 * Switch between the available icon sets.
+	 */
 	$.evf.delegate( ".ev-field-icon select", "change", "icon", function() {
 		var field = $( this ).parents( ".ev-field" ).first(),
 			font_set = $( this ).val();
 
-		$( ".ev-icon-sets ul" ).removeClass( "ev-on" );
-		$( ".ev-icon-sets ul.ev-icon-set-" + font_set ).addClass( "ev-on" );
+		$( ".ev-icon-sets > div" ).removeClass( "ev-on" );
+		$( ".ev-icon-sets > div.ev-icon-set-" + font_set ).addClass( "ev-on" );
 	} );
 
 	/**
@@ -68,8 +80,8 @@
 	/**
 	 * Select an icon.
 	 */
-	$.evf.delegate( ".ev-icon-sets li", "click", "icon", function() {
-		var icon_i = $( this ).find( 'i' ),
+	$.evf.delegate( ".ev-icon-sets i", "click", "icon", function() {
+		var icon_i = $( this ),
 			field = icon_i.parents( ".ev-field" ).first(),
 			prefix = icon_i.attr( "data-prefix" ),
 			icon = icon_i.attr( "data-icon-name" ),
@@ -87,6 +99,9 @@
 
 		$( "[data-preview]", field ).attr( "class", "" );
 		$( "[data-preview]", field ).attr( "class", "ev-icon ev-component " + prefix + " " + icon );
+
+		$( "input[data-icon-search]", field ).val( "" );
+		$( ".ev-icon-search-results", field ).html( "" );
 	} );
 
 } )( jQuery );

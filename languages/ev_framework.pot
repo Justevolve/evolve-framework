@@ -24,11 +24,11 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: classes/core/ev_field.php:520
+#: classes/core/ev_field.php:526
 msgid "Add"
 msgstr ""
 
-#: classes/core/ev_field.php:580
+#: classes/core/ev_field.php:586
 msgid "Need help?"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Remove all"
 msgstr ""
 
-#: templates/fields/icon.php:22
+#: templates/fields/icon.php:38
 msgid "Search for an icon"
 msgstr ""
 
