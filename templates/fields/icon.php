@@ -18,7 +18,7 @@
 	<span class="ev-remove ev-icon-remove"></span>
 </div>
 
-<div class="ev-icon-outer-wrapper">
+<div class="ev-icon-sets-external-wrapper">
 	<div class="ev-icon-set-select-wrapper">
 		<?php
 			$font_sets = array();
