@@ -100,6 +100,7 @@ function get_modules_admin_scripts() {
 	scripts.push( "assets/js/admin/libs/jquery.minicolors.min.js" );
 	scripts.push( "assets/js/admin/libs/selectize.min.js" );
 	scripts.push( "assets/js/admin/libs/js-wp-editor.js" );
+	scripts.push( "assets/js/admin/libs/jquery.scrollintoview.min.js" );
 	scripts.push( "assets/js/admin/history.js" );
 	scripts.push( "assets/js/admin/tooltip.js" );
 	scripts.push( "assets/js/admin/ev.media_selector.js" );

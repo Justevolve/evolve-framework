@@ -60,7 +60,6 @@
 			}
 		}
 
-
 		if ( field.is( "[data-controller]" ) ) {
 			ev_controller_field_get( field ).trigger( "change" );
 		}
@@ -85,11 +84,21 @@
 			var container = field.parents( ".ev-tab-container" ).first(),
 				controller_value = $( this ).val(),
 				controller = $( this ).parents( "[data-controller]" ).first(),
-				controller_key = controller.attr( "data-controller" );
+				controller_key = controller.attr( "data-controller" ),
+				slaves = $( "[data-slave='" + controller_key + "']", container );
 
-			$( "[data-slave='" + controller_key + "']", container ).each( function() {
+			slaves.each( function() {
 				ev_handle_slave_field_display( $( this ) );
 			} );
+
+			var last_slave = slaves.not( ".ev-hidden" ).last(),
+				tabs = $( this ).parents( ".ev-tabs" ).first();
+
+			if ( last_slave.length && tabs.length && tabs.css( "overflow-y" ) ) {
+				var scroll = last_slave.position().top + last_slave.outerHeight() * 2;
+
+				tabs.get( 0 ).scrollTop = scroll;
+			}
 		}
 	} );
 } )( jQuery );
