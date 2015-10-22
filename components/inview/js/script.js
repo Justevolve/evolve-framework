@@ -11,9 +11,6 @@
 		/* The class associated to elements entering the viewport. */
 		this.inview_class = "ev-inview";
 
-		/* A list of CSS selectors attached to the inview controller. */
-		this.selectors = [];
-
 		/**
 		 * Register a selector to perform an action when entering the viewport.
 		 */
