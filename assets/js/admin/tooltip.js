@@ -15,7 +15,7 @@
 		if ( transitionSupport ) {
 			var event_string = "transitionend.ev webkitTransitionEnd.ev oTransitionEnd.ev MSTransitionEnd.ev";
 
-			$( this ).one( event_string, function( e ) {
+			$( this ).on( event_string, function( e ) {
 				tooltip.remove();
 			} );
 		}
@@ -24,6 +24,13 @@
 		}
 
 		tooltip.removeClass( "ev-tooltip-active" );
+	};
+
+	/**
+	 * Destroy all tooltips;
+	 */
+	window.ev_seek_and_destroy_tooltips = function() {
+		$( "." + tooltip_container ).remove();
 	};
 
 	/**
@@ -36,6 +43,8 @@
 		if ( link_title == "" ) {
 			return false;
 		}
+
+		ev_seek_and_destroy_tooltips();
 
 		var $container = $( '<div class="' + tooltip_container + '"></div>' ).appendTo( "body" ),
 			link_height = $link.outerHeight(),
