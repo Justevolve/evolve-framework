@@ -135,7 +135,7 @@ function ev_array_add( &$array, $path = '', $add = null ) {
 	$delimiter = '/';
 	$comparison = ':';
 
-	$find = find( $array, $path, null, 'ids' );
+	$find = ev_array_find( $array, $path, null, 'ids' );
 
 	if ( ! empty( $find ) ) {
 		$path = trim( $path, $delimiter );
@@ -147,7 +147,7 @@ function ev_array_add( &$array, $path = '', $add = null ) {
 		$path = array_shift( $find );
 
 		if ( is_string( $path ) || is_integer( $path ) && array_key_exists( $path, $array ) ) {
-			add( $array[$path], implode( $delimiter, $find ), $add );
+			ev_array_add( $array[$path], implode( $delimiter, $find ), $add );
 
 			if ( count( $find ) === 0 ) {
 				$array[$path][] = $add;
@@ -171,7 +171,7 @@ function ev_array_update( &$array, $path = '', $replacement = null ) {
 	$delimiter = '/';
 	$comparison = ':';
 
-	$find = find( $array, $path, null, 'ids' );
+	$find = ev_array_find( $array, $path, null, 'ids' );
 
 	if ( ! empty( $find ) ) {
 		$path = trim( $path, $delimiter );
@@ -183,7 +183,7 @@ function ev_array_update( &$array, $path = '', $replacement = null ) {
 		$path = array_shift( $find );
 
 		if ( is_string( $path ) || is_integer( $path ) && array_key_exists( $path, $array ) ) {
-			update( $array[$path], implode( $delimiter, $find ), $replacement );
+			ev_array_update( $array[$path], implode( $delimiter, $find ), $replacement );
 
 			if ( count( $find ) === 0 ) {
 				$array[$path] = $replacement;
@@ -206,7 +206,7 @@ function remove( &$array, $path = '' ) {
 	$delimiter = '/';
 	$comparison = ':';
 
-	$find = find( $array, $path, null, 'ids' );
+	$find = ev_array_find( $array, $path, null, 'ids' );
 
 	if ( ! empty( $find ) ) {
 		$path = trim( $path, $delimiter );
@@ -218,7 +218,7 @@ function remove( &$array, $path = '' ) {
 		$path = array_shift( $find );
 
 		if ( is_string( $path ) || is_integer( $path ) && array_key_exists( $path, $array ) ) {
-			remove( $array[$path], implode( $delimiter, $find ) );
+			ev_array_remove( $array[$path], implode( $delimiter, $find ) );
 
 			if ( count( $find ) === 0 ) {
 				unset( $array[$path] );
@@ -236,7 +236,7 @@ function remove( &$array, $path = '' ) {
  * @return boolean
  */
 function is_set( $array, $path = '' ) {
-	$find = find( $array, $path, null );
+	$find = ev_array_find( $array, $path, null );
 
 	return $find !== null;
 }
