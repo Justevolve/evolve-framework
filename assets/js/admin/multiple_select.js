@@ -10,7 +10,8 @@
 				value = $( this ).attr( "data-value-field" ),
 				label = $( this ).attr( "data-label-field" ),
 				search = $( this ).attr( "data-search-field" ),
-				nonce = $( this ).attr( "data-nonce" );
+				nonce = $( this ).attr( "data-nonce" ),
+				max = $( this ).attr( "data-max" ) ? parseInt( $( this ).attr( "data-max" ), 10 ) : 1;
 
 			$( this ).selectize( {
 				valueField: value,
@@ -18,6 +19,7 @@
 				searchField: [ search ],
 				dropdownParent: "body",
 				create: false,
+				maxItems: max,
 				load: function( query, callback ) {
 					if ( ! query.length ) {
 						return callback();
@@ -43,6 +45,10 @@
 					item: function( item, escape ) {
 						var html = '<div>';
 
+						if ( item.spec && item.spec !== "" ) {
+							html += '<span>' + escape( item.spec ) + '</span>';
+						}
+
 						// if ( item.id && item.id !== "" ) {
 						// 	html += '<span>' + escape( item.id ) + '</span>';
 						// }
@@ -54,6 +60,10 @@
 					},
 					option: function( item, escape ) {
 						var html = '<div>';
+
+						if ( item.spec && item.spec !== "" ) {
+							html += '<span>' + escape( item.spec ) + '</span>';
+						}
 
 						// if ( item.id && item.id !== "" ) {
 						// 	html += '<span>' + escape( item.id ) + '</span>';
@@ -74,7 +84,8 @@
 	 */
 	$.evf.ui.add( "input.ev-multiple-select-input", function() {
 		$( this ).each( function() {
-			var options = $.parseJSON( $( this ).attr( "data-options" ) );
+			var options = $.parseJSON( $( this ).attr( "data-options" ) ),
+				max = $( this ).attr( "data-max" ) ? parseInt( $( this ).attr( "data-max" ), 10 ) : options.length; // TODO: needed?
 
 			$( this ).selectize( {
 				plugins: ['remove_button', 'drag_drop'],
@@ -83,7 +94,7 @@
 				labelField: 'label',
 				searchField: [ 'label' ],
 				dropdownParent: "body",
-				maxItems: options.length + 1,
+				maxItems: max,
 				create: false,
 				render: {
 					item: function( item, escape ) {

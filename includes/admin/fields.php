@@ -95,6 +95,10 @@ function ev_multiple_select_ajax( $name, $action, $selected = '', $args = array(
 		'data-nonce=' . wp_create_nonce( 'ev_multiple_select_ajax' )
 	);
 
+	if ( isset( $args['max'] ) && is_numeric( $args['max'] ) ) {
+		$attrs[] = 'data-max=' . $args['max'];
+	}
+
 	printf( '<select %s class="%s" name="%s">',
 		implode( ' ', array_map( 'esc_attr', $attrs ) ),
 		esc_attr( $class ),
@@ -148,6 +152,10 @@ function ev_multiple_select( $name, $data, $selected = '', $args = array() ) {
 
 	if ( empty( $structured_data ) ) {
 		$attrs[] = 'disabled';
+	}
+
+	if ( isset( $args['max'] ) && is_numeric( $args['max'] ) ) {
+		$attrs[] = 'data-max=' . $args['max'];
 	}
 
 	printf( '<input type="hidden" %s data-options="%s" class="%s" name="%s" value="%s">',
