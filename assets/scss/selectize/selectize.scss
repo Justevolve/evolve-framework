@@ -364,6 +364,9 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 .selectize-control.plugin-remove_button {
 	[data-value] {
 		position: relative;
+	}
+
+	.multi [data-value] {
 		padding-right: 24px !important;
 	}
 
