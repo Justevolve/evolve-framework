@@ -32,7 +32,8 @@ class Ev_MultipleSelectField extends Ev_Field {
 
 		$data['config'] = wp_parse_args( $data['config'], array(
 			'vertical' => false,
-			'data' => array()
+			'data' => array(),
+			'max' => false
 		) );
 
 		parent::__construct( $data );

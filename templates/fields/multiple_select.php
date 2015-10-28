@@ -5,6 +5,10 @@
 		$args['vertical'] = true;
 	}
 
+	if ( $field->config( 'max' ) !== false ) {
+		$args['max'] = (int) $field->config( 'max' );
+	}
+
 	$data = $field->config( 'data' );
 
 	if ( is_array( $data ) ) {

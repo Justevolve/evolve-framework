@@ -92,7 +92,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 .selectize-dropdown,
 .selectize-input,
 .selectize-input input {
-	color: $selectize-color-text;
+	// color: $selectize-color-text;
 	font-family: $selectize-font-family;
 	font-size: $selectize-font-size;
 	line-height: $selectize-line-height;
@@ -109,8 +109,6 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	}
 
 	.selectize-input {
-		color: $text;
-
 		> input {
 			padding: 0 !important;
 		}
@@ -142,6 +140,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	@include box-shadow( $selectize-shadow-input );
 
 	.selectize-control.multi &.has-items {
+		color: $selectize-color-text;
 		$padding-x: $selectize-padding-x;
 		$padding-top: $selectize-padding-y - $selectize-padding-item-y - $selectize-width-item-border;
 		$padding-bottom: $selectize-padding-y - $selectize-padding-item-y - $selectize-margin-item-y - $selectize-width-item-border;
@@ -178,14 +177,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 		*display: inline;
 	}
 
-	.selectize-control.multi & > div {
-		cursor: pointer;
-		margin: 0 $selectize-margin-item-x $selectize-margin-item-y 0;
-		padding: $selectize-padding-item-y $selectize-padding-item-x;
-		background: $selectize-color-item;
-		color: $selectize-color-item-text;
-		border-radius: 2px;
-
+	.selectize-control & > div {
 		span {
 			margin-right: 5px;
 
@@ -194,6 +186,15 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 				display: inline-block;
 			}
 		}
+	}
+
+	.selectize-control.multi & > div {
+		cursor: pointer;
+		margin: 0 $selectize-margin-item-x $selectize-margin-item-y 0;
+		padding: $selectize-padding-item-y $selectize-padding-item-x;
+		background: $selectize-color-item;
+		color: $selectize-color-item-text;
+		border-radius: 2px;
 
 		&.active {
 			background: $selectize-color-item-active;
@@ -363,6 +364,9 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 .selectize-control.plugin-remove_button {
 	[data-value] {
 		position: relative;
+	}
+
+	.multi [data-value] {
 		padding-right: 24px !important;
 	}
 
