@@ -117,7 +117,6 @@
 				}
 				else {
 					value = selection.id;
-
 					var extension = selection.url.split(/[\\/]/).pop() + " (" + selection.filesizeHumanReadable + ")",
 						type = selection.type;
 
@@ -129,7 +128,8 @@
 						"type": type,
 						"id": value,
 						"title": selection.title,
-						"extension": extension
+						"extension": extension,
+						"url": selection.url
 					} ) );
 				}
 

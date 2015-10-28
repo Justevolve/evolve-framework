@@ -73,7 +73,9 @@ printf( '<div class="ev-attachment-upload-container %s" %s>', esc_attr( $contain
 	<div class="ev-attachment-upload-action">
 		<a href="#" class="ev-edit-action"><?php esc_html_e( 'Edit', 'ev_framework' ); ?></a>
 		<a href="#" class="ev-upload-action"><?php esc_html_e( 'Upload', 'ev_framework' ); ?></a>
-		<a href="#" class="ev-remove-all-action"><?php esc_html_e( 'Remove all', 'ev_framework' ); ?></a>
+		<?php if ( $multiple ) : ?>
+			<a href="#" class="ev-remove-all-action"><?php esc_html_e( 'Remove all', 'ev_framework' ); ?></a>
+		<?php endif; ?>
 	</div>
 
 	<input type="hidden" data-id name="<?php echo esc_attr( $handle ); ?>" value="<?php echo esc_attr( $value ); ?>">
