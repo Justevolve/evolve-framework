@@ -138,6 +138,16 @@ class Ev_Query {
 	 */
 	public function paginate()
 	{
+		$this->_args['paged'] = $this->get_current_page();
+	}
+
+	/**
+	 * Get the current page index.
+	 *
+	 * @return integer
+	 */
+	public function get_current_page()
+	{
 		$paged = 1;
 
 		if ( get_query_var( 'paged' ) ) {
@@ -147,7 +157,7 @@ class Ev_Query {
 			$paged = get_query_var( 'page' );
 		}
 
-		$this->_args['paged'] = $paged;
+		return $paged;
 	}
 
 	/**
