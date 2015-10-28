@@ -1244,12 +1244,13 @@ $attachment_spreadsheet: "\f495";
 }
 
 .ev-attachment-placeholder {
-	@include clearfix();
 	position: relative;
 	margin-bottom: $baseline/2;
 	border: 1px solid $border_color;
 	padding: $baseline/2 ($gutter/2 + 18) $baseline/2 $gutter/2;
 	background-color: $white;
+	min-height: 42px + $baseline;
+	@include box-sizing( border-box );
 
 	&:hover {
 		border: 1px solid $blue_medium;
@@ -1272,7 +1273,7 @@ $attachment_spreadsheet: "\f495";
 		}
 	}
 
-	.ui-sortable & {
+	.ev-attachment-upload-container.ui-sortable & {
 		cursor: move;
 
 		.ev-sortable-handle {
@@ -1309,6 +1310,10 @@ $attachment_spreadsheet: "\f495";
 			margin-top: -9px;
 			@include position( absolute, 50% $gutter/2 null null );
 		}
+
+		&:hover:before {
+			color: darken( $red, 20 );
+		}
 	}
 
 	&:hover .ev-upload-remove:before {
@@ -1326,6 +1331,14 @@ $attachment_spreadsheet: "\f495";
 			font-style: italic;
 			color: $text_light;
 			margin-top: $baseline/4;
+
+			&:hover {
+				color: $blue_dark;
+			}
+
+			&:focus {
+				@include box-shadow( none );
+			}
 		}
 	}
 
