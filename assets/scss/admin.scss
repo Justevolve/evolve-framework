@@ -188,85 +188,91 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 
 @include ev_tabs_reset();
 
-.ev-admin-page .ev-tabs-nav.ev-vertical {
-	width: 20%;
-	padding-right: 20px;
-	@include box-sizing( border-box );
-
-	@include ev-media( $media_tablet ) {
-		width: 25%;
-	}
-
-	@include ev-media( $media_mobile ) {
-		width: 100%;
-		padding-right: 0;
-		margin-bottom: $baseline;
-	}
-
-	li {
-		margin-bottom: 0;
-
-		&:first-child {
-			a {
-				border-top-right-radius: $radius;
-				border-top-left-radius: $radius;
-				border-top: 1px solid $border_color;
-			}
-		}
-
-		&:last-child {
-			a {
-				border-bottom-right-radius: $radius;
-				border-bottom-left-radius: $radius;
-			}
-		}
-
-		a {
-			display: block;
-			position: relative;
-			background-color: $white;
-			font-size: 13px;
-			padding: $baseline/2 $gutter/1.5;
-			text-decoration: none;
-			color: $text_light;
-			border-left: 1px solid $border_color;
-			border-right: 1px solid $border_color;
-			border-bottom: 1px solid $border_color;
-
-			&:focus {
-				@include box-shadow( none );
-			}
-
-			&.ev-active {
-				font-weight: bold;
-				background-color: $blue_light;
-				color: $text;
-
-				&:before {
-					content: "";
-					display: block;
-					@include position( absolute, 0 null 0 0 );
-					width: 4px;
-					height: 100%;
-					background-color: $blue_medium;
-				}
-			}
-		}
-	}
-
-	+ .ev-tab-container {
+.ev-admin-page {
+	.ev-tabs-nav.ev-vertical {
+		width: 20%;
+		padding-right: 20px;
 		@include box-sizing( border-box );
-		width: 80%;
-		float: left;
-		position: relative;
 
 		@include ev-media( $media_tablet ) {
-			width: 75%;
+			width: 25%;
 		}
 
 		@include ev-media( $media_mobile ) {
 			width: 100%;
+			padding-right: 0;
+			margin-bottom: $baseline;
 		}
+
+		li {
+			margin-bottom: 0;
+
+			&:first-child {
+				a {
+					border-top-right-radius: $radius;
+					border-top-left-radius: $radius;
+					border-top: 1px solid $border_color;
+				}
+			}
+
+			&:last-child {
+				a {
+					border-bottom-right-radius: $radius;
+					border-bottom-left-radius: $radius;
+				}
+			}
+
+			a {
+				display: block;
+				position: relative;
+				background-color: $white;
+				font-size: 13px;
+				padding: $baseline/2 $gutter/1.5;
+				text-decoration: none;
+				color: $text_light;
+				border-left: 1px solid $border_color;
+				border-right: 1px solid $border_color;
+				border-bottom: 1px solid $border_color;
+
+				&:focus {
+					@include box-shadow( none );
+				}
+
+				&.ev-active {
+					font-weight: bold;
+					background-color: $blue_light;
+					color: $text;
+
+					&:before {
+						content: "";
+						display: block;
+						@include position( absolute, 0 null 0 0 );
+						width: 4px;
+						height: 100%;
+						background-color: $blue_medium;
+					}
+				}
+			}
+		}
+
+		+ .ev-tab-container {
+			@include box-sizing( border-box );
+			width: 80%;
+			float: left;
+			position: relative;
+
+			@include ev-media( $media_tablet ) {
+				width: 75%;
+			}
+
+			@include ev-media( $media_mobile ) {
+				width: 100%;
+			}
+		}
+	}
+
+	.ev-tab-container {
+		border: 1px solid $border_color;
 	}
 }
 
@@ -278,13 +284,16 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 	@include vertical_tab_style;
 }
 
+.ev-tabs-nav.ev-vertical + .ev-tab-container {
+	border-left: 1px solid $border_color;
+}
+
 // -----------------------------------------------------------------------------
 // $Options tab container
 // -----------------------------------------------------------------------------
 
 .ev-tab-container {
 	background-color: $white;
-	border: 1px solid $border_color;
 
 	&.ev-tab-container-loaded {
 		&:before {
@@ -1495,7 +1504,12 @@ $upload_size: 80px;
 		&.ev-image-uploaded {
 			.ev-remove-all-action {
 				display: inline-block;
-				margin-left: $gutter/2;
+				margin-left: $gutter;
+				color: $red;
+
+				&:hover {
+					color: darken( $red, 20 );
+				}
 			}
 
 			&[data-sortable] {
