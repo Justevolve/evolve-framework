@@ -156,6 +156,25 @@ class Ev_Framework {
 	{
 		/* Load the text domain for framework files. */
 		load_plugin_textdomain( 'ev_framework', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
+		/* Localize framework strings. */
+		add_action( 'admin_enqueue_scripts', array( $this, 'i18n_strings' ) );
+	}
+
+	/**
+	 * Localize framework strings.
+	 *
+	 * @since 0.4.0
+	 */
+	public function i18n_strings()
+	{
+		wp_localize_script( 'jquery', 'ev_framework', array(
+			'editor' => array(
+				'text' => __( 'Text', 'ev_framework' ),
+				'visual' => __( 'Visual', 'ev_framework' ),
+				'add_media' => __( 'Add Media', 'ev_framework' ),
+			)
+		) );
 	}
 
 	/**

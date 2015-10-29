@@ -166,10 +166,10 @@
 				var wrap = $('<div id="wp-' + current_id + '-wrap" class="wp-core-ui wp-editor-wrap ' + options.mode + '-active" />'),
 					editor_tools = $('<div id="wp-' + current_id + '-editor-tools" class="wp-editor-tools hide-if-no-js" />'),
 					editor_tabs = $('<div class="wp-editor-tabs" />'),
-					switch_editor_html = $('<a id="' + current_id + '-html" class="ev-switch-editor switch-html" onclick="switchEditors.evswitchto(this);">Text</a>'),
-					switch_editor_tmce = $('<a id="' + current_id + '-tmce" class="ev-switch-editor switch-tmce" onclick="switchEditors.evswitchto(this);">Visual</a>'),
+					switch_editor_html = $('<a id="' + current_id + '-html" class="ev-switch-editor switch-html" onclick="switchEditors.evswitchto(this);">' + ev_framework.editor.text + '</a>'),
+					switch_editor_tmce = $('<a id="' + current_id + '-tmce" class="ev-switch-editor switch-tmce" onclick="switchEditors.evswitchto(this);">' + ev_framework.editor.visual + '</a>'),
 					media_buttons = $('<div id="wp-' + current_id + '-media-buttons" class="wp-media-buttons" />'),
-					insert_media_button = $('<a href="#" id="insert-media-button" class="button insert-media add_media" data-editor="' + current_id + '" title="Add Media"><span class="wp-media-buttons-icon"></span> Add Media</a>'),
+					insert_media_button = $('<a href="#" id="insert-media-button" class="button insert-media add_media" data-editor="' + current_id + '" title="' + ev_framework.editor.add_media + '"><span class="wp-media-buttons-icon"></span> ' + ev_framework.editor.add_media + '</a>'),
 					editor_container = $('<div id="wp-' + current_id + '-editor-container" class="wp-editor-container" />'),
 					content_css = /*Object.prototype.hasOwnProperty.call(tinyMCEPreInit.mceInit[current_id], 'content_css') ? tinyMCEPreInit.mceInit[current_id]['content_css'].split(',') :*/ false;
 

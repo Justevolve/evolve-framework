@@ -53,6 +53,7 @@ if ( ! function_exists( 'js_wp_editor' ) ) {
 		// 	) );
 		// }
 
+		// TODO: see it breaks other implementations
 		_WP_Editors::editor_settings( 'apid', $set );
 
 		$ap_vars = array(
