@@ -69,3 +69,68 @@ function ev_get_image( $id, $size = 'full' ) {
 
 	return '';
 }
+
+/**
+ * Get the current post's featured image attachment ID.
+ *
+ * @param  int $post_id The post ID.
+ * @return integer The attachment ID.
+ */
+function ev_get_featured_image_id( $post_id = null ) {
+	if ( ! $post_id ) {
+		$post_id = get_the_ID();
+	}
+
+	return get_post_thumbnail_id( $post_id );
+}
+
+/**
+ * Get the current post's featured image URL.
+ *
+ * @param  string $size The image size.
+ * @param  int $post_id The post ID.
+ * @return string
+ */
+function ev_get_featured_image( $size = 'full', $post_id = null ) {
+	if ( ! $post_id ) {
+		$post_id = get_the_ID();
+	}
+
+	return ev_get_image( ev_get_featured_image_id( $post_id ), $size );
+}
+
+/**
+ * Get the caption of an attachment in the Media Library.
+ *
+ * @since 1.0.0
+ * @param integer $attachment_id The attachment ID.
+ * @return string
+ */
+function ev_get_image_caption( $attachment_id ) {
+	$image_data = get_post( $attachment_id );
+
+	if ( $image_data ) {
+		return $image_data->post_excerpt;
+	}
+	else {
+		return '';
+	}
+}
+
+/**
+ * Get the description of an attachment in the Media Library.
+ *
+ * @since 1.0.0
+ * @param integer $attachment_id The attachment ID.
+ * @return string
+ */
+function ev_get_image_description( $attachment_id ) {
+	$image_data = get_post( $attachment_id );
+
+	if ( $image_data ) {
+		return $image_data->post_content;
+	}
+	else {
+		return '';
+	}
+}
