@@ -1754,6 +1754,7 @@ $tooltip_arrow_size: 16px;
 	@include opacity( 0 );
 	visibility: hidden;
 	z-index: 2000000;
+	pointer-events: none;
 
 	&.ev-tooltip-active {
 		@include opacity( 100 );
