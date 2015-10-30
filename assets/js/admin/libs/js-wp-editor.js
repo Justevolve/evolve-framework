@@ -173,8 +173,10 @@
 					editor_container = $('<div id="wp-' + current_id + '-editor-container" class="wp-editor-container" />'),
 					content_css = /*Object.prototype.hasOwnProperty.call(tinyMCEPreInit.mceInit[current_id], 'content_css') ? tinyMCEPreInit.mceInit[current_id]['content_css'].split(',') :*/ false;
 
-				insert_media_button.appendTo(media_buttons);
-				media_buttons.appendTo(editor_tools);
+				if ( ap_vars.upload_files ) {
+					insert_media_button.appendTo(media_buttons);
+					media_buttons.appendTo(editor_tools);
+				}
 
 				switch_editor_tmce.appendTo(editor_tabs);
 				switch_editor_html.appendTo(editor_tabs);
