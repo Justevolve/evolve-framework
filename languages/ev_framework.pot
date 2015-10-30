@@ -81,7 +81,19 @@ msgstr ""
 msgid "Evolve Framework not activated: at least WordPress 4.0 is required."
 msgstr ""
 
-#: evolve-framework.php:456
+#: evolve-framework.php:173
+msgid "Text"
+msgstr ""
+
+#: evolve-framework.php:174
+msgid "Visual"
+msgstr ""
+
+#: evolve-framework.php:175
+msgid "Add Media"
+msgstr ""
+
+#: evolve-framework.php:475
 msgid "Changelog"
 msgstr ""
 

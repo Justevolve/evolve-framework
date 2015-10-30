@@ -2092,6 +2092,18 @@ body.ev-modal-open {
 		left: 0;
 		right: 0;
 		bottom: $modal_footer_height;
+
+		.ev-tabs-nav.ev-vertical {
+			overflow-y: auto;
+			@include position( absolute, 0 80% 0 0 );
+			max-width: none;
+			width: auto;
+
+			+ .ev-tab-container {
+				overflow-y: auto;
+				@include position( absolute, 0 0 0 20% );
+			}
+		}
 	}
 }
 
