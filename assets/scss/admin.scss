@@ -40,8 +40,9 @@ $yellow_text    : #595643;
 
 // WordPress admin media queries
 
-$media_tablet: "only screen and (max-width: 960px)";
-$media_mobile: "only screen and (max-width: 782px)";
+$media_tablet      : "only screen and (max-width: 960px)";
+$media_mobile      : "only screen and (max-width: 782px)";
+$media_mobile_small: "only screen and (max-width: 600px)";
 
 // Resources
 
@@ -664,11 +665,23 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 		width: 30%;
 		max-width: 220px;
 
+		@include ev_media( $media_mobile ) {
+			width: 100%;
+			max-width: auto;
+			margin-top: 0;
+		}
+
 		+ .ev-container {
 			display: inline-block;
 			width: 70%;
 			@include box-sizing( border-box );
 			padding-left: $gutter;
+
+			@include ev_media( $media_mobile ) {
+				width: 100%;
+				padding-left: 0;
+				padding-top: $baseline/2;
+			}
 		}
 	}
 
@@ -754,9 +767,13 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 	textarea {
 		max-width: 100%;
 
-		@include ev_media( $media_tablet ) {
+		@include ev_media( $media_mobile ) {
 			width: 100%;
 		}
+	}
+
+	textarea {
+		width: 100%;
 	}
 
 	select {
@@ -840,7 +857,8 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 @include ev_media( $media_mobile ) {
 	.ev-field-color {
 		.minicolors-swatch {
-			top: 9px;
+			top: 5px;
+			height: 26px;
 		}
 	}
 }
@@ -865,16 +883,21 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 	&:not( .ev-repeatable ),
 	&:not( .ev-sortable ) {
 		padding-right: 0;
+		padding-top: 0;
 
 		> .ev-container {
 			padding-left: 0;
+			margin-left: -$gutter;
+		}
+
+		> .ev-field-header-label-inline-block,
+		> .ev-field-header-label-block {
+			padding-top: $baseline/2;
 		}
 
 		> .ev-field-header-label-hidden,
 		> .ev-field-header-label-block {
-			+ .ev-container {
-				margin-left: -$gutter;
-			}
+			padding-left: 0;
 		}
 	}
 
@@ -1914,6 +1937,16 @@ $icon_size: 20 + ( $baseline/3 * 2 );
 	}
 
 	&.ev-empty {
+		background-color: $grey_light_2;
+
+		&:before {
+			content: "";
+			display: block;
+			@include size( 24px );
+			border: 2px dashed $grey_light;
+			margin-top: 10px;
+			margin-left: 10px;
+		}
 		.ev-icon-remove {
 			display: none;
 		}
@@ -2058,6 +2091,8 @@ body.ev-modal-open {
 	@include ev_media( $media_mobile ) {
 		left: 0;
 		right: 0;
+		top: 0;
+		bottom: 0;
 	}
 
 	&.ev-loading {
@@ -2099,9 +2134,21 @@ body.ev-modal-open {
 			max-width: none;
 			width: auto;
 
+			@include ev-media( $media_mobile_small ) {
+				position: relative;
+				width: 100%;
+			}
+
 			+ .ev-tab-container {
 				overflow-y: auto;
 				@include position( absolute, 0 0 0 20% );
+
+				@include ev-media( $media_mobile_small ) {
+					position: relative;
+					left: 0;
+					width: 100%;
+					border: none;
+				}
 			}
 		}
 	}
