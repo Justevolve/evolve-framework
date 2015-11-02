@@ -28,7 +28,12 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: classes/core/ev_field.php:586
+#: classes/core/ev_field.php:529 templates/fields/attachment.php:77
+#: templates/fields/partials/image_upload.php:73
+msgid "Remove all"
+msgstr ""
+
+#: classes/core/ev_field.php:588
 msgid "Need help?"
 msgstr ""
 
@@ -100,11 +105,6 @@ msgstr ""
 #: templates/fields/attachment.php:75
 #: templates/fields/partials/image_upload.php:70
 msgid "Upload"
-msgstr ""
-
-#: templates/fields/attachment.php:77
-#: templates/fields/partials/image_upload.php:73
-msgid "Remove all"
 msgstr ""
 
 #: templates/fields/icon.php:38

@@ -63,24 +63,40 @@ function ev_get_icon_fonts() {
  *
  * @since 0.4.0
  * @param string $icon The icon name.
+ * @param array $attrs The icon attributes.
  * @return string
  */
-function ev_get_icon( $icon ) {
+function ev_get_icon( $icon, $attrs = array() ) {
 	if ( empty( $icon ) ) {
 		return;
 	}
 
 	$icon_fonts = ev_get_icon_fonts();
-	$icon_class = "ev-icon $icon";
+	$icon_classes = array(
+		'ev-icon',
+		$icon
+	);
 
 	foreach ( $icon_fonts as $index => $icon_font ) {
 		if ( in_array( $icon, $icon_font['mapping'] ) ) {
-			$icon_class .= ' ' . $icon_font['prefix'];
+			$icon_classes[] = $icon_font['prefix'];
 			break;
 		}
 	}
 
-	return sprintf( '<i class="%s"></i>', esc_attr( $icon_class ) );
+	$icon_classes = array_map( 'esc_attr', $icon_classes );
+
+	$attrs = wp_parse_args( $attrs, array(
+		'class' => implode( ' ', $icon_classes )
+	) );
+
+	$attrs_html = '';
+
+	foreach ( $attrs as $attr_key => $attr_value ) {
+		$attrs_html .= ' ' . $attr_key . '="' . esc_attr( $attr_value ) . '"';
+	}
+
+	return sprintf( '<i %s></i>', $attrs_html );
 }
 
 /**
@@ -88,7 +104,8 @@ function ev_get_icon( $icon ) {
  *
  * @since 0.4.0
  * @param string $icon The icon name.
+ * @param array $attrs The icon attributes.
  */
-function ev_icon( $icon ) {
-	echo ev_get_icon( $icon );
+function ev_icon( $icon, $attrs = array() ) {
+	echo ev_get_icon( $icon, $attrs );
 }

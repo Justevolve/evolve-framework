@@ -1118,11 +1118,24 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 .ev-repeatable {
 
 	.ev-repeatable-controls {
+		@include clearfix();
+		clear: both;
 		display: block;
 		margin-bottom: $baseline/4;
 
 		a + a {
 			margin-left: $gutter;
+		}
+
+		a.ev-repeat-remove-all {
+			color: $red;
+		}
+	}
+
+	.ev-no-fields {
+		.ev-repeat-remove-all,
+		.ev-repeatable-controls + .ev-repeatable-controls {
+			display: none;
 		}
 	}
 

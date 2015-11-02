@@ -2,6 +2,31 @@
 	"use strict";
 
 	/**
+	 * Slide to include a particular element in the viewport.
+	 */
+	function ev_repeatable_maybe_scroll( element ) {
+		element = $( element ).get( 0 );
+
+		var rect = element.getBoundingClientRect(),
+			in_viewport =
+				rect.top >= 0 &&
+				rect.left >= 0 &&
+				rect.bottom <= ( window.innerHeight || document.documentElement.clientHeight ) &&
+				rect.right <= ( window.innerWidth || document.documentElement.clientWidth );
+
+		if ( in_viewport ) {
+			return;
+		}
+
+		$( element ).scrollintoview( {
+			duration: 400,
+			easing: "easeInOutCubic",
+			direction: "vertical",
+			offset: 40
+		} );
+	}
+
+	/**
 	 * Adding the sortable component to the UI building queue.
 	 */
 	$.evf.ui.add( ".ev-sortable .ev-container, .ev-sortable .ev-bundle-fields-wrapper", function() {
@@ -21,9 +46,32 @@
 
 		current_field.remove();
 
-		if ( ! $( ".ev-field-inner", container ).length && $( ".ev-empty-state", container ).length ) {
+		if ( ! $( ".ev-field-inner", container ).length ) {
+			if ( $( ".ev-empty-state", container ).length ) {
+				container.addClass( "ev-container-empty" );
+			}
+
+			container.addClass( "ev-no-fields" );
+		}
+
+		return false;
+	} );
+
+	/**
+	 * Remove all the added repeatable fields.
+	 */
+	$.evf.delegate( ".ev-repeat-remove-all", "click", "repeatable", function() {
+		var current_master_field = $( this ).parents( ".ev-field" ).first(),
+			container = $( ".ev-container", current_master_field ).first(),
+			fields = $( ".ev-field-inner, .ev-bundle-fields-wrapper", container );
+
+		fields.remove();
+
+		if ( $( ".ev-empty-state", container ).length ) {
 			container.addClass( "ev-container-empty" );
 		}
+
+		container.addClass( "ev-no-fields" );
 
 		return false;
 	} );
@@ -35,11 +83,11 @@
 	$.evf.delegate( ".ev-field .ev-repeat", "click", "repeatable", function() {
 		var nested_fields = $( this ).parents( ".ev-field" ),
 			current_field = nested_fields.first(),
-			current_control = $( ".ev-repeatable-controls", current_field ).first(),
-			current_count = parseInt( current_control.attr( "data-count" ), 10 ),
-			container = current_control.parents( ".ev-container" ).first(),
-			key = current_control.attr( "data-key" ),
-			tpl = $( "script[type='text/template'][data-template='" + key + "']", current_control );
+			current_control = $( ".ev-repeatable-controls", current_field ),
+			current_count = parseInt( current_control.first().attr( "data-count" ), 10 ),
+			container = current_control.first().parents( ".ev-container" ).first(),
+			key = current_control.first().attr( "data-key" ),
+			tpl = $( "script[type='text/template'][data-template='" + key + "']", current_control.first() );
 
 		var sanitize_and_insert = function( html ) {
 			nested_fields.each( function() {
@@ -64,15 +112,19 @@
 				html.insertBefore( first_inner_field );
 			}
 			else {
-				html.appendTo( container );
+				html.insertBefore( current_control.last() );
 			}
 
 			if ( $( ".ev-empty-state", container ).length ) {
 				container.removeClass( "ev-container-empty" );
 			}
 
+			container.removeClass( "ev-no-fields" );
+
 			setTimeout( function() {
 				$.evf.ui.build();
+
+				ev_repeatable_maybe_scroll( html );
 			}, 1 );
 		};
 
