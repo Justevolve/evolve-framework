@@ -124,6 +124,13 @@ class Ev_MediaManager {
 			}
 		}
 
+		$sizes['full'] = array(
+			'width'  => true,
+			'height' => true,
+			'crop'   => false,
+			'label' => __( 'Full width', 'ev_framework' )
+		);
+
 		return $sizes;
 	}
 
