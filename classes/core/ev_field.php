@@ -68,9 +68,11 @@ abstract class Ev_Field {
 	/**
 	 * The size of the field. Accepted values:
 	 * - 'full'
-	 * - 'large'
-	 * - 'medium'
-	 * - 'small'
+	 * - 'large' -> 'one-half', 'two-fourths'
+	 * - 'medium' -> 'one-third'
+	 * - 'small' -> 'one-fourth'
+	 * - 'three-fourths'
+	 * - 'two-thirds'
 	 *
 	 * @var string
 	 */
