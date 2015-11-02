@@ -32,7 +32,26 @@
 	$.evf.ui.add( ".ev-sortable .ev-container, .ev-sortable .ev-bundle-fields-wrapper", function() {
 		$( this ).sortable( {
 			handle: ".ev-sortable-handle",
-			items: "> .ev-field-inner, .ev-bundle-fields-wrapper"
+			items: "> .ev-field-inner, .ev-bundle-fields-wrapper",
+			stop: function( e, ui ) {
+				var sortable = $( ui.item ).parents( ".ev-sortable" ).first(),
+					fields = $( "> .ev-field-inner, .ev-bundle-fields-wrapper", sortable );
+
+				fields.each( function( index, field ) {
+					$( "[name]", field ).each( function() {
+						var name_attr = $( this ).attr( "name" ),
+							reg = new RegExp( /\[\d+\]/g ),
+							matches = name_attr.match( reg );
+
+						if ( matches && matches.length ) {
+							var last_match = matches[matches.length - 1];
+							name_attr = name_attr.replaceLast( last_match, "[" + index + "]" );
+
+							$( this ).attr( "name", name_attr );
+						}
+					} );
+				} );
+			}
 		} );
 	} );
 

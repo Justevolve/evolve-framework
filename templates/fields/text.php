@@ -1,10 +1,10 @@
 <?php
 	$classes = array();
 	$size = $field->config( 'size' );
+	$full = $field->config( 'full' );
 
-	if ( ! empty( $size ) && ! is_numeric( $size ) ) {
-		$classes[] = 'ev-' . $size;
-		$size = '';
+	if ( $full === true ) {
+		$classes[] = 'ev-field-input-size-full';
 	}
 ?>
 

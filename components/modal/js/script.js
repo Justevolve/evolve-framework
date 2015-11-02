@@ -142,6 +142,9 @@
 			);
 		};
 
+		/**
+		 * Initialize the component.
+		 */
 		this.init = function() {
 			var origin = ".ev-modal-container[data-key='" + key + "']",
 				save_btn = origin + " .ev-modal-footer .ev-save",

@@ -33,7 +33,8 @@ class Ev_TextareaField extends Ev_Field {
 		$data['config'] = wp_parse_args( $data['config'], array(
 			'rows' => '2',
 			'cols' => '20',
-			'rich' => false
+			'rich' => false,
+			'full' => false
 		) );
 
 		parent::__construct( $data );
