@@ -41,11 +41,15 @@
 	</div>
 
 	<div class="ev-icon-sets">
-		<?php foreach ( $icon_fonts as $index => $font ) : ?>
+		<?php
+			reset( $icon_fonts );
+			$first_index = key( $icon_fonts );
+
+			foreach ( $icon_fonts as $index => $font ) : ?>
 			<?php
 				$set_class = 'ev-icon-set-' . $font['name'];
 
-				if ( $font['name'] == $set || $set == '' && $index == 0 ) {
+				if ( $font['name'] == $set || $set == '' && $index == $first_index ) {
 					$set_class .= ' ev-on';
 				}
 			?>
