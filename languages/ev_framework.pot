@@ -53,6 +53,10 @@ msgstr ""
 msgid "Large"
 msgstr ""
 
+#: classes/core/ev_media_manager.php:131
+msgid "Full width"
+msgstr ""
+
 #: classes/core/fields/ev_attachment_field.php:103
 #: classes/core/fields/ev_image_field.php:89 templates/fields/attachment.php:63
 #: templates/fields/partials/image_upload.php:49
