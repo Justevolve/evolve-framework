@@ -1041,6 +1041,11 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 					right: 0;
 				}
 			}
+
+			+ .ev-repeatable-controls {
+				padding-top: $baseline/2;
+				margin-bottom: 0;
+			}
 		}
 
 		// Remove icon
