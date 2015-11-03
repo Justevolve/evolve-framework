@@ -27,6 +27,13 @@
 	}
 
 	/**
+	 * Replace a string at a given position.
+	 */
+	function ev_repeatable_replace_at( string, index, character, how_many ) {
+	    return string.substr( 0, index ) + character + string.substr( index + how_many );
+	}
+
+	/**
 	 * Adding the sortable component to the UI building queue.
 	 */
 	$.evf.ui.add( ".ev-sortable .ev-container, .ev-sortable .ev-bundle-fields-wrapper", function() {
@@ -35,17 +42,27 @@
 			items: "> .ev-field-inner, .ev-bundle-fields-wrapper",
 			stop: function( e, ui ) {
 				var sortable = $( ui.item ).parents( ".ev-sortable" ).first(),
-					fields = $( "> .ev-field-inner, .ev-bundle-fields-wrapper", sortable );
+					fields = $( "> .ev-field-inner, .ev-bundle-fields-wrapper", sortable ),
+					depth = $( ui.item ).parents( ".ev-repeatable" ).length;
 
 				fields.each( function( index, field ) {
 					$( "[name]", field ).each( function() {
 						var name_attr = $( this ).attr( "name" ),
 							reg = new RegExp( /\[\d+\]/g ),
-							matches = name_attr.match( reg );
+							matches = name_attr.match( reg ),
+							i = 0;
 
 						if ( matches && matches.length ) {
-							var last_match = matches[matches.length - 1];
-							name_attr = name_attr.replaceLast( last_match, "[" + index + "]" );
+							for ( var j=0; j<matches.length; j++ ) {
+								matches[j] = j === depth - 1 ? "[" + index + "]" : matches[j];
+							}
+
+							var match = null;
+
+							while ( ( match = reg.exec( name_attr ) ) !== null ) {
+								name_attr = ev_repeatable_replace_at( name_attr, match.index, matches[i], matches[i].length );
+								i++;
+							}
 
 							$( this ).attr( "name", name_attr );
 						}
