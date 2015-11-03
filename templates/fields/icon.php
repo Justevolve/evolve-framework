@@ -19,6 +19,7 @@
 </div>
 
 <div class="ev-icon-sets-external-wrapper">
+	<span class="ev-icon-sets-close"><span class="screen-reader-text"><?php echo esc_html( __( 'Close', 'ev_framework' ) ); ?></span></span>
 	<div class="ev-icon-set-select-wrapper">
 		<?php
 			$font_sets = array();
