@@ -60,10 +60,58 @@ add_filter( 'ev_field_types', 'ev_register_icon_field_type' );
  */
 function ev_icon_field_i18n() {
 	wp_localize_script( 'jquery', 'ev_icon_field', array(
-		'0' => __( 'Nothing found', 'ev_framework' ),
+		'0' => _x( 'Nothing found', 'no icons found', 'ev_framework' ),
 		'1' => _x( '%s found', 'one icon found', 'ev_framework' ),
 		'2' => _x( '%s found', 'multiple icons found', 'ev_framework' ),
 	) );
 }
 
 add_action( 'admin_enqueue_scripts', 'ev_icon_field_i18n' );
+
+/**
+ * Append the template for the icon selection modal to the body of the page
+ * for later use.
+ *
+ * @since 0.4.0
+ */
+function ev_icon_modal_template() {
+	$icon_fonts = ev_get_icon_fonts();
+
+	echo '<script type="text/template" data-template="ev-icon-modal">';
+		?>
+		<div class="ev-icon-sets-external-wrapper ev-active">
+			<div class="ev-icon-set-select-wrapper">
+				<div class="ev-icon-search-wrapper">
+					<input type="text" placeholder="<?php echo esc_attr( __( 'Search', 'icon search', 'ev_framework' ) ); ?>" data-icon-search>
+					<p class="ev-icon-search-results"></p>
+				</div>
+
+				<span class="ev-close-icon-modal"><span class="screen-reader-text"><?php echo esc_html( __( 'Close', 'ev_framework' ) ); ?></span></span>
+			</div>
+
+			<div class="ev-icon-sets">
+				<?php
+					foreach ( $icon_fonts as $index => $font ) : ?>
+					<?php
+						$set_class = 'ev-on ev-icon-set-' . $font['name'];
+					?>
+					<div class="<?php echo esc_attr( $set_class ); ?>">
+						<h2><?php echo esc_html( $font['label'] ); ?></h2>
+
+						<?php foreach ( $font['mapping'] as $set_icon ) : ?>
+							<?php
+								$icon_class = $font['prefix'] . ' ' . $set_icon . ' ev-icon ev-component';
+
+								$set_icon_stripped = strstr( $set_icon, '-' );
+							?>
+							<i data-prefix="<?php echo esc_attr( $font['prefix'] ); ?>" data-set="<?php echo esc_attr( $font['name'] ); ?>" data-icon-name="<?php echo esc_attr( $set_icon ); ?>" data-icon-stripped="<?php echo esc_attr( $set_icon_stripped ); ?>" class="<?php echo esc_attr( $icon_class ); ?>" aria-hidden="true"></i>
+						<?php endforeach; ?>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</div>
+		<?php
+	echo '</script>';
+}
+
+add_action( 'admin_print_footer_scripts', 'ev_icon_modal_template' );

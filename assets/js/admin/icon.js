@@ -5,23 +5,40 @@
 	 * Switch between the available icon sets.
 	 */
 	$.evf.delegate( ".ev-selected-icon-wrapper", "click", "icon", function() {
-		var field = $( this ).parents( ".ev-field" ).first(),
-			wrapper = $( ".ev-icon-sets-external-wrapper", field );
+		var field = $( this ).parents( ".ev-field" ).first();
 
-		wrapper.toggleClass( "ev-active" );
+		var template = $( "script[type='text/template'][data-template='ev-icon-modal']" );
+
+		if ( $( ".ev-icon-sets-external-wrapper" ).length ) {
+			$( ".ev-icon-sets-external-wrapper" ).remove();
+		}
+		else {
+			var wrapper = $( $.evf.template( template, {} ) );
+			wrapper.data( "ev-field", field );
+
+			var prefix = $( "[data-prefix]", field ).val(),
+				set = $( "[data-set]", field ).val(),
+				icon = $( "[data-icon]", field ).val();
+
+			$( ".ev-selected", wrapper ).removeClass( "ev-selected" );
+
+			if ( icon ) {
+				$( "[data-set='" + set + "'][data-prefix='" + prefix + "'][data-icon-name='" + icon + "']", wrapper ).addClass( "ev-selected" );
+			}
+
+			$( "body" ).append( wrapper );
+		}
 
 		return false;
 	} );
 
 	/**
-	 * Switch between the available icon sets.
+	 * Close the icon selection modal.
 	 */
-	$.evf.delegate( ".ev-field-icon select", "change", "icon", function() {
-		var field = $( this ).parents( ".ev-field" ).first(),
-			font_set = $( this ).val();
+	$.evf.delegate( ".ev-close-icon-modal", "click", "icon", function() {
+		$( ".ev-icon-sets-external-wrapper" ).remove();
 
-		$( ".ev-icon-sets > div" ).removeClass( "ev-on" );
-		$( ".ev-icon-sets > div.ev-icon-set-" + font_set ).addClass( "ev-on" );
+		return false;
 	} );
 
 	/**
@@ -29,11 +46,10 @@
 	 */
 	$.evf.delegate( ".ev-icon-remove", "click", "icon", function() {
 		var field = $( this ).parents( ".ev-field" ).first(),
-			selected_wrapper = $( ".ev-selected-icon-wrapper", field ),
-			icons = $( ".ev-icon", field );
+			selected_wrapper = $( ".ev-selected-icon-wrapper", field );
 
-		icons.removeClass( "ev-found ev-selected" );
 		selected_wrapper.addClass( "ev-empty" );
+		$( ".ev-icon-sets-external-wrapper" ).remove();
 
 		$( "[data-prefix]", field ).val( "" );
 		$( "[data-set]", field ).val( "" );
@@ -41,10 +57,12 @@
 
 		$( "[data-preview]", field ).attr( "class", "" );
 		$( "[data-preview]", field ).attr( "class", "ev-icon ev-component" );
+
+		return false;
 	} );
 
 	/**
-	 * Search between available icons.
+	 * Prevent hitting the Enter key when searching through icons.
 	 */
 	$.evf.delegate( "input[data-icon-search]", "keydown", "icon", function( e ) {
 		if ( e.which == 13 ) {
@@ -52,32 +70,35 @@
 		}
 	} );
 
+	/**
+	 * Search through available icons.
+	 */
 	$.evf.delegate( "input[data-icon-search]", "keyup", "icon", function() {
-		var field = $( this ).parents( ".ev-field" ).first(),
+		var wrapper = $( this ).parents( ".ev-icon-sets-external-wrapper" ).first(),
 			search = $( this ).val(),
-			icons = $( ".ev-icon", field );
+			icons = $( ".ev-icon", wrapper );
 
 		if ( search != "" ) {
-			$( ".ev-icon-sets", field ).addClass( "ev-searching" );
+			$( ".ev-icon-sets", wrapper ).addClass( "ev-searching" );
 		}
 		else {
-			$( ".ev-icon-sets", field ).removeClass( "ev-searching" );
+			$( ".ev-icon-sets", wrapper ).removeClass( "ev-searching" );
 		}
 
 		icons.removeClass( "ev-found" );
 		icons = icons.filter( '[data-icon-stripped*="' + search + '"]' ).addClass( "ev-found" );
-		$( ".ev-icon-search-results", field ).addClass( "ev-search-icon-results-visible" );
+		$( ".ev-icon-search-results", wrapper ).addClass( "ev-search-icon-results-visible" );
 
 		if ( icons.length ) {
 			var k = icons.length > 1 ? 2 : 1;
-			$( ".ev-icon-search-results", field ).html( ev_icon_field[k].replace( "%s", icons.length ) );
+			$( ".ev-icon-search-results", wrapper ).html( ev_icon_field[k].replace( "%s", icons.length ) );
 		}
 		else {
 			if ( search != '' ) {
-				$( ".ev-icon-search-results", field ).html( ev_icon_field[0] );
+				$( ".ev-icon-search-results", wrapper ).html( ev_icon_field[0] );
 			}
 			else {
-				$( ".ev-icon-search-results", field ).removeClass( "ev-search-icon-results-visible" );
+				$( ".ev-icon-search-results", wrapper ).removeClass( "ev-search-icon-results-visible" );
 			}
 		}
 
@@ -88,15 +109,16 @@
 	 */
 	$.evf.delegate( ".ev-icon-sets i", "click", "icon", function() {
 		var icon_i = $( this ),
-			field = icon_i.parents( ".ev-field" ).first(),
 			prefix = icon_i.attr( "data-prefix" ),
 			icon = icon_i.attr( "data-icon-name" ),
+			wrapper = $( this ).parents( ".ev-icon-sets-external-wrapper" ).first(),
+			field = wrapper.data( "ev-field" ),
 			selected_wrapper = $( ".ev-selected-icon-wrapper", field ),
-			icons = $( ".ev-icon", field );
+			icons = $( ".ev-icon", wrapper );
 
 		icons.removeClass( "ev-found ev-selected" );
 		icon_i.addClass( "ev-selected" );
-		$( ".ev-icon-sets", field ).removeClass( "ev-searching" );
+		$( ".ev-icon-sets", wrapper ).removeClass( "ev-searching" );
 		selected_wrapper.removeClass( "ev-empty" );
 
 		$( "[data-prefix]", field ).val( prefix );
@@ -106,8 +128,10 @@
 		$( "[data-preview]", field ).attr( "class", "" );
 		$( "[data-preview]", field ).attr( "class", "ev-icon ev-component " + prefix + " " + icon );
 
-		$( "input[data-icon-search]", field ).val( "" );
-		$( ".ev-icon-search-results", field ).html( "" ).removeClass( "ev-search-icon-results-visible" );
+		$( "input[data-icon-search]", wrapper ).val( "" );
+		$( ".ev-icon-search-results", wrapper ).html( "" ).removeClass( "ev-search-icon-results-visible" );
+
+		$( ".ev-icon-sets-external-wrapper" ).remove();
 	} );
 
 } )( jQuery );
