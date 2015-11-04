@@ -68,8 +68,12 @@ msgstr ""
 msgid "Transparent"
 msgstr ""
 
-#: classes/core/fields/ev_icon_field.php:63
-msgid "Nothing found"
+#: classes/core/fields/ev_icon_field.php:86
+msgid "Search"
+msgstr ""
+
+#: classes/core/fields/ev_icon_field.php:90
+msgid "Close"
 msgstr ""
 
 #: classes/core/fields_containers/ev_admin_page.php:362
@@ -111,10 +115,6 @@ msgstr ""
 msgid "Upload"
 msgstr ""
 
-#: templates/fields/icon.php:38
-msgid "Search for an icon"
-msgstr ""
-
 #: templates/fields/image.php:98
 msgid "Image size"
 msgstr ""
@@ -147,6 +147,11 @@ msgstr ""
 #: classes/core/ev_media_manager.php:55
 msgctxt "standard desktop media query"
 msgid "Desktop"
+msgstr ""
+
+#: classes/core/fields/ev_icon_field.php:63
+msgctxt "no icons found"
+msgid "Nothing found"
 msgstr ""
 
 #: classes/core/fields/ev_icon_field.php:64

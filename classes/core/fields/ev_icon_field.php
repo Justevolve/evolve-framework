@@ -79,7 +79,7 @@ function ev_icon_modal_template() {
 
 	echo '<script type="text/template" data-template="ev-icon-modal">';
 		?>
-		<div class="ev-icon-sets-external-wrapper ev-active">
+		<div class="ev-icon-sets-external-wrapper ev-modal-container ev-active">
 			<div class="ev-icon-sets-inner-wrapper">
 				<div class="ev-icon-set-select-wrapper">
 					<div class="ev-icon-search-wrapper">

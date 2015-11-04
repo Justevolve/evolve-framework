@@ -1977,7 +1977,7 @@ $icon_size: $icn + ( $baseline/3 * 2 );
 
 // Icon modal
 
-.ev-icon-sets-external-wrapper {
+.ev-icon-sets-external-wrapper.ev-modal-container {
 	display: none;
 	@include position( fixed, 60px 15% 60px 15% );
 	background: rgba( #000, 0.5 );
