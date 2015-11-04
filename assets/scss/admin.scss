@@ -1897,10 +1897,6 @@ $tooltip_arrow_size: 16px;
 // $Icon picker
 // -----------------------------------------------------------------------------
 
-$rows: 3;
-$icn: 24;
-$icon_size: $icn + ( $baseline/3 * 2 );
-
 .ev-selected-icon-wrapper {
 	position: relative;
 	@include size( $baseline*2 );
@@ -1993,23 +1989,45 @@ $icon_size: $icn + ( $baseline/3 * 2 );
 	}
 
 	.ev-close-icon-modal {
+		float: right;
 
+		&:before {
+			cursor: pointer;
+			content: "\f335";
+			font-size: $baseline;
+			line-height: $baseline*1.5;
+			font-weight: 400;
+			font-style: normal;
+			text-transform: none;
+			text-rendering: auto;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			font-family: "dashicons";
+		}
+
+		&:hover {
+			color: $red;
+		}
 	}
 }
 
 .ev-icon-search-wrapper {
 	float: left;
 	@include box-shadow( inset 0 1px 2px rgba( #000, .07 ) );
-	background-color: $white;
 	border: 1px solid $border_color;
-	padding: $baseline/6 $gutter/4;
+	width: 50%;
+	position: relative;
+	z-index: 10;
 
 	input {
+		background-color: $white;
+		width: 100%;
+		line-height: $baseline*1.5 - 2;
+		padding: 0 $gutter/2;
 		border: none;
 		@include box-shadow( none );
 		@include transition( none );
 		margin: 0;
-		padding: 0;
 
 		&:focus {
 			border: none;
@@ -2020,38 +2038,56 @@ $icon_size: $icn + ( $baseline/3 * 2 );
 
 .ev-icon-search-results {
 	@extend %label;
-	padding-top: $baseline/6;
 	font-size: 11px;
 	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background-color: $blue_medium;
+	color: $white;
+	margin: 0;
+	padding: 2px 6px;
 
 	&.ev-search-icon-results-visible {
 		display: block;
 	}
 }
 
+$icn: 24;
+$icon_size: $icn + ( $baseline/2 * 2 );
+
 .ev-icon-set-select-wrapper {
 	position: relative;
 	clear: both;
 	background-color: $grey_light_2;
-	padding: $baseline/3;
-	border: 1px solid $border_color;
-	border-bottom: none;
+	padding: $baseline/2 $baseline;
 	float: left;
 	width: 100%;
 	@include box-sizing( border-box );
+	z-index: 1;
 }
 
 .ev-icon-sets {
 	clear: both;
 	@include clearfix;
-	@include position( absolute, $baseline*2 0 0 0 );
+	@include position( absolute, 60px 0 0 0 );
 	overflow-y: auto;
-	padding: $baseline/2;
+
+	> div {
+		clear: both;
+		@include clearfix;
+		padding: $baseline;
+
+		> h2 {
+			padding-bottom: $baseline/2;
+			border-bottom: 1px solid $grey_light;
+		}
+	}
 
 	i {
 		@include box-sizing( border-box );
 		float: left;
-		padding: $baseline/3;
+		padding: $baseline/2;
 		font-size: #{$icn}px;
 		cursor: pointer;
 		line-height: 1;
@@ -2064,7 +2100,8 @@ $icon_size: $icn + ( $baseline/3 * 2 );
 		}
 
 		&.ev-selected {
-			color: $blue_medium;
+			background-color: $blue_medium;
+			color: $white;
 		}
 	}
 
@@ -2168,9 +2205,10 @@ body.ev-modal-open {
 
 		.ev-tabs-nav.ev-vertical {
 			overflow-y: auto;
-			@include position( absolute, 0 80% 0 0 );
+			@include position( absolute, 0 auto 0 0 );
 			max-width: none;
-			width: auto;
+			width: 180px;
+			margin-right: 0;
 
 			@include ev-media( $media_mobile_small ) {
 				position: relative;
@@ -2179,7 +2217,7 @@ body.ev-modal-open {
 
 			+ .ev-tab-container {
 				overflow-y: auto;
-				@include position( absolute, 0 0 0 20% );
+				@include position( absolute, 0 0 0 179px );
 
 				@include ev-media( $media_mobile_small ) {
 					position: relative;
