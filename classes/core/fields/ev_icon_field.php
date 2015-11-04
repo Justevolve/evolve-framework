@@ -80,34 +80,36 @@ function ev_icon_modal_template() {
 	echo '<script type="text/template" data-template="ev-icon-modal">';
 		?>
 		<div class="ev-icon-sets-external-wrapper ev-active">
-			<div class="ev-icon-set-select-wrapper">
-				<div class="ev-icon-search-wrapper">
-					<input type="text" placeholder="<?php echo esc_attr( __( 'Search', 'icon search', 'ev_framework' ) ); ?>" data-icon-search>
-					<p class="ev-icon-search-results"></p>
+			<div class="ev-icon-sets-inner-wrapper">
+				<div class="ev-icon-set-select-wrapper">
+					<div class="ev-icon-search-wrapper">
+						<input type="text" placeholder="<?php echo esc_attr( __( 'Search', 'icon search', 'ev_framework' ) ); ?>" data-icon-search>
+						<p class="ev-icon-search-results"></p>
+					</div>
+
+					<span class="ev-close-icon-modal"><span class="screen-reader-text"><?php echo esc_html( __( 'Close', 'ev_framework' ) ); ?></span></span>
 				</div>
 
-				<span class="ev-close-icon-modal"><span class="screen-reader-text"><?php echo esc_html( __( 'Close', 'ev_framework' ) ); ?></span></span>
-			</div>
-
-			<div class="ev-icon-sets">
-				<?php
-					foreach ( $icon_fonts as $index => $font ) : ?>
+				<div class="ev-icon-sets">
 					<?php
-						$set_class = 'ev-on ev-icon-set-' . $font['name'];
-					?>
-					<div class="<?php echo esc_attr( $set_class ); ?>">
-						<h2><?php echo esc_html( $font['label'] ); ?></h2>
+						foreach ( $icon_fonts as $index => $font ) : ?>
+						<?php
+							$set_class = 'ev-on ev-icon-set-' . $font['name'];
+						?>
+						<div class="<?php echo esc_attr( $set_class ); ?>">
+							<h2><?php echo esc_html( $font['label'] ); ?></h2>
 
-						<?php foreach ( $font['mapping'] as $set_icon ) : ?>
-							<?php
-								$icon_class = $font['prefix'] . ' ' . $set_icon . ' ev-icon ev-component';
+							<?php foreach ( $font['mapping'] as $set_icon ) : ?>
+								<?php
+									$icon_class = $font['prefix'] . ' ' . $set_icon . ' ev-icon ev-component';
 
-								$set_icon_stripped = strstr( $set_icon, '-' );
-							?>
-							<i data-prefix="<?php echo esc_attr( $font['prefix'] ); ?>" data-set="<?php echo esc_attr( $font['name'] ); ?>" data-icon-name="<?php echo esc_attr( $set_icon ); ?>" data-icon-stripped="<?php echo esc_attr( $set_icon_stripped ); ?>" class="<?php echo esc_attr( $icon_class ); ?>" aria-hidden="true"></i>
-						<?php endforeach; ?>
-					</div>
-				<?php endforeach; ?>
+									$set_icon_stripped = strstr( $set_icon, '-' );
+								?>
+								<i data-prefix="<?php echo esc_attr( $font['prefix'] ); ?>" data-set="<?php echo esc_attr( $font['name'] ); ?>" data-icon-name="<?php echo esc_attr( $set_icon ); ?>" data-icon-stripped="<?php echo esc_attr( $set_icon_stripped ); ?>" class="<?php echo esc_attr( $icon_class ); ?>" aria-hidden="true"></i>
+							<?php endforeach; ?>
+						</div>
+					<?php endforeach; ?>
+				</div>
 			</div>
 		</div>
 		<?php
