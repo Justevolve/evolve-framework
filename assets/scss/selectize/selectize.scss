@@ -285,14 +285,14 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 		cursor: default;
 	}
 
-	span {
-		margin-right: 4px;
+	// span {
+	// 	margin-right: 4px;
 
-		&:after {
-			content: ":";
-			display: inline-block;
-		}
-	}
+	// 	&:after {
+	// 		content: ":";
+	// 		display: inline-block;
+	// 	}
+	// }
 
 	.active {
 		background-color: $selectize-color-dropdown-item-active;
@@ -366,8 +366,10 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 		position: relative;
 	}
 
-	.multi [data-value] {
-		padding-right: 24px !important;
+	&.multi {
+		[data-value] {
+			padding-right: 24px !important;
+		}
 	}
 
 	[data-value] .remove {
