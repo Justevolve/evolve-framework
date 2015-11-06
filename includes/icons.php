@@ -57,13 +57,14 @@ add_action( 'init', 'ev_load_icon_fonts' );
 function ev_get_icon_fonts() {
 	$icon_fonts = apply_filters( 'ev_get_icon_fonts', array() );
 
-	// foreach ( $icon_fonts as $index => $icon_font ) {
-	// 	foreach ( $icon_fonts as $_i => $_if ) {
-	// 		if ( $icon_font['name'] == $_if['name'] && $_i !== $index ) {
-	// 			unset( $icon_fonts[$index] );
-	// 		}
-	// 	}
-	// }
+	/* Remove duplicate icon families. */
+	foreach ( $icon_fonts as $index => $icon_font ) {
+		foreach ( $icon_fonts as $_i => $_if ) {
+			if ( $icon_font['name'] == $_if['name'] && $_i !== $index ) {
+				unset( $icon_fonts[$index] );
+			}
+		}
+	}
 
 	return $icon_fonts;
 }
