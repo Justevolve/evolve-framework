@@ -25,8 +25,13 @@
 	 * Handle a slave field display.
 	 */
 	function ev_handle_slave_field_display( field ) {
-		var container = field.parents( ".ev-tab-container" ).first(),
-			ctrl_key = field.attr( "data-slave" ),
+		var container = field.parents( ".ev-tab-container" ).first();
+
+		if ( field.parents( ".ev-field-bundle" ).length ) {
+			container = field.parents( ".ev-field-bundle" ).first();
+		}
+
+		var ctrl_key = field.attr( "data-slave" ),
 			ctrl = $( "[data-controller='" + ctrl_key + "']", container ),
 			ctrl_field = ev_controller_field_get( ctrl );
 
@@ -81,8 +86,13 @@
 		var field = $( this ).parents( ".ev-field" ).first();
 
 		if ( $( this ).is( ev_controller_field_get( field ) ) ) {
-			var container = field.parents( ".ev-tab-container" ).first(),
-				controller_value = $( this ).val(),
+			var container = field.parents( ".ev-tab-container" ).first();
+
+			if ( field.parents( ".ev-field-bundle" ).length ) {
+				container = field.parents( ".ev-field-bundle" ).first();
+			}
+
+			var controller_value = $( this ).val(),
 				controller = $( this ).parents( "[data-controller]" ).first(),
 				controller_key = controller.attr( "data-controller" ),
 				slaves = $( "[data-slave='" + controller_key + "']", container );
