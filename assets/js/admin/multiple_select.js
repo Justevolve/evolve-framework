@@ -50,10 +50,6 @@
 							html += '<span>' + escape( item.spec ) + '</span>';
 						}
 
-						// if ( item.id && item.id !== "" ) {
-						// 	html += '<span>' + escape( item.id ) + '</span>';
-						// }
-
 						html += escape( item.text );
 						html += '</div>';
 
@@ -65,10 +61,6 @@
 						if ( item.spec && item.spec !== "" ) {
 							html += '<span>' + escape( item.spec ) + '</span>';
 						}
-
-						// if ( item.id && item.id !== "" ) {
-						// 	html += '<span>' + escape( item.id ) + '</span>';
-						// }
 
 						html += escape( item.text );
 						html += '</div>';

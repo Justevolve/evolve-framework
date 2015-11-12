@@ -25,6 +25,7 @@
 	 */
 	$.evf.delegate( ".ev-modal-close", "click", namespace, function( e ) {
 		$( this ).parents( ".ev-modal-container" ).first().remove();
+		$( window ).trigger( "resize" );
 
 		var modals = $( ".ev-modal-container" );
 
@@ -45,6 +46,7 @@
 
 		if ( modals.length ) {
 			modals.last().remove();
+			$( window ).trigger( "resize" );
 
 			if ( ! $( ".ev-modal-container" ).length ) {
 				$( "body" ).removeClass( "ev-modal-open" );
@@ -77,6 +79,7 @@
 		 */
 		this.close = function() {
 			$( ".ev-modal-container[data-key='" + key + "']" ).remove();
+			$( window ).trigger( "resize" );
 
 			var modals = $( ".ev-modal-container" );
 
