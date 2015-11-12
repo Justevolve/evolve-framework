@@ -18,22 +18,33 @@
 			stop: true,
 
 			/* Custom component namespace. */
-			namespace: ""
+			namespace: "ev"
 		}, config );
 
 		var map = {
-				"enter": 13,
-				"left": 37,
-				"up": 38,
-				"right": 39,
-				"down": 40,
-				"esc": 27,
-				"space": 32
-			};
+			"enter": 13,
+			"left": 37,
+			"up": 38,
+			"right": 39,
+			"down": 40,
+			"esc": 27,
+			"space": 32,
+			"backspace": 8
+		};
 
-		$( window ).on( "keydown.ev", function( e ) {
+		var namespace = "ev";
+
+		if ( config.namespace ) {
+			namespace = "." + config.namespace;
+		}
+
+		$( window ).on( "keydown." + namespace, function( e ) {
 			if( map[key] && e.which === map[key] ) {
-				callback( e );
+				var ret = callback( e );
+
+				if ( typeof ret !== "undefined" ) {
+					return ret;
+				}
 
 				if ( config.stop ) {
 					return false;

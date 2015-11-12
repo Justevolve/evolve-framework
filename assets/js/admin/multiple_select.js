@@ -73,6 +73,22 @@
 	} );
 
 	/**
+	 * Disable backspace when selectize nont-ajax has focus and is not empty.
+	 */
+	$.evf.key(
+		"backspace",
+		function() {
+			if ( $( ".ev-multiple-select-input .selectize-input.has-items.focus" ).length ) {
+				return false;
+			}
+		},
+		{
+			stop: false,
+			namespace: "selectize"
+		}
+	);
+
+	/**
 	 * Adding the multiple select component to the UI building queue.
 	 */
 	$.evf.ui.add( "input.ev-multiple-select-input", function() {
