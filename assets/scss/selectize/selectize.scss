@@ -312,6 +312,12 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	overflow-y: auto;
 	overflow-x: hidden;
 	max-height: $selectize-max-height-dropdown;
+
+	> div {
+		span {
+			margin-right: 5px;
+		}
+	}
 }
 
 .selectize-control.single .selectize-input {
