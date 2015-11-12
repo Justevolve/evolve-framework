@@ -11,7 +11,7 @@
 				label = $( this ).attr( "data-label-field" ),
 				search = $( this ).attr( "data-search-field" ),
 				nonce = $( this ).attr( "data-nonce" ),
-				max = $( this ).attr( "data-max" ) ? parseInt( $( this ).attr( "data-max" ), 10 ) : 1;
+				max = $( this ).attr( "data-max" ) ? parseInt( $( this ).attr( "data-max" ), 10 ) : 1000;
 
 			$( this ).selectize( {
 				plugins: ['remove_button', 'drag_drop'],
