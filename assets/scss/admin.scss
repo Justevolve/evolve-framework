@@ -917,10 +917,10 @@ $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+
 
 		> .ev-container {
 			padding-left: 0;
-			margin-left: -$gutter;
+			// margin-left: -$gutter;
 		}
 
-		> .ev-field-header-label-inline-block,
+		> .ev-field-header-label-inline,
 		> .ev-field-header-label-block {
 			padding-top: $baseline/2;
 		}
