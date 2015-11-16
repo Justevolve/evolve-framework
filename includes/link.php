@@ -1,70 +1,119 @@
 <?php if ( ! defined( 'EV_FW' ) ) die( 'Forbidden' );
 
-// TODO:
+/**
+ * Display a partial to integrate the link functionality in a framework field.
+ *
+ * @since 0.4.0
+ * @param string $handle The field base handle.
+ * @param array $link The link data.
+ */
 function ev_link_partial( $handle, $link ) {
-    if ( $link === false ) {
-        return;
-    }
+	if ( ! isset( $link['link'] ) ) {
+	    return;
+	}
 
-    $link_class = 'ev-link-ctrl';
+	$link = $link['link'];
+	$handle .= '[link]';
+	$link_class = 'ev-link-ctrl';
 
-    if ( isset( $link['url'] ) && ! empty( $link['url'] ) ) {
-        $link_class .= ' ev-link-on';
-    }
+	if ( isset( $link['url'] ) && ! empty( $link['url'] ) ) {
+		$link_class .= ' ev-link-on';
+	}
 
-    $nonce = ''; // TODO:
+	$url = isset( $link['url'] ) ? $link['url'] : '';
+	$target = isset( $link['target'] ) ? $link['target'] : '';
+	$rel = isset( $link['rel'] ) ? $link['rel'] : '';
+	$title = isset( $link['title'] ) ? $link['title'] : '';
 
-    $url = isset( $link['url'] ) ? $link['url'] : '';
-    $target = isset( $link['target'] ) ? $link['target'] : '';
-    $rel = isset( $link['rel'] ) ? $link['rel'] : '';
-    $title = isset( $link['title'] ) ? $link['title'] : '';
+	$link_hidden_inputs = sprintf( '<input data-link-url type="hidden" value="%s" name="%s[url]">', esc_attr( $url ), esc_attr( $handle ) );
+	$link_hidden_inputs .= sprintf( '<input data-link-target type="hidden" value="%s" name="%s[target]">', esc_attr( $target ), esc_attr( $handle ) );
+	$link_hidden_inputs .= sprintf( '<input data-link-rel type="hidden" value="%s" name="%s[rel]">', esc_attr( $rel ), esc_attr( $handle ) );
+	$link_hidden_inputs .= sprintf( '<input data-link-title type="hidden" value="%s" name="%s[title]">', esc_attr( $title ), esc_attr( $handle ) );
 
-    $link_hidden_inputs = sprintf( '<input data-link-url type="hidden" value="%s" name="%s[url]">', esc_attr( $url ), esc_attr( $handle ) );
-    $link_hidden_inputs .= sprintf( '<input data-link-target type="hidden" value="%s" name="%s[target]">', esc_attr( $target ), esc_attr( $handle ) );
-    $link_hidden_inputs .= sprintf( '<input data-link-rel type="hidden" value="%s" name="%s[rel]">', esc_attr( $rel ), esc_attr( $handle ) );
-    $link_hidden_inputs .= sprintf( '<input data-link-title type="hidden" value="%s" name="%s[title]">', esc_attr( $title ), esc_attr( $handle ) );
-
-    printf( '<span class="%s" data-nonce="%s"><span class="screen-reader-texta">%s</span>%s</span>',
-        esc_attr( $link_class ),
-        esc_attr( $nonce ),
-        esc_html( __( 'Link', 'ev_framework' ) ),
-        $link_hidden_inputs
-    );
+	printf( '<span class="%s"><span class="screen-reader-texta">%s</span>%s</span>',
+		esc_attr( $link_class ),
+		esc_html( __( 'Link', 'ev_framework' ) ),
+		$link_hidden_inputs
+	);
 }
 
+/**
+ * Populate the link editing modal.
+ *
+ * @since 0.4.0
+ */
 function ev_link_modal_load() {
-    if ( ! isset( $_POST['data'] ) ) {
-        die();
-    }
+	if ( ! isset( $_POST['data'] ) ) {
+		die();
+	}
 
-    $data = $_POST['data'];
+	$data = $_POST['data'];
 
-    $url = isset( $data['url'] ) ? $data['url'] : '';
-    $target = isset( $data['target'] ) ? $data['target'] : '';
-    $rel = isset( $data['rel'] ) ? $data['rel'] : '';
-    $title = isset( $data['title'] ) ? $data['title'] : '';
+	$url    = isset( $data['url'] ) ? $data['url'] : '';
+	$target = isset( $data['target'] ) ? $data['target'] : '';
+	$rel    = isset( $data['rel'] ) ? $data['rel'] : '';
+	$title  = isset( $data['title'] ) ? $data['title'] : '';
 
-    $content = '';
+	$content = '';
+	$content .= sprintf( '<input type="text" name="url" value="%s" placeholder="URL">', esc_attr( $url ) );
 
-    $content .= sprintf( '<input type="text" name="url" value="%s" placeholder="URL">', esc_attr( $url ) );
+	$content .= ev_select(
+		'target',
+		array(
+			''       => __( 'Same tab', 'ev_framework' ),
+			'_blank' => __( 'New tab', 'ev_framework' ),
+		),
+		$target,
+		false
+	);
 
-    $content .= ev_select(
-        'target',
-        array(
-            '' => __( 'Same tab', 'ev_framework' ),
-            '_blank' => __( 'New tab', 'ev_framework' ),
-        ),
-        $target,
-        false
-    );
+	$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ) );
+	$content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ) );
 
-    $content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ) );
-    $content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ) );
+	$m = new Ev_SimpleModal( 'ev-link' );
+	$m->render( $content );
 
-    $m = new Ev_SimpleModal( 'ev-link' );
-    $m->render( $content );
-
-    die();
+	die();
 }
 
 add_action( 'wp_ajax_ev_link_modal_load', 'ev_link_modal_load' );
+
+function ev_link( $data, $content, $echo = true ) {
+	if ( ! isset( $data['url'] ) || empty( $data['url'] ) ) {
+		if ( $echo ) {
+			echo $content;
+		}
+		else {
+			return $content;
+		}
+	}
+
+	$url    = isset( $data['url'] ) ? $data['url'] : '';
+	$target = isset( $data['target'] ) ? $data['target'] : '';
+	$rel    = isset( $data['rel'] ) ? $data['rel'] : '';
+	$title  = isset( $data['title'] ) ? $data['title'] : '';
+
+	$link = sprintf( '<a href="%s"', esc_attr( $url ) );
+
+	if ( $target ) {
+		$link .= sprintf( ' target="%s"', esc_attr( $target ) );
+	}
+
+	if ( $rel ) {
+		$link .= sprintf( ' rel="%s"', esc_attr( $rel ) );
+	}
+
+	if ( $title ) {
+		$link .= sprintf( ' title="%s"', esc_attr( $title ) );
+	}
+
+	$link .= '>';
+	$link .= $content;
+	$link .= '</a>';
+
+	if ( $echo ) {
+		echo $content;
+	}
+
+	return $content;
+}

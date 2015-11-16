@@ -68,6 +68,9 @@
 			/* Callback function fired after the drawer transition starts. */
 			save: function() {},
 
+			/* Additional CSS class to be passed to the modal container. */
+			class: "",
+
 			/* Wait for the save function to be completed before closing the modal. */
 			wait: false
 		}, config );
@@ -121,7 +124,7 @@
 
 			$( origin ).remove();
 
-			var html = '<div class="ev-modal-container" data-key="' + key + '">';
+			var html = '<div class="ev-modal-container ' + config.class + '" data-key="' + key + '">';
 				html += '<div class="ev-modal-wrapper">';
 					html += '<a class="ev-modal-close" href="#"><i data-icon="ev-modal-close" class="ev-icon ev-component" aria-hidden="true"></i></a>';
 

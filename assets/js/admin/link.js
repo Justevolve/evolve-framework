@@ -42,15 +42,15 @@
 				ajaxurl,
 				modal_data,
 				function( response ) {
+					response = $( response );
+
 					$( origin + " .ev-modal-wrapper" ).removeClass( "ev-loading" );
 					content.html( response );
 
 					setTimeout( function() {
 						$.evf.ui.build();
 
-						// if ( startup_callback ) {
-						// 	startup_callback();
-						// }
+						$( "input[name=url]", content ).focus().select();
 					}, 1 );
 				}
 			);
