@@ -47,29 +47,40 @@ function ev_image_upload( $handle, $id, $args = array() ) {
  * @param string $name The select control name attribute.
  * @param array $options An array containing the select options.
  * @param string $selected The select selected value.
+ * @param boolean $echo Set to true to echo the select control.
  */
-function ev_select( $name, $options, $selected = '' ) {
-	printf( '<select name="%s">', esc_attr( $name ) );
-		foreach ( $options as $index => $option ) {
-			if ( ! is_array( $option ) ) {
-				$selected_attr = $index == $selected ? 'selected' : '';
-				$value = $index;
-				$label = $option;
+function ev_select( $name, $options, $selected = '', $echo = true ) {
+	$html = '';
 
-				printf( '<option %s value="%s">%s</option>', esc_attr( $selected_attr ), esc_attr( $value ), esc_html( $label ) );
+	$html .= '<div class="ev-select-wrapper">';
+		$html .= sprintf( '<select name="%s">', esc_attr( $name ) );
+			foreach ( $options as $index => $option ) {
+				if ( ! is_array( $option ) ) {
+					$selected_attr = $index == $selected ? 'selected' : '';
+					$value = $index;
+					$label = $option;
+
+					$html .= sprintf( '<option %s value="%s">%s</option>', esc_attr( $selected_attr ), esc_attr( $value ), esc_html( $label ) );
+				}
+				else {
+					$html .= sprintf( '<optgroup label="%s">',  esc_attr( $index ) );
+						foreach ( $option as $o_k => $o_v ) {
+							$selected_attr = $o_k == $selected ? 'selected' : '';
+
+							$html .= sprintf( '<option value="%s" %s>%s</option>', esc_attr( $o_k ), esc_attr( $selected_attr ), esc_attr( $o_v ) );
+
+						}
+					$html .= '</optgroup>';
+				}
 			}
-			else {
-				printf( '<optgroup label="%s">',  esc_attr( $index ) );
-					foreach ( $option as $o_k => $o_v ) {
-						$selected_attr = $o_k == $selected ? 'selected' : '';
+		$html .= '</select>';
+	$html .= '</div>';
 
-						printf( '<option value="%s" %s>%s</option>', esc_attr( $o_k ), esc_attr( $selected_attr ), esc_attr( $o_v ) );
+	if ( $echo ) {
+		echo $html;
+	}
 
-					}
-				echo '</optgroup>';
-			}
-		}
-	echo '</select>';
+	return $html;
 }
 
 /**

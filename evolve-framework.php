@@ -275,6 +275,9 @@ class Ev_Framework {
 		/* Array utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'array.php' );
 
+		/* Link utilities. */
+		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'link.php' );
+
 		/* Notices utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'admin/notices.php' );
 
@@ -349,8 +352,9 @@ class Ev_Framework {
 		/* Meta box fields container. */
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_meta_box.php' );
 
-		/* Modal fields container. */
+		/* Modal fields containers. */
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_modal.php' );
+		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/ev_simple_modal.php' );
 
 		/* Admin page fields container. */
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_admin_page.php' );

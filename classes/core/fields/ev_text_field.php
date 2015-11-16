@@ -32,7 +32,8 @@ class Ev_TextField extends Ev_Field {
 
 		$data['config'] = wp_parse_args( $data['config'], array(
 			'size' => '',
-			'full' => false
+			'full' => false,
+			'link' => false
 		) );
 
 		parent::__construct( $data );

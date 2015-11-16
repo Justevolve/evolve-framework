@@ -106,8 +106,20 @@ msgstr ""
 msgid "Add Media"
 msgstr ""
 
-#: evolve-framework.php:475
+#: evolve-framework.php:478
 msgid "Changelog"
+msgstr ""
+
+#: includes/link.php:30
+msgid "Link"
+msgstr ""
+
+#: includes/link.php:46
+msgid "Same tab"
+msgstr ""
+
+#: includes/link.php:47
+msgid "New tab"
 msgstr ""
 
 #: templates/fields/attachment.php:75
