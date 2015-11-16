@@ -8,9 +8,9 @@
  * @param array $link The link data.
  */
 function ev_link_partial( $handle, $link ) {
-	// if ( ! isset( $link['link'] ) ) {
-	//     return;
-	// }
+	if ( ! isset( $link['link'] ) ) {
+		$link['link'] = array();
+	}
 
 	$link = $link['link'];
 	$handle .= '[link]';
@@ -55,30 +55,30 @@ function ev_link_modal_load() {
 	$title  = isset( $data['title'] ) ? $data['title'] : '';
 
 	$content = '';
-    $content .= '<div class="ev-link-url-wrapper">';
+	$content .= '<div class="ev-link-url-wrapper">';
 	   $content .= sprintf( '<input type="text" name="url" value="%s" placeholder="URL">', esc_attr( $url ) );
-        $content .= sprintf( '<span>%s</span>', esc_html( __( 'Tab', 'ev_framework' ) ) );
-    $content .= '</div>';
+		$content .= sprintf( '<span>%s</span>', esc_html( __( 'Tab', 'ev_framework' ) ) );
+	$content .= '</div>';
 
-    $content .= '<div class="ev-link-inner-wrapper">';
-        $content .= '<div class="ev-link-field-row">';
-            $content .= ev_select(
-                'target',
-                array(
-                    ''       => __( 'Same tab', 'ev_framework' ),
-                    '_blank' => __( 'New tab', 'ev_framework' ),
-                ),
-                $target,
-                false
-            );
+	$content .= '<div class="ev-link-inner-wrapper">';
+		$content .= '<div class="ev-link-field-row">';
+			$content .= ev_select(
+				'target',
+				array(
+					''       => __( 'Same tab', 'ev_framework' ),
+					'_blank' => __( 'New tab', 'ev_framework' ),
+				),
+				$target,
+				false
+			);
 
-            $content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ) );
-        $content .= '</div>';
+			$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ) );
+		$content .= '</div>';
 
-        $content .= '<div class="ev-link-field-row">';
-            $content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ) );
-        $content .= '</div>';
-    $content .= '</div>';
+		$content .= '<div class="ev-link-field-row">';
+			$content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ) );
+		$content .= '</div>';
+	$content .= '</div>';
 
 	$m = new Ev_SimpleModal( 'ev-link' );
 	$m->render( $content );
