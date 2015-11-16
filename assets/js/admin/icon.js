@@ -6,7 +6,8 @@
 	 */
 	$.evf.delegate( ".ev-selected-icon-wrapper", "click", "icon", function() {
 		var key = "ev-icon",
-			field = $( this ).parents( ".ev-field" ).first(),
+			ctrl = $( this ),
+			field = ctrl.parents( ".ev-field" ).first(),
 			selected_wrapper = $( ".ev-selected-icon-wrapper", field ),
 			data = {
 				"prefix": $( "[data-prefix]", field ).val(),
@@ -39,7 +40,8 @@
 		modal.open( function( content, key, _data ) {
 			var modal_data = {
 				"action": "ev_icon_modal_load",
-				"data": _data
+				"data": _data,
+				"nonce": ctrl.attr( "data-nonce" )
 			};
 
 			var origin = ".ev-modal-container[data-key='" + key + "']";

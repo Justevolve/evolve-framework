@@ -316,9 +316,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 
 		/* Verify the validity of the supplied nonce. */
-		$nonce = isset( $_POST['nonce'] ) ? $_POST['nonce'] : '';
-		$action = 'ev_admin_page';
-		$is_valid_nonce = wp_verify_nonce( $nonce, $action );
+		$is_valid_nonce = ev_is_post_nonce_valid( 'ev_admin_page' );
 
 		/* Check the user has the capability to save the page. */
 		$is_valid_cap = current_user_can( $this->capability() );

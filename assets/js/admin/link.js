@@ -32,6 +32,7 @@
         modal.open( function( content, key, _data ) {
 			var modal_data = {
 				"action": "ev_link_modal_load",
+				"nonce": ctrl.attr( "data-nonce" ),
 				"data": _data
 			};
 

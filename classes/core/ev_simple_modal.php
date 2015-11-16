@@ -3,7 +3,7 @@
 /**
  * Simple modal class.
  *
- * A modal is a field container that is displayed in a popup. TODO:
+ * A modal is a container that is displayed in a popup.
  *
  * @package   EvolveFramework
  * @since 	  0.1.0

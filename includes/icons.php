@@ -127,6 +127,10 @@ function ev_icon( $icon, $attrs = array() ) {
  * @since 0.4.0
  */
 function ev_icon_modal_load() {
+	if ( ! ev_is_post_nonce_valid( 'ev_icon' ) ) {
+		die();
+	}
+
 	if ( ! isset( $_POST['data'] ) ) {
 		die();
 	}

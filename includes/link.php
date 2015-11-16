@@ -30,8 +30,9 @@ function ev_link_partial( $handle, $link ) {
 	$link_hidden_inputs .= sprintf( '<input data-link-rel type="hidden" value="%s" name="%s[rel]">', esc_attr( $rel ), esc_attr( $handle ) );
 	$link_hidden_inputs .= sprintf( '<input data-link-title type="hidden" value="%s" name="%s[title]">', esc_attr( $title ), esc_attr( $handle ) );
 
-	printf( '<span class="%s"><span class="screen-reader-text">%s</span>%s</span>',
+	printf( '<span class="%s" data-nonce="%s"><span class="screen-reader-text">%s</span>%s</span>',
 		esc_attr( $link_class ),
+		esc_attr( wp_create_nonce( 'ev_link' ) ),
 		esc_html( __( 'Link', 'ev_framework' ) ),
 		$link_hidden_inputs
 	);
@@ -43,6 +44,10 @@ function ev_link_partial( $handle, $link ) {
  * @since 0.4.0
  */
 function ev_link_modal_load() {
+	if ( ! ev_is_post_nonce_valid( 'ev_link' ) ) {
+		die();
+	}
+
 	if ( ! isset( $_POST['data'] ) ) {
 		die();
 	}

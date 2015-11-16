@@ -14,13 +14,13 @@
 	}
 ?>
 
-<div class="ev-selected-icon-wrapper <?php echo esc_attr( $wrapper_class ); ?>">
+<div class="ev-selected-icon-wrapper <?php echo esc_attr( $wrapper_class ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'ev_icon' ) ); ?>">
 	<i data-preview class="<?php echo esc_attr( $prefix ); ?> <?php echo esc_attr( $icon ); ?> ev-icon ev-component" aria-hidden="true"></i>
 	<span class="ev-remove ev-icon-remove"></span>
 </div>
 
-<input type="text" data-prefix name="<?php echo esc_attr( $handle ); ?>[prefix]" value="<?php echo esc_attr( $prefix ); ?>">
-<input type="text" data-set name="<?php echo esc_attr( $handle ); ?>[set]" value="<?php echo esc_attr( $set ); ?>">
-<input type="text" data-icon name="<?php echo esc_attr( $handle ); ?>[icon]" value="<?php echo esc_attr( $icon ); ?>">
-<input type="text" data-color name="<?php echo esc_attr( $handle ); ?>[color]" value="<?php echo esc_attr( $color ); ?>">
-<input type="text" data-size name="<?php echo esc_attr( $handle ); ?>[size]" value="<?php echo esc_attr( $size ); ?>">
+<input type="hidden" data-prefix name="<?php echo esc_attr( $handle ); ?>[prefix]" value="<?php echo esc_attr( $prefix ); ?>">
+<input type="hidden" data-set name="<?php echo esc_attr( $handle ); ?>[set]" value="<?php echo esc_attr( $set ); ?>">
+<input type="hidden" data-icon name="<?php echo esc_attr( $handle ); ?>[icon]" value="<?php echo esc_attr( $icon ); ?>">
+<input type="hidden" data-color name="<?php echo esc_attr( $handle ); ?>[color]" value="<?php echo esc_attr( $color ); ?>">
+<input type="hidden" data-size name="<?php echo esc_attr( $handle ); ?>[size]" value="<?php echo esc_attr( $size ); ?>">

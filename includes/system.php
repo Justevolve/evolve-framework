@@ -78,7 +78,7 @@ function ev_admin_pages_groups() {
  */
 function ev_user_can_save_user_meta( $user_id, $action = '', $nonce = 'ev' ) {
 	/* Verify the validity of the supplied nonce. */
-	$is_valid_nonce = isset( $_POST[$nonce] ) && wp_verify_nonce( $_POST[$nonce], $action );
+	$is_valid_nonce = ev_is_post_nonce_valid( $action, $nonce );
 
 	/* Check the user has the capability to edit the user's information. */
 	$is_valid_cap = current_user_can( 'edit_user', $user_id );
@@ -100,7 +100,7 @@ function ev_user_can_save_user_meta( $user_id, $action = '', $nonce = 'ev' ) {
  */
 function ev_user_can_save( $post_id, $action = '', $nonce = 'ev' ) {
 	/* Verify the validity of the supplied nonce. */
-	$is_valid_nonce = isset( $_POST[$nonce] ) && wp_verify_nonce( $_POST[$nonce], $action );
+	$is_valid_nonce = ev_is_post_nonce_valid( $action, $nonce );
 
 	/* Preventing to do anything when autosaving, editing a revision or performing an AJAX request. */
 	$is_autosave = wp_is_post_autosave( $post_id );
@@ -462,4 +462,18 @@ function ev_restore_configuration( $data = array() ) {
 		$theme = get_option( 'stylesheet' );
 		update_option( "theme_mods_$theme", $data['mods'] );
 	}
+}
+
+/**
+ * Check if a provided nonce is valid for requests performed via POST.
+ *
+ * @since 0.4.0
+ * @param string $action The nonce action.
+ * @param string $key The nonce key.
+ * @return boolean
+ */
+function ev_is_post_nonce_valid( $action, $key = 'nonce' ) {
+	$is_valid_nonce = isset( $_POST[$key] ) && wp_verify_nonce( $_POST[$key], $action );
+
+	return $is_valid_nonce;
 }
