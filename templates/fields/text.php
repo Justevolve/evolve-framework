@@ -9,14 +9,20 @@
 	if ( $full === true ) {
 		$classes[] = 'ev-field-input-size-full';
 	}
+
+	$text_value = $value;
+	$handle_suffix = '';
+
+	if ( is_array( $value ) ) {
+		$text_value = isset( $value['text'] ) ? $value['text'] : '';
+		$handle_suffix = '[text]';
+	}
 ?>
 
-<input type="text" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" size="<?php echo esc_attr( $size ); ?>" name="<?php echo esc_attr( $handle ); ?>" value="<?php echo esc_attr( $value ); ?>">
+<input type="text" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" size="<?php echo esc_attr( $size ); ?>" name="<?php echo esc_attr( $handle . $handle_suffix ); ?>" value="<?php echo esc_attr( $text_value ); ?>">
 
 <?php
 
 if ( $link !== false ) {
-	$link_value = isset( $value['link'] ) ? $value['link'] : array();
-
-	ev_link_partial( $handle, $link_value );
+	ev_link_partial( $handle, $value );
 }
