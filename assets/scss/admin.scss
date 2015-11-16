@@ -2354,3 +2354,116 @@ body.ev-modal-open {
 	padding: 3px 8px 4px;
 	border: 1px solid #E5E5E5;
 }
+
+// -----------------------------------------------------------------------------
+// $Simple modal
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// $Link
+// -----------------------------------------------------------------------------
+
+$link_modal_height: $baseline*2;
+
+.ev-link-ctrl {
+	display: inline-block;
+
+	&:before {
+		@include icon( "\f103" );
+		cursor: pointer;
+		display: inline-block;
+	}
+}
+
+[data-key="ev-link"] {
+	.ev-modal-wrapper {
+		@include position( absolute, 50% null null 50% );
+		width: 400px;
+		height: $link_modal_height;
+		margin-left: -200px;
+		margin-top: -($link_modal_height/2);
+		overflow: visible;
+		@include transition( height $transition_time*2 $ease-out-cubic );
+
+		.ev-link-modal-expanded & {
+			height: $link_modal_height*3;
+			margin-top: -($link_modal_height*3/2);
+		}
+	}
+
+	.ev-modal-close {
+		top: -$baseline*1.5;
+		margin-right: 0;
+		color: $white;
+		padding-top: 0;
+
+		&:hover {
+			color: $red;
+		}
+	}
+
+	.ev-modal {
+		border-top: none;
+
+		.ev-modal-footer {
+			border-top: none;
+			@include position( absolute, 100% 0 0 0 );
+			padding: 0;
+			border-top: none;
+			background-color: transparent;
+			margin-top: $baseline;
+		}
+
+		input[type="text"] {
+			line-height: $baseline*2 - 2;
+			padding: 0 $gutter/2;
+			@include box-sizing( border-box );
+			margin: 0;
+
+			&:focus {
+				@include box-shadow( none );
+			}
+		}
+	}
+}
+
+.ev-link-url-wrapper {
+	position: relative;
+
+	input {
+		width: 100%;
+	}
+
+	span {
+		display: block;
+		@include position( absolute, 0 0 0 null );
+
+		.ev-link-modal-expanded & {
+			display: none;
+		}
+	}
+}
+
+.ev-link-inner-wrapper {
+	display: none;
+
+	.ev-link-modal-expanded & {
+		display: block;
+	}
+}
+
+.ev-link-field-row {
+	.ev-select-wrapper {
+		width: 40%;
+		float: left;
+
+		+ input {
+			float: left;
+			width: 60%;
+		}
+	}
+
+	input {
+		width: 100%;
+	}
+}

@@ -52,7 +52,7 @@ function ev_image_upload( $handle, $id, $args = array() ) {
 function ev_select( $name, $options, $selected = '', $echo = true ) {
 	$html = '';
 
-	$html .= '<div class="ev-select-wrapper">';
+	$html .= '<span class="ev-select-wrapper">';
 		$html .= sprintf( '<select name="%s">', esc_attr( $name ) );
 			foreach ( $options as $index => $option ) {
 				if ( ! is_array( $option ) ) {
@@ -74,7 +74,7 @@ function ev_select( $name, $options, $selected = '', $echo = true ) {
 				}
 			}
 		$html .= '</select>';
-	$html .= '</div>';
+	$html .= '</span>';
 
 	if ( $echo ) {
 		echo $html;
