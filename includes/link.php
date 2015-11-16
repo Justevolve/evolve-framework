@@ -78,6 +78,15 @@ function ev_link_modal_load() {
 
 add_action( 'wp_ajax_ev_link_modal_load', 'ev_link_modal_load' );
 
+/**
+ * Print a link.
+ *
+ * @since 0.4.0
+ * @param array $data The link data.
+ * @param string $content The link content.
+ * @param boolean $echo Set to true to echo the link.
+ * @return string
+ */
 function ev_link( $data, $content, $echo = true ) {
 	if ( ! isset( $data['url'] ) || empty( $data['url'] ) ) {
 		if ( $echo ) {

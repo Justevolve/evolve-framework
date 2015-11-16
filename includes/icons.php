@@ -120,3 +120,79 @@ function ev_get_icon( $icon, $attrs = array() ) {
 function ev_icon( $icon, $attrs = array() ) {
 	echo ev_get_icon( $icon, $attrs );
 }
+
+/**
+ * Contents for the icon selection modal.
+ *
+ * @since 0.4.0
+ */
+function ev_icon_modal_load() {
+	if ( ! isset( $_POST['data'] ) ) {
+		die();
+	}
+
+	$data = $_POST['data'];
+
+	$prefix = isset( $data['prefix'] ) ? $data['prefix'] : '';
+	$set    = isset( $data['set'] ) ? $data['set'] : '';
+	$icon   = isset( $data['icon'] ) ? $data['icon'] : '';
+	$color  = isset( $data['color'] ) ? $data['color'] : '';
+	$size   = isset( $data['size'] ) ? $data['size'] : '';
+
+	$icon_fonts = ev_get_icon_fonts();
+
+	$content = '<div class="ev-icon-sets-external-wrapper ev-active">';
+		$content .= sprintf( '<input type="text" name="color" value="%s" data-icon-color>', esc_attr( $color ) );
+		$content .= sprintf( '<input type="text" name="size" value="%s" data-icon-size>', esc_attr( $size ) );
+
+		$content .= sprintf( '<input type="hidden" name="prefix" value="%s" data-icon-prefix>', esc_attr( $prefix ) );
+		$content .= sprintf( '<input type="hidden" name="set" value="%s" data-icon-set>', esc_attr( $set ) );
+		$content .= sprintf( '<input type="hidden" name="icon" value="%s" data-icon-name>', esc_attr( $icon ) );
+
+		$content .= '<div class="ev-icon-sets-inner-wrapper">';
+			$content .= '<div class="ev-icon-set-select-wrapper">';
+				$content .= '<div class="ev-icon-search-wrapper">';
+					$content .= sprintf( '<input type="text" placeholder="%s" data-icon-search>', esc_attr( __( 'Search', 'icon search', 'ev_framework' ) ) );
+					$content .= '<p class="ev-icon-search-results"></p>';
+				$content .= '</div>';
+			$content .= '</div>';
+
+			$content .= '<div class="ev-icon-sets">';
+
+				foreach ( $icon_fonts as $index => $font ) {
+					$set_class = 'ev-on ev-icon-set-' . $font['name'];
+
+					$content .= sprintf( '<div class="%s">', esc_attr( $set_class ) );
+						$content .= sprintf( '<h2>%s</h2>', esc_html( $font['label'] ) );
+
+						foreach ( $font['mapping'] as $set_icon ) {
+							$icon_class = $font['prefix'] . ' ' . $set_icon . ' ev-icon ev-component';
+
+							if ( $font['name'] == $set && $font['prefix'] == $prefix && $set_icon == $icon ) {
+								$icon_class .= ' ev-selected';
+							}
+
+							$set_icon_stripped = strstr( $set_icon, '-' );
+
+							$content .= sprintf( '<i data-prefix="%s" data-set="%s" data-icon-name="%s" data-icon-stripped="%s" class="%s" aria-hidden="true"></i>',
+								esc_attr( $font['prefix'] ),
+								esc_attr( $font['name'] ),
+								esc_attr( $set_icon ),
+								esc_attr( $set_icon_stripped ),
+								esc_attr( $icon_class )
+							);
+						}
+					$content .= '</div>';
+				}
+
+			$content .= '</div>';
+		$content .= '</div>';
+	$content .= '</div>';
+
+	$m = new Ev_SimpleModal( 'ev-icon' );
+	$m->render( $content );
+
+	die();
+}
+
+add_action( 'wp_ajax_ev_icon_modal_load', 'ev_icon_modal_load' );

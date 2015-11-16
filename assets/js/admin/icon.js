@@ -5,38 +5,61 @@
 	 * Switch between the available icon sets.
 	 */
 	$.evf.delegate( ".ev-selected-icon-wrapper", "click", "icon", function() {
-		var field = $( this ).parents( ".ev-field" ).first();
+		var key = "ev-icon",
+			field = $( this ).parents( ".ev-field" ).first(),
+			selected_wrapper = $( ".ev-selected-icon-wrapper", field ),
+			data = {
+				"prefix": $( "[data-prefix]", field ).val(),
+				"set": $( "[data-set]", field ).val(),
+				"icon": $( "[data-icon]", field ).val(),
+				"color": $( "[data-color]", field ).val(),
+				"size": $( "[data-size]", field ).val(),
+			};
 
-		var template = $( "script[type='text/template'][data-template='ev-icon-modal']" );
+		var modal = new $.evf.modal( key, data, {
+			save: function( data, after_save, nonce ) {
+				$( "[data-prefix]", field ).val( data["prefix"] );
+				$( "[data-set]", field ).val( data["set"] );
+				$( "[data-icon]", field ).val( data["icon"] );
+				$( "[data-color]", field ).val( data["color"] );
+				$( "[data-size]", field ).val( data["size"] );
 
-		if ( $( ".ev-icon-sets-external-wrapper" ).length ) {
-			$( ".ev-icon-sets-external-wrapper" ).remove();
-		}
-		else {
-			var wrapper = $( $.evf.template( template, {} ) );
-			wrapper.data( "ev-field", field );
+				$( "[data-preview]", field )
+					.attr( "class", "" )
+					.css( "color", "" );
 
-			var prefix = $( "[data-prefix]", field ).val(),
-				set = $( "[data-set]", field ).val(),
-				icon = $( "[data-icon]", field ).val();
+				$( "[data-preview]", field )
+					.attr( "class", "ev-icon ev-component " + data["prefix"] + " " + data["icon"] )
+					.css( "color", data["color"] );
 
-			$( ".ev-selected", wrapper ).removeClass( "ev-selected" );
-
-			if ( icon ) {
-				$( "[data-set='" + set + "'][data-prefix='" + prefix + "'][data-icon-name='" + icon + "']", wrapper ).addClass( "ev-selected" );
+				selected_wrapper.removeClass( "ev-empty" );
 			}
+		} );
 
-			$( "body" ).append( wrapper );
-		}
+		modal.open( function( content, key, _data ) {
+			var modal_data = {
+				"action": "ev_icon_modal_load",
+				"data": _data
+			};
 
-		return false;
-	} );
+			var origin = ".ev-modal-container[data-key='" + key + "']";
+			$( origin + " .ev-modal-wrapper" ).addClass( "ev-loading" );
 
-	/**
-	 * Close the icon selection modal.
-	 */
-	$.evf.delegate( ".ev-close-icon-modal", "click", "icon", function() {
-		$( ".ev-icon-sets-external-wrapper" ).remove();
+			$.post(
+				ajaxurl,
+				modal_data,
+				function( response ) {
+					response = $( response );
+
+					$( origin + " .ev-modal-wrapper" ).removeClass( "ev-loading" );
+					content.html( response );
+
+					setTimeout( function() {
+						$.evf.ui.build();
+					}, 1 );
+				}
+			);
+		} );
 
 		return false;
 	} );
@@ -49,14 +72,15 @@
 			selected_wrapper = $( ".ev-selected-icon-wrapper", field );
 
 		selected_wrapper.addClass( "ev-empty" );
-		$( ".ev-icon-sets-external-wrapper" ).remove();
 
 		$( "[data-prefix]", field ).val( "" );
 		$( "[data-set]", field ).val( "" );
 		$( "[data-icon]", field ).val( "" );
+		$( "[data-color]", field ).val( "" );
+		$( "[data-size]", field ).val( "" );
 
-		$( "[data-preview]", field ).attr( "class", "" );
-		$( "[data-preview]", field ).attr( "class", "ev-icon ev-component" );
+		$( "[data-preview]", field ).attr( "class", "ev-icon ev-component" )
+			.css( "color", "" );
 
 		return false;
 	} );
@@ -108,30 +132,24 @@
 	 * Select an icon.
 	 */
 	$.evf.delegate( ".ev-icon-sets i", "click", "icon", function() {
-		var icon_i = $( this ),
-			prefix = icon_i.attr( "data-prefix" ),
-			icon = icon_i.attr( "data-icon-name" ),
+		var icon = $( this ),
 			wrapper = $( this ).parents( ".ev-icon-sets-external-wrapper" ).first(),
-			field = wrapper.data( "ev-field" ),
-			selected_wrapper = $( ".ev-selected-icon-wrapper", field ),
-			icons = $( ".ev-icon", wrapper );
+			icons = $( ".ev-icon", wrapper ),
+			color = $( "[data-icon-color]", wrapper ).val(),
+			size = $( "[data-icon-size]", wrapper ).val();
 
 		icons.removeClass( "ev-found ev-selected" );
-		icon_i.addClass( "ev-selected" );
+		icon.addClass( "ev-selected" );
 		$( ".ev-icon-sets", wrapper ).removeClass( "ev-searching" );
-		selected_wrapper.removeClass( "ev-empty" );
 
-		$( "[data-prefix]", field ).val( prefix );
-		$( "[data-set]", field ).val( icon_i.attr( "data-set" ) );
-		$( "[data-icon]", field ).val( icon );
-
-		$( "[data-preview]", field ).attr( "class", "" );
-		$( "[data-preview]", field ).attr( "class", "ev-icon ev-component " + prefix + " " + icon );
+		$( "[data-icon-prefix]", wrapper ).val( icon.attr( "data-prefix" ) );
+		$( "[data-icon-set]", wrapper ).val( icon.attr( "data-set" ) );
+		$( "[data-icon-name]", wrapper ).val( icon.attr( "data-icon-name" ) );
+		$( "[data-icon-color]", wrapper ).val( color );
+		$( "[data-icon-size]", wrapper ).val( size );
 
 		$( "input[data-icon-search]", wrapper ).val( "" );
 		$( ".ev-icon-search-results", wrapper ).html( "" ).removeClass( "ev-search-icon-results-visible" );
-
-		$( ".ev-icon-sets-external-wrapper" ).remove();
 	} );
 
 } )( jQuery );

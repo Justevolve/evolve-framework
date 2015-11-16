@@ -1975,13 +1975,13 @@ $tooltip_arrow_size: 16px;
 
 .ev-icon-sets-external-wrapper.ev-modal-container {
 	display: none;
-	@include position( fixed, 60px 15% 60px 15% );
+	// @include position( fixed, 60px 15% 60px 15% );
 	background: rgba( #000, 0.5 );
     z-index: 100100;
 
 	.ev-icon-sets-inner-wrapper {
 		background-color: $white;
-		@include position( absolute, $baseline $baseline $baseline $baseline );
+		// @include position( absolute, $baseline $baseline $baseline $baseline );
 	}
 
 	&.ev-active {
