@@ -69,7 +69,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: classes/core/fields/ev_color_field.php:97
+#: classes/core/fields/ev_color_field.php:100
 msgid "Transparent"
 msgstr ""
 
@@ -107,19 +107,23 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: includes/link.php:36
+#: includes/link.php:37
 msgid "Link"
 msgstr ""
 
-#: includes/link.php:65
+#: includes/link.php:66
 msgid "Tab"
 msgstr ""
 
-#: includes/link.php:73
+#: includes/link.php:72
+msgid "Open in tab"
+msgstr ""
+
+#: includes/link.php:76
 msgid "Same tab"
 msgstr ""
 
-#: includes/link.php:74
+#: includes/link.php:77
 msgid "New tab"
 msgstr ""
 
