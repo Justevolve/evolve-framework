@@ -8,6 +8,9 @@
 		var type = field.attr( "data-type" );
 
 		switch ( type ) {
+			case 'radio':
+				return $( "input[type='radio'][name]:checked", field ).first();
+				break;
 			case 'select':
 				return $( "select[name]", field ).first();
 				break;

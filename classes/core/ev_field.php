@@ -394,7 +394,7 @@ abstract class Ev_Field {
 
 		$slave = $this->config( 'visible' );
 		$controller = $this->config( 'controller' );
-		$controller_types = array( 'select', 'checkbox' );
+		$controller_types = array( 'select', 'checkbox', 'radio' );
 
 		if ( is_array( $slave ) ) {
 			$attrs[] = sprintf( 'data-slave=%s', key( $slave ) );

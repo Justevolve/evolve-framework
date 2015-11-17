@@ -57,6 +57,11 @@ msgstr ""
 msgid "Full width"
 msgstr ""
 
+#: classes/core/ev_simple_modal.php:37
+#: classes/core/fields_containers/ev_modal.php:57
+msgid "OK"
+msgstr ""
+
 #: classes/core/fields/ev_attachment_field.php:103
 #: classes/core/fields/ev_image_field.php:89 templates/fields/attachment.php:63
 #: templates/fields/partials/image_upload.php:49
@@ -68,15 +73,7 @@ msgstr ""
 msgid "Transparent"
 msgstr ""
 
-#: classes/core/fields/ev_icon_field.php:86
-msgid "Search"
-msgstr ""
-
-#: classes/core/fields/ev_icon_field.php:90
-msgid "Close"
-msgstr ""
-
-#: classes/core/fields_containers/ev_admin_page.php:362
+#: classes/core/fields_containers/ev_admin_page.php:360
 msgid "All saved!"
 msgstr ""
 
@@ -84,10 +81,6 @@ msgstr ""
 #: templates/fields/attachment.php:74
 #: templates/fields/partials/image_upload.php:69
 msgid "Edit"
-msgstr ""
-
-#: classes/core/fields_containers/ev_modal.php:57
-msgid "OK"
 msgstr ""
 
 #: evolve-framework.php:13
@@ -106,19 +99,27 @@ msgstr ""
 msgid "Add Media"
 msgstr ""
 
-#: evolve-framework.php:478
+#: evolve-framework.php:479
 msgid "Changelog"
 msgstr ""
 
-#: includes/link.php:30
+#: includes/icons.php:159
+msgid "Search"
+msgstr ""
+
+#: includes/link.php:36
 msgid "Link"
 msgstr ""
 
-#: includes/link.php:46
+#: includes/link.php:65
+msgid "Tab"
+msgstr ""
+
+#: includes/link.php:73
 msgid "Same tab"
 msgstr ""
 
-#: includes/link.php:47
+#: includes/link.php:74
 msgid "New tab"
 msgstr ""
 
