@@ -60,4 +60,18 @@
 		return false;
 	} );
 
+	$.evf.delegate( ".ev-link-trigger", "click", "link", function() {
+		$( '.ev-modal-container[data-key="ev-link"]').addClass( 'ev-link-modal-expanded' );
+
+		return false;
+	} );
+
+	$( window ).on( "keydown.ev_link", function( e ) {
+		if ( e.which == 9 ) {
+			$( '.ev-modal-container[data-key="ev-link"]').addClass( 'ev-link-modal-expanded' );
+
+			return false;
+		}
+	} );
+
 } )( jQuery );

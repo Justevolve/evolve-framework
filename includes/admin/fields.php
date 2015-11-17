@@ -177,3 +177,65 @@ function ev_multiple_select( $name, $data, $selected = '', $args = array() ) {
 		esc_attr( $selected )
 	);
 }
+
+/**
+ * Output an HTML radio control.
+ *
+ * @since 0.4.0
+ * @param string $name The radio control name attribute.
+ * @param array $data An array containing the radio options.
+ * @param string $value The radio selected value.
+ * @param boolean $style The radio control style.
+ * @param boolean $echo Set to true to print the control.
+ * @return string
+ */
+function ev_radio( $name, $data, $value = '', $style = '', $echo = true ) {
+	$i=0;
+	$html = '';
+
+	$graphic = $style == 'graphic';
+
+	$html .= sprintf( '<span class="ev-radio-wrapper ev-radio-style-%s">', esc_attr( $style ) );
+
+	foreach ( $data as $k => $v ) {
+		$checked = '';
+		$class = '';
+
+		if ( $value == $k || ( empty( $value ) && $i === 0 ) ) {
+			$checked = 'checked';
+		}
+
+		if ( $graphic ) {
+			$class = 'ev-graphic-radio';
+		}
+
+		$html .= sprintf( '<label class="ev-radio %s">', esc_attr( $class ) );
+			$html .= sprintf( '<input name="%s" type="radio" value="%s" %s>', esc_attr( $name ), esc_attr( $k ), esc_attr( $checked ) );
+
+			if ( $graphic ) {
+				$image = $v;
+				$label = '';
+
+				if ( is_array( $v ) ) {
+					$image = isset( $v['image'] ) && ! empty( $v['image'] ) ? $v['image'] : '';
+					$label = isset( $v['label'] ) && ! empty( $v['label'] ) ? $v['label'] : '';
+				}
+
+				$html .= sprintf( '<img src="%s" title="%s">', esc_attr( $image ), esc_attr( $label ) );
+			}
+			else {
+				$html .= sprintf( '<span>%s</span>', esc_html( $v ) );
+			}
+		$html .= '</label>';
+
+		$i++;
+	}
+
+	$html .= sprintf( '</span>' );
+
+	if ( $echo ) {
+		echo $html;
+	}
+
+	return $html;
+}

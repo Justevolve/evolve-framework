@@ -34,6 +34,9 @@ class Ev_ColorField extends Ev_Field {
 			/* Allows for multiple colors properties. */
 			'multiple' => false,
 
+			/* Add opacity control */
+			'opacity' => false,
+
 			/* A palette of colors to choose from. */
 			'palette' => false
 		) );

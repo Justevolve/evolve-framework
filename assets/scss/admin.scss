@@ -2373,23 +2373,36 @@ $link_modal_height: $baseline*2;
 		cursor: pointer;
 		display: inline-block;
 	}
+
+	&.ev-link-on {
+		color: $blue_medium;
+	}
 }
 
 [data-key="ev-link"] {
-	.ev-modal-wrapper {
-		@include position( absolute, 50% null null 50% );
-		width: 400px;
-		height: $link_modal_height;
-		margin-left: -200px;
-		margin-top: -($link_modal_height/2);
-		overflow: visible;
-		@include transition( height $transition_time*2 $ease-out-cubic );
+	@include align-items(center);
+	@include display(flex);
+	@include flex-direction(row);
+	@include justify-content(center);
 
-		.ev-link-modal-expanded & {
-			height: $link_modal_height*3;
-			margin-top: -($link_modal_height*3/2);
-		}
+	.ev-modal-wrapper {
+		@include position( relative, auto auto auto auto );
+		// @include position( absolute, 50% null null 50% );
+		width: 400px;
+		// bottom: auto;
+		// height: $link_modal_height;
+		// margin-left: -200px;
+		// @include transform( translateY( -50% ) );
+		// margin-top: -($link_modal_height/2);
+		overflow: visible;
+		// @include transition( height $transition_time*2 $ease-out-cubic );
 	}
+
+	// &.ev-link-modal-expanded .ev-modal-wrapper {
+		// @include transform( translateY( -50% ) );
+		// height: $link_modal_height*3;
+		// margin-top: -($link_modal_height*3/2);
+	// }
 
 	.ev-modal-close {
 		top: -$baseline*1.5;
@@ -2430,17 +2443,33 @@ $link_modal_height: $baseline*2;
 .ev-link-url-wrapper {
 	position: relative;
 
-	input {
+	input[type="text"] {
 		width: 100%;
+	}
+}
+
+.ev-link-trigger {
+	display: flex;
+	align-items: center;
+	padding: 0 8px 0 2px;
+	cursor: pointer;
+	@include position( absolute, 0 0 0 null );
+
+	&:hover {
+		span {
+			background-color: $grey_light;
+		}
 	}
 
 	span {
-		display: block;
-		@include position( absolute, 0 0 0 null );
+		display: inline-block;
+		border: 1px solid $border_color;
+		padding: 2px 6px;
+		border-radius: $radius;
+	}
 
-		.ev-link-modal-expanded & {
-			display: none;
-		}
+	.ev-link-modal-expanded & {
+		display: none;
 	}
 }
 
@@ -2453,17 +2482,90 @@ $link_modal_height: $baseline*2;
 }
 
 .ev-link-field-row {
-	.ev-select-wrapper {
-		width: 40%;
+	@include align-items(center);
+	@include display(flex);
+	@include flex-direction(row);
+
+	.ev-link-radio-wrapper {
+		width: 50%;
 		float: left;
 
-		+ input {
+		+ input[type="text"] {
 			float: left;
-			width: 60%;
+			width: 50%;
 		}
 	}
 
-	input {
+	input[type="text"] {
 		width: 100%;
+	}
+}
+
+.ev-link-radio-wrapper {
+	@include box-sizing( border-box );
+	padding: $baseline/2 $gutter/2;
+
+	> p {
+		margin-top: 0;
+		margin-bottom: $baseline/4;
+	}
+}
+
+.ev-radio-style-switch {
+
+	.ev-radio {
+		display: inline-block;
+		color: $text_light;
+		position: relative;
+		padding: $baseline/4 $baseline/3;
+
+		input {
+			@include position( absolute, 0 0 0 0 );
+			border-radius: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+			margin: 0;
+			border: none;
+			background-color: $border_color;
+			@include box-shadow( none );
+
+			&:checked {
+				background-color: $green;
+
+				+ span {
+					color: $white;
+				}
+
+				&:before {
+					display: none;
+				}
+			}
+
+			&:focus {
+				border-color: transparent;
+				@include box-shadow( none );
+			}
+		}
+
+		+ .ev-radio {
+			margin-top: 0;
+			margin-left: 1px;
+		}
+
+		span {
+			position: relative;
+			z-index: 1;
+		}
+
+		&:first-of-type input {
+			border-top-left-radius: 3px;
+			border-bottom-left-radius: 3px;
+		}
+
+		&:last-child input {
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+		}
 	}
 }

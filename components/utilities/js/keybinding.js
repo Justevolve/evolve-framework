@@ -18,7 +18,10 @@
 			stop: true,
 
 			/* Custom component namespace. */
-			namespace: "ev"
+			namespace: "ev",
+
+			/* Set to true to execute one time only. */
+			one: false
 		}, config );
 
 		var map = {
@@ -29,7 +32,8 @@
 			"down": 40,
 			"esc": 27,
 			"space": 32,
-			"backspace": 8
+			"backspace": 8,
+			"tab": 9
 		};
 
 		var namespace = "ev";
@@ -38,7 +42,7 @@
 			namespace = "." + config.namespace;
 		}
 
-		$( window ).on( "keydown." + namespace, function( e ) {
+		var _keydown = function( e ) {
 			if( map[key] && e.which === map[key] ) {
 				var ret = callback( e );
 
@@ -52,6 +56,13 @@
 			}
 
 			return true;
-		} );
+		};
+
+		if ( config.one ) {
+			$( window ).one( "keydown." + namespace, _keydown );
+		}
+		else {
+			$( window ).on( "keydown." + namespace, _keydown );
+		}
 	};
 } )( jQuery );

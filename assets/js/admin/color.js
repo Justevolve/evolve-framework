@@ -26,7 +26,19 @@
 	 */
 	$.evf.ui.add( "input.ev-color-input", function() {
 		$( this ).each( function() {
-			$( this ).minicolors();
+			var wrapper = $( this ).parents( ".ev-color-inner-wrapper" ).first(),
+				opacity = $( this ).attr( "data-opacity" ),
+				options = {};
+
+			if ( opacity !== undefined ) {
+				options.opacity = true;
+
+				options.change = function( value, opacity ) {
+					$( "[data-input-color-opacity]", wrapper ).val( opacity );
+				}
+			}
+
+			$( this ).minicolors( options );
 		} );
 	} );
 

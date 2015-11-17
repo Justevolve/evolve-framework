@@ -14,7 +14,7 @@ function ev_link_partial( $handle, $link ) {
 
 	$link = $link['link'];
 	$handle .= '[link]';
-	$link_class = 'ev-link-ctrl';
+	$link_class = 'ev-link-ctrl ev-tooltip';
 
 	if ( isset( $link['url'] ) && ! empty( $link['url'] ) ) {
 		$link_class .= ' ev-link-on';
@@ -30,9 +30,10 @@ function ev_link_partial( $handle, $link ) {
 	$link_hidden_inputs .= sprintf( '<input data-link-rel type="hidden" value="%s" name="%s[rel]">', esc_attr( $rel ), esc_attr( $handle ) );
 	$link_hidden_inputs .= sprintf( '<input data-link-title type="hidden" value="%s" name="%s[title]">', esc_attr( $title ), esc_attr( $handle ) );
 
-	printf( '<span class="%s" data-nonce="%s"><span class="screen-reader-text">%s</span>%s</span>',
+	printf( '<span class="%s" data-nonce="%s" data-title="%s"><span class="screen-reader-text">%s</span>%s</span>',
 		esc_attr( $link_class ),
 		esc_attr( wp_create_nonce( 'ev_link' ) ),
+		esc_attr( $url ),
 		esc_html( __( 'Link', 'ev_framework' ) ),
 		$link_hidden_inputs
 	);
@@ -62,20 +63,24 @@ function ev_link_modal_load() {
 	$content = '';
 	$content .= '<div class="ev-link-url-wrapper">';
 	   $content .= sprintf( '<input type="text" name="url" value="%s" placeholder="URL">', esc_attr( $url ) );
-		$content .= sprintf( '<span>%s</span>', esc_html( __( 'Tab', 'ev_framework' ) ) );
+		$content .= sprintf( '<span class="ev-link-trigger"><span>%s</span></span>', esc_html( __( 'Tab', 'ev_framework' ) ) );
 	$content .= '</div>';
 
 	$content .= '<div class="ev-link-inner-wrapper">';
 		$content .= '<div class="ev-link-field-row">';
-			$content .= ev_select(
-				'target',
-				array(
-					''       => __( 'Same tab', 'ev_framework' ),
-					'_blank' => __( 'New tab', 'ev_framework' ),
-				),
-				$target,
-				false
-			);
+			$content .= '<div class="ev-link-radio-wrapper">';
+				$content .= sprintf( '<p>%s</p>', esc_html( __( 'Open in tab', 'ev_framework' ) ) );
+				$content .= ev_radio(
+					'target',
+					array(
+						''       => __( 'Same tab', 'ev_framework' ),
+						'_blank' => __( 'New tab', 'ev_framework' ),
+					),
+					$target,
+					'switch',
+					false
+				);
+		$content .= '</div>';
 
 			$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ) );
 		$content .= '</div>';

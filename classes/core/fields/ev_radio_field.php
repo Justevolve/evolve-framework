@@ -31,7 +31,7 @@ class Ev_RadioField extends Ev_Field {
 		}
 
 		$data['config'] = wp_parse_args( $data['config'], array(
-			'graphic' => false,
+			'style' => '',
 			'data' => array()
 		) );
 
