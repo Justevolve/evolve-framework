@@ -239,3 +239,63 @@ function ev_radio( $name, $data, $value = '', $style = '', $echo = true ) {
 
 	return $html;
 }
+
+/**
+ * Output an HTML checkbox control.
+ *
+ * @since 0.4.0
+ * @param string $name The checkbox control name attribute.
+ * @param string $value The checkbox selected value.
+ * @param boolean $class The checkbox control class.
+ * @param boolean $echo Set to true to print the control.
+ * @return string
+ */
+function ev_checkbox( $name, $value, $class = '', $echo = true ) {
+	$checked = '';
+	$html = '';
+
+	if ( $value == 1 ) {
+		$checked = 'checked';
+	}
+
+	$html .= sprintf( '<input name="%s" type="hidden" value="0">', esc_attr( $name ) );
+	$html .= sprintf( '<input class="%s" name="%s" type="checkbox" value="1" %s>',
+		esc_attr( $class ),
+		esc_attr( $name ),
+		esc_attr( $checked )
+	);
+
+	if ( $echo ) {
+		echo $html;
+	}
+
+	return $html;
+}
+
+function ev_color( $name, $value, $opacity = false, $echo = true ) {
+	$html = '';
+	$opacity_data = '';
+	$field_color = isset( $value['color'] ) ? $value['color'] : '';
+	$field_opacity = isset( $value['opacity'] ) ? $value['opacity'] : '';
+
+	if ( $opacity ) {
+		$opacity_data = 'data-opacity=' . $field_opacity;
+
+		$html .= sprintf( '<input type="hidden" data-input-color-opacity name="%s" value="%s">',
+			esc_attr( $name . '[opacity]' ),
+			esc_attr( $field_opacity )
+		);
+	}
+
+	$html .= sprintf( '<input type="text" class="ev-color-input" name="%s" value="%s" %s>',
+		esc_attr( $name . '[color]' ),
+		esc_attr( $field_color ),
+		esc_attr( $opacity_data )
+	);
+
+	if ( $echo ) {
+		echo $html;
+	}
+
+	return $html;
+}
