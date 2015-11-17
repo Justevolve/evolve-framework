@@ -26,6 +26,14 @@ class Ev_CheckboxField extends Ev_Field {
 			$data['default'] = '';
 		}
 
+		if ( ! isset( $data['config'] ) ) {
+			$data['config'] = array();
+		}
+
+		$data['config'] = wp_parse_args( $data['config'], array(
+			'style' => ''
+		) );
+
 		parent::__construct( $data );
 	}
 }

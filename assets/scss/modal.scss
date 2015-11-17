@@ -1,0 +1,223 @@
+@import "libs";
+
+// -----------------------------------------------------------------------------
+// $Modal
+// -----------------------------------------------------------------------------
+
+$modal_header_height: $baseline*2;
+$modal_footer_height: $baseline + ($baseline + 13) + 1; // footer padding + button padding + button font size + border
+
+body.ev-modal-open {
+	overflow: hidden;
+}
+
+.ev-modal-container + .ev-modal-container {
+	top: 60px;
+	bottom: 60px;
+	left: 15%;
+	right: 15%;
+	background: rgba( #000, 0.5 );
+
+	@include ev_media( $media_tablet ) {
+		left: 5%;
+		right: 5%;
+	}
+
+	@include ev_media( $media_mobile ) {
+		left: 0;
+		right: 0;
+	}
+
+	.ev-modal-wrapper {
+		top: $baseline;
+		bottom: $baseline;
+		left: $baseline;
+		right: $baseline;
+	}
+}
+
+.ev-modal-wrapper {
+	top: 60px;
+	bottom: 60px;
+	left: 15%;
+	right: 15%;
+	background: $white;
+	overflow: hidden;
+
+	@include ev_media( $media_tablet ) {
+		left: 5%;
+		right: 5%;
+	}
+
+	@include ev_media( $media_mobile ) {
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+	}
+
+	&.ev-loading {
+		&:before {
+			@include spinner( 20px, 3px, $text );
+			@include position( absolute, 50% null null 50% );
+			margin-left: -10px;
+			margin-top: -10px;
+		}
+	}
+}
+
+.ev-modal-header {
+	padding: $baseline/2 ($gutter*1.5 + $baseline) $baseline/2 $gutter;
+	min-height: $modal_header_height;
+	@include box-sizing( border-box );
+
+	h1 {
+		font-size: 16px;
+		line-height: $baseline;
+		margin: 0;
+		font-weight: bold;
+	}
+}
+
+.ev-modal {
+	border-top: 1px solid $border_color;
+
+	> .ev-tabs {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: $modal_footer_height;
+
+		.ev-tabs-nav.ev-vertical {
+			overflow-y: auto;
+			@include position( absolute, 0 auto 0 0 );
+			max-width: none;
+			width: 180px;
+			margin-right: 0;
+
+			@include ev-media( $media_mobile_small ) {
+				position: relative;
+				width: 100%;
+			}
+
+			+ .ev-tab-container {
+				overflow-y: auto;
+				@include position( absolute, 0 0 0 179px );
+
+				@include ev-media( $media_mobile_small ) {
+					position: relative;
+					left: 0;
+					width: 100%;
+					border: none;
+				}
+			}
+		}
+	}
+}
+
+.ev-modal-footer {
+	@include clearfix;
+	@include box-sizing( border-box );
+	display: inline-block;
+	width: 100%;
+	clear: both;
+	padding: $baseline/2 $gutter;
+	border-top: 1px solid $border_color;
+	@include position( absolute, null 0 0 0 );
+	z-index: 1;
+	background: #fff;
+
+	.ev-save {
+		float: right;
+
+		.ev-btn-action {
+			background-color: $blue_dark;
+
+			&:hover {
+				background-color: darken( $blue_dark, 10 );
+			}
+		}
+
+		&.ev-saving {
+			.ev-btn-action {
+				background-color: darken( $blue_dark, 10 );
+			}
+		}
+	}
+}
+
+.ev-modal-close {
+	position: relative;
+	font-size: $baseline;
+	@include size( $baseline );
+	line-height: $baseline;
+	padding-top: $baseline/2;
+	float: right;
+	margin-right: $gutter;
+	z-index: 10;
+	color: $text;
+
+	&:focus {
+		@include box-shadow( none );
+	}
+
+	&:hover {
+		color: $red;
+	}
+
+	i {
+		font-style: normal;
+	}
+}
+
+.ev-modal-back {
+	float: left;
+	@extend %btn;
+
+	.ev-btn-action {
+		color: $text;
+		background-color: $grey_light_1;
+		@include transition( background-color $transition_time*1.5 ease, width $transition_time*2.5 ease, padding $transition_time*2.5 $ease-out-back );
+		cursor: pointer;
+
+		&:before {
+			@include icon( "\f340" );
+			float: left;
+			margin-right: $gutter/4;
+		}
+
+		&:hover {
+			background-color: darken( $grey_light_1, 10 );
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Modal tabs
+// -----------------------------------------------------------------------------
+
+.ev-modal {
+	@include vertical_tab_style;
+
+	> .ev-tabs {
+		@include position( absolute, ($modal_header_height + 1) 0 $modal_footer_height 0 );
+		overflow-y: auto;
+		background: $grey_light_1;
+
+		.ev-tab-container {
+			min-height: 100%;
+		}
+	}
+
+	> .ev-tab-container {
+		@include position( absolute, ($modal_header_height + 1) 0 $modal_footer_height 0 );
+		overflow-y: auto;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Modal container
+// -----------------------------------------------------------------------------
+
+@include ev_modal_reset();

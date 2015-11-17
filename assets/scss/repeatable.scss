@@ -1,0 +1,163 @@
+@import "libs";
+
+// -----------------------------------------------------------------------------
+// $Fields repeatable
+// -----------------------------------------------------------------------------
+
+.ev-repeatable-remove:before {
+	display: none;
+}
+
+.ev-repeatable {
+
+	.ev-repeatable-controls {
+		@include clearfix();
+		clear: both;
+		display: block;
+		margin-bottom: $baseline/4;
+
+		a + a {
+			margin-left: $gutter;
+		}
+
+		a.ev-repeat-remove-all {
+			color: $red;
+		}
+	}
+
+	.ev-no-fields {
+		.ev-repeat-remove-all,
+		.ev-repeatable-controls + .ev-repeatable-controls {
+			display: none;
+		}
+	}
+
+	.ev-container-empty .ev-repeatable-controls {
+		display: none;
+	}
+
+	.ev-field-inner {
+		float: left;
+		width: 100%;
+		clear: both;
+		@include box-sizing( border-box );
+		position: relative;
+		padding: $baseline/4 $baseline*1.25 $baseline/4 $baseline/2;
+		border: 1px solid $border_color;
+		border-bottom: 0;
+
+		&:last-child {
+			border-bottom: 1px solid $border_color;
+		}
+
+		&:hover {
+			background-color: rgba( $blue_light, .1 );
+			border-left-color: $blue_medium;
+			border-right-color: $blue_medium;
+
+			.ev-repeatable-remove:before {
+				@include opacity( 100 );
+			}
+
+			&:before,
+			&:after {
+				content: "";
+				display: block;
+				@include position( absolute, -1px null -1px null );
+				width: 1px;
+				background-color: $blue_medium;
+			}
+
+			&:before {
+				left: 0;
+			}
+
+			&:after {
+				right: 0;
+			}
+		}
+
+		+ .ev-field-inner {
+			border-top: 1px dashed $border_color;
+		}
+	}
+
+	.ev-repeatable-remove {
+		cursor: pointer;
+
+		&:before {
+			@extend %remove_icon;
+			margin-top: -9px;
+			@include position( absolute, 50% $baseline/4 null null );
+		}
+
+		&:hover:before {
+			color: darken( $red, 20 );
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Fields sortable
+// -----------------------------------------------------------------------------
+
+.ev-sortable {
+
+	.ev-field-inner {
+		padding-left: $gutter + 1;
+		float: left;
+		width: 100%;
+		clear: both;
+		@include box-sizing( border-box );
+
+		&:hover {
+			.ev-sortable-handle {
+				visibility: visible;
+			}
+		}
+
+		&.ui-sortable-helper {
+			border-top: 1px solid $border_color;
+			border-bottom: 1px solid $border_color;
+			background-color: $white;
+			@include box-shadow( 0 1px 10px rgba( #000, .1 ) );
+		}
+
+		&.ui-sortable-placeholder {
+			background-color: $grey_light_2;
+			visibility: visible !important;
+		}
+
+	}
+
+	.ev-sortable-handle {
+		@include ev_handle;
+		width: $gutter;
+		@include position( absolute, 0 null 0 0 );
+
+		&:before {
+			@include position( absolute, 50% null null 50% );
+			margin-left: -3px;
+			margin-top: -7px;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Empty state
+// -----------------------------------------------------------------------------
+
+.ev-empty-state {
+	display: none;
+	border: 1px solid $border_color;
+	background: $grey_light_2;
+	text-align: center;
+	font-size: 12px;
+	font-style: italic;
+	color: $text_light;
+	padding: $baseline/2 $gutter;
+
+	.ev-container-empty & {
+		display: block;
+	}
+}

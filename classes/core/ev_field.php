@@ -786,7 +786,7 @@ abstract class Ev_Field {
 			$messages[] = sprintf( 'Field "%s": repeatable parameter must be in array/boolean form.', $field['handle'] );
 		}
 		elseif ( array_key_exists( 'size', $field ) ) {
-			$allowed_sizes = array( 'full', 'large', 'medium', 'small' );
+			$allowed_sizes = array( 'full', 'large', 'medium', 'small', 'one-half', 'two-fourths', 'one-third', 'one-fourth', 'three-fourths', 'two-thirds' );
 
 			if ( ! empty( $field['size'] ) && ! in_array( $field['size'], $allowed_sizes ) ) {
 				/* Ensuring that the field has a valid value for its size, if any. */
