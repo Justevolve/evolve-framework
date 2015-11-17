@@ -476,7 +476,7 @@ class Ev_Framework {
 		if ( $framework_changelog_url !== '' ) {
 			$plugin_meta[] = sprintf( '<a target="_blank" data-changelog href="%s">%s</a>',
 				esc_url( $framework_changelog_url ),
-				__( 'Changelog', 'ev_framework' )
+				esc_html( __( 'Changelog', 'ev_framework' ) )
 			);
 		}
 
