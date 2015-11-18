@@ -92,6 +92,7 @@ add_filter( 'ev_field_types', 'ev_register_color_field_type' );
  * @return string
  */
 function ev_color_field_palette_html( $palette, $value ) {
+	// TODO: rimuovere funzione
 	if ( ! $palette ) {
 		return '';
 	}

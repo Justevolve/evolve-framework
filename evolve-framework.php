@@ -278,6 +278,9 @@ class Ev_Framework {
 		/* Link utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'link.php' );
 
+		/* Color utilities. */
+		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'color.php' );
+
 		/* Notices utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'admin/notices.php' );
 

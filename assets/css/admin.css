@@ -75,6 +75,16 @@
   100% { -ms-transform: rotate(360deg); } }
 @keyframes spinner { 0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); } }
+@media only screen and (max-width: 782px) { .ev-field-color .minicolors-swatch { top: 5px; height: 26px; } }
+.ev-color-input-wrapper { display: inline-block; }
+.ev-color-input-wrapper + .ev-color-input-wrapper { margin-left: 20px; }
+.ev-color-input-wrapper .ev-sub-label { display: block; }
+
+.ev-color-user-presets, .ev-color-default-presets { margin-bottom: 24px; }
+.ev-color-user-presets:after, .ev-color-default-presets:after { content: ""; display: table; clear: both; }
+
+.ev-color-preset { display: block; float: left; width: 48px; height: 48px; cursor: pointer; }
+.ev-color-preset.ev-selected { -khtml-opacity: 0.2; -moz-opacity: 0.2; opacity: 0.2; filter: alpha(opacity=20); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)"; }
 
 
 .ev-field .ev-sub-label, .ev-image-size-select-container p, .ev-image-upload .ev-density-label, .ev-image-upload .ev-breakpoint-label, .ev-image-upload-image-size-selection span, .ev-icon-search-results { font-style: italic; font-size: 12px; color: #999; }

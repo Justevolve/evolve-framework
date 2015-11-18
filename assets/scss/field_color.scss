@@ -1,31 +1,8 @@
 @import "libs";
 
-
 // -----------------------------------------------------------------------------
 // $Color field
 // -----------------------------------------------------------------------------
-
-.ev-color-palette {
-	margin: 0;
-	padding: 0;
-	@include clearfix;
-
-	.ev-color-palette-variant {
-		cursor: pointer;
-		width: $gutter*1.5;
-		height: $gutter*1.5;
-		margin-right: $gutter/4;
-		margin-bottom: $gutter/4;
-		display: inline-block;
-		float: left;
-		border: 3px solid $border_color;
-		@include box-shadow( inset 0px 0px 0px 1px $white );
-
-		&.ev-selected {
-			border-color: $blue_medium;
-		}
-	}
-}
 
 @include ev_media( $media_mobile ) {
 	.ev-field-color {
@@ -45,5 +22,26 @@
 
 	.ev-sub-label {
 		display: block;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Color presets
+// -----------------------------------------------------------------------------
+
+.ev-color-user-presets,
+.ev-color-default-presets {
+	@include clearfix();
+	margin-bottom: $baseline;
+}
+
+.ev-color-preset {
+	display: block;
+	float: left;
+	@include size( $baseline*2 );
+	cursor: pointer;
+
+	&.ev-selected {
+		@include opacity( 20 );
 	}
 }
