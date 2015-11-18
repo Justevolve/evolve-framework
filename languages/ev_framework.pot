@@ -69,10 +69,6 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: classes/core/fields/ev_color_field.php:101
-msgid "Transparent"
-msgstr ""
-
 #: classes/core/fields_containers/ev_admin_page.php:360
 msgid "All saved!"
 msgstr ""
@@ -99,7 +95,11 @@ msgstr ""
 msgid "Add Media"
 msgstr ""
 
-#: evolve-framework.php:482
+#: evolve-framework.php:179
+msgid "Insert a name for the preset"
+msgstr ""
+
+#: evolve-framework.php:486
 msgid "Changelog"
 msgstr ""
 
@@ -107,15 +107,19 @@ msgstr ""
 msgid "Presets"
 msgstr ""
 
-#: includes/color.php:120
+#: includes/color.php:159
 msgid "User-defined presets"
 msgstr ""
 
-#: includes/color.php:132
+#: includes/color.php:168
+msgid "Delete preset"
+msgstr ""
+
+#: includes/color.php:173
 msgid "You haven't saved any color presets yet!"
 msgstr ""
 
-#: includes/color.php:138
+#: includes/color.php:179
 msgid "Default presets"
 msgstr ""
 
@@ -199,9 +203,4 @@ msgstr ""
 #: classes/core/fields/ev_icon_field.php:65
 msgctxt "multiple icons found"
 msgid "%s found"
-msgstr ""
-
-#: includes/admin/fields.php:316
-msgctxt "save color preset"
-msgid "Save"
 msgstr ""

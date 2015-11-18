@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Delete a color preset.
+ *
+ * @since 0.4.0
+ */
 function ev_color_delete_preset() {
 	if ( ! ev_is_post_nonce_valid( 'ev_color_delete_preset' ) ) {
 		die();
@@ -27,6 +32,11 @@ function ev_color_delete_preset() {
 
 add_action( 'wp_ajax_ev_color_delete_preset', 'ev_color_delete_preset' );
 
+/**
+ * Save a color preset.
+ *
+ * @since 0.4.0
+ */
 function ev_color_save_preset() {
 	if ( ! ev_is_post_nonce_valid( 'ev_color_save_preset' ) ) {
 		die();
@@ -144,7 +154,7 @@ function ev_color_presets_modal_load() {
 
 		$content .= '<div class="ev-color-presets-wrapper">';
 
-			// User presets
+			/* User presets */
 			$content .= '<div class="ev-color-user-presets">';
 				$content .= sprintf( '<h3>%s</h3>', esc_html( __( 'User-defined presets', 'ev_framework' ) ) );
 
@@ -164,7 +174,7 @@ function ev_color_presets_modal_load() {
 				}
 			$content .= '</div>';
 
-			// Default presets
+			/* Default presets */
 			$content .= '<div class="ev-color-default-presets">';
 				$content .= sprintf( '<h3>%s</h3>', esc_html( __( 'Default presets', 'ev_framework' ) ) );
 

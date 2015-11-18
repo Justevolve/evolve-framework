@@ -13,6 +13,9 @@
 .ev-color-input-wrapper + .ev-color-input-wrapper { margin-left: 20px; }
 .ev-color-input-wrapper .ev-sub-label { display: block; }
 
+[data-color-presets] { display: none; }
+.ev-has-color-presets [data-color-presets] { display: inline-block; }
+
 .ev-color-user-presets, .ev-color-default-presets { margin-bottom: 24px; }
 .ev-color-user-presets:after, .ev-color-default-presets:after { content: ""; display: table; clear: both; }
 

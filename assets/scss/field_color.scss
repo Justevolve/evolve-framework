@@ -29,6 +29,14 @@
 // $Color presets
 // -----------------------------------------------------------------------------
 
+[data-color-presets] {
+	display: none;
+
+	.ev-has-color-presets & {
+		display: inline-block;
+	}
+}
+
 .ev-color-user-presets,
 .ev-color-default-presets {
 	@include clearfix();

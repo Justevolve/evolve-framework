@@ -34,6 +34,15 @@
 		if ( hex ) {
 			$( "[data-hex='" + hex + "']", wrapper ).remove();
 
+			ev_framework.color.presets = _.without(
+				ev_framework.color.presets,
+				_.findWhere( ev_framework.color.presets, { user: true, hex: hex } )
+			);
+
+			if ( ! ev_framework.color.presets.length ) {
+				$( "body" ).removeClass( "ev-has-color-presets" );
+			}
+
 			$.post(
 				ajaxurl,
 				{
@@ -42,7 +51,6 @@
 					hex: hex
 				},
 				function( response ) {
-					// $( "body" ).addClass( "ev-has-color-presets" );
 				}
 			);
 		}
@@ -60,7 +68,7 @@
 			hex = input.val();
 
 		if ( hex ) {
-			var preset_name = prompt( 'Name?' ); // TODO: tradurre
+			var preset_name = prompt( ev_framework.color.new_preset_name );
 
 			$.post(
 				ajaxurl,
@@ -71,6 +79,12 @@
 					name: preset_name
 				},
 				function( response ) {
+					ev_framework.color.presets.push( {
+						user: true,
+						hex: hex,
+						label: preset_name
+					} );
+
 					$( "body" ).addClass( "ev-has-color-presets" );
 				}
 			);
