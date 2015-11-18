@@ -204,3 +204,8 @@ msgstr ""
 msgctxt "multiple icons found"
 msgid "%s found"
 msgstr ""
+
+#: includes/admin/fields.php:316
+msgctxt "save color preset"
+msgid "Save"
+msgstr ""
