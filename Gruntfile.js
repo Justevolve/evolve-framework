@@ -270,7 +270,7 @@ module.exports = function( grunt ) {
 			},
 			admin_css: {
 				files: [
-					"assets/admin/scss/*.scss"
+					"assets/scss/*.scss"
 				],
 				tasks: [ "sass:admin", "concat:admin_css", "string-replace:admin_css", "file_append:admin_css" ],
 				options: {
