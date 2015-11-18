@@ -24,16 +24,16 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: classes/core/ev_field.php:529
+#: classes/core/ev_field.php:540
 msgid "Add"
 msgstr ""
 
-#: classes/core/ev_field.php:532 templates/fields/attachment.php:77
+#: classes/core/ev_field.php:543 templates/fields/attachment.php:77
 #: templates/fields/partials/image_upload.php:73
 msgid "Remove all"
 msgstr ""
 
-#: classes/core/ev_field.php:593
+#: classes/core/ev_field.php:604
 msgid "Need help?"
 msgstr ""
 
@@ -107,23 +107,23 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: includes/link.php:37
+#: includes/link.php:39
 msgid "Link"
 msgstr ""
 
-#: includes/link.php:66
+#: includes/link.php:68
 msgid "Tab"
 msgstr ""
 
-#: includes/link.php:72
+#: includes/link.php:74
 msgid "Open in tab"
 msgstr ""
 
-#: includes/link.php:76
+#: includes/link.php:78
 msgid "Same tab"
 msgstr ""
 
-#: includes/link.php:77
+#: includes/link.php:79
 msgid "New tab"
 msgstr ""
 

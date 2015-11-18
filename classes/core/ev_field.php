@@ -317,6 +317,17 @@ abstract class Ev_Field {
 	}
 
 	/**
+	 * Get the field size.
+	 *
+	 * @since 0.4.0
+	 * @return string
+	 */
+	public function get_size()
+	{
+		return $this->_size;
+	}
+
+	/**
 	 * Set or retrieve the field default data value.
 	 *
 	 * @since 0.1.0
@@ -426,7 +437,7 @@ abstract class Ev_Field {
 		$classes = array(
 			'ev-field',
 			'ev-field-' . $this->_type,
-			'ev-field-size-' . $this->_size
+			'ev-field-size-' . $this->get_size()
 		);
 
 		if ( $this->_break === true ) {
@@ -558,7 +569,7 @@ abstract class Ev_Field {
 	 *
 	 * @since 0.1.0
 	 */
-	private function _render_label()
+	public function _render_label()
 	{
 		$label = $this->label();
 
@@ -690,6 +701,15 @@ abstract class Ev_Field {
 	}
 
 	/**
+	 * Output custom content just after the field container has been printed.
+	 *
+	 * @since 0.4.0
+	 */
+	protected function _field_container_start()
+	{
+	}
+
+	/**
 	 * Render the field interface.
 	 *
 	 * @since 0.1.0
@@ -720,6 +740,8 @@ abstract class Ev_Field {
 			}
 
 			printf( '<div class="ev-container %s">', esc_attr( $container_class ) );
+				$this->_field_container_start();
+
 				if ( $this->_repeatable !== false ) {
 					if ( ! ev_is_skipped_on_saving( $this->_type ) ) {
 						$this->_render_repeatable_controls();
