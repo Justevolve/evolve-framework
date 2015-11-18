@@ -146,20 +146,38 @@ function ev_icon_modal_load() {
 	$icon_fonts = ev_get_icon_fonts();
 
 	$content = '<div class="ev-icon-sets-external-wrapper ev-active">';
-		$content .= sprintf( '<input type="text" name="color" value="%s" data-icon-color>', esc_attr( $color ) );
-		$content .= sprintf( '<input type="text" name="size" value="%s" data-icon-size>', esc_attr( $size ) );
 
-		$content .= sprintf( '<input type="hidden" name="prefix" value="%s" data-icon-prefix>', esc_attr( $prefix ) );
-		$content .= sprintf( '<input type="hidden" name="set" value="%s" data-icon-set>', esc_attr( $set ) );
-		$content .= sprintf( '<input type="hidden" name="icon" value="%s" data-icon-name>', esc_attr( $icon ) );
+		$content .= '<div class="ev-icon-sets-controls-wrapper">';
+
+			$content .= '<div class="ev-icon-search-wrapper">';
+				$content .= sprintf( '<input type="text" placeholder="%s" data-icon-search>', esc_attr( __( 'Search', 'icon search', 'ev_framework' ) ) );
+				$content .= '<p class="ev-icon-search-results"></p>';
+			$content .= '</div>';
+
+			$content .= '<div class="ev-icon-sets-controls-wrapper">';
+				$content .= sprintf( '<input type="text" name="color" value="%s" data-icon-color>', esc_attr( $color ) );
+				$content .= sprintf( '<input type="text" name="size" value="%s" data-icon-size>', esc_attr( $size ) );
+
+				$content .= sprintf( '<input type="hidden" name="prefix" value="%s" data-icon-prefix>', esc_attr( $prefix ) );
+				$content .= sprintf( '<input type="hidden" name="set" value="%s" data-icon-set>', esc_attr( $set ) );
+				$content .= sprintf( '<input type="hidden" name="icon" value="%s" data-icon-name>', esc_attr( $icon ) );
+			$content .= '</div>';
+
+			$content .= '<div class="ev-icon-sets-preview-wrapper">';
+				$content .= 'Preview';
+			$content .= '</div>';
+
+		$content .= '</div>';
 
 		$content .= '<div class="ev-icon-sets-inner-wrapper">';
-			$content .= '<div class="ev-icon-set-select-wrapper">';
-				$content .= '<div class="ev-icon-search-wrapper">';
-					$content .= sprintf( '<input type="text" placeholder="%s" data-icon-search>', esc_attr( __( 'Search', 'icon search', 'ev_framework' ) ) );
-					$content .= '<p class="ev-icon-search-results"></p>';
-				$content .= '</div>';
-			$content .= '</div>';
+			// $content .= '<div class="ev-icon-set-select-wrapper">';
+			// 	$content .= '<div class="ev-icon-search-wrapper">';
+			// 		$content .= sprintf( '<input type="text" placeholder="%s" data-icon-search>', esc_attr( __( 'Search', 'icon search', 'ev_framework' ) ) );
+			// 		$content .= '<p class="ev-icon-search-results"></p>';
+			// 	$content .= '</div>';
+			// $content .= '</div>';
+
+			$content .= printf( '<h2>%s</h2>', esc_html( __( 'Choose your icon', 'ev_framework' ) ) );
 
 			$content .= '<div class="ev-icon-sets">';
 

@@ -9,10 +9,12 @@
  */
 function ev_link_partial( $handle, $link ) {
 	if ( ! isset( $link['link'] ) ) {
-		$link['link'] = array();
+		$link = array();
+	}
+	else {
+		$link = $link['link'];
 	}
 
-	$link = $link['link'];
 	$handle .= '[link]';
 	$link_class = 'ev-link-ctrl ev-tooltip';
 

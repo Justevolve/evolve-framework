@@ -137,10 +137,30 @@ module.exports = function( grunt ) {
 				style: "compressed",
 				sourcemap: "none"
 			},
+			// admin: {
+			// 	files: {
+			// 		"assets/css/admin.css" : "assets/scss/admin.scss"
+			// 	}
+			// }
 			admin: {
-				files: {
-					"assets/css/admin.css" : "assets/scss/admin.scss"
-				}
+				options: {
+					style: "compact",
+					quiet: true
+				},
+				files: [ {
+					expand: true,
+					cwd: "assets/scss/",
+					src: [
+						"*.scss",
+						"!_utils.scss",
+						"!libs.scss",
+						"!config.scss",
+						"!import.scss",
+						"!admin.scss",
+					],
+					dest: "assets/scss/compiled/",
+					ext: ".css"
+				} ]
 			}
 		},
 
@@ -161,7 +181,28 @@ module.exports = function( grunt ) {
 				},
 				src: get_modules_raw_stylesheets(),
 				dest: 'scss/components-libs.scss'
+			},
+			admin_css: {
+				src: [ "assets/scss/compiled/*.css" ],
+				dest: "assets/css/admin.css"
+			},
+		},
+
+		// Append
+		'file_append': {
+			'admin_css': {
+				files: [
+					{
+						prepend: '@charset "UTF-8";\n',
+						input: "assets/css/admin.css",
+						output: "assets/css/admin.css"
+					}
+				]
 			}
+		},
+
+		clean: {
+			start: [ "assets/scss/compiled" ],
 		},
 
 		// Uglify
@@ -191,7 +232,20 @@ module.exports = function( grunt ) {
 						}
 					]
 				}
-			}
+			},
+			'admin_css': {
+				files: {
+					'assets/css/admin.css': 'assets/css/admin.css',
+				},
+				options: {
+					replacements: [
+						{
+							pattern: /@charset "UTF-8";/g,
+							replacement: "",
+						}
+					]
+				}
+			},
 		},
 
 		// Watch
@@ -203,16 +257,27 @@ module.exports = function( grunt ) {
 					spawn: false
 				}
 			},
-			admin_css: {
-				files: [ "assets/scss/admin.scss", "scss/components-libs.scss" ],
-				tasks: [ "sass:admin", "notify:done" ]
-			},
+			// admin_css: {
+			// 	files: [ "assets/scss/admin.scss", "scss/components-libs.scss" ],
+			// 	tasks: [ "sass:admin", "notify:done" ]
+			// },
 			prod_css: {
 				files: get_modules_raw_stylesheets(),
 				tasks: [ "prod" ],
 				options: {
 					spawn: false,
 				}
+			},
+			admin_css: {
+				files: [
+					"assets/scss/*.scss"
+				],
+				tasks: [ "sass:admin", "concat:admin_css", "string-replace:admin_css", "file_append:admin_css" ],
+				options: {
+					spawn: false
+				}
+				// files: [ "assets/admin/scss/style.scss" ],
+				// tasks: [ "sass", "notify:done" ]
 			},
 		},
 
@@ -264,6 +329,8 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-markdown" );
 	grunt.loadNpmTasks( "grunt-notify" );
 	grunt.loadNpmTasks( "grunt-wp-i18n" );
+	grunt.loadNpmTasks( "grunt-contrib-clean" );
+	grunt.loadNpmTasks( "grunt-file-append" );
 
 	grunt.task.run( "notify_hooks" );
 
@@ -290,7 +357,10 @@ module.exports = function( grunt ) {
 	 */
 	grunt.registerTask( "start", [
 		"string-replace:framework-info",
+		"sass",
 		"concat",
+		"string-replace:admin_css",
+		"file_append:admin_css",
 		"uglify",
 		"makepot",
 		"notify:start",

@@ -13,6 +13,8 @@
 		"grunt-notify": "*",
 		"grunt-string-replace": "*",
 		"grunt-markdown": "*",
-		"grunt-wp-i18n": "*"
+		"grunt-wp-i18n": "*",
+		"grunt-contrib-clean": "",
+		"grunt-file-append": ""
 	}
 }
