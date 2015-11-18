@@ -778,6 +778,177 @@ $upload_size: 80px;
 }
 
 // -----------------------------------------------------------------------------
+// $Divider
+// -----------------------------------------------------------------------------
+
+.ev-field-divider {
+	padding-left: $gutter;
+	padding-right: $gutter;
+	padding-bottom: 0;
+	margin-bottom: $baseline/2;
+
+	h3 {
+		display: inline-block;
+		padding: 0 0 $baseline/4 !important;
+		margin-bottom: -1px !important;
+		font-size: 14px !important;
+	}
+
+	// Section break
+	&.ev-divider-style-section_break {
+		border-bottom: 1px solid $blue_dark;
+		background-color: $blue_dark;
+
+		h3 {
+			// background-color: $blue_dark;
+			color: $white;
+			// border-top-left-radius: $radius;
+			// border-top-right-radius: $radius;
+			padding: $baseline/4 $baseline/2 !important;
+		}
+	}
+
+	// In page divider
+	&.ev-divider-style-in_page {
+		padding-top: $baseline;
+
+		.ev-field-inner {
+			border-bottom: 1px solid $blue_dark;
+		}
+
+		h3 {
+			background-color: $blue_dark;
+			color: $white;
+			border-top-left-radius: $radius;
+			border-top-right-radius: $radius;
+			padding: $baseline/4 $baseline/2 !important;
+			// border-bottom: 4px solid $blue_dark;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Field description
+// -----------------------------------------------------------------------------
+
+.ev-field-description {
+
+	// Standard message
+	&.ev-description-style-standard {
+		.ev-container {}
+	}
+
+	// Blue info notice
+	&.ev-description-style-info {
+		.ev-container {
+			padding: $baseline/1.5 $gutter;
+			border-radius: $radius;
+			background-color: $blue_light;
+			color: $blue_light_text;
+		}
+	}
+
+	// Yellow important message
+	&.ev-description-style-important {
+		.ev-container {
+			padding: $baseline/1.5 $gutter;
+			border-radius: $radius;
+			background-color: $yellow_light;
+			color: $yellow_text;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Tooltip
+// -----------------------------------------------------------------------------
+
+$tooltip_arrow_size: 16px;
+
+.ev-tooltip-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: $text;
+	color: #fff;
+	max-width: 200px;
+	border-radius: $radius;
+	padding: $baseline/3 $baseline/2;
+	font-size: 12px;
+	@include box-shadow( 0 1px 4px rgba( #000, .2 ) );
+	@include ev-transition( visibility $transition_time*1.5 ease, opacity $transition_time*1.5 ease );
+	@include opacity( 0 );
+	visibility: hidden;
+	z-index: 2000000;
+	pointer-events: none;
+
+	&.ev-tooltip-active {
+		@include opacity( 100 );
+		visibility: visible;
+	}
+
+	&:after {
+		position: absolute;
+		content: "";
+		display: block;
+	}
+
+	&.ev-tooltip-expand-top:after {
+		top: 100%;
+		left: 50%;
+		margin-left: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $text, down );
+	}
+
+	&.ev-tooltip-expand-bottom:after {
+		top: - $tooltip_arrow_size/2;
+		left: 50%;
+		margin-left: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $text, up );
+	}
+
+	&.ev-tooltip-expand-left:after {
+		left: 100%;
+		top: 50%;
+		margin-top: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $text, right );
+	}
+
+	&.ev-tooltip-expand-right:after {
+		left: 0;
+		top: 50%;
+		margin-top: - $tooltip_arrow_size/2;
+		margin-left: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $text, left );
+	}
+
+
+	// &.ev-tooltip-vertical {
+	// 	// margin-top: -10px;
+
+	// 	&:after {
+	// 		top: 100%;
+	// 		left: 50%;
+	// 		// margin-left: -8px;
+	// 		// margin-top: -2px;
+	// 		@include triangle( 16px, $text, down );
+	// 	}
+	// }
+
+	// &.ev-tooltip-horizontal {
+	// 	&:after {
+	// 		top: 50%;
+	// 		left: 0;
+	// 		// margin-left: -8px;
+	// 		// margin-top: -2px;
+	// 		margin-top: -8px;
+	// 		margin-left: -8px;
+	// 		@include triangle( 16px, $text, left );
+	// 	}
+	// }
+}
+
+// -----------------------------------------------------------------------------
 // $Link
 // -----------------------------------------------------------------------------
 
@@ -1027,6 +1198,227 @@ $link_modal_height: $baseline*2;
 			&:after {
 				left: $baseline + 3;
 			}
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Icon picker
+// -----------------------------------------------------------------------------
+
+.ev-selected-icon-wrapper {
+	position: relative;
+	@include size( $baseline*2 );
+	border: 1px solid $border_color;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+
+	&:after {
+		content: "";
+		display: block;
+		@include position( absolute, 0 0 0 0 );
+	}
+
+	&:hover {
+		border-color: $blue_medium;
+
+		&:after {
+			border: 1px solid $blue_medium;
+		}
+	}
+
+	.ev-icon {
+		font-size: 24px;
+		line-height: $baseline*2;
+	}
+
+	&.ev-empty {
+		background-color: $grey_light_2;
+
+		&:before {
+			content: "";
+			display: block;
+			@include size( 24px );
+			border: 2px dashed $grey_light;
+			margin-top: 10px;
+			margin-left: 10px;
+		}
+		.ev-icon-remove {
+			display: none;
+		}
+	}
+
+	.ev-icon-remove {
+		cursor: pointer;
+		display: block;
+
+		&:before {
+			@extend %remove_icon;
+			background-color: $white;
+			border-radius: 50%;
+			@include position( absolute, -3px -3px null null );
+		}
+	}
+
+	&.ev-empty .ev-icon-remove {
+		display: none;
+	}
+
+	&:hover {
+		.ev-icon-remove {
+			&:before {
+				@include opacity( 100 );
+			}
+
+			&:hover {
+				&:before {
+					color: darken( $red, 20 );
+				}
+			}
+		}
+	}
+}
+
+// Icon modal
+
+.ev-icon-sets-external-wrapper.ev-modal-container {
+	display: none;
+	// @include position( fixed, 60px 15% 60px 15% );
+	background: rgba( #000, 0.5 );
+    z-index: 100100;
+
+	.ev-icon-sets-inner-wrapper {
+		background-color: $white;
+		// @include position( absolute, $baseline $baseline $baseline $baseline );
+	}
+
+	&.ev-active {
+		display: block;
+	}
+
+	.ev-close-icon-modal {
+		float: right;
+
+		&:before {
+			cursor: pointer;
+			content: "\f335";
+			font-size: $baseline;
+			line-height: $baseline*1.5;
+			font-weight: 400;
+			font-style: normal;
+			text-transform: none;
+			text-rendering: auto;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			font-family: "dashicons";
+		}
+
+		&:hover {
+			color: $red;
+		}
+	}
+}
+
+.ev-icon-search-wrapper {
+	float: left;
+	@include box-shadow( inset 0 1px 2px rgba( #000, .07 ) );
+	border: 1px solid $border_color;
+	width: 50%;
+	position: relative;
+	z-index: 10;
+
+	input {
+		background-color: $white;
+		width: 100%;
+		line-height: $baseline*1.5 - 2;
+		padding: 0 $gutter/2;
+		border: none;
+		@include box-shadow( none );
+		@include transition( none );
+		margin: 0;
+
+		&:focus {
+			border: none;
+			@include box-shadow( none );
+		}
+	}
+}
+
+.ev-icon-search-results {
+	@extend %label;
+	font-size: 11px;
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background-color: $blue_medium;
+	color: $white;
+	margin: 0;
+	padding: 2px 6px;
+
+	&.ev-search-icon-results-visible {
+		display: block;
+	}
+}
+
+$icn: 24;
+$icon_size: $icn + ( $baseline/2 * 2 );
+
+.ev-icon-set-select-wrapper {
+	position: relative;
+	clear: both;
+	background-color: $grey_light_2;
+	padding: $baseline/2 $baseline;
+	float: left;
+	width: 100%;
+	@include box-sizing( border-box );
+	z-index: 1;
+}
+
+.ev-icon-sets {
+	clear: both;
+	@include clearfix;
+	@include position( absolute, 60px 0 0 0 );
+	overflow-y: auto;
+
+	> div {
+		clear: both;
+		@include clearfix;
+		padding: $baseline;
+
+		> h2 {
+			padding-bottom: $baseline/2;
+			border-bottom: 1px solid $grey_light;
+		}
+	}
+
+	i {
+		@include box-sizing( border-box );
+		float: left;
+		padding: $baseline/2;
+		font-size: #{$icn}px;
+		cursor: pointer;
+		line-height: 1;
+		@include size( $icon_size );
+		margin: 0;
+		text-align: center;
+
+		&:hover {
+			background-color: $grey_light_1;
+		}
+
+		&.ev-selected {
+			background-color: $blue_medium;
+			color: $white;
+		}
+	}
+
+	&.ev-searching i {
+		display: none;
+
+		&.ev-found {
+			display: block;
 		}
 	}
 }

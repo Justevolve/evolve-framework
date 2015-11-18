@@ -247,11 +247,10 @@ function ev_radio( $name, $data, $value = '', $style = '', $echo = true ) {
  * @param string $name The checkbox control name attribute.
  * @param string $value The checkbox selected value.
  * @param string $style The checkbox control style.
- * @param boolean $class The checkbox control class.
  * @param boolean $echo Set to true to print the control.
  * @return string
  */
-function ev_checkbox( $name, $value, $style = '', $class = '', $echo = true ) {
+function ev_checkbox( $name, $value, $style = '', $echo = true ) {
 	$checked = '';
 	$html = '';
 
@@ -261,8 +260,7 @@ function ev_checkbox( $name, $value, $style = '', $class = '', $echo = true ) {
 
 	$html .= sprintf( '<span class="ev-checkbox-wrapper ev-checkbox-style-%s">', esc_attr( $style ) );
 		$html .= sprintf( '<input name="%s" type="hidden" value="0">', esc_attr( $name ) );
-		$html .= sprintf( '<input class="%s" name="%s" type="checkbox" value="1" %s>',
-			esc_attr( $class ),
+		$html .= sprintf( '<input name="%s" type="checkbox" value="1" %s>',
 			esc_attr( $name ),
 			esc_attr( $checked )
 		);
