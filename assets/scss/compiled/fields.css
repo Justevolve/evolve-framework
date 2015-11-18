@@ -28,16 +28,6 @@
 .ev-field .ev-radio.ev-graphic-radio + .ev-graphic-radio { margin-left: 10px; margin-top: 0; }
 .ev-field .ev-sub-label { padding-bottom: 4px; }
 
-.ev-color-palette { margin: 0; padding: 0; }
-.ev-color-palette:after { content: ""; display: table; clear: both; }
-.ev-color-palette .ev-color-palette-variant { cursor: pointer; width: 30px; height: 30px; margin-right: 5px; margin-bottom: 5px; display: inline-block; float: left; border: 3px solid #e5e5e5; box-shadow: inset 0px 0px 0px 1px #fff; }
-.ev-color-palette .ev-color-palette-variant.ev-selected { border-color: #2ea2cc; }
-
-@media only screen and (max-width: 782px) { .ev-field-color .minicolors-swatch { top: 5px; height: 26px; } }
-.ev-color-input-wrapper { display: inline-block; }
-.ev-color-input-wrapper + .ev-color-input-wrapper { margin-left: 20px; }
-.ev-color-input-wrapper .ev-sub-label { display: block; }
-
 .ev-attachment-upload-action .ev-edit-action { display: none; }
 .ev-attachment-upload-action .ev-remove-all-action { display: none; }
 
