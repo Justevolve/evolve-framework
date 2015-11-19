@@ -21,6 +21,8 @@
 	}
 
 	.ev-sub-label {
+		@extend %label;
+		padding-bottom: $baseline/6;
 		display: block;
 	}
 }
