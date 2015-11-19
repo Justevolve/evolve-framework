@@ -1,4 +1,0 @@
-.ev-field input[type="text"], .ev-field input[type="number"], .ev-field textarea { max-width: 100%; }
-@media only screen and (max-width: 782px) { .ev-field input[type="text"], .ev-field input[type="number"], .ev-field textarea { width: 100%; } }
-.ev-field select { max-width: 100%; }
-.ev-field input[type=checkbox], .ev-field input[type=radio] { margin-top: 0; }
