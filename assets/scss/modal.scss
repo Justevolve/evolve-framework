@@ -4,9 +4,6 @@
 // $Modal
 // -----------------------------------------------------------------------------
 
-$modal_header_height: $baseline*2;
-$modal_footer_height: $baseline + ($baseline + 13) + 1; // footer padding + button padding + button font size + border
-
 body.ev-modal-open {
 	overflow: hidden;
 }

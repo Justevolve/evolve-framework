@@ -9,6 +9,9 @@ $gutter         : 20px;
 $radius         : 2px;
 $transition_time: .1s;
 
+$modal_header_height: $baseline*2;
+$modal_footer_height: $baseline + ($baseline + 13) + 1; // footer padding + button padding + button font size + border
+
 // Icons
 
 $icons: "dashicons";
