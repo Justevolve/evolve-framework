@@ -147,7 +147,7 @@ function ev_icon_modal_load() {
 
 	$content = '<div class="ev-icon-sets-external-wrapper ev-active">';
 
-		$content .= '<div class="ev-icon-sets-controls-wrapper">';
+		$content .= '<div class="ev-icon-sets-controls-external-wrapper">';
 
 			$content .= '<div class="ev-icon-search-wrapper">';
 				$content .= sprintf( '<input type="text" placeholder="%s" data-icon-search>', esc_attr( __( 'Search', 'icon search', 'ev_framework' ) ) );
@@ -177,7 +177,7 @@ function ev_icon_modal_load() {
 			// 	$content .= '</div>';
 			// $content .= '</div>';
 
-			$content .= printf( '<h2>%s</h2>', esc_html( __( 'Choose your icon', 'ev_framework' ) ) );
+			$content .= sprintf( '<h2>%s</h2>', esc_html( __( 'Choose your icon', 'ev_framework' ) ) );
 
 			$content .= '<div class="ev-icon-sets">';
 
