@@ -1,14 +1,4 @@
 @charset "UTF-8";
-@-webkit-keyframes spinner { 0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); } }
-@-moz-keyframes spinner { 0% { -moz-transform: rotate(0deg); }
-  100% { -moz-transform: rotate(360deg); } }
-@-o-keyframes spinner { 0% { -o-transform: rotate(0deg); }
-  100% { -o-transform: rotate(360deg); } }
-@-ms-keyframes spinner { 0% { -ms-transform: rotate(0deg); }
-  100% { -ms-transform: rotate(360deg); } }
-@keyframes spinner { 0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); } }
 .ev-persistent-messages-container { position: fixed; top: 56px; right: 40px; left: 200px; z-index: 100; }
 @media only screen and (max-width: 782px) { .ev-persistent-messages-container { right: 10px; left: 10px; } }
 .folded .ev-persistent-messages-container { left: 76px; }

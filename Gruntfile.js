@@ -152,6 +152,7 @@ module.exports = function( grunt ) {
 					cwd: "assets/scss/",
 					src: [
 						"*.scss",
+						"fields/*.scss",
 						"!_utils.scss",
 						"!libs.scss",
 						"!config.scss",
@@ -183,7 +184,7 @@ module.exports = function( grunt ) {
 				dest: 'scss/components-libs.scss'
 			},
 			admin_css: {
-				src: [ "assets/scss/compiled/*.css" ],
+				src: [ "assets/scss/compiled/*.css", "assets/scss/compiled/fields/*.css" ],
 				dest: "assets/css/admin.css"
 			},
 		},
@@ -357,6 +358,7 @@ module.exports = function( grunt ) {
 	 */
 	grunt.registerTask( "start", [
 		"string-replace:framework-info",
+		"clean:start",
 		"sass",
 		"concat",
 		"string-replace:admin_css",

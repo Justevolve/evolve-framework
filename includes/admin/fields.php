@@ -273,26 +273,50 @@ function ev_checkbox( $name, $value, $style = '', $echo = true ) {
 	return $html;
 }
 
+/**
+ * Output an HTML color control.
+ *
+ * @since 0.4.0
+ * @param string $name The color control name attribute.
+ * @param string $value The color selected value.
+ * @param boolean $opacity The color control opacity value.
+ * @param boolean $echo Set to true to print the control.
+ * @return string
+ */
 function ev_color( $name, $value, $opacity = false, $echo = true ) {
 	$html = '';
 	$opacity_data = '';
 	$field_color = isset( $value['color'] ) ? $value['color'] : '';
 	$field_opacity = isset( $value['opacity'] ) ? $value['opacity'] : '';
 
-	if ( $opacity ) {
-		$opacity_data = 'data-opacity=' . $field_opacity;
+	$html .= '<span class="ev-color-wrapper">';
 
-		$html .= sprintf( '<input type="hidden" data-input-color-opacity name="%s" value="%s">',
-			esc_attr( $name . '[opacity]' ),
-			esc_attr( $field_opacity )
+		if ( $opacity ) {
+			$opacity_data = 'data-opacity=' . $field_opacity;
+
+			$html .= sprintf( '<input type="hidden" data-input-color-opacity name="%s" value="%s">',
+				esc_attr( $name . '[opacity]' ),
+				esc_attr( $field_opacity )
+			);
+		}
+
+		$html .= sprintf( '<input type="text" class="ev-color-input" name="%s" value="%s" %s>',
+			esc_attr( $name . '[color]' ),
+			esc_attr( $field_color ),
+			esc_attr( $opacity_data )
 		);
-	}
 
-	$html .= sprintf( '<input type="text" class="ev-color-input" name="%s" value="%s" %s>',
-		esc_attr( $name . '[color]' ),
-		esc_attr( $field_color ),
-		esc_attr( $opacity_data )
-	);
+		$html .= sprintf( '<a href="#" data-color-presets data-nonce="%s">%s</a>',
+			esc_attr( wp_create_nonce( 'ev_color_presets' ) ),
+			esc_html( __( 'Presets', 'ev_framework' ) )
+		);
+
+		$html .= sprintf( '<a href="#" data-color-save-preset data-nonce="%s">%s</a>',
+			esc_attr( wp_create_nonce( 'ev_color_save_preset' ) ),
+			esc_html( _x( 'Save', 'save color preset', 'ev_framework' ) )
+		);
+
+	$html .= '</span>';
 
 	if ( $echo ) {
 		echo $html;

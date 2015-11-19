@@ -173,6 +173,10 @@ class Ev_Framework {
 				'text' => __( 'Text', 'ev_framework' ),
 				'visual' => __( 'Visual', 'ev_framework' ),
 				'add_media' => __( 'Add Media', 'ev_framework' ),
+			),
+			'color' => array(
+				'presets' => ev_get_color_presets(),
+				'new_preset_name' => __( 'Insert a name for the preset', 'ev_framework' )
 			)
 		) );
 	}
@@ -277,6 +281,9 @@ class Ev_Framework {
 
 		/* Link utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'link.php' );
+
+		/* Color utilities. */
+		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'color.php' );
 
 		/* Notices utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'admin/notices.php' );
