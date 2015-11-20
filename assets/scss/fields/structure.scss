@@ -10,6 +10,10 @@
 	@include box-sizing( border-box );
 	padding: $baseline/2 $gutter;
 
+	.ev-field-input-size-full {
+		width: 100%;
+	}
+
 	&.ev-hidden {
 		display: none;
 	}
