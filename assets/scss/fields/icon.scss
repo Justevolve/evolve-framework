@@ -85,102 +85,85 @@
 	width: 300px;
 }
 
-.ev-icon-sets-controls-wrapper {}
-.ev-icon-sets-preview-wrapper {}
+.ev-icon-sets-controls-wrapper {
+	padding: $baseline $gutter/2;
+}
+
+.ev-icon-sets-preview-wrapper {
+	border-top: 1px solid $border_color;
+	height: 300px;
+	width: 100%;
+	@include position( absolute, null 0 0 0 );
+}
+
+.ev-icon-sets-preview-label {
+	text-transform: uppercase;
+	color: $text_light;
+	@include position( absolute, $baseline/2 null null $gutter/2 );
+	font-size: 12px;
+}
 
 .ev-icon-sets-inner-wrapper {
 	@include position( absolute, 0 0 0 300px );
+	@include box-shadow( -1px 0 0 $border_color );
+
+	> h2 {
+		padding: 0 $baseline;
+		line-height: $modal_header_height;
+		margin: 0;
+		color: $text_light;
+		border-bottom: 1px solid $border_color;
+	}
+}
+
+.ev-icon-sets-controls-field-wrapper {
+
+	+ * {
+		margin-top: $baseline;
+	}
+
+	label {
+		font-weight: bold;
+		font-size: 14px;
+		color: $text;
+		cursor: default;
+		display: block;
+		margin-bottom: $baseline/4;
+	}
 }
 
 .ev-modal-container[data-key="ev-icon"] {
 	.ev-modal-footer {
 		width: 300px;
 		right: auto;
+		background-color: transparent;
 	}
 }
 
 .ev-icon-search-wrapper {
 	background-color: $grey_light;
+	height: $modal_header_height;
+	position: relative;
 
 	input {
-		background-color: $white;
+		background-color: transparent;
 		width: 100%;
-		line-height: $baseline*1.5 - 2;
+		line-height: $modal_header_height;
 		padding: 0 $gutter/2;
 		border: none;
 		@include box-shadow( none );
 		@include transition( none );
 		margin: 0;
+		border-bottom: 1px solid $border_color;
 
 		&:focus {
 			border: none;
+			border-bottom: 1px solid $border_color;
+			background-color: $white;
 			@include box-shadow( none );
 		}
 	}
 }
-
-// .ev-icon-sets-external-wrapper.ev-modal-container {
-// 	display: none;
-// 	// @include position( fixed, 60px 15% 60px 15% );
-// 	background: rgba( #000, 0.5 );
-//     z-index: 100100;
-
-// 	.ev-icon-sets-inner-wrapper {
-// 		background-color: $white;
-// 		// @include position( absolute, $baseline $baseline $baseline $baseline );
-// 	}
-
-// 	&.ev-active {
-// 		display: block;
-// 	}
-
-// 	.ev-close-icon-modal {
-// 		float: right;
-
-// 		&:before {
-// 			cursor: pointer;
-// 			content: "\f335";
-// 			font-size: $baseline;
-// 			line-height: $baseline*1.5;
-// 			font-weight: 400;
-// 			font-style: normal;
-// 			text-transform: none;
-// 			text-rendering: auto;
-// 			-webkit-font-smoothing: antialiased;
-// 			-moz-osx-font-smoothing: grayscale;
-// 			font-family: "dashicons";
-// 		}
-
-// 		&:hover {
-// 			color: $red;
-// 		}
-// 	}
-// }
-
-// .ev-icon-search-wrapper {
-// 	float: left;
-// 	@include box-shadow( inset 0 1px 2px rgba( #000, .07 ) );
-// 	border: 1px solid $border_color;
-// 	width: 50%;
-// 	position: relative;
-// 	z-index: 10;
-
-// 	input {
-// 		background-color: $white;
-// 		width: 100%;
-// 		line-height: $baseline*1.5 - 2;
-// 		padding: 0 $gutter/2;
-// 		border: none;
-// 		@include box-shadow( none );
-// 		@include transition( none );
-// 		margin: 0;
-
-// 		&:focus {
-// 			border: none;
-// 			@include box-shadow( none );
-// 		}
-// 	}
-// }
 
 .ev-icon-search-results {
 	@extend %label;
@@ -188,10 +171,10 @@
 	display: none;
 	position: absolute;
 	top: 100%;
-	left: 0;
+	right: 0;
 	background-color: $blue_medium;
 	color: $white;
-	margin: 0;
+	margin: -10px 0 0 0;
 	padding: 2px 6px;
 
 	&.ev-search-icon-results-visible {
