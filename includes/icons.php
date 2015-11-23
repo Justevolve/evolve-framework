@@ -155,8 +155,15 @@ function ev_icon_modal_load() {
 			$content .= '</div>';
 
 			$content .= '<div class="ev-icon-sets-controls-wrapper">';
-				$content .= sprintf( '<input type="text" name="color" value="%s" data-icon-color>', esc_attr( $color ) );
-				$content .= sprintf( '<input type="text" name="size" value="%s" data-icon-size>', esc_attr( $size ) );
+				$content .= '<div class="ev-icon-sets-controls-field-wrapper">';
+					$content .= sprintf( '<label>%s</label>', esc_html( __( 'Color', 'ev_framework' ) ) );
+					$content .= sprintf( '<input type="text" name="color" value="%s" data-icon-color>', esc_attr( $color ) );
+				$content .= '</div>';
+
+				$content .= '<div class="ev-icon-sets-controls-field-wrapper">';
+					$content .= sprintf( '<label>%s</label>', esc_html( __( 'Size', 'ev_framework' ) ) );
+					$content .= sprintf( '<input type="text" name="size" value="%s" data-icon-size>', esc_attr( $size ) );
+				$content .= '</div>';
 
 				$content .= sprintf( '<input type="hidden" name="prefix" value="%s" data-icon-prefix>', esc_attr( $prefix ) );
 				$content .= sprintf( '<input type="hidden" name="set" value="%s" data-icon-set>', esc_attr( $set ) );
@@ -164,7 +171,7 @@ function ev_icon_modal_load() {
 			$content .= '</div>';
 
 			$content .= '<div class="ev-icon-sets-preview-wrapper">';
-				$content .= 'Preview';
+				$content .= sprintf( '<span class="ev-icon-sets-preview-label">%s</span>', esc_html( __( 'Preview', 'ev_framework' ) ) );
 			$content .= '</div>';
 
 		$content .= '</div>';
