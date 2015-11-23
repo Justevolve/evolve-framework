@@ -426,6 +426,8 @@ body.ev-modal-open { overflow: hidden; }
 .ev-color-input-wrapper + .ev-color-input-wrapper { margin-left: 20px; }
 .ev-color-input-wrapper .ev-sub-label { padding-bottom: 4px; display: block; }
 
+[data-key="ev-color-presets"] .ev-modal-wrapper { left: 25%; right: 25%; top: 120px; bottom: 120px; }
+
 [data-color-presets] { display: none; }
 .ev-has-color-presets [data-color-presets] { display: inline-block; }
 
@@ -434,6 +436,9 @@ body.ev-modal-open { overflow: hidden; }
 
 .ev-color-preset { display: block; float: left; width: 48px; height: 48px; cursor: pointer; }
 .ev-color-preset.ev-selected { -khtml-opacity: 0.2; -moz-opacity: 0.2; opacity: 0.2; filter: alpha(opacity=20); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)"; }
+
+.ev-no-user-color-presets-warning { display: block; }
+.ev-color-has-user-presets .ev-no-user-color-presets-warning { display: none; }
 
 .ev-field-description.ev-description-style-info .ev-container { padding: 16px 20px; border-radius: 2px; background-color: #f7fcfe; color: #314e59; }
 .ev-field-description.ev-description-style-important .ev-container { padding: 16px 20px; border-radius: 2px; background-color: #fff6bf; color: #595643; }

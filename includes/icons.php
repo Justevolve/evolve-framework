@@ -150,14 +150,14 @@ function ev_icon_modal_load() {
 		$content .= '<div class="ev-icon-sets-controls-external-wrapper">';
 
 			$content .= '<div class="ev-icon-search-wrapper">';
-				$content .= sprintf( '<input type="text" placeholder="%s" data-icon-search>', esc_attr( __( 'Search', 'icon search', 'ev_framework' ) ) );
+				$content .= sprintf( '<input type="text" placeholder="%s" data-icon-search>', esc_attr( _x( 'Search', 'icon search', 'ev_framework' ) ) );
 				$content .= '<p class="ev-icon-search-results"></p>';
 			$content .= '</div>';
 
 			$content .= '<div class="ev-icon-sets-controls-wrapper">';
 				$content .= '<div class="ev-icon-sets-controls-field-wrapper">';
 					$content .= sprintf( '<label>%s</label>', esc_html( __( 'Color', 'ev_framework' ) ) );
-					$content .= sprintf( '<input type="text" name="color" value="%s" data-icon-color>', esc_attr( $color ) );
+					$content .= ev_color( 'color', $color, false, false );
 				$content .= '</div>';
 
 				$content .= '<div class="ev-icon-sets-controls-field-wrapper">';
@@ -172,6 +172,12 @@ function ev_icon_modal_load() {
 
 			$content .= '<div class="ev-icon-sets-preview-wrapper">';
 				$content .= sprintf( '<span class="ev-icon-sets-preview-label">%s</span>', esc_html( __( 'Preview', 'ev_framework' ) ) );
+				$content .= sprintf( '<span class="ev-selected-icon-preview ev-icon ev-component %s %s" style="color: %s;font-size: %s"></span>',
+					esc_attr( $prefix ),
+					esc_attr( $icon ),
+					esc_attr( $color ),
+					esc_attr( $size )
+				);
 			$content .= '</div>';
 
 		$content .= '</div>';

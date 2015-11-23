@@ -22,7 +22,7 @@
 				$( "[data-prefix]", field ).val( data["prefix"] );
 				$( "[data-set]", field ).val( data["set"] );
 				$( "[data-icon]", field ).val( data["icon"] );
-				$( "[data-color]", field ).val( data["color"] );
+				$( "[data-color]", field ).val( data["color"]["color"] );
 				$( "[data-size]", field ).val( data["size"] );
 
 				$( "[data-preview]", field )
@@ -31,9 +31,14 @@
 
 				$( "[data-preview]", field )
 					.attr( "class", "ev-icon ev-component " + data["prefix"] + " " + data["icon"] )
-					.css( "color", data["color"] );
+					.css( "color", data["color"]["color"] );
 
-				selected_wrapper.removeClass( "ev-empty" );
+				if ( data["icon"] ) {
+					selected_wrapper.removeClass( "ev-empty" );
+				}
+				else {
+					selected_wrapper.addClass( "ev-empty" );
+				}
 			}
 		} );
 
@@ -83,6 +88,8 @@
 
 		$( "[data-preview]", field ).attr( "class", "ev-icon ev-component" )
 			.css( "color", "" );
+
+		// TODO: sbiancare preview
 
 		return false;
 	} );
@@ -137,8 +144,9 @@
 		var icon = $( this ),
 			wrapper = $( this ).parents( ".ev-icon-sets-external-wrapper" ).first(),
 			icons = $( ".ev-icon", wrapper ),
-			color = $( "[data-icon-color]", wrapper ).val(),
-			size = $( "[data-icon-size]", wrapper ).val();
+			color = $( "[name='color[color]']", wrapper ).val(),
+			size = $( "[data-icon-size]", wrapper ).val(),
+			local_preview = $( ".ev-selected-icon-preview", wrapper );
 
 		icons.removeClass( "ev-found ev-selected" );
 		icon.addClass( "ev-selected" );
@@ -147,11 +155,37 @@
 		$( "[data-icon-prefix]", wrapper ).val( icon.attr( "data-prefix" ) );
 		$( "[data-icon-set]", wrapper ).val( icon.attr( "data-set" ) );
 		$( "[data-icon-name]", wrapper ).val( icon.attr( "data-icon-name" ) );
-		$( "[data-icon-color]", wrapper ).val( color );
-		$( "[data-icon-size]", wrapper ).val( size );
+
+		local_preview
+			.removeAttr( "class" )
+			.attr( "class", "ev-selected-icon-preview ev-icon ev-component " + icon.attr( "data-prefix" ) + " " + icon.attr( "data-icon-name" ) )
+			.css( {
+				"color": color,
+				"font-size": size
+			} );
 
 		$( "input[data-icon-search]", wrapper ).val( "" );
 		$( ".ev-icon-search-results", wrapper ).html( "" ).removeClass( "ev-search-icon-results-visible" );
+	} );
+
+	$.evf.delegate( ".ev-icon-sets-controls-field-wrapper [name='color[color]']", "change", "icon", function() {
+		var wrapper = $( this ).parents( ".ev-icon-sets-external-wrapper" ).first(),
+			local_preview = $( ".ev-selected-icon-preview", wrapper );
+
+		local_preview
+			.css( {
+				"color": $( this ).val()
+			} );
+	} );
+
+	$.evf.delegate( ".ev-icon-sets-controls-field-wrapper [name='size']", "input", "icon", function() {
+		var wrapper = $( this ).parents( ".ev-icon-sets-external-wrapper" ).first(),
+			local_preview = $( ".ev-selected-icon-preview", wrapper );
+
+		local_preview
+			.css( {
+				"font-size": $( this ).val()
+			} );
 	} );
 
 } )( jQuery );

@@ -289,6 +289,10 @@ function ev_color( $name, $value, $opacity = false, $echo = true ) {
 	$field_color   = isset( $value['color'] ) ? $value['color'] : '';
 	$field_opacity = isset( $value['opacity'] ) ? $value['opacity'] : '';
 
+	if ( $opacity === false && ! $field_color ) {
+		$field_color = $value;
+	}
+
 	$html .= '<span class="ev-color-wrapper">';
 
 		if ( $opacity ) {

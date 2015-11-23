@@ -15,7 +15,7 @@
 ?>
 
 <div class="ev-selected-icon-wrapper <?php echo esc_attr( $wrapper_class ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'ev_icon' ) ); ?>">
-	<i data-preview class="<?php echo esc_attr( $prefix ); ?> <?php echo esc_attr( $icon ); ?> ev-icon ev-component" aria-hidden="true"></i>
+	<i data-preview style="color: <?php echo esc_attr( $color ); ?>" class="<?php echo esc_attr( $prefix ); ?> <?php echo esc_attr( $icon ); ?> ev-icon ev-component" aria-hidden="true"></i>
 	<span class="ev-remove ev-icon-remove"></span>
 </div>
 
