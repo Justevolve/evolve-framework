@@ -284,9 +284,9 @@ function ev_checkbox( $name, $value, $style = '', $echo = true ) {
  * @return string
  */
 function ev_color( $name, $value, $opacity = false, $echo = true ) {
-	$html = '';
-	$opacity_data = '';
-	$field_color = isset( $value['color'] ) ? $value['color'] : '';
+	$html          = '';
+	$opacity_data  = '';
+	$field_color   = isset( $value['color'] ) ? $value['color'] : '';
 	$field_opacity = isset( $value['opacity'] ) ? $value['opacity'] : '';
 
 	$html .= '<span class="ev-color-wrapper">';

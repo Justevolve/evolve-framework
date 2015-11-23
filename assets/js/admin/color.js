@@ -28,27 +28,37 @@
 	 */
 	$.evf.delegate( "[data-color-delete-preset]", "click", "color", function() {
 		var ctrl = $( this ),
-			hex = $( this ).parents( ".ev-color-preset" ).first().attr( "data-hex" ),
-			wrapper = $( this ).parents( ".ev-color-user-presets" ).first();
+			preview = $( this ).parents( ".ev-color-preset" ).first(),
+			id = preview.attr( "data-id" ),
+			wrapper = $( this ).parents( ".ev-color-user-presets" ).first(),
+			outer_wrapper = $( this ).parents( ".ev-color-presets-wrapper" ).first();
 
-		if ( hex ) {
-			$( "[data-hex='" + hex + "']", wrapper ).remove();
+		if ( id ) {
+			preview.remove();
+			window.ev_seek_and_destroy_tooltips();
+
+			if ( ! $( ".ev-color-preset", outer_wrapper ).length ) {
+				$( "body" ).removeClass( "ev-has-color-presets" );
+			}
+
+			if ( ! $( ".ev-color-preset", wrapper ).length ) {
+				wrapper.removeClass( "ev-color-has-user-presets" );
+			}
+			else {
+				wrapper.addClass( "ev-color-has-user-presets" );
+			}
 
 			ev_framework.color.presets = _.without(
 				ev_framework.color.presets,
-				_.findWhere( ev_framework.color.presets, { user: true, hex: hex } )
+				_.findWhere( ev_framework.color.presets, { user: true, id: id } )
 			);
-
-			if ( ! ev_framework.color.presets.length ) {
-				$( "body" ).removeClass( "ev-has-color-presets" );
-			}
 
 			$.post(
 				ajaxurl,
 				{
 					action: "ev_color_delete_preset",
 					nonce: ctrl.attr( "data-nonce" ),
-					hex: hex
+					id: id,
 				},
 				function( response ) {
 				}
@@ -70,13 +80,16 @@
 		if ( hex ) {
 			var preset_name = prompt( ev_framework.color.new_preset_name );
 
+			ctrl.addClass( "ev-saving" );
+
 			$.post(
 				ajaxurl,
 				{
 					action: "ev_color_save_preset",
 					nonce: ctrl.attr( "data-nonce" ),
 					hex: hex,
-					name: preset_name
+					name: preset_name,
+					id: ev_framework.color.presets.length + 1
 				},
 				function( response ) {
 					ev_framework.color.presets.push( {
@@ -86,6 +99,7 @@
 					} );
 
 					$( "body" ).addClass( "ev-has-color-presets" );
+					ctrl.removeClass( "ev-saving" );
 				}
 			);
 		}

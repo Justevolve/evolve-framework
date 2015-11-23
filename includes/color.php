@@ -10,18 +10,23 @@ function ev_color_delete_preset() {
 		die();
 	}
 
-	$hex = isset( $_POST['hex'] ) ? sanitize_text_field( $_POST['hex'] ) : false;
+	$id = isset( $_POST['id'] ) ? sanitize_text_field( $_POST['id'] ) : false;
 
-	if ( ! $hex ) {
+	if ( ! $id ) {
 		die();
 	}
 
 	$key = 'color_presets';
 	$presets = ev_get_option( $key );
 
-	foreach ( $presets as $i => $preset ) {
-		if ( isset( $preset['user'] ) && $preset['user'] == true && $preset['hex'] == $hex ) {
-			unset( $presets[$i] );
+	if ( ! isset( $presets['user'] ) ) {
+		die();
+	}
+
+	foreach ( $presets['user'] as $i => $preset ) {
+		if ( isset( $preset['id'] ) && $id == $preset['id'] ) {
+			unset( $presets['user'][$i] );
+			break;
 		}
 	}
 
@@ -43,19 +48,25 @@ function ev_color_save_preset() {
 	}
 
 	$hex = isset( $_POST['hex'] ) ? sanitize_text_field( $_POST['hex'] ) : false;
+	$id = isset( $_POST['id'] ) ? sanitize_text_field( $_POST['id'] ) : false;
 	$name = isset( $_POST['name'] ) ? sanitize_text_field( $_POST['name'] ) : $hex;
 
-	if ( ! $hex ) {
+	if ( ! $hex || ! $id ) {
 		die();
 	}
 
 	$key = 'color_presets';
 	$presets = ev_get_option( $key );
 
-	$presets[] = array(
+	if ( ! isset( $presets['user'] ) ) {
+		$presets['user'] = array();
+	}
+
+	$presets['user'][] = array(
 		'user'  => true,
 		'hex'   => $hex,
-		'label' => $name
+		'label' => $name,
+		'id'    => $id
 	);
 
 	ev_update_option( $key, $presets );
@@ -120,7 +131,7 @@ function ev_get_color_presets() {
 function ev_get_user_color_presets() {
 	$presets = ev_get_color_presets();
 
-	return wp_list_filter( $presets, array( 'user' => true ) );
+	return isset( $presets['user'] ) ? $presets['user'] : array();
 }
 
 /**
@@ -132,7 +143,11 @@ function ev_get_user_color_presets() {
 function ev_get_default_color_presets() {
 	$presets = ev_get_color_presets();
 
-	return wp_list_filter( $presets, array( 'user' => true ), 'NOT' );
+	if ( isset( $presets['user'] ) ) {
+		unset( $presets['user'] );
+	}
+
+	return $presets;
 }
 
 /**
@@ -155,12 +170,19 @@ function ev_color_presets_modal_load() {
 		$content .= '<div class="ev-color-presets-wrapper">';
 
 			/* User presets */
-			$content .= '<div class="ev-color-user-presets">';
+			$user_presets_class = '';
+
+			if ( ! empty( $user_presets ) ) {
+				$user_presets_class .= 'ev-color-has-user-presets';
+			}
+
+			$content .= sprintf( '<div class="ev-color-user-presets %s">', $user_presets_class );
 				$content .= sprintf( '<h3>%s</h3>', esc_html( __( 'User-defined presets', 'ev_framework' ) ) );
 
 				if ( ! empty( $user_presets ) ) {
-					foreach ( $user_presets as $preset ) {
-						$content .= sprintf( '<span class="ev-color-preset ev-tooltip" data-hex="%s" data-title="%s" style="background-color: %s"><span data-nonce="%s" data-color-delete-preset>%s</span></span>',
+					foreach ( $user_presets as $index => $preset ) {
+						$content .= sprintf( '<span data-id="%s" class="ev-color-preset ev-tooltip" data-hex="%s" data-title="%s" style="background-color: %s"><span data-nonce="%s" data-color-delete-preset>%s</span></span>',
+							isset( $preset['id'] ) ? esc_attr( $preset['id'] ) : '',
 							isset( $preset['hex'] ) ? esc_attr( $preset['hex'] ) : '',
 							isset( $preset['label'] ) ? esc_attr( $preset['label'] ) : '',
 							isset( $preset['hex'] ) ? esc_attr( $preset['hex'] ) : '',
@@ -169,9 +191,8 @@ function ev_color_presets_modal_load() {
 						);
 					}
 				}
-				else {
-					$content .= __( "You haven't saved any color presets yet!", 'ev_framework' );
-				}
+
+				$content .= '<p class="ev-no-user-color-presets-warning">' . __( "You haven't saved any color presets yet!", 'ev_framework' ) . '</p>';
 			$content .= '</div>';
 
 			/* Default presets */
@@ -179,12 +200,16 @@ function ev_color_presets_modal_load() {
 				$content .= sprintf( '<h3>%s</h3>', esc_html( __( 'Default presets', 'ev_framework' ) ) );
 
 				if ( ! empty( $default_presets ) ) {
-					foreach ( $default_presets as $preset ) {
-						$content .= sprintf( '<span class="ev-color-preset ev-tooltip" data-hex="%s" data-title="%s" style="background-color: %s"></span>',
-							isset( $preset['hex'] ) ? esc_attr( $preset['hex'] ) : '',
-							isset( $preset['label'] ) ? esc_attr( $preset['label'] ) : '',
-							isset( $preset['hex'] ) ? esc_attr( $preset['hex'] ) : ''
-						);
+					foreach ( $default_presets as $set ) {
+						$content .= sprintf( '<h4>%s</h4>', esc_html( $set['label'] ) );
+
+						foreach ( $set['presets'] as $preset ) {
+							$content .= sprintf( '<span class="ev-color-preset ev-tooltip" data-hex="%s" data-title="%s" style="background-color: %s"></span>',
+								isset( $preset['hex'] ) ? esc_attr( $preset['hex'] ) : '',
+								isset( $preset['label'] ) ? esc_attr( $preset['label'] ) : '',
+								isset( $preset['hex'] ) ? esc_attr( $preset['hex'] ) : ''
+							);
+						}
 					}
 				}
 			$content .= '</div>';
@@ -206,17 +231,22 @@ add_action( 'wp_ajax_ev_color_presets_modal_load', 'ev_color_presets_modal_load'
 
 
 function ev_flat_ui_color_presets( $presets ) {
-	$presets[] = array(
+	$presets['flat_ui'] = array(
+		'label' => 'Flat UI',
+		'presets' => array()
+	);
+
+	$presets['flat_ui']['presets'][] = array(
 		'hex' => '#1abc9c',
 		'label' => 'Turquoise'
 	);
 
-	$presets[] = array(
+	$presets['flat_ui']['presets'][] = array(
 		'hex' => '#2ecc71',
 		'label' => 'Emerald'
 	);
 
-	$presets[] = array(
+	$presets['flat_ui']['presets'][] = array(
 		'hex' => '#3498db',
 		'label' => 'Peter River'
 	);

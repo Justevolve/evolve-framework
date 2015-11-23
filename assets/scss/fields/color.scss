@@ -31,6 +31,13 @@
 // $Color presets
 // -----------------------------------------------------------------------------
 
+[data-key="ev-color-presets"] .ev-modal-wrapper {
+	left: 25%;
+	right: 25%;
+	top: 120px;
+	bottom: 120px;
+}
+
 [data-color-presets] {
 	display: none;
 
@@ -53,5 +60,13 @@
 
 	&.ev-selected {
 		@include opacity( 20 );
+	}
+}
+
+.ev-no-user-color-presets-warning {
+	display: block;
+
+	.ev-color-has-user-presets & {
+		display: none;
 	}
 }
