@@ -1,0 +1,62 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Select
+// -----------------------------------------------------------------------------
+
+.ev-select-wrapper {
+	@include ui_input_standard;
+	display: inline-block;
+	border-radius: $radius;
+	font-size: $main_fsz;
+	position: relative;
+
+	&:hover {
+		@include ui_input_hover;
+		@include box-shadow( none );
+
+		&:before {
+			border-top-color: $grey_6;
+		}
+		&:after {
+			border-left-color: $grey_3;
+		}
+	}
+
+	&:focus {
+		@include ui_input_focus;
+
+		&:after {
+			border-left-color: $grey_1;
+		}
+	}
+
+	&:before {
+		content: "";
+		display: block;
+		@include position( absolute, 50% $baseline/2+1 null null );
+		@include triangle( 12px, $grey_3, down );
+		margin-top: -3px;
+	}
+
+	&:after {
+		content: "";
+		display: block;
+		@include position( absolute, 50% $baseline*1.5 null null );
+		margin-top: -$baseline/2;
+		@include size( 0 $baseline );
+		border-left: 1px solid $grey_1;
+	}
+
+	select {
+		padding: ($baseline/2 - 1) $baseline*2 ($baseline/2 - 1) $gutter;
+		@include appearance( none );
+		margin: 0;
+		border: none;
+		height: auto;
+		line-height: 1.5;
+		background-color: transparent;
+		@include box-shadow( none );
+		cursor: pointer;
+	}
+}

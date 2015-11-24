@@ -44,7 +44,38 @@
 	}
 
 	&.ev-checkbox-style-switch {
-		input[type="checkbox"] {}
+		input[type="checkbox"] {
+			@include size( $baseline*3 $baseline*1.5 );
+			border-radius: $baseline*1.5;
+			@include box-shadow( none );
+			position: relative;
+
+			&:after {
+				@include size( $baseline + 4 );
+				content: "";
+				display: block;
+				@include position( absolute, 3px null null 4px );
+				@include transition( left $transition_time*2 $ease-in-out-quint );
+				background-color: $white;
+				border-radius: 50%;
+				@include box-shadow( #{$ui_el_shadow} );
+			}
+
+			&:focus {
+			}
+
+			&:checked {
+				background-color: $green;
+
+				&:before {
+					display: none;
+				}
+
+				&:after {
+					left: $baseline*1.5 + 2;
+				}
+			}
+		}
 	}
 }
 
