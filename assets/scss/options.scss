@@ -1,395 +1,395 @@
 @import "libs";
 
-// -----------------------------------------------------------------------------
-// $Spinner animation
-// -----------------------------------------------------------------------------
-
-@-webkit-keyframes spinner {
-	0%   { -webkit-transform: rotate(0deg); }
-	100% { -webkit-transform: rotate(360deg); }
-}
-@-moz-keyframes spinner {
-	0%   { -moz-transform: rotate(0deg); }
-	100% { -moz-transform: rotate(360deg); }
-}
-@-o-keyframes spinner {
-	0%   { -o-transform: rotate(0deg); }
-	100% { -o-transform: rotate(360deg); }
-}
-@-ms-keyframes spinner {
-	0%   { -ms-transform: rotate(0deg); }
-	100% { -ms-transform: rotate(360deg); }
-}
-@keyframes spinner {
-	0%   { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
-}
-
-// -----------------------------------------------------------------------------
-// $General
-// -----------------------------------------------------------------------------
-
-.ev-admin-page {
-	@include box-sizing( border-box );
-	margin-left: 20px;
-	margin-right: 40px;
-	padding-top: $baseline;
-
-	@include ev-media( $media_mobile ) {
-		margin-right: 10px;
-		margin-left: 0;
-	}
-}
-
-// -----------------------------------------------------------------------------
-// $Page heading
-// -----------------------------------------------------------------------------
-
-.ev-admin-page-heading {
-	margin-bottom: $baseline*2;
-
-	h1 {
-		line-height: 1;
-		font-weight: 300;
-		font-size: 2em;
-
-		span {
-			font-weight: bold;
-		}
-
-		+ div {
-			margin-top: $baseline/2 !important;
-		}
-	}
-
-	p {
-		margin-top: $baseline/3;
-		font-style: italic;
-	}
-}
-
-// -----------------------------------------------------------------------------
-// $Horizonal navigation for option page
-// -----------------------------------------------------------------------------
-
-.ev-admin-page .ev-admin-page-group-nav {
-	margin-bottom: $baseline*2;
-
-	ul {
-		font-size: 0.01em;
-		border: 1px solid $border_color;
-		background-color: $white;
-		border-radius: $radius;
-
-		li {
-			display: inline-block;
-			list-style: none;
-			font-size: 100em;
-			margin-bottom: 0;
-
-			&:first-child a {
-				border-top-left-radius: $radius;
-				border-bottom-left-radius: $radius;
-			}
-
-			&:last-child a {
-				border-top-right-radius: $radius;
-				border-bottom-right-radius: $radius;
-			}
-
-			a {
-				display: block;
-				position: relative;
-				background-color: $white;
-				font-size: 13px;
-				padding: $baseline/2 $gutter/1.5;
-				text-decoration: none;
-				color: $text_light;
-				border-right: 1px solid $border_color;
-
-				&:focus {
-					@include box-shadow( none );
-				}
-
-				&.ev-active {
-					font-weight: bold;
-					background-color: $blue_dark;
-					color: $white;
-				}
-			}
-		}
-	}
-}
-
-// -----------------------------------------------------------------------------
-// $Containers
-// -----------------------------------------------------------------------------
-
-.ev-page-container {
-	background-color: $white;
-	border: 1px solid $border_color;
-	padding: $baseline $gutter;
-	@include clearfix();
-}
-
-// -----------------------------------------------------------------------------
-// $Vertical navigation for option page
-// -----------------------------------------------------------------------------
-
-@include ev_tabs_reset();
-
-.ev-admin-page {
-	.ev-tabs-nav.ev-vertical {
-		width: 20%;
-		padding-right: 20px;
-		@include box-sizing( border-box );
-
-		@include ev-media( $media_tablet ) {
-			width: 25%;
-		}
-
-		@include ev-media( $media_mobile ) {
-			width: 100%;
-			padding-right: 0;
-			margin-bottom: $baseline;
-		}
-
-		li {
-			margin-bottom: 0;
-
-			&:first-child {
-				a {
-					border-top-right-radius: $radius;
-					border-top-left-radius: $radius;
-					border-top: 1px solid $border_color;
-				}
-			}
-
-			&:last-child {
-				a {
-					border-bottom-right-radius: $radius;
-					border-bottom-left-radius: $radius;
-				}
-			}
-
-			a {
-				display: block;
-				position: relative;
-				background-color: $white;
-				font-size: 13px;
-				padding: $baseline/2 $gutter/1.5;
-				text-decoration: none;
-				color: $text_light;
-				border-left: 1px solid $border_color;
-				border-right: 1px solid $border_color;
-				border-bottom: 1px solid $border_color;
-
-				&:focus {
-					@include box-shadow( none );
-				}
-
-				&.ev-active {
-					font-weight: bold;
-					background-color: $blue_light;
-					color: $text;
-
-					&:before {
-						content: "";
-						display: block;
-						@include position( absolute, 0 null 0 0 );
-						width: 4px;
-						height: 100%;
-						background-color: $blue_medium;
-					}
-				}
-			}
-		}
-
-		+ .ev-tab-container {
-			@include box-sizing( border-box );
-			width: 80%;
-			float: left;
-			position: relative;
-
-			@include ev-media( $media_tablet ) {
-				width: 75%;
-			}
-
-			@include ev-media( $media_mobile ) {
-				width: 100%;
-			}
-		}
-	}
-
-	.ev-tab-container {
-		border: 1px solid $border_color;
-	}
-}
-
-// -----------------------------------------------------------------------------
-// $Vertical navigation for Metabox
-// -----------------------------------------------------------------------------
-
-.ev-metabox {
-	@include vertical_tab_style;
-}
-
-.ev-tabs-nav.ev-vertical + .ev-tab-container {
-	border-left: 1px solid $border_color;
-}
-
-// -----------------------------------------------------------------------------
-// $Options tab container
-// -----------------------------------------------------------------------------
-
-.ev-tab-container {
-	background-color: $white;
-
-	&.ev-tab-container-loaded {
-		&:before {
-			@include opacity( 0 );
-			z-index: -1;
-		}
-	}
-
-	&:before {
-		content: "";
-		display: block;
-		z-index: 100;
-		background: $white;
-		@include opacity( 100 );
-		@include position( absolute, 0 0 0 0 );
-		@include transition( opacity $transition_time, z-index $transition_time );
-	}
-
-	.ev-tab {
-		@include clearfix;
-	}
-}
-
-// -----------------------------------------------------------------------------
-// $Options tab saving container
-// -----------------------------------------------------------------------------
-
-.ev-form-submit-container {
-	@include clearfix;
-	@include box-sizing( border-box );
-	display: inline-block;
-	width: 100%;
-	clear: both;
-	padding: $baseline/2 $gutter;
-	margin-top: $baseline/2;
-	border-top: 1px solid $border_color;
-}
-
-.ev-save {
-	@extend %btn;
-
-	input[type="submit"] {
-		display: none;
-	}
-
-	.ev-btn-message {
-		color: $green;
-
-		&:before {
-			@include icon( "\f147" );
-			display: inline-block;
-			font-size: 20px;
-			position: relative;
-			top: 5px;
-			margin-right: $gutter/4;
-		}
-	}
-
-	.ev-btn-action {
-		color: $white;
-		background-color: $green;
-		@include transition( background-color $transition_time*1.5 ease, width $transition_time*2.5 ease, padding $transition_time*2.5 $ease-out-back );
-		cursor: pointer;
-
-		&:after {
-			@include position( absolute, 50% $gutter/2 null null );
-			@include spinner( 12px, 2px, $white );
-			@include opacity( 0 );
-			visibility: hidden;
-			@include transition( visibility $transition_time*1.5 linear, opacity $transition_time*1.5 ease );
-		}
-
-		&:hover {
-			background-color: darken( $green, 10 );
-		}
-	}
-
-	&.ev-saving {
-		.ev-btn-action {
-			cursor: default;
-			background-color: lighten( $green, 10 );
-			padding-right: $gutter + 16px + $gutter/2;
-
-			&:after {
-				@include opacity( 100 );
-				visibility: visible;
-			}
-		}
-	}
-
-	&.ev-saved {
-		.ev-btn-action {
-			background-color: lighten( $green, 10 );
-			cursor: default;
-		}
-
-		.ev-btn-message {
-			@include opacity( 100 );
-			visibility: visible;
-			margin-left: $gutter;
-		}
-	}
-}
-
-// -----------------------------------------------------------------------------
-// $Native meta boxes
-// -----------------------------------------------------------------------------
-
-.ev-native-meta {
-	margin-top: $baseline;
-
-	> h3 {
-		margin-bottom: $baseline;
-	}
-
-	.ev-tabs {
-		@include vertical_tab_style;
-		background-color: $grey_light_2;
-		border: 1px solid $border_color;
-	}
-}
-
-// -----------------------------------------------------------------------------
-// $Metabox style
-// -----------------------------------------------------------------------------
-
-.ev-metabox {
-	background-color: $grey_light_1;
-	margin: -6px -12px -12px;
-}
-
-// -----------------------------------------------------------------------------
-// $TinyMCE
-// -----------------------------------------------------------------------------
-
-.ev-switch-editor {
-	float: left;
-	@include box-sizing( content-box );
-	position: relative;
-	top: 1px;
-	background: #EBEBEB;
-	color: #777;
-	cursor: pointer;
-	font: 13px/19px "Open Sans", sans-serif;
-	height: 20px;
-	margin: 5px 0 0 5px;
-	padding: 3px 8px 4px;
-	border: 1px solid #E5E5E5;
-}
+// // -----------------------------------------------------------------------------
+// // $Spinner animation
+// // -----------------------------------------------------------------------------
+
+// @-webkit-keyframes spinner {
+// 	0%   { -webkit-transform: rotate(0deg); }
+// 	100% { -webkit-transform: rotate(360deg); }
+// }
+// @-moz-keyframes spinner {
+// 	0%   { -moz-transform: rotate(0deg); }
+// 	100% { -moz-transform: rotate(360deg); }
+// }
+// @-o-keyframes spinner {
+// 	0%   { -o-transform: rotate(0deg); }
+// 	100% { -o-transform: rotate(360deg); }
+// }
+// @-ms-keyframes spinner {
+// 	0%   { -ms-transform: rotate(0deg); }
+// 	100% { -ms-transform: rotate(360deg); }
+// }
+// @keyframes spinner {
+// 	0%   { transform: rotate(0deg); }
+// 	100% { transform: rotate(360deg); }
+// }
+
+// // -----------------------------------------------------------------------------
+// // $General
+// // -----------------------------------------------------------------------------
+
+// .ev-admin-page {
+// 	@include box-sizing( border-box );
+// 	margin-left: 20px;
+// 	margin-right: 40px;
+// 	padding-top: $baseline;
+
+// 	@include ev-media( $media_mobile ) {
+// 		margin-right: 10px;
+// 		margin-left: 0;
+// 	}
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Page heading
+// // -----------------------------------------------------------------------------
+
+// .ev-admin-page-heading {
+// 	margin-bottom: $baseline*2;
+
+// 	h1 {
+// 		line-height: 1;
+// 		font-weight: 300;
+// 		font-size: 2em;
+
+// 		span {
+// 			font-weight: bold;
+// 		}
+
+// 		+ div {
+// 			margin-top: $baseline/2 !important;
+// 		}
+// 	}
+
+// 	p {
+// 		margin-top: $baseline/3;
+// 		font-style: italic;
+// 	}
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Horizonal navigation for option page
+// // -----------------------------------------------------------------------------
+
+// .ev-admin-page .ev-admin-page-group-nav {
+// 	margin-bottom: $baseline*2;
+
+// 	ul {
+// 		font-size: 0.01em;
+// 		border: 1px solid $border_color;
+// 		background-color: $white;
+// 		border-radius: $radius;
+
+// 		li {
+// 			display: inline-block;
+// 			list-style: none;
+// 			font-size: 100em;
+// 			margin-bottom: 0;
+
+// 			&:first-child a {
+// 				border-top-left-radius: $radius;
+// 				border-bottom-left-radius: $radius;
+// 			}
+
+// 			&:last-child a {
+// 				border-top-right-radius: $radius;
+// 				border-bottom-right-radius: $radius;
+// 			}
+
+// 			a {
+// 				display: block;
+// 				position: relative;
+// 				background-color: $white;
+// 				font-size: 13px;
+// 				padding: $baseline/2 $gutter/1.5;
+// 				text-decoration: none;
+// 				color: $text_light;
+// 				border-right: 1px solid $border_color;
+
+// 				&:focus {
+// 					@include box-shadow( none );
+// 				}
+
+// 				&.ev-active {
+// 					font-weight: bold;
+// 					background-color: $blue_dark;
+// 					color: $white;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Containers
+// // -----------------------------------------------------------------------------
+
+// .ev-page-container {
+// 	background-color: $white;
+// 	border: 1px solid $border_color;
+// 	padding: $baseline $gutter;
+// 	@include clearfix();
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Vertical navigation for option page
+// // -----------------------------------------------------------------------------
+
+// @include ev_tabs_reset();
+
+// .ev-admin-page {
+// 	.ev-tabs-nav.ev-vertical {
+// 		width: 20%;
+// 		padding-right: 20px;
+// 		@include box-sizing( border-box );
+
+// 		@include ev-media( $media_tablet ) {
+// 			width: 25%;
+// 		}
+
+// 		@include ev-media( $media_mobile ) {
+// 			width: 100%;
+// 			padding-right: 0;
+// 			margin-bottom: $baseline;
+// 		}
+
+// 		li {
+// 			margin-bottom: 0;
+
+// 			&:first-child {
+// 				a {
+// 					border-top-right-radius: $radius;
+// 					border-top-left-radius: $radius;
+// 					border-top: 1px solid $border_color;
+// 				}
+// 			}
+
+// 			&:last-child {
+// 				a {
+// 					border-bottom-right-radius: $radius;
+// 					border-bottom-left-radius: $radius;
+// 				}
+// 			}
+
+// 			a {
+// 				display: block;
+// 				position: relative;
+// 				background-color: $white;
+// 				font-size: 13px;
+// 				padding: $baseline/2 $gutter/1.5;
+// 				text-decoration: none;
+// 				color: $text_light;
+// 				border-left: 1px solid $border_color;
+// 				border-right: 1px solid $border_color;
+// 				border-bottom: 1px solid $border_color;
+
+// 				&:focus {
+// 					@include box-shadow( none );
+// 				}
+
+// 				&.ev-active {
+// 					font-weight: bold;
+// 					background-color: $blue_light;
+// 					color: $text;
+
+// 					&:before {
+// 						content: "";
+// 						display: block;
+// 						@include position( absolute, 0 null 0 0 );
+// 						width: 4px;
+// 						height: 100%;
+// 						background-color: $blue_medium;
+// 					}
+// 				}
+// 			}
+// 		}
+
+// 		+ .ev-tab-container {
+// 			@include box-sizing( border-box );
+// 			width: 80%;
+// 			float: left;
+// 			position: relative;
+
+// 			@include ev-media( $media_tablet ) {
+// 				width: 75%;
+// 			}
+
+// 			@include ev-media( $media_mobile ) {
+// 				width: 100%;
+// 			}
+// 		}
+// 	}
+
+// 	.ev-tab-container {
+// 		border: 1px solid $border_color;
+// 	}
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Vertical navigation for Metabox
+// // -----------------------------------------------------------------------------
+
+// .ev-metabox {
+// 	@include vertical_tab_style;
+// }
+
+// .ev-tabs-nav.ev-vertical + .ev-tab-container {
+// 	border-left: 1px solid $border_color;
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Options tab container
+// // -----------------------------------------------------------------------------
+
+// .ev-tab-container {
+// 	background-color: $white;
+
+// 	&.ev-tab-container-loaded {
+// 		&:before {
+// 			@include opacity( 0 );
+// 			z-index: -1;
+// 		}
+// 	}
+
+// 	&:before {
+// 		content: "";
+// 		display: block;
+// 		z-index: 100;
+// 		background: $white;
+// 		@include opacity( 100 );
+// 		@include position( absolute, 0 0 0 0 );
+// 		@include transition( opacity $transition_time, z-index $transition_time );
+// 	}
+
+// 	.ev-tab {
+// 		@include clearfix;
+// 	}
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Options tab saving container
+// // -----------------------------------------------------------------------------
+
+// .ev-form-submit-container {
+// 	@include clearfix;
+// 	@include box-sizing( border-box );
+// 	display: inline-block;
+// 	width: 100%;
+// 	clear: both;
+// 	padding: $baseline/2 $gutter;
+// 	margin-top: $baseline/2;
+// 	border-top: 1px solid $border_color;
+// }
+
+// .ev-save {
+// 	@extend %btn;
+
+// 	input[type="submit"] {
+// 		display: none;
+// 	}
+
+// 	.ev-btn-message {
+// 		color: $green;
+
+// 		&:before {
+// 			@include icon( "\f147" );
+// 			display: inline-block;
+// 			font-size: 20px;
+// 			position: relative;
+// 			top: 5px;
+// 			margin-right: $gutter/4;
+// 		}
+// 	}
+
+// 	.ev-btn-action {
+// 		color: $white;
+// 		background-color: $green;
+// 		@include transition( background-color $transition_time*1.5 ease, width $transition_time*2.5 ease, padding $transition_time*2.5 $ease-out-back );
+// 		cursor: pointer;
+
+// 		&:after {
+// 			@include position( absolute, 50% $gutter/2 null null );
+// 			@include spinner( 12px, 2px, $white );
+// 			@include opacity( 0 );
+// 			visibility: hidden;
+// 			@include transition( visibility $transition_time*1.5 linear, opacity $transition_time*1.5 ease );
+// 		}
+
+// 		&:hover {
+// 			background-color: darken( $green, 10 );
+// 		}
+// 	}
+
+// 	&.ev-saving {
+// 		.ev-btn-action {
+// 			cursor: default;
+// 			background-color: lighten( $green, 10 );
+// 			padding-right: $gutter + 16px + $gutter/2;
+
+// 			&:after {
+// 				@include opacity( 100 );
+// 				visibility: visible;
+// 			}
+// 		}
+// 	}
+
+// 	&.ev-saved {
+// 		.ev-btn-action {
+// 			background-color: lighten( $green, 10 );
+// 			cursor: default;
+// 		}
+
+// 		.ev-btn-message {
+// 			@include opacity( 100 );
+// 			visibility: visible;
+// 			margin-left: $gutter;
+// 		}
+// 	}
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Native meta boxes
+// // -----------------------------------------------------------------------------
+
+// .ev-native-meta {
+// 	margin-top: $baseline;
+
+// 	> h3 {
+// 		margin-bottom: $baseline;
+// 	}
+
+// 	.ev-tabs {
+// 		@include vertical_tab_style;
+// 		background-color: $grey_light_2;
+// 		border: 1px solid $border_color;
+// 	}
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Metabox style
+// // -----------------------------------------------------------------------------
+
+// .ev-metabox {
+// 	background-color: $grey_light_1;
+// 	margin: -6px -12px -12px;
+// }
+
+// // -----------------------------------------------------------------------------
+// // $TinyMCE
+// // -----------------------------------------------------------------------------
+
+// .ev-switch-editor {
+// 	float: left;
+// 	@include box-sizing( content-box );
+// 	position: relative;
+// 	top: 1px;
+// 	background: #EBEBEB;
+// 	color: #777;
+// 	cursor: pointer;
+// 	font: 13px/19px "Open Sans", sans-serif;
+// 	height: 20px;
+// 	margin: 5px 0 0 5px;
+// 	padding: 3px 8px 4px;
+// 	border: 1px solid #E5E5E5;
+// }

@@ -1,153 +1,153 @@
 @import "../libs";
 
-// -----------------------------------------------------------------------------
-// $Link
-// -----------------------------------------------------------------------------
+// // -----------------------------------------------------------------------------
+// // $Link
+// // -----------------------------------------------------------------------------
 
-$link_modal_height: $baseline*2;
+// $link_modal_height: $baseline*2;
 
-.ev-link-ctrl {
-	display: inline-block;
+// .ev-link-ctrl {
+// 	display: inline-block;
 
-	&:before {
-		@include icon( "\f103" );
-		cursor: pointer;
-		display: inline-block;
-	}
+// 	&:before {
+// 		@include icon( "\f103" );
+// 		cursor: pointer;
+// 		display: inline-block;
+// 	}
 
-	&.ev-link-on {
-		color: $blue_medium;
-	}
-}
+// 	&.ev-link-on {
+// 		color: $blue_medium;
+// 	}
+// }
 
-[data-key="ev-link"] {
-	@include align-items(center);
-	@include display(flex);
-	@include flex-direction(row);
-	@include justify-content(center);
+// [data-key="ev-link"] {
+// 	@include align-items(center);
+// 	@include display(flex);
+// 	@include flex-direction(row);
+// 	@include justify-content(center);
 
-	.ev-modal-wrapper {
-		@include position( relative, auto auto auto auto );
-		// @include position( absolute, 50% null null 50% );
-		width: 400px;
-		// bottom: auto;
-		// height: $link_modal_height;
-		// margin-left: -200px;
-		// @include transform( translateY( -50% ) );
-		// margin-top: -($link_modal_height/2);
-		overflow: visible;
-		// @include transition( height $transition_time*2 $ease-out-cubic );
-	}
+// 	.ev-modal-wrapper {
+// 		@include position( relative, auto auto auto auto );
+// 		// @include position( absolute, 50% null null 50% );
+// 		width: 400px;
+// 		// bottom: auto;
+// 		// height: $link_modal_height;
+// 		// margin-left: -200px;
+// 		// @include transform( translateY( -50% ) );
+// 		// margin-top: -($link_modal_height/2);
+// 		overflow: visible;
+// 		// @include transition( height $transition_time*2 $ease-out-cubic );
+// 	}
 
-	// &.ev-link-modal-expanded .ev-modal-wrapper {
-		// @include transform( translateY( -50% ) );
-		// height: $link_modal_height*3;
-		// margin-top: -($link_modal_height*3/2);
-	// }
+// 	// &.ev-link-modal-expanded .ev-modal-wrapper {
+// 		// @include transform( translateY( -50% ) );
+// 		// height: $link_modal_height*3;
+// 		// margin-top: -($link_modal_height*3/2);
+// 	// }
 
-	.ev-modal-close {
-		top: -$baseline*1.5;
-		margin-right: 0;
-		color: $white;
-		padding-top: 0;
+// 	.ev-modal-close {
+// 		top: -$baseline*1.5;
+// 		margin-right: 0;
+// 		color: $white;
+// 		padding-top: 0;
 
-		&:hover {
-			color: $red;
-		}
-	}
+// 		&:hover {
+// 			color: $red;
+// 		}
+// 	}
 
-	.ev-modal {
-		border-top: none;
+// 	.ev-modal {
+// 		border-top: none;
 
-		.ev-modal-footer {
-			border-top: none;
-			@include position( absolute, 100% 0 0 0 );
-			padding: 0;
-			border-top: none;
-			background-color: transparent;
-			margin-top: $baseline;
-		}
+// 		.ev-modal-footer {
+// 			border-top: none;
+// 			@include position( absolute, 100% 0 0 0 );
+// 			padding: 0;
+// 			border-top: none;
+// 			background-color: transparent;
+// 			margin-top: $baseline;
+// 		}
 
-		input[type="text"] {
-			line-height: $baseline*2 - 2;
-			padding: 0 $gutter/2;
-			@include box-sizing( border-box );
-			margin: 0;
+// 		input[type="text"] {
+// 			line-height: $baseline*2 - 2;
+// 			padding: 0 $gutter/2;
+// 			@include box-sizing( border-box );
+// 			margin: 0;
 
-			&:focus {
-				@include box-shadow( none );
-			}
-		}
-	}
-}
+// 			&:focus {
+// 				@include box-shadow( none );
+// 			}
+// 		}
+// 	}
+// }
 
-.ev-link-url-wrapper {
-	position: relative;
+// .ev-link-url-wrapper {
+// 	position: relative;
 
-	input[type="text"] {
-		width: 100%;
-	}
-}
+// 	input[type="text"] {
+// 		width: 100%;
+// 	}
+// }
 
-.ev-link-trigger {
-	display: flex;
-	align-items: center;
-	padding: 0 8px 0 2px;
-	cursor: pointer;
-	@include position( absolute, 0 0 0 null );
+// .ev-link-trigger {
+// 	display: flex;
+// 	align-items: center;
+// 	padding: 0 8px 0 2px;
+// 	cursor: pointer;
+// 	@include position( absolute, 0 0 0 null );
 
-	&:hover {
-		span {
-			background-color: $grey_light;
-		}
-	}
+// 	&:hover {
+// 		span {
+// 			background-color: $grey_light;
+// 		}
+// 	}
 
-	span {
-		display: inline-block;
-		border: 1px solid $border_color;
-		padding: 2px 6px;
-		border-radius: $radius;
-	}
+// 	span {
+// 		display: inline-block;
+// 		border: 1px solid $border_color;
+// 		padding: 2px 6px;
+// 		border-radius: $radius;
+// 	}
 
-	.ev-link-modal-expanded & {
-		display: none;
-	}
-}
+// 	.ev-link-modal-expanded & {
+// 		display: none;
+// 	}
+// }
 
-.ev-link-inner-wrapper {
-	display: none;
+// .ev-link-inner-wrapper {
+// 	display: none;
 
-	.ev-link-modal-expanded & {
-		display: block;
-	}
-}
+// 	.ev-link-modal-expanded & {
+// 		display: block;
+// 	}
+// }
 
-.ev-link-field-row {
-	@include align-items(center);
-	@include display(flex);
-	@include flex-direction(row);
+// .ev-link-field-row {
+// 	@include align-items(center);
+// 	@include display(flex);
+// 	@include flex-direction(row);
 
-	.ev-link-radio-wrapper {
-		width: 50%;
-		float: left;
+// 	.ev-link-radio-wrapper {
+// 		width: 50%;
+// 		float: left;
 
-		+ input[type="text"] {
-			float: left;
-			width: 50%;
-		}
-	}
+// 		+ input[type="text"] {
+// 			float: left;
+// 			width: 50%;
+// 		}
+// 	}
 
-	input[type="text"] {
-		width: 100%;
-	}
-}
+// 	input[type="text"] {
+// 		width: 100%;
+// 	}
+// }
 
-.ev-link-radio-wrapper {
-	@include box-sizing( border-box );
-	padding: $baseline/2 $gutter/2;
+// .ev-link-radio-wrapper {
+// 	@include box-sizing( border-box );
+// 	padding: $baseline/2 $gutter/2;
 
-	> p {
-		margin-top: 0;
-		margin-bottom: $baseline/4;
-	}
-}
+// 	> p {
+// 		margin-top: 0;
+// 		margin-bottom: $baseline/4;
+// 	}
+// }

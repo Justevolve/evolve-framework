@@ -103,31 +103,39 @@ msgstr ""
 msgid "Changelog"
 msgstr ""
 
-#: includes/admin/fields.php:311
+#: includes/admin/fields.php:315
 msgid "Presets"
 msgstr ""
 
-#: includes/color.php:159
+#: includes/color.php:180
 msgid "User-defined presets"
 msgstr ""
 
-#: includes/color.php:168
+#: includes/color.php:190
 msgid "Delete preset"
 msgstr ""
 
-#: includes/color.php:173
+#: includes/color.php:195
 msgid "You haven't saved any color presets yet!"
 msgstr ""
 
-#: includes/color.php:179
+#: includes/color.php:200
 msgid "Default presets"
 msgstr ""
 
-#: includes/icons.php:153
-msgid "Search"
+#: includes/icons.php:159
+msgid "Color"
 msgstr ""
 
-#: includes/icons.php:180
+#: includes/icons.php:164
+msgid "Size"
+msgstr ""
+
+#: includes/icons.php:174
+msgid "Preview"
+msgstr ""
+
+#: includes/icons.php:193
 msgid "Choose your icon"
 msgstr ""
 
@@ -205,7 +213,12 @@ msgctxt "multiple icons found"
 msgid "%s found"
 msgstr ""
 
-#: includes/admin/fields.php:316
+#: includes/admin/fields.php:320
 msgctxt "save color preset"
 msgid "Save"
+msgstr ""
+
+#: includes/icons.php:153
+msgctxt "icon search"
+msgid "Search"
 msgstr ""

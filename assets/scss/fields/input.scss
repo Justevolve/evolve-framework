@@ -1,0 +1,34 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $General
+// -----------------------------------------------------------------------------
+
+.ev-field {
+
+	input[type="text"],
+	input[type="number"],
+	input[type="url"],
+	input[type="password"],
+	input[type="email"],
+	input[type="tel"],
+	textarea {
+		@include ui_input_standard;
+		font-size: $main_fsz;
+		@include box-shadow( none );
+		margin: 0;
+		line-height: 1.25;
+		padding: $baseline/2 $gutter;
+		border-radius: $radius;
+		@include transition( background-color, border-color, box-shadow );
+
+		&:hover {
+			@include ui_input_hover;
+		}
+
+		&:focus {
+			@include ui_input_focus;
+		}
+	}
+
+}

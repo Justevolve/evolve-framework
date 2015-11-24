@@ -1,229 +1,229 @@
 @import "../libs";
 
-// -----------------------------------------------------------------------------
-// $Image upload
-// -----------------------------------------------------------------------------
+// // -----------------------------------------------------------------------------
+// // $Image upload
+// // -----------------------------------------------------------------------------
 
-$upload_size: 80px;
+// $upload_size: 80px;
 
-.ev-image-size-select-container {
-	clear: both;
-	margin-top: $baseline/2;
+// .ev-image-size-select-container {
+// 	clear: both;
+// 	margin-top: $baseline/2;
 
-	p {
-		@extend %label;
-		padding-bottom: $baseline/6;
-	}
-}
+// 	p {
+// 		@extend %label;
+// 		padding-bottom: $baseline/6;
+// 	}
+// }
 
-.ev-image-upload-container {
-	@include clearfix;
-	display: inline-block;
-	position: relative;
-	float: left;
+// .ev-image-upload-container {
+// 	@include clearfix;
+// 	display: inline-block;
+// 	position: relative;
+// 	float: left;
 
-	& + .ev-image-upload-container {
-		margin-left: $gutter/2;
-	}
-}
+// 	& + .ev-image-upload-container {
+// 		margin-left: $gutter/2;
+// 	}
+// }
 
-.ev-image-upload {
-	display: inline-block;
+// .ev-image-upload {
+// 	display: inline-block;
 
-	.ev-image-placeholder {
-		@include clearfix;
-		display: inline-block;
-		position: relative;
-		background-color: $grey_light_2;
-		@include size( $upload_size );
-		float: left;
-		margin-bottom: $gutter/4;
+// 	.ev-image-placeholder {
+// 		@include clearfix;
+// 		display: inline-block;
+// 		position: relative;
+// 		background-color: $grey_light_2;
+// 		@include size( $upload_size );
+// 		float: left;
+// 		margin-bottom: $gutter/4;
 
-		&:before {
-			@include icon( "\f128" );
-			font-size: 22px;
-			@include position( absolute, 50% null null 50% );
-			@include transform( translate3d( -50%, -50%, 0 ) );
-			color: $grey_light;
-		}
+// 		&:before {
+// 			@include icon( "\f128" );
+// 			font-size: 22px;
+// 			@include position( absolute, 50% null null 50% );
+// 			@include transform( translate3d( -50%, -50%, 0 ) );
+// 			color: $grey_light;
+// 		}
 
-		&:after {
-			content: "";
-			display: block;
-			@include position( absolute, 0 0 0 0 );
-			border: 1px solid $border_color;
-		}
+// 		&:after {
+// 			content: "";
+// 			display: block;
+// 			@include position( absolute, 0 0 0 0 );
+// 			border: 1px solid $border_color;
+// 		}
 
-		img {
-			float: left;
-			display: none;
-		}
-	}
+// 		img {
+// 			float: left;
+// 			display: none;
+// 		}
+// 	}
 
-	&[data-multiple] {
-		.ev-image-placeholder {
-			visibility: hidden;
-		}
+// 	&[data-multiple] {
+// 		.ev-image-placeholder {
+// 			visibility: hidden;
+// 		}
 
-		.ev-image-placeholder-container {
-			position: relative;
+// 		.ev-image-placeholder-container {
+// 			position: relative;
 
-			&:before {
-				@include icon( "\f161" );
-				font-size: 22px;
-				line-height: $upload_size;
-				@include size( $upload_size );
-				text-align: center;
-				float: left;
-				margin-bottom: $gutter/4;
-				color: $grey_light;
-			}
+// 			&:before {
+// 				@include icon( "\f161" );
+// 				font-size: 22px;
+// 				line-height: $upload_size;
+// 				@include size( $upload_size );
+// 				text-align: center;
+// 				float: left;
+// 				margin-bottom: $gutter/4;
+// 				color: $grey_light;
+// 			}
 
-			&:after {
-				content: "";
-				display: block;
-				@include size( ($upload_size - 2px) );
-				@include position( absolute, 0 null null 0 );
-				border: 1px dashed $border_color;
-			}
-		}
+// 			&:after {
+// 				content: "";
+// 				display: block;
+// 				@include size( ($upload_size - 2px) );
+// 				@include position( absolute, 0 null null 0 );
+// 				border: 1px dashed $border_color;
+// 			}
+// 		}
 
-		.ev-remove-all-action {
-			display: none;
-		}
+// 		.ev-remove-all-action {
+// 			display: none;
+// 		}
 
-		&.ev-image-uploaded {
-			.ev-remove-all-action {
-				display: inline-block;
-				margin-left: $gutter;
-				color: $red;
+// 		&.ev-image-uploaded {
+// 			.ev-remove-all-action {
+// 				display: inline-block;
+// 				margin-left: $gutter;
+// 				color: $red;
 
-				&:hover {
-					color: darken( $red, 20 );
-				}
-			}
+// 				&:hover {
+// 					color: darken( $red, 20 );
+// 				}
+// 			}
 
-			&[data-sortable] {
-				.ev-image-placeholder {
-					cursor: move;
-				}
-			}
+// 			&[data-sortable] {
+// 				.ev-image-placeholder {
+// 					cursor: move;
+// 				}
+// 			}
 
-			.ev-image-placeholder-container {
-				&:before, &:after {
-					display: none;
-				}
-			}
+// 			.ev-image-placeholder-container {
+// 				&:before, &:after {
+// 					display: none;
+// 				}
+// 			}
 
-			.ev-image-placeholder {
-				visibility: visible;
-				margin-right: $gutter/4;
+// 			.ev-image-placeholder {
+// 				visibility: visible;
+// 				margin-right: $gutter/4;
 
-				&.ui-sortable-helper {
-					@include box-shadow( 0 1px 10px rgba( #000, .1 ) );
-				}
+// 				&.ui-sortable-helper {
+// 					@include box-shadow( 0 1px 10px rgba( #000, .1 ) );
+// 				}
 
-				&.ui-sortable-placeholder {
-					visibility: visible !important;
+// 				&.ui-sortable-placeholder {
+// 					visibility: visible !important;
 
-					&:after {
-						border-color: $grey_light_2;
-					}
-				}
-			}
+// 					&:after {
+// 						border-color: $grey_light_2;
+// 					}
+// 				}
+// 			}
 
-		}
-	}
+// 		}
+// 	}
 
-	.ev-density-label,
-	.ev-breakpoint-label {
-		@extend %label;
-		padding-bottom: $baseline/6;
-	}
+// 	.ev-density-label,
+// 	.ev-breakpoint-label {
+// 		@extend %label;
+// 		padding-bottom: $baseline/6;
+// 	}
 
-	+ .ev-image-upload {
-		margin-left: $gutter/2;
-	}
+// 	+ .ev-image-upload {
+// 		margin-left: $gutter/2;
+// 	}
 
-	.ev-image-upload-action {
-		clear: both;
-	}
+// 	.ev-image-upload-action {
+// 		clear: both;
+// 	}
 
-	.ev-edit-action {
-		display: none;
-	}
+// 	.ev-edit-action {
+// 		display: none;
+// 	}
 
-	.ev-upload-action {
-		display: inline-block;
-	}
+// 	.ev-upload-action {
+// 		display: inline-block;
+// 	}
 
-	&.ev-image-uploaded {
-		+ .ev-image-upload-image-size-selection {
-			display: block;
-			margin-top: $baseline/6;
-		}
+// 	&.ev-image-uploaded {
+// 		+ .ev-image-upload-image-size-selection {
+// 			display: block;
+// 			margin-top: $baseline/6;
+// 		}
 
-		.ev-upload-remove {
-			cursor: pointer;
+// 		.ev-upload-remove {
+// 			cursor: pointer;
 
-			&:before {
-				@extend %remove_icon;
-				background-color: $white;
-				border-radius: 50%;
-				@include position( absolute, -3px -3px null null );
-			}
-		}
+// 			&:before {
+// 				@extend %remove_icon;
+// 				background-color: $white;
+// 				border-radius: 50%;
+// 				@include position( absolute, -3px -3px null null );
+// 			}
+// 		}
 
-		.ev-edit-action {
-			display: inline-block;
-		}
+// 		.ev-edit-action {
+// 			display: inline-block;
+// 		}
 
-		.ev-upload-action {
-			display: none;
-		}
+// 		.ev-upload-action {
+// 			display: none;
+// 		}
 
-		.ev-image-placeholder {
-			@include size( auto );
+// 		.ev-image-placeholder {
+// 			@include size( auto );
 
-			&:hover {
-				.ev-upload-remove {
-					&:before {
-						@include opacity( 100 );
-					}
+// 			&:hover {
+// 				.ev-upload-remove {
+// 					&:before {
+// 						@include opacity( 100 );
+// 					}
 
-					&:hover {
-						&:before {
-							color: darken( $red, 20 );
-						}
-					}
-				}
+// 					&:hover {
+// 						&:before {
+// 							color: darken( $red, 20 );
+// 						}
+// 					}
+// 				}
 
-				&:after {
-					border: 3px solid $blue_medium;
-					@include box-shadow( inset 0px 0px 0px 1px $white );
-				}
-			}
+// 				&:after {
+// 					border: 3px solid $blue_medium;
+// 					@include box-shadow( inset 0px 0px 0px 1px $white );
+// 				}
+// 			}
 
-			&:before {
-				display: none;
-			}
+// 			&:before {
+// 				display: none;
+// 			}
 
-			img {
-				display: block;
-				max-height: $upload_size;
-				width: auto;
-				height: $upload_size;
-			}
-		}
-	}
-}
+// 			img {
+// 				display: block;
+// 				max-height: $upload_size;
+// 				width: auto;
+// 				height: $upload_size;
+// 			}
+// 		}
+// 	}
+// }
 
-.ev-image-upload-image-size-selection {
-	display: none;
+// .ev-image-upload-image-size-selection {
+// 	display: none;
 
-	span {
-		display: block;
-		@extend %label;
-		padding-bottom: $baseline/6;
-	}
-}
+// 	span {
+// 		display: block;
+// 		@extend %label;
+// 		padding-bottom: $baseline/6;
+// 	}
+// }

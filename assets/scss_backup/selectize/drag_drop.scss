@@ -1,0 +1,16 @@
+.selectize-control.plugin-drag_drop {
+	&.multi > .selectize-input > div.ui-sortable-placeholder {
+		visibility: visible !important;
+		background: $grey_light_2 !important;
+		// border: 0 none !important;
+	}
+
+	.ui-sortable-placeholder::after {
+		content: '!';
+		visibility: hidden;
+	}
+
+	.ui-sortable-helper {
+		@include box-shadow( 0 1px 10px rgba( #000, .1 ) );
+	}
+}

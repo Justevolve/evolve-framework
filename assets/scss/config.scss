@@ -8,6 +8,9 @@ $baseline       : 24px;
 $gutter         : 20px;
 $radius         : 2px;
 $transition_time: .1s;
+$main_fsz       : 14px;
+$small_fsz      : 12px;
+$big_fsz        : 16px;
 
 $modal_header_height: $baseline*2;
 $modal_footer_height: $baseline + ($baseline + 13) + 1; // footer padding + button padding + button font size + border
@@ -18,21 +21,47 @@ $icons: "dashicons";
 
 // Colors
 
-$white          : #fff;
-$text           : #222;
-$text_light     : #999;
-$red            : #f76d5e;
-$green          : #76ba5f;
-$blue_dark      : #0074a2;
-$blue_medium    : #2ea2cc;
-$blue_light     : #f7fcfe;
-$blue_light_text: #314e59;
-$border_color   : #e5e5e5;
-$grey_light     : #e0e0e0;
-$grey_light_1   : #f1f1f1;
-$grey_light_2   : #f7f7f7;
-$yellow_light   : #fff6bf;
-$yellow_text    : #595643;
+// $white          : #fff;
+// $text           : #222;
+// $text_light     : #999;
+// $red            : #f76d5e;
+// $green          : #76ba5f;
+// $blue_dark      : #0074a2;
+// $blue_medium    : #2ea2cc;
+// $blue_light     : #f7fcfe;
+// $blue_light_text: #314e59;
+// $border_color   : #e5e5e5;
+// $grey_light     : #e0e0e0;
+// $grey_light_1   : #f1f1f1;
+// $grey_light_2   : #f7f7f7;
+// $yellow_light   : #fff6bf;
+// $yellow_text    : #595643;
+
+
+$white  : #fff;
+
+$grey_0 : #fafafa;
+$grey_1 : #f0f0f0;
+$grey_2 : #f2f2f2;
+$grey_3 : #ccc;
+$grey_4 : #999;
+$grey_5 : #666;
+$grey_6 : #333;
+
+$green  : #66CC66;
+$green_0: #F7FAF9;
+$green_1: #DAE6DA;
+
+$blue   : #47AACC;
+$blue_0 : #DAE3E6;
+
+$red    : #CC4747;
+
+// Shadows
+
+$ui_el_shadow      : "0px 1px 2px rgba(0,0,0,.2)";
+$ui_el_shadow_hover: "0px 2px 3px rgba(0,0,0,.2)";
+
 
 // WordPress admin media queries
 
@@ -42,4 +71,4 @@ $media_mobile_small: "only screen and (max-width: 600px)";
 
 // Resources
 
-$handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4zwABjDACQwCqAEkZsggAb94CBcYDBvUAAAAASUVORK5CYII=";
+// $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4zwABjDACQwCqAEkZsggAb94CBcYDBvUAAAAASUVORK5CYII=";

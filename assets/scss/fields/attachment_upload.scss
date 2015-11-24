@@ -1,221 +1,221 @@
 @import "../libs";
 
-// -----------------------------------------------------------------------------
-// $Attachment upload
-// -----------------------------------------------------------------------------
+// // -----------------------------------------------------------------------------
+// // $Attachment upload
+// // -----------------------------------------------------------------------------
 
-$attachment_upload_size: $gutter*2;
-$attachment_generic    : "\f498";
-$attachment_zip        : "\f501";
-$attachment_image      : "\f128";
-$attachment_audio      : "\f500";
-$attachment_video      : "\f490";
-$attachment_text       : "\f491";
-$attachment_doc        : "\f497";
-$attachment_interactive: "\f496";
-$attachment_code       : "\f499";
-$attachment_spreadsheet: "\f495";
+// $attachment_upload_size: $gutter*2;
+// $attachment_generic    : "\f498";
+// $attachment_zip        : "\f501";
+// $attachment_image      : "\f128";
+// $attachment_audio      : "\f500";
+// $attachment_video      : "\f490";
+// $attachment_text       : "\f491";
+// $attachment_doc        : "\f497";
+// $attachment_interactive: "\f496";
+// $attachment_code       : "\f499";
+// $attachment_spreadsheet: "\f495";
 
-.ev-attachment-upload-action {
-	.ev-edit-action {
-		display: none;
-	}
+// .ev-attachment-upload-action {
+// 	.ev-edit-action {
+// 		display: none;
+// 	}
 
-	.ev-remove-all-action {
-		display: none;
-	}
-}
+// 	.ev-remove-all-action {
+// 		display: none;
+// 	}
+// }
 
-.ev-attachment-uploaded .ev-attachment-upload-action {
-	.ev-edit-action {
-		display: inline;
-	}
+// .ev-attachment-uploaded .ev-attachment-upload-action {
+// 	.ev-edit-action {
+// 		display: inline;
+// 	}
 
-	.ev-remove-all-action {
-		display: inline;
-		margin-left: $gutter/2;
-	}
+// 	.ev-remove-all-action {
+// 		display: inline;
+// 		margin-left: $gutter/2;
+// 	}
 
-	.ev-upload-action {
-		display: none;
-	}
-}
+// 	.ev-upload-action {
+// 		display: none;
+// 	}
+// }
 
-.ev-attachment-placeholder {
-	position: relative;
-	margin-bottom: $baseline/2;
-	border: 1px solid $border_color;
-	padding: $baseline/2 ($gutter/2 + 18) $baseline/2 $gutter/2;
-	background-color: $white;
-	min-height: 42px + $baseline;
-	@include box-sizing( border-box );
+// .ev-attachment-placeholder {
+// 	position: relative;
+// 	margin-bottom: $baseline/2;
+// 	border: 1px solid $border_color;
+// 	padding: $baseline/2 ($gutter/2 + 18) $baseline/2 $gutter/2;
+// 	background-color: $white;
+// 	min-height: 42px + $baseline;
+// 	@include box-sizing( border-box );
 
-	&:hover {
-		border: 1px solid $blue_medium;
+// 	&:hover {
+// 		border: 1px solid $blue_medium;
 
-		&:before,
-		&:after {
-			content: "";
-			display: block;
-			@include position( absolute, -1px null -1px null );
-			width: 1px;
-			background-color: $blue_medium;
-		}
+// 		&:before,
+// 		&:after {
+// 			content: "";
+// 			display: block;
+// 			@include position( absolute, -1px null -1px null );
+// 			width: 1px;
+// 			background-color: $blue_medium;
+// 		}
 
-		&:before {
-			left: 0;
-		}
+// 		&:before {
+// 			left: 0;
+// 		}
 
-		&:after {
-			right: 0;
-		}
-	}
+// 		&:after {
+// 			right: 0;
+// 		}
+// 	}
 
-	.ev-attachment-upload-container.ui-sortable & {
-		cursor: move;
+// 	.ev-attachment-upload-container.ui-sortable & {
+// 		cursor: move;
 
-		.ev-sortable-handle {
-			@include ev_handle;
-			width: $gutter;
-			@include position( absolute, 0 null 0 0 );
+// 		.ev-sortable-handle {
+// 			@include ev_handle;
+// 			width: $gutter;
+// 			@include position( absolute, 0 null 0 0 );
 
-			&:before {
-				@include position( absolute, 50% null null 50% );
-				margin-left: -3px;
-				margin-top: -7px;
-			}
-		}
+// 			&:before {
+// 				@include position( absolute, 50% null null 50% );
+// 				margin-left: -3px;
+// 				margin-top: -7px;
+// 			}
+// 		}
 
-		&:hover {
-			.ev-sortable-handle {
-				visibility: visible;
-			}
-		}
-	}
+// 		&:hover {
+// 			.ev-sortable-handle {
+// 				visibility: visible;
+// 			}
+// 		}
+// 	}
 
-	&.ui-sortable-placeholder {
-		background-color: $grey_light_2;
-		visibility: visible !important;
-	}
+// 	&.ui-sortable-placeholder {
+// 		background-color: $grey_light_2;
+// 		visibility: visible !important;
+// 	}
 
-	.ev-upload-remove {
-		cursor: pointer;
+// 	.ev-upload-remove {
+// 		cursor: pointer;
 
-		&:before {
-			@extend %remove_icon;
-			background-color: $white;
-			border-radius: 50%;
-			margin-top: -9px;
-			@include position( absolute, 50% $gutter/2 null null );
-		}
+// 		&:before {
+// 			@extend %remove_icon;
+// 			background-color: $white;
+// 			border-radius: 50%;
+// 			margin-top: -9px;
+// 			@include position( absolute, 50% $gutter/2 null null );
+// 		}
 
-		&:hover:before {
-			color: darken( $red, 20 );
-		}
-	}
+// 		&:hover:before {
+// 			color: darken( $red, 20 );
+// 		}
+// 	}
 
-	&:hover .ev-upload-remove:before {
-		@include opacity( 100 );
-	}
+// 	&:hover .ev-upload-remove:before {
+// 		@include opacity( 100 );
+// 	}
 
-	.ev-attachment-details {
-		.ev-attachment-title {
-			font-weight: bold;
-			font-size: 14px;
-		}
+// 	.ev-attachment-details {
+// 		.ev-attachment-title {
+// 			font-weight: bold;
+// 			font-size: 14px;
+// 		}
 
-		.ev-attachment-extension {
-			display: block;
-			font-style: italic;
-			color: $text_light;
-			margin-top: $baseline/4;
+// 		.ev-attachment-extension {
+// 			display: block;
+// 			font-style: italic;
+// 			color: $text_light;
+// 			margin-top: $baseline/4;
 
-			&:hover {
-				color: $blue_dark;
-			}
+// 			&:hover {
+// 				color: $blue_dark;
+// 			}
 
-			&:focus {
-				@include box-shadow( none );
-			}
-		}
-	}
+// 			&:focus {
+// 				@include box-shadow( none );
+// 			}
+// 		}
+// 	}
 
-	.ev-attachment-placeholder-icon {
-		@include size( $attachment_upload_size );
-		float: left;
-		position: relative;
-		display: block;
-		margin-right: $gutter;
-		border-right: 1px solid $border_color;
-		padding-right: $gutter/2;
+// 	.ev-attachment-placeholder-icon {
+// 		@include size( $attachment_upload_size );
+// 		float: left;
+// 		position: relative;
+// 		display: block;
+// 		margin-right: $gutter;
+// 		border-right: 1px solid $border_color;
+// 		padding-right: $gutter/2;
 
-		&:before {
-			color: $text_light;
-			@include size( $attachment_upload_size );
-			@include icon( $attachment_generic );
-			float: left;
-			line-height: $attachment_upload_size;
-			font-size: 32px;
-		}
-	}
+// 		&:before {
+// 			color: $text_light;
+// 			@include size( $attachment_upload_size );
+// 			@include icon( $attachment_generic );
+// 			float: left;
+// 			line-height: $attachment_upload_size;
+// 			font-size: 32px;
+// 		}
+// 	}
 
-	&[class*="video"] {
-		.ev-attachment-placeholder-icon:before {
-			content: $attachment_video;
-		}
-	}
+// 	&[class*="video"] {
+// 		.ev-attachment-placeholder-icon:before {
+// 			content: $attachment_video;
+// 		}
+// 	}
 
-	&[class*="image"] {
-		.ev-attachment-placeholder-icon:before {
-			content: $attachment_image;
-			font-size: 22px;
-		}
-	}
+// 	&[class*="image"] {
+// 		.ev-attachment-placeholder-icon:before {
+// 			content: $attachment_image;
+// 			font-size: 22px;
+// 		}
+// 	}
 
-	&[class*="audio"] {
-		.ev-attachment-placeholder-icon:before {
-			content: $attachment_audio;
-		}
-	}
+// 	&[class*="audio"] {
+// 		.ev-attachment-placeholder-icon:before {
+// 			content: $attachment_audio;
+// 		}
+// 	}
 
-	&[class*="zip"] {
-		.ev-attachment-placeholder-icon:before {
-			content: $attachment_zip;
-		}
-	}
+// 	&[class*="zip"] {
+// 		.ev-attachment-placeholder-icon:before {
+// 			content: $attachment_zip;
+// 		}
+// 	}
 
-	&[class*="txt"],
-	&[class*="text-plain"] {
-		.ev-attachment-placeholder-icon:before {
-			content: $attachment_text;
-		}
-	}
+// 	&[class*="txt"],
+// 	&[class*="text-plain"] {
+// 		.ev-attachment-placeholder-icon:before {
+// 			content: $attachment_text;
+// 		}
+// 	}
 
-	&[class*="pdf"] {
-		.ev-attachment-placeholder-icon:before {
-			content: $attachment_doc;
-		}
-	}
+// 	&[class*="pdf"] {
+// 		.ev-attachment-placeholder-icon:before {
+// 			content: $attachment_doc;
+// 		}
+// 	}
 
-	&[class*="html"] {
-		.ev-attachment-placeholder-icon:before {
-			content: $attachment_code;
-		}
-	}
+// 	&[class*="html"] {
+// 		.ev-attachment-placeholder-icon:before {
+// 			content: $attachment_code;
+// 		}
+// 	}
 
-	&[class*="key"],
-	&[class*="ppt"],
-	&[class*="keynote"],
-	&[class*="powerpoint"] {
-		.ev-attachment-placeholder-icon:before {
-			content: $attachment_interactive;
-		}
-	}
+// 	&[class*="key"],
+// 	&[class*="ppt"],
+// 	&[class*="keynote"],
+// 	&[class*="powerpoint"] {
+// 		.ev-attachment-placeholder-icon:before {
+// 			content: $attachment_interactive;
+// 		}
+// 	}
 
-	&[class*="xls"],
-	&[class*="excel"] {
-		.ev-attachment-placeholder-icon:before {
-			content: $attachment_spreadsheet;
-		}
-	}
-}
+// 	&[class*="xls"],
+// 	&[class*="excel"] {
+// 		.ev-attachment-placeholder-icon:before {
+// 			content: $attachment_spreadsheet;
+// 		}
+// 	}
+// }

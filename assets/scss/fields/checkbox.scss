@@ -4,41 +4,86 @@
 // $Checkbox
 // -----------------------------------------------------------------------------
 
-.ev-checkbox-style-switch {
+.ev-checkbox-wrapper {
 	input[type="checkbox"] {
-		border: none;
-		@include size( $baseline*2 $baseline );
-		border-radius: $baseline/2;
-		@include box-shadow( none );
+		@include ui_input_standard;
+		@include size( $baseline );
+		border-radius: $radius;
 		position: relative;
-		background-color: $grey_light;
-		@include transition( background-color $transition_time*2 );
+		@include box-shadow( none );
 
-		&:after {
-			@include size( $baseline - 6 );
-			content: "";
-			display: block;
-			@include position( absolute, 3px null null 3px );
-			@include transition( left $transition_time*2 $ease-in-out-quint );
-			background-color: $white;
-			border-radius: 50%;
+		&:hover {
+			@include ui_input_hover;
+			@include box-shadow( none );
 		}
 
 		&:focus {
 			@include box-shadow( none );
-			border-color: $border_color;
+		}
+
+		&:before {
+
 		}
 
 		&:checked {
 			background-color: $green;
+			border-color: $green;
 
 			&:before {
-				display: none;
+				// TODO: Sostituire icona
+				color: $white;
+				text-shadow: #{$ui_el_shadow};
+				margin: 0;
+				@include size( $baseline );
+				line-height: $baseline;
+				@include position( absolute, 0 null null -1px );
 			}
 
-			&:after {
-				left: $baseline + 3;
-			}
 		}
+
+	}
+
+	&.ev-checkbox-style-switch {
+		input[type="checkbox"] {}
 	}
 }
+
+
+// .ev-checkbox-style-switch {
+// 	input[type="checkbox"] {
+// 		border: none;
+// 		@include size( $baseline*2 $baseline );
+// 		border-radius: $baseline/2;
+// 		@include box-shadow( none );
+// 		position: relative;
+// 		background-color: $grey_light;
+// 		@include transition( background-color $transition_time*2 );
+
+// 		&:after {
+// 			@include size( $baseline - 6 );
+// 			content: "";
+// 			display: block;
+// 			@include position( absolute, 3px null null 3px );
+// 			@include transition( left $transition_time*2 $ease-in-out-quint );
+// 			background-color: $white;
+// 			border-radius: 50%;
+// 		}
+
+// 		&:focus {
+// 			@include box-shadow( none );
+// 			border-color: $border_color;
+// 		}
+
+// 		&:checked {
+// 			background-color: $green;
+
+// 			&:before {
+// 				display: none;
+// 			}
+
+// 			&:after {
+// 				left: $baseline + 3;
+// 			}
+// 		}
+// 	}
+// }
