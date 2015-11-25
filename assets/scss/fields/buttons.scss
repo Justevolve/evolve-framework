@@ -7,12 +7,16 @@
 .ev-btn {
 	position: relative;
 	display: inline-block;
-	border-radius: $radius;
 	cursor: pointer;
+	border: none;
+	padding: 0;
+	background-color: transparent;
 
-	input[type="submit"] {
-		display: none;
+	&:focus {
+		outline: none;
 	}
+
+	// Sizes -------------------------------------------------------------------
 
 	&.ev-btn-size-small {
 		line-height: $baseline;
@@ -24,26 +28,48 @@
 		font-size: 13px;
 	}
 
-	&.ev-btn-size-big {
+	&.ev-btn-size-large {
 		line-height: $baseline*2;
 		font-size: 14px;
 	}
 
+	// Styles ------------------------------------------------------------------
+
 	&.ev-btn-style-text {
 		line-height: 1.25;
+
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 
 	&.ev-btn-style-icon {
-
+		i {
+			&:before {
+				display: inline-block;
+				content: attr(data-icon);
+				line-height: 1;
+				font-size: inherit;
+				font-weight: 400;
+				font-style: normal;
+				text-transform: none;
+				text-rendering: auto;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				text-align: center;
+			}
+		}
 	}
 
 	&.ev-btn-style-round {
 		border-radius: 50%;
 	}
 
-	&.ev-btn-style-button {
-		padding: 0 $gutter;
+	&.ev-btn-style-button,
+	&.ev-btn-style-round {
 		color: $white;
+		border: 1px solid;
+		font-weight: bold;
 
 		&:hover {
 			@include box-shadow( #{$ui_el_shadow_hover} );
@@ -51,16 +77,26 @@
 
 		&:active {
 			@include box-shadow( #{$ui_el_shadow} );
+			color: rgba( $grey_6, .3 );
 		}
+	}
+
+	&.ev-btn-style-button {
+		padding: 0 $gutter;
+		border-radius: $radius;
 
 		&.ev-btn-size-small {
 			padding: 0 $gutter/2;
 		}
 	}
 
+	// Types -------------------------------------------------------------------
+
 	&.ev-btn-type-action {
+		&.ev-btn-style-round,
 		&.ev-btn-style-button {
 			background-color: $blue_0;
+			border-color: $blue_0;
 		}
 
 		&.ev-btn-style-text {
@@ -69,8 +105,10 @@
 	}
 
 	&.ev-btn-type-confirm {
+		&.ev-btn-style-round,
 		&.ev-btn-style-button {
 			background-color: $blue;
+			border-color: $blue;
 		}
 
 		&.ev-btn-style-text {
@@ -79,8 +117,10 @@
 	}
 
 	&.ev-btn-type-delete {
+		&.ev-btn-style-round,
 		&.ev-btn-style-button {
 			background-color: $red;
+			border-color: $red;
 		}
 
 		&.ev-btn-style-text {
@@ -89,8 +129,10 @@
 	}
 
 	&.ev-btn-type-save {
+		&.ev-btn-style-round,
 		&.ev-btn-style-button {
 			background-color: $green;
+			border-color: $green;
 		}
 
 		&.ev-btn-style-text {
