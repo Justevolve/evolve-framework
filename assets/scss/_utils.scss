@@ -150,96 +150,96 @@
 // 	@include transition( color $transition_time ease );
 // }
 
-// // -----------------------------------------------------------------------------
-// // $Vertical tab style
-// // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Vertical tab style
+// -----------------------------------------------------------------------------
 
-// @mixin vertical_tab_style {
-// 	.ev-tabs-nav.ev-vertical {
-// 		width: 20%;
-// 		max-width: 220px;
-// 		margin-right: -1px;
-// 		z-index: 10;
-// 		position: relative;
+@mixin vertical_tab_style {
+	.ev-tabs-nav.ev-vertical {
+		width: 20%;
+		max-width: 220px;
+		margin-right: -1px;
+		z-index: 10;
+		position: relative;
 
-// 		li {
-// 			margin-bottom: 0;
+		li {
+			margin-bottom: 0;
 
-// 			a {
-// 				display: block;
-// 				position: relative;
-// 				background-color: $grey_light_2;
-// 				font-size: 13px;
-// 				padding: $baseline/2 $gutter/1.5;
-// 				text-decoration: none;
-// 				color: $text_light;
-// 				border-right: 1px solid $border_color;
-// 				border-bottom: 1px solid $border_color;
+			a {
+				display: block;
+				position: relative;
+				background-color: $grey_1;
+				font-size: 13px;
+				padding: $baseline/2 $gutter/1.5;
+				text-decoration: none;
+				color: $grey_4;
+				border-right: 1px solid $grey_3;
+				border-bottom: 1px solid $grey_3;
 
-// 				&:focus {
-// 					@include box-shadow( none );
-// 				}
+				&:focus {
+					@include box-shadow( none );
+				}
 
-// 				&.ev-active {
-// 					font-weight: bold;
-// 					background-color: $white;
-// 					border-right-color: $white;
-// 					color: $text;
-// 				}
-// 			}
-// 		}
-// 	}
+				&.ev-active {
+					font-weight: bold;
+					background-color: $white;
+					border-right-color: $white;
+					color: $grey_6;
+				}
+			}
+		}
+	}
 
-// 	.ev-tab-container {
-// 		border-right: 0;
-// 		border-bottom: 0;
-// 		border-top: 0;
-// 		position: relative;
-// 		z-index: 1;
-// 		overflow-y: auto;
-// 	}
-// }
+	.ev-tab-container {
+		border-right: 0;
+		border-bottom: 0;
+		border-top: 0;
+		position: relative;
+		z-index: 1;
+		overflow-y: auto;
+	}
+}
 
-// // -----------------------------------------------------------------------------
-// // $Spinner
-// // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Spinner
+// -----------------------------------------------------------------------------
 
-// @mixin spinner( $size: 16px, $weight: 2px, $color: "" ) {
-// 	z-index: 100000;
-// 	content: "";
-// 	display: block;
-// 	margin: {
-// 		left: -( ( $size + ( $weight*2 ) ) / 2 );
-// 		top: -( ( $size + ( $weight*2 ) ) / 2 );
-// 	}
-// 	@include size($size);
-// 	border-top: {
-// 		width: $weight;
-// 		style: solid;
-// 	}
-// 	border-right: {
-// 		width: $weight;
-// 		style: solid;
-// 		color: transparent;
-// 	}
-// 	border-bottom: {
-// 		width: $weight;
-// 		style: solid;
-// 		color: transparent;
-// 	}
-// 	border-left: {
-// 		width: $weight;
-// 		style: solid;
-// 	}
-// 	border-top-color: $color;
-// 	border-left-color: $color;
-// 	border-radius: 50%;
-// 	-webkit-animation: spinner 400ms linear infinite;
-// 	-moz-animation:    spinner 400ms linear infinite;
-// 	-ms-animation:     spinner 400ms linear infinite;
-// 	-o-animation:      spinner 400ms linear infinite;
-// 	animation:         spinner 400ms linear infinite;
-// }
+@mixin spinner( $size: 16px, $weight: 2px, $color: "" ) {
+	z-index: 100000;
+	content: "";
+	display: block;
+	margin: {
+		left: -( ( $size + ( $weight*2 ) ) / 2 );
+		top: -( ( $size + ( $weight*2 ) ) / 2 );
+	}
+	@include size($size);
+	border-top: {
+		width: $weight;
+		style: solid;
+	}
+	border-right: {
+		width: $weight;
+		style: solid;
+		color: transparent;
+	}
+	border-bottom: {
+		width: $weight;
+		style: solid;
+		color: transparent;
+	}
+	border-left: {
+		width: $weight;
+		style: solid;
+	}
+	border-top-color: $color;
+	border-left-color: $color;
+	border-radius: 50%;
+	-webkit-animation: spinner 400ms linear infinite;
+	-moz-animation:    spinner 400ms linear infinite;
+	-ms-animation:     spinner 400ms linear infinite;
+	-o-animation:      spinner 400ms linear infinite;
+	animation:         spinner 400ms linear infinite;
+}
 
 // // -----------------------------------------------------------------------------
 // // $Handle

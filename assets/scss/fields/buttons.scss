@@ -1,0 +1,69 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Buttons
+// -----------------------------------------------------------------------------
+
+.ev-btn {
+	position: relative;
+	display: inline-block;
+	border-radius: $radius;
+	cursor: pointer;
+
+	input[type="submit"] {
+		display: none;
+	}
+
+	&.ev-btn-size-small {
+		line-height: $baseline;
+		font-size: 12px;
+	}
+
+	&.ev-btn-size-medium {
+		line-height: $baseline*1.5;
+		font-size: 13px;
+	}
+
+	&.ev-btn-size-big {
+		line-height: $baseline*2;
+		font-size: 14px;
+	}
+
+	&.ev-btn-style-text {
+		line-height: 1;
+	}
+
+	&.ev-btn-style-round {
+		border-radius: 50%;
+	}
+
+	&.ev-btn-style-button {
+		padding: 0 $gutter;
+
+		&:hover {
+			@include box-shadow( #{$ui_el_shadow_hover} );
+		}
+
+		&:active {
+			@include box-shadow( #{$ui_el_shadow} );
+		}
+
+		&.ev-btn-size-small {
+			padding: 0 $gutter/2;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Save button
+// -----------------------------------------------------------------------------
+
+.ev-save {
+	.ev-btn-message {}
+
+	.ev-btn-action {}
+
+	&.ev-saving {}
+
+	&.ev-saved {}
+}

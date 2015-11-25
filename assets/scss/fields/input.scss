@@ -17,7 +17,7 @@
 		font-size: $main_fsz;
 		@include box-shadow( none );
 		margin: 0;
-		line-height: 1.25;
+		line-height: $baseline;
 		padding: $baseline/2 $gutter;
 		border-radius: $radius;
 		@include transition( background-color, border-color, box-shadow );
@@ -29,6 +29,10 @@
 		&:focus {
 			@include ui_input_focus;
 		}
+	}
+
+	textarea {
+		line-height: 1.5;
 	}
 
 }
