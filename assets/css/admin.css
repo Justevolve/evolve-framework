@@ -109,24 +109,27 @@
 .ev-field-bundle:hover .ev-bundle-fields-wrapper { border-color: #ccc; }
 .ev-field-bundle .ev-field .ev-field-header .ev-label { font-size: 12px; }
 
-.ev-btn { position: relative; display: inline-block; border-radius: 3px; cursor: pointer; }
-.ev-btn input[type="submit"] { display: none; }
+.ev-btn { position: relative; display: inline-block; cursor: pointer; border: none; padding: 0; background-color: transparent; }
+.ev-btn:focus { outline: none; }
 .ev-btn.ev-btn-size-small { line-height: 24px; font-size: 12px; }
 .ev-btn.ev-btn-size-medium { line-height: 36px; font-size: 13px; }
-.ev-btn.ev-btn-size-big { line-height: 48px; font-size: 14px; }
+.ev-btn.ev-btn-size-large { line-height: 48px; font-size: 14px; }
 .ev-btn.ev-btn-style-text { line-height: 1.25; }
+.ev-btn.ev-btn-style-text:hover { text-decoration: underline; }
+.ev-btn.ev-btn-style-icon i:before { display: inline-block; content: attr(data-icon); line-height: 1; font-size: inherit; font-weight: 400; font-style: normal; text-transform: none; text-rendering: auto; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-align: center; }
 .ev-btn.ev-btn-style-round { border-radius: 50%; }
-.ev-btn.ev-btn-style-button { padding: 0 20px; color: #fff; }
-.ev-btn.ev-btn-style-button:hover { box-shadow: 0px 2px 3px rgba(0,0,0,.2); }
-.ev-btn.ev-btn-style-button:active { box-shadow: 0px 1px 2px rgba(0,0,0,.2); }
+.ev-btn.ev-btn-style-button, .ev-btn.ev-btn-style-round { color: #fff; border: 1px solid; font-weight: bold; }
+.ev-btn.ev-btn-style-button:hover, .ev-btn.ev-btn-style-round:hover { box-shadow: 0px 2px 3px rgba(0,0,0,.2); }
+.ev-btn.ev-btn-style-button:active, .ev-btn.ev-btn-style-round:active { box-shadow: 0px 1px 2px rgba(0,0,0,.2); color: rgba(51, 51, 51, 0.3); }
+.ev-btn.ev-btn-style-button { padding: 0 20px; border-radius: 3px; }
 .ev-btn.ev-btn-style-button.ev-btn-size-small { padding: 0 10px; }
-.ev-btn.ev-btn-type-action.ev-btn-style-button { background-color: #DAE3E6; }
+.ev-btn.ev-btn-type-action.ev-btn-style-round, .ev-btn.ev-btn-type-action.ev-btn-style-button { background-color: #DAE3E6; border-color: #DAE3E6; }
 .ev-btn.ev-btn-type-action.ev-btn-style-text { color: #DAE3E6; }
-.ev-btn.ev-btn-type-confirm.ev-btn-style-button { background-color: #47AACC; }
+.ev-btn.ev-btn-type-confirm.ev-btn-style-round, .ev-btn.ev-btn-type-confirm.ev-btn-style-button { background-color: #47AACC; border-color: #47AACC; }
 .ev-btn.ev-btn-type-confirm.ev-btn-style-text { color: #47AACC; }
-.ev-btn.ev-btn-type-delete.ev-btn-style-button { background-color: #CC4747; }
+.ev-btn.ev-btn-type-delete.ev-btn-style-round, .ev-btn.ev-btn-type-delete.ev-btn-style-button { background-color: #CC4747; border-color: #CC4747; }
 .ev-btn.ev-btn-type-delete.ev-btn-style-text { color: #CC4747; }
-.ev-btn.ev-btn-type-save.ev-btn-style-button { background-color: #66CC66; }
+.ev-btn.ev-btn-type-save.ev-btn-style-round, .ev-btn.ev-btn-type-save.ev-btn-style-button { background-color: #66CC66; border-color: #66CC66; }
 .ev-btn.ev-btn-type-save.ev-btn-style-text { color: #66CC66; }
 
 .ev-checkbox-wrapper input[type="checkbox"] { border: 1px solid #f0f0f0; background-color: #fafafa; width: 24px; height: 24px; border-radius: 3px; position: relative; box-shadow: none; }
