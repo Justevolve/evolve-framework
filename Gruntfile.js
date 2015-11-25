@@ -16,6 +16,8 @@ var modules = [
 	"components/utilities",
 ];
 
+var scss_folder = 'scss';
+
 // -----------------------------------------------------------------------------
 // MODULES UTILITIES
 // -----------------------------------------------------------------------------
@@ -137,11 +139,6 @@ module.exports = function( grunt ) {
 				style: "compressed",
 				sourcemap: "none"
 			},
-			// admin: {
-			// 	files: {
-			// 		"assets/css/admin.css" : "assets/scss/admin.scss"
-			// 	}
-			// }
 			admin: {
 				options: {
 					style: "compact",
@@ -149,7 +146,7 @@ module.exports = function( grunt ) {
 				},
 				files: [ {
 					expand: true,
-					cwd: "assets/scss/",
+					cwd: "assets/" + scss_folder + "/",
 					src: [
 						"*.scss",
 						"fields/*.scss",
@@ -159,7 +156,7 @@ module.exports = function( grunt ) {
 						"!import.scss",
 						"!admin.scss",
 					],
-					dest: "assets/scss/compiled/",
+					dest: "assets/" + scss_folder + "/compiled/",
 					ext: ".css"
 				} ]
 			}
@@ -167,14 +164,6 @@ module.exports = function( grunt ) {
 
 		// Concat
 		concat: {
-			// js_admin_dev: {
-			// 	options: {
-			// 		separator: ';\n',
-			// 		banner: '',
-			// 	},
-			// 	src: get_modules_admin_scripts(),
-			// 	dest: "assets/js/min/admin.min.js"
-			// },
 			prod: {
 				options: {
 					separator: '\n\n',
@@ -184,7 +173,7 @@ module.exports = function( grunt ) {
 				dest: 'scss/components-libs.scss'
 			},
 			admin_css: {
-				src: [ "assets/scss/compiled/*.css", "assets/scss/compiled/fields/*.css" ],
+				src: [ "assets/" + scss_folder + "/compiled/*.css", "assets/" + scss_folder + "/compiled/fields/*.css" ],
 				dest: "assets/css/admin.css"
 			},
 		},
@@ -203,7 +192,7 @@ module.exports = function( grunt ) {
 		},
 
 		clean: {
-			start: [ "assets/scss/compiled" ],
+			start: [ "assets/" + scss_folder + "/compiled" ],
 		},
 
 		// Uglify
@@ -258,10 +247,6 @@ module.exports = function( grunt ) {
 					spawn: false
 				}
 			},
-			// admin_css: {
-			// 	files: [ "assets/scss/admin.scss", "scss/components-libs.scss" ],
-			// 	tasks: [ "sass:admin", "notify:done" ]
-			// },
 			prod_css: {
 				files: get_modules_raw_stylesheets(),
 				tasks: [ "prod" ],
@@ -271,15 +256,13 @@ module.exports = function( grunt ) {
 			},
 			admin_css: {
 				files: [
-					"assets/scss/*.scss",
-					"assets/scss/fields/*.scss"
+					"assets/" + scss_folder + "/*.scss",
+					"assets/" + scss_folder + "/fields/*.scss"
 				],
 				tasks: [ "sass:admin", "concat:admin_css", "string-replace:admin_css", "file_append:admin_css" ],
 				options: {
 					spawn: false
 				}
-				// files: [ "assets/admin/scss/style.scss" ],
-				// tasks: [ "sass", "notify:done" ]
 			},
 		},
 
