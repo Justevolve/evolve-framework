@@ -37,7 +37,7 @@ msgstr ""
 msgid "Need help?"
 msgstr ""
 
-#: classes/core/ev_fields_container.php:187
+#: classes/core/ev_fields_container.php:186
 msgid "Save"
 msgstr ""
 
@@ -99,7 +99,7 @@ msgstr ""
 msgid "Insert a name for the preset"
 msgstr ""
 
-#: evolve-framework.php:486
+#: evolve-framework.php:489
 msgid "Changelog"
 msgstr ""
 

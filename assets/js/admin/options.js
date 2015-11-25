@@ -76,13 +76,17 @@
 		data += "&action=" + action.attr( "data-callback" );
 		data += "&nonce=" + nonce;
 
-		window.ev_save_options_tab_button.call( action, "on" );
+		ev_idle_button( action );
+
+		// window.ev_save_options_tab_button.call( action, "on" );
 
 		$.post(
 			form.attr( "action" ),
 			data,
 			function( response ) {
-				window.ev_save_options_tab_button.call( action, "off", response );
+				ev_unidle_button( action );
+
+				// window.ev_save_options_tab_button.call( action, "off", response );
 			},
 			'json'
 		);
