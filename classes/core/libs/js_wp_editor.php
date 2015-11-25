@@ -34,7 +34,7 @@ if ( ! function_exists( 'js_wp_editor' ) ) {
 	function js_wp_editor( $settings = array() ) {
 		if ( ! class_exists( '_WP_Editors' ) )
 			require( ABSPATH . WPINC . '/class-wp-editor.php' );
-		// $set = _WP_Editors::parse_settings( 'apid', $settings );
+		$set = _WP_Editors::parse_settings( 'apid', $settings );
 
 		// if ( !current_user_can( 'upload_files' ) )
 			// $set['media_buttons'] = false;
@@ -53,7 +53,7 @@ if ( ! function_exists( 'js_wp_editor' ) ) {
 		// 	) );
 		// }
 
-		// _WP_Editors::editor_settings( 'apid', $set );
+		_WP_Editors::editor_settings( 'apid', $set );
 
 		$ap_vars = array(
 			'url' => get_home_url(),
