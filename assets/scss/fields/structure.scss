@@ -1,6 +1,223 @@
 @import "../libs";
 
 // -----------------------------------------------------------------------------
+// $Field structure
+// -----------------------------------------------------------------------------
+
+.ev-field {
+	display: block;
+	float: left;
+	@include box-sizing( border-box );
+	padding: 0 $gutter;
+
+	&:not( .ev-field-divider ) + .ev-field:not( .ev-field-divider ) {
+		.ev-field-inner-wrapper {
+			border-top: 1px solid $grey_1;
+		}
+	}
+
+	.ev-field-inner-wrapper {
+		@include clearfix;
+		@include box-sizing( border-box );
+		padding: $baseline 0;
+	}
+
+	.ev-field-input-size-full {
+		width: 100%;
+	}
+
+	&.ev-hidden {
+		display: none;
+	}
+
+	// 100% width
+	&.ev-field-size-full {
+		width: 100%;
+		clear: both;
+	}
+
+	// 1/2 width
+	&.ev-field-size-large,
+	&.ev-field-size-one-half,
+	&.ev-field-size-two-fourths {
+		width: _ev_col( 1/2 );
+
+		@include ev_media( $media_mobile ) {
+			width: _ev_col( 1/1 );
+		}
+	}
+
+	// 1/3 width
+	&.ev-field-size-medium,
+	&.ev-field-size-one-third {
+		width: _ev_col( 1/3 );
+
+		@include ev_media( $media_mobile ) {
+			width: _ev_col( 1/1 );
+		}
+	}
+
+	// 2/3 width
+	&.ev-field-size-two-thirds {
+		width: _ev_col( 2/3 );
+
+		@include ev_media( $media_tablet ) {
+			width: _ev_col( 1/2 );
+		}
+
+		@include ev_media( $media_mobile ) {
+			width: _ev_col( 1/1 );
+		}
+	}
+
+	// 1/4 width
+	&.ev-field-size-small,
+	&.ev-field-size-one-fourth {
+		width: _ev_col( 1/4 );
+
+		@include ev_media( $media_tablet ) {
+			width: _ev_col( 1/2 );
+		}
+
+		@include ev_media( $media_mobile ) {
+			width: _ev_col( 1/1 );
+		}
+	}
+
+	// 3/4 width
+	&.ev-field-size-three-fourths {
+		width: _ev_col( 3/4 );
+
+		@include ev_media( $media_tablet ) {
+			width: _ev_col( 1/2 );
+		}
+
+		@include ev_media( $media_mobile ) {
+			width: _ev_col( 1/1 );
+		}
+	}
+
+	// Break field
+	&.ev-field-break {
+		float: none;
+		clear: both;
+	}
+
+	.ev-field-inner {
+		@include clearfix();
+
+		p {
+			margin: 0;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Label
+// -----------------------------------------------------------------------------
+
+.ev-field-header {
+	@include box-sizing( border-box );
+
+	.ev-label {
+		font-weight: bold;
+		font-size: 14px;
+		float: left;
+		color: $grey_6;
+		cursor: default;
+	}
+
+	&.ev-field-header-label-inline,
+	&.ev-field-header-label-inline-hidden {
+		display: inline-block;
+		float: left;
+		width: 30%;
+		max-width: 220px;
+
+		@include ev_media( $media_mobile ) {
+			width: 100%;
+			margin-top: 0;
+		}
+
+		+ .ev-container {
+			display: inline-block;
+			width: 70%;
+			@include box-sizing( border-box );
+			padding-left: $gutter;
+
+			@include ev_media( $media_mobile ) {
+				width: 100%;
+				padding-left: 0;
+				padding-top: $baseline/2;
+			}
+		}
+	}
+
+	&.ev-field-header-label-inline-hidden {
+		margin-top: 0;
+		min-height: 1px;
+	}
+
+	&.ev-field-header-label-block {
+		width: 100%;
+		@include clearfix;
+		margin-bottom: $baseline/2;
+
+		.ev-label {
+			display: block;
+		}
+	}
+
+	&.ev-field-header-label-inline-hidden,
+	&.ev-field-header-label-hidden {
+		.ev-label {
+			display: none;
+		}
+
+		.ev-help-inline {
+			padding-top: 0;
+		}
+	}
+
+	&.ev-field-header-label-hidden {
+		.ev-help-inline {
+			margin-bottom: $baseline/2;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Help
+// -----------------------------------------------------------------------------
+
+.ev-help {
+	color: $grey_4;
+
+	&.ev-help-tooltip,
+	&.ev-help-popup {
+		display: inline-block;
+	}
+
+	&.ev-help-inline {
+		display: block;
+		clear: both;
+		padding-top: $baseline/4;
+
+		strong,
+		b {
+			color: $grey_6;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+// -----------------------------------------------------------------------------
 // $Fields
 // -----------------------------------------------------------------------------
 

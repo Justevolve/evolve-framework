@@ -103,7 +103,7 @@ msgstr ""
 msgid "Changelog"
 msgstr ""
 
-#: includes/admin/fields.php:315
+#: includes/admin/fields.php:318
 msgid "Presets"
 msgstr ""
 
@@ -213,7 +213,7 @@ msgctxt "multiple icons found"
 msgid "%s found"
 msgstr ""
 
-#: includes/admin/fields.php:320
+#: includes/admin/fields.php:323
 msgctxt "save color preset"
 msgid "Save"
 msgstr ""

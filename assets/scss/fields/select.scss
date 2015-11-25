@@ -10,6 +10,7 @@
 	border-radius: $radius;
 	font-size: $main_fsz;
 	position: relative;
+	max-width: 100%;
 
 	&:hover {
 		@include ui_input_hover;
@@ -49,12 +50,12 @@
 	}
 
 	select {
-		padding: ($baseline/2 - 1) $baseline*2 ($baseline/2 - 1) $gutter;
+		padding: $baseline/2 $baseline*2 $baseline/2 $gutter;
 		@include appearance( none );
 		margin: 0;
 		border: none;
 		height: auto;
-		line-height: 1.5;
+		line-height: $baseline;
 		background-color: transparent;
 		@include box-shadow( none );
 		cursor: pointer;

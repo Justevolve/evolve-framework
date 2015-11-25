@@ -286,11 +286,12 @@ function ev_checkbox( $name, $value, $style = '', $echo = true ) {
 function ev_color( $name, $value, $opacity = false, $echo = true ) {
 	$html          = '';
 	$opacity_data  = '';
-	$field_color   = isset( $value['color'] ) ? $value['color'] : '';
-	$field_opacity = isset( $value['opacity'] ) ? $value['opacity'] : '';
+	$field_color   = $value;
+	$field_opacity = '1';
 
-	if ( $opacity === false && ! $field_color ) {
-		$field_color = $value;
+	if ( is_array( $value ) ) {
+		$field_color   = isset( $value['color'] ) ? $value['color'] : '';
+		$field_opacity = isset( $value['opacity'] ) ? $value['opacity'] : '';
 	}
 
 	$html .= '<span class="ev-color-wrapper">';
@@ -310,15 +311,19 @@ function ev_color( $name, $value, $opacity = false, $echo = true ) {
 			esc_attr( $opacity_data )
 		);
 
-		$html .= sprintf( '<a href="#" data-color-presets data-nonce="%s">%s</a>',
-			esc_attr( wp_create_nonce( 'ev_color_presets' ) ),
-			esc_html( __( 'Presets', 'ev_framework' ) )
-		);
+		$html .= '<div class="ev-color-controls-wrapper">';
 
-		$html .= sprintf( '<a href="#" data-color-save-preset data-nonce="%s">%s</a>',
-			esc_attr( wp_create_nonce( 'ev_color_save_preset' ) ),
-			esc_html( _x( 'Save', 'save color preset', 'ev_framework' ) )
-		);
+			$html .= sprintf( '<a href="#" data-color-presets data-nonce="%s">%s</a>',
+				esc_attr( wp_create_nonce( 'ev_color_presets' ) ),
+				esc_html( __( 'Presets', 'ev_framework' ) )
+			);
+
+			$html .= sprintf( '<a href="#" data-color-save-preset data-nonce="%s">%s</a>',
+				esc_attr( wp_create_nonce( 'ev_color_save_preset' ) ),
+				esc_html( _x( 'Save', 'save color preset', 'ev_framework' ) )
+			);
+
+		$html .= '</div>';
 
 	$html .= '</span>';
 

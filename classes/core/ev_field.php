@@ -719,45 +719,49 @@ abstract class Ev_Field {
 		$label = $this->label();
 
 		printf( '<div class="%s" %s>', esc_attr( implode( ' ', $this->classes() ) ), $this->attrs() );
-			echo '<div class="ev-field-header ev-field-header-label-' . esc_attr( $label["type"] ) . '">';
-				$this->_render_label();
-				$this->_render_help();
-			echo '</div>';
+			echo '<div class="ev-field-inner-wrapper">';
 
-			$values = (array) $this->value();
-			$container_class = '';
+				echo '<div class="ev-field-header ev-field-header-label-' . esc_attr( $label["type"] ) . '">';
+					$this->_render_label();
+					$this->_render_help();
+				echo '</div>';
 
-			if ( isset( $this->_repeatable['empty_state'] ) && $this->_repeatable['empty_state'] !== '' ) {
-				if ( empty( $values ) || isset( $values[0] ) && empty( $values[0] ) ) {
-					$container_class .= ' ev-container-empty';
+				$values = (array) $this->value();
+				$container_class = '';
+
+				if ( isset( $this->_repeatable['empty_state'] ) && $this->_repeatable['empty_state'] !== '' ) {
+					if ( empty( $values ) || isset( $values[0] ) && empty( $values[0] ) ) {
+						$container_class .= ' ev-container-empty';
+					}
 				}
-			}
-
-			if ( $this->_repeatable !== false ) {
-				if ( empty( $values ) || isset( $values[0] ) && empty( $values[0] ) ) {
-					$container_class .= ' ev-no-fields';
-				}
-			}
-
-			printf( '<div class="ev-container %s">', esc_attr( $container_class ) );
-				$this->_field_container_start();
 
 				if ( $this->_repeatable !== false ) {
-					if ( ! ev_is_skipped_on_saving( $this->_type ) ) {
-						$this->_render_repeatable_controls();
+					if ( empty( $values ) || isset( $values[0] ) && empty( $values[0] ) ) {
+						$container_class .= ' ev-no-fields';
 					}
+				}
 
-					$this->_render_inner_repeatable();
+				printf( '<div class="ev-container %s">', esc_attr( $container_class ) );
+					$this->_field_container_start();
 
-					if ( ! isset( $this->_repeatable['append'] ) || $this->_repeatable['append'] === true ) {
+					if ( $this->_repeatable !== false ) {
 						if ( ! ev_is_skipped_on_saving( $this->_type ) ) {
-							$this->_render_repeatable_controls( false );
+							$this->_render_repeatable_controls();
+						}
+
+						$this->_render_inner_repeatable();
+
+						if ( ! isset( $this->_repeatable['append'] ) || $this->_repeatable['append'] === true ) {
+							if ( ! ev_is_skipped_on_saving( $this->_type ) ) {
+								$this->_render_repeatable_controls( false );
+							}
 						}
 					}
-				}
-				else {
-					$this->render_inner();
-				}
+					else {
+						$this->render_inner();
+					}
+				echo '</div>';
+
 			echo '</div>';
 		echo '</div>';
 	}

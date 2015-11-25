@@ -13,6 +13,8 @@
 		@include size( $baseline );
 		border-radius: 50%;
 		@include box-shadow( none );
+		margin-right: $gutter/2;
+		float: left;
 
 		&:before {
 			content: "";
@@ -33,11 +35,20 @@
 		}
 	}
 
+	span {
+		display: inline-block;
+		font-size: $main_fsz;
+		line-height: $baseline;
+	}
+
 	+ .ev-radio {
-		margin-top: $baseline/4;
+		margin-top: $baseline/2;
 	}
 }
 
+// -----------------------------------------------------------------------------
+// $Switch style
+// -----------------------------------------------------------------------------
 .ev-radio-style-switch {
 	display: inline-block;
 
@@ -67,8 +78,8 @@
 			position: relative;
 			z-index: 1;
 			font-size: $main_fsz;
-			line-height: 1.25;
-			padding: ($baseline/2 + 2) $gutter;
+			line-height: $baseline;
+			padding: $baseline/2 $gutter;
 		}
 
 		+ .ev-radio {
