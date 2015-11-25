@@ -18,7 +18,7 @@
 		@include box-shadow( none );
 		margin: 0;
 		line-height: $baseline;
-		padding: $baseline/2 $gutter;
+		padding: $baseline/4 $gutter/2;
 		border-radius: $radius;
 		@include transition( background-color, border-color, box-shadow );
 

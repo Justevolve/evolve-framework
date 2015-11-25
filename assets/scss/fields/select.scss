@@ -50,7 +50,7 @@
 	}
 
 	select {
-		padding: $baseline/2 $baseline*2 $baseline/2 $gutter;
+		padding: $baseline/4 $baseline*2 $baseline/4 $gutter/2;
 		@include appearance( none );
 		margin: 0;
 		border: none;

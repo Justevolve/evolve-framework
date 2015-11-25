@@ -182,11 +182,21 @@ abstract class Ev_FieldsContainer {
 
 			echo '<div class="ev-form-submit-container">';
 
-				echo '<div class="ev-btn ev-save">';
-					echo '<input type="submit" value="">';
-					printf( '<span class="ev-btn-action" data-callback="%s">%s</span>', esc_attr( $group_callback ), __( 'Save', 'ev_framework' ) );
-					echo '<span class="ev-btn-message"></span>';
-				echo '</div>';
+				ev_btn(
+					__( 'Save', 'ev_framework' ),
+					'save',
+					array(
+						'attrs' => array(
+							'data-callback' => $group_callback,
+						)
+					)
+				);
+
+				// echo '<div class="ev-btn ev-save">';
+				// 	echo '<input type="submit" value="">';
+				// 	printf( '<span class="ev-btn-action" data-callback="%s">%s</span>', esc_attr( $group_callback ), __( 'Save', 'ev_framework' ) );
+				// 	echo '<span class="ev-btn-message"></span>';
+				// echo '</div>';
 
 			echo '</div>';
 

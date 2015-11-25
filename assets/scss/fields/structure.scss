@@ -10,11 +10,11 @@
 	@include box-sizing( border-box );
 	padding: 0 $gutter;
 
-	&:not( .ev-field-divider ) + .ev-field:not( .ev-field-divider ) {
-		.ev-field-inner-wrapper {
-			border-top: 1px solid $grey_1;
-		}
-	}
+	// &:not( .ev-field-divider ) + .ev-field:not( .ev-field-divider ) {
+	// 	.ev-field-inner-wrapper {
+	// 		border-top: 1px solid $grey_1;
+	// 	}
+	// }
 
 	.ev-field-inner-wrapper {
 		@include clearfix;

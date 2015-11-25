@@ -1,8 +1,56 @@
 @import "../libs";
 
-// // -----------------------------------------------------------------------------
-// // $Icon picker
-// // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Icon picker
+// -----------------------------------------------------------------------------
+
+.ev-selected-icon-wrapper {
+	position: relative;
+	@include size( $baseline*1.5 );
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	@include ui_input_standard;
+	border-radius: $radius;
+
+	&:hover {
+		@include ui_input_hover;
+	}
+
+	.ev-icon {
+		font-size: 24px;
+		line-height: $baseline*1.5;
+	}
+
+	&.ev-empty {
+		background-color: $grey_0;
+
+		&:before {
+			content: "";
+			display: block;
+			@include size( $baseline );
+			border: 2px dashed $grey_2;
+			margin-top: $baseline/4 - 2;
+			margin-left: $baseline/4 - 2;
+		}
+
+		&:hover {
+			&:before {
+				border-color: $grey_3;
+			}
+		}
+
+		.ev-icon-remove {
+			display: none;
+		}
+	}
+
+	.ev-icon-remove {}
+
+	&:hover {
+		.ev-icon-remove {}
+	}
+}
 
 // .ev-selected-icon-wrapper {
 // 	position: relative;

@@ -264,6 +264,9 @@ class Ev_Framework {
 		/* General system utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'system.php' );
 
+		/* Button utilities. */
+		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'button.php' );
+
 		/* Templating utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'templates.php' );
 

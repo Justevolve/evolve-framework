@@ -36,7 +36,8 @@
 				margin: 0;
 				@include size( $baseline );
 				line-height: $baseline;
-				@include position( absolute, 0 null null -1px );
+				@include position( absolute, 0 null null -2px );
+				font-size: 25px;
 			}
 
 		}

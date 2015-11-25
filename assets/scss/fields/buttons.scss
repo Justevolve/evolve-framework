@@ -30,7 +30,11 @@
 	}
 
 	&.ev-btn-style-text {
-		line-height: 1;
+		line-height: 1.25;
+	}
+
+	&.ev-btn-style-icon {
+
 	}
 
 	&.ev-btn-style-round {
@@ -39,6 +43,7 @@
 
 	&.ev-btn-style-button {
 		padding: 0 $gutter;
+		color: $white;
 
 		&:hover {
 			@include box-shadow( #{$ui_el_shadow_hover} );
@@ -52,6 +57,47 @@
 			padding: 0 $gutter/2;
 		}
 	}
+
+	&.ev-btn-type-action {
+		&.ev-btn-style-button {
+			background-color: $blue_0;
+		}
+
+		&.ev-btn-style-text {
+			color: $blue_0;
+		}
+	}
+
+	&.ev-btn-type-confirm {
+		&.ev-btn-style-button {
+			background-color: $blue;
+		}
+
+		&.ev-btn-style-text {
+			color: $blue;
+		}
+	}
+
+	&.ev-btn-type-delete {
+		&.ev-btn-style-button {
+			background-color: $red;
+		}
+
+		&.ev-btn-style-text {
+			color: $red;
+		}
+	}
+
+	&.ev-btn-type-save {
+		&.ev-btn-style-button {
+			background-color: $green;
+		}
+
+		&.ev-btn-style-text {
+			color: $green;
+		}
+	}
+
 }
 
 // -----------------------------------------------------------------------------

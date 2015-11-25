@@ -79,7 +79,7 @@
 			z-index: 1;
 			font-size: $main_fsz;
 			line-height: $baseline;
-			padding: $baseline/2 $gutter;
+			padding: $baseline/4+1 $gutter/2;
 		}
 
 		+ .ev-radio {

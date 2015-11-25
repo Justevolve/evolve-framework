@@ -6,7 +6,7 @@
 
 .ev-field-color {
 	.minicolors input[type="text"] {
-		padding-left: $baseline*3;
+		padding-left: $baseline*2;
 
 		&:hover {
 			background-color: $white;
@@ -49,16 +49,16 @@
 }
 
 .minicolors-swatch {
-	@include position( absolute, 1px null 1px 1px );
+	@include position( absolute, 0 null null 0 );
 	cursor: pointer;
 	padding: 0;
 	margin: 0;
 	display: inline-block;
-	@include size( $baseline*2 );
+	@include size( $baseline*1.5 + 2 );
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAH0lEQVQYV2NkYGAwZkAFZ5G5jPRRgOYEVDeB3EBjBQBOZwTVonMbmQAAAABJRU5ErkJggg==);
 	background-repeat: repeat;
-	// border-top-left-radius: $radius/2;
-	// border-bottom-left-radius: $radius/2;
+	border-top-left-radius: $radius;
+	border-bottom-left-radius: $radius;
 	overflow: hidden;
 }
 

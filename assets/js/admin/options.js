@@ -18,41 +18,41 @@
 	 * @return {Boolean}
 	 */
 	window.ev_save_options_tab_button = function( mode, response ) {
-		var parent = $( this ).parents( ".ev-btn" ).first(),
-			text = $( this ).text();
+		// var parent = $( this ).parents( ".ev-btn" ).first(),
+		// 	text = $( this ).text();
 
-		if ( mode === "on" ) {
-			if ( parent.hasClass( "ev-saving" ) || parent.hasClass( "ev-saved" ) ) {
-				return false;
-			}
+		// if ( mode === "on" ) {
+		// 	if ( parent.hasClass( "ev-saving" ) || parent.hasClass( "ev-saved" ) ) {
+		// 		return false;
+		// 	}
 
-			parent.addClass( "ev-saving" );
-		}
-		else if ( mode === "off" && typeof response !== "undefined" ) {
-			parent.removeClass( "ev-saving" );
+		// 	parent.addClass( "ev-saving" );
+		// }
+		// else if ( mode === "off" && typeof response !== "undefined" ) {
+		// 	parent.removeClass( "ev-saving" );
 
-			var response_heading = '';
+		// 	var response_heading = '';
 
-			if ( response.heading !== '' ) {
-				response_heading = '<h3>' + response.heading + '</h3>';
-			}
+		// 	if ( response.heading !== '' ) {
+		// 		response_heading = '<h3>' + response.heading + '</h3>';
+		// 	}
 
-			if ( response.type == 'success' ) {
-				parent.addClass( "ev-saved" );
-				parent.find( '.ev-btn-message' ).html( response.message );
+		// 	if ( response.type == 'success' ) {
+		// 		parent.addClass( "ev-saved" );
+		// 		parent.find( '.ev-btn-message' ).html( response.message );
 
-				if ( response.refresh ) {
-					window.location.href = window.location.href;
-				}
+		// 		if ( response.refresh ) {
+		// 			window.location.href = window.location.href;
+		// 		}
 
-				setTimeout( function() {
-					parent.removeClass( "ev-saved" );
-				}, 2000 );
-			} else {
-				$( '<div class="ev-persistent-message ev-' + response.type + '"><span class="ev-close-persistent-message"></span>' + response_heading + response.message + '</div>' )
-				.appendTo( '.ev-persistent-messages-container' );
-			}
-		}
+		// 		setTimeout( function() {
+		// 			parent.removeClass( "ev-saved" );
+		// 		}, 2000 );
+		// 	} else {
+		// 		$( '<div class="ev-persistent-message ev-' + response.type + '"><span class="ev-close-persistent-message"></span>' + response_heading + response.message + '</div>' )
+		// 		.appendTo( '.ev-persistent-messages-container' );
+		// 	}
+		// }
 
 		return false;
 	};
@@ -69,7 +69,7 @@
 		}
 
 		var form = $( "form", tab ).first(),
-			action = $( ".ev-btn-action[data-callback]", form ).first(),
+			action = $( ".ev-btn-type-save[data-callback]", form ).first(),
 			data = form.serialize().replace( /%5B%5D/g, '[]' ),
 			nonce = $( "#ev" ).val();
 
@@ -106,10 +106,10 @@
 	 * Hooks to the click event of admin pages forms save buttons in order to
 	 * trigger the tabs saving action.
 	 */
-	$.evf.on( ".ev-admin-page .ev-tab > form .ev-btn-action[data-callback]", "click", "save-options-tab", function() {
-		var tab = $( this ).parents( ".ev-tab" ).first();
+	// $.evf.on( ".ev-admin-page .ev-tab > form .ev-btn-action[data-callback]", "click", "save-options-tab", function() {
+	// 	var tab = $( this ).parents( ".ev-tab" ).first();
 
-		return window.ev_save_options_tab( tab );
-	} );
+	// 	return window.ev_save_options_tab( tab );
+	// } );
 
 } )( jQuery );
