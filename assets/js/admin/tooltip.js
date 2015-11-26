@@ -9,7 +9,7 @@
 	/**
 	 * Destroy a tooltip.
 	 */
-	function ev_tooltip_destroy( tooltip ) {
+	window.ev_tooltip_destroy = function( tooltip ) {
 		var s = $( "body" ).get( 0 ).style,
 			transitionSupport = "transition" in s || "WebkitTransition" in s || "MozTransition" in s || "msTransition" in s || "OTransition" in s;
 
