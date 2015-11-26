@@ -1,6 +1,7 @@
 ( function( $ ) {
 
 	var tooltip_container = "ev-tooltip-container",
+		tooltip_container_selector = "." + tooltip_container,
 		tooltip_selector = ".ev-tooltip",
 		tooltip_attr = "title",
 		arrow_size = 16;
@@ -29,23 +30,58 @@
 	/**
 	 * Destroy all tooltips;
 	 */
-	window.ev_seek_and_destroy_tooltips = function() {
+	function ev_seek_and_destroy_tooltips() {
 		$( "." + tooltip_container ).remove();
 	};
 
+	/**
+	 * Correctly position a tooltip depending on the viewport's boundaries.
+	 */
+	function _ev_position_tooltip( $link, $container ) {
+		var link_height = $link.outerHeight(),
+			link_width = $link.outerWidth(),
+			livetip_height = $container.outerHeight() + ( arrow_size / 2 ),
+			livetip_width = $container.outerWidth(),
+			style = {},
+			offset_top = $link.offset().top,
+			scroll = offset_top - $( window ).scrollTop();
+
+		if ( $( "body" ).is( ".admin-bar" ) ) {
+			scroll -= $( "#wpadminbar" ).outerHeight();
+		}
+
+		style.left = $link.offset().left - ( livetip_width / 2 ) + ( link_width / 2 );
+
+		$container.removeClass( "ev-tooltip-expand-top ev-tooltip-expand-bottom ev-tooltip-vertical" );
+
+		if ( livetip_height <= scroll ) {
+			$container.addClass( "ev-tooltip-expand-top" );
+			style.top = offset_top - livetip_height;
+		}
+		else {
+			$container.addClass( "ev-tooltip-expand-bottom" );
+			style.top = offset_top + link_height + ( arrow_size / 2 );
+		}
+
+		$container
+			.addClass( "ev-tooltip-vertical" )
+			.css( style );
+	};
+
+	/**
+	 * Create a tooltip on a specific element.
+	 */
 	window.ev_create_tooltip = function( element ) {
 		var $link = $( element ),
 			link_title = $link.attr( "data-" + tooltip_attr ) || $link.attr( tooltip_attr );
 
-		if ( link_title === "" ) {
+		if ( typeof link_title === "undefined" || link_title === "" ) {
 			return false;
 		}
 
 		ev_seek_and_destroy_tooltips();
 
-		var $container = $( '<div class="' + tooltip_container + '"></div>' ).appendTo( "body" ),
-			link_height = $link.outerHeight(),
-			link_width = $link.outerWidth();
+		var $container = $( '<div class="' + tooltip_container + '"></div>' ).appendTo( "body" );
 
 		$link.data( "ev-tooltip", $container );
 
@@ -58,47 +94,11 @@
 			.addClass( 'ev-tooltip-active' )
 			.show();
 
-		var livetip_height = $container.outerHeight(),
-			livetip_width = $container.outerWidth(),
-			mode = "vertical",
-			style = {};
+		$( window ).on( "resize scroll", function() {
+			_ev_position_tooltip( $link, $container );
+		} )
 
-		if ( $link.attr( "data-horizontal" ) ) {
-			mode = "horizontal";
-		}
-
-		if ( mode === "vertical" ) {
-			style.left = $link.offset().left - ( livetip_width / 2 ) + ( link_width / 2 );
-
-			livetip_height += ( arrow_size / 2 );
-
-			if ( livetip_height <= $link.offset().top ) {
-				$container.addClass( "ev-tooltip-expand-top" );
-				style.top = $link.offset().top - livetip_height;
-			}
-			else {
-				$container.addClass( "ev-tooltip-expand-bottom" );
-				style.top = $link.offset().top + link_height + ( arrow_size / 2 );
-			}
-		}
-		else {
-			style.top = $link.offset().top - ( livetip_height / 2 ) + ( link_height / 2 );
-
-			livetip_width += ( arrow_size / 2 );
-
-			if ( $( window ).width() >= $link.offset().left + link_width + livetip_width ) {
-				$container.addClass( "ev-tooltip-expand-right" );
-				style.left = $link.offset().left + link_width + ( arrow_size / 2 );
-			}
-			else {
-				$container.addClass( "ev-tooltip-expand-left" );
-				style.left = $link.offset().left - livetip_width;
-			}
-		}
-
-		$container
-			.addClass( "ev-tooltip-" + mode )
-			.css( style );
+		_ev_position_tooltip( $link, $container );
 	}
 
 	/**
@@ -117,5 +117,12 @@
 		if ( tooltip ) {
 			window.ev_tooltip_destroy( tooltip );
 		}
+	});
+
+	/**
+	 * When clicking on a persistent tooltip, hide the tooltip.
+	 */
+	$.evf.delegate( tooltip_container_selector, "click", "tooltip", function() {
+		window.ev_tooltip_destroy( $( this ) );
 	});
 } )( jQuery );
