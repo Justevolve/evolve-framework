@@ -13,6 +13,7 @@ function ev_btn( $text, $type, $config = array() ) {
 		'size'  => 'small',
 		'style' => 'button',
 		'icon'  => false,
+		'hide_text' => false,
 		'attrs' => array(),
 		'echo'	=> true
 	) );
@@ -44,7 +45,7 @@ function ev_btn( $text, $type, $config = array() ) {
 
 		$text_class = '';
 
-		if ( $config['style'] === 'icon' ) {
+		if ( $config['hide_text'] === true ) {
 			$text_class = 'screen-reader-text';
 		}
 
