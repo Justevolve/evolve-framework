@@ -84,7 +84,7 @@
 			form.attr( "action" ),
 			data,
 			function( response ) {
-				ev_unidle_button( action );
+				ev_unidle_button( action, response );
 
 				// window.ev_save_options_tab_button.call( action, "off", response );
 			},
@@ -102,6 +102,23 @@
 		var tab = $( this ).parents( ".ev-tab" ).first();
 
 		window.ev_save_options_tab( tab );
+
+		return false;
+	} );
+
+	// TODO: rimuovere
+	$.evf.on( ".ev-tab .ev-field-ev_debug_button .ev-btn", "click", "asd", function() {
+		var btn = $( this ),
+			response = {
+				message: '',
+				type: 'success'
+			};
+
+		ev_idle_button( btn );
+
+		setTimeout( function() {
+			ev_unidle_button( btn, response );
+		}, 1000 );
 
 		return false;
 	} );

@@ -359,7 +359,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 			$type = 'success';
 			$message = apply_filters( 'ev_save_options_tab_response_message', __( 'All saved!', 'ev_framework' ), $type );
 			$heading = apply_filters( 'ev_save_options_tab_response_heading', '', $type );
-			$args = apply_filters( "ev_save_options_tab_response_args[tab:$group]", array() );
+			$args    = apply_filters( "ev_save_options_tab_response_args[tab:$group]", array() );
 
 			ev_ajax_message( $message, $type, $heading, $args );
 		}

@@ -33,14 +33,11 @@
 		$( "." + tooltip_container ).remove();
 	};
 
-	/**
-	 * When hovering a tooltip market, show the related tooltip.
-	 */
-	$.evf.delegate( tooltip_selector, "mouseover", "tooltip", function() {
-		var $link = $( this ),
-			link_title = $( this ).attr( "data-" + tooltip_attr ) || $( this ).attr( tooltip_attr );
+	window.ev_create_tooltip = function( element ) {
+		var $link = $( element ),
+			link_title = $link.attr( "data-" + tooltip_attr ) || $link.attr( tooltip_attr );
 
-		if ( link_title == "" ) {
+		if ( link_title === "" ) {
 			return false;
 		}
 
@@ -50,7 +47,7 @@
 			link_height = $link.outerHeight(),
 			link_width = $link.outerWidth();
 
-		$( this ).data( "ev-tooltip", $container );
+		$link.data( "ev-tooltip", $container );
 
 		$container
 			.html( link_title )
@@ -102,6 +99,13 @@
 		$container
 			.addClass( "ev-tooltip-" + mode )
 			.css( style );
+	}
+
+	/**
+	 * When hovering a tooltip market, show the related tooltip.
+	 */
+	$.evf.delegate( tooltip_selector, "mouseover", "tooltip", function() {
+		ev_create_tooltip( $( this ) );
 	});
 
 	/**

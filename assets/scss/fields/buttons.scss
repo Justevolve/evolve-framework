@@ -133,6 +133,50 @@
 		&.ev-btn-style-button {
 			background-color: $green;
 			border-color: $green;
+			@include transition( padding $transition_time*2 $ease-out-back );
+
+			&:before {
+				@include position( absolute, 50% $gutter/2 null null ); //TODO:
+				@include spinner( 12px, 2px, $white ); //TODO:
+				@include opacity( 0 );
+				visibility: hidden;
+				@include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
+			}
+
+			// ( 'notice', 'warning', 'success', 'error' ) // TODO: gestire ritorno
+
+			&:after {
+				content: "\f147";
+				font-family: $icons;
+				color: $green;
+				line-height: $baseline/2;
+				border-radius: 50%;
+				background-color: $white;
+				@include position( absolute, 50% $gutter/2 null null ); //TODO:
+				@include size( $baseline/2 );
+				margin-top: -$baseline/4;
+				@include opacity( 0 );
+				visibility: hidden;
+				@include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
+			}
+
+			&.ev-btn-idle {
+				padding-right: $gutter + 16px + $gutter/2; //TODO:
+
+				&:before {
+					@include opacity( 100 );
+					visibility: visible;
+				}
+			}
+
+			&.ev-btn-complete {
+				padding-right: $gutter + 16px + $gutter/2; //TODO:
+
+				&:after {
+					@include opacity( 100 );
+					visibility: visible;
+				}
+			}
 		}
 
 		&.ev-btn-style-text {
@@ -143,15 +187,26 @@
 }
 
 // -----------------------------------------------------------------------------
-// $Save button
+// $Spinner animation
 // -----------------------------------------------------------------------------
 
-.ev-save {
-	.ev-btn-message {}
-
-	.ev-btn-action {}
-
-	&.ev-saving {}
-
-	&.ev-saved {}
+@-webkit-keyframes spinner {
+	0%   { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes spinner {
+	0%   { -moz-transform: rotate(0deg); }
+	100% { -moz-transform: rotate(360deg); }
+}
+@-o-keyframes spinner {
+	0%   { -o-transform: rotate(0deg); }
+	100% { -o-transform: rotate(360deg); }
+}
+@-ms-keyframes spinner {
+	0%   { -ms-transform: rotate(0deg); }
+	100% { -ms-transform: rotate(360deg); }
+}
+@keyframes spinner {
+	0%   { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
 }
