@@ -108,6 +108,7 @@
 
 		&.ev-btn-style-round i {
 			@include size( $baseline );
+			font-size: 14px;
 
 			&:before {
 				line-height: $baseline;
@@ -127,6 +128,7 @@
 
 		&.ev-btn-style-round i {
 			@include size( $baseline*1.5 );
+			font-size: 16px;
 
 			&:before {
 				line-height: $baseline*1.5;
@@ -146,6 +148,7 @@
 
 		&.ev-btn-style-round i {
 			@include size( $baseline*2 );
+			font-size: 18px;
 
 			&:before {
 				line-height: $baseline*2;
@@ -226,6 +229,10 @@
 			@include opacity( 100 );
 			visibility: visible;
 			@include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
+
+			&:before {
+				bottom: -1px;
+			}
 		}
 
 		&.ev-btn-type-confirm,
@@ -333,6 +340,11 @@
 		&.ev-btn-style-button {
 			background-color: $blue_0;
 			border-color: $blue_0;
+
+			&:hover {
+				background-color: $blue;
+				border-color: $blue;
+			}
 		}
 
 		&.ev-btn-style-text {
