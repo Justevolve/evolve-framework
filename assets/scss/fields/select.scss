@@ -59,5 +59,7 @@
 		background-color: transparent;
 		@include box-shadow( none );
 		cursor: pointer;
+		position: relative;
+		z-index: 10;
 	}
 }

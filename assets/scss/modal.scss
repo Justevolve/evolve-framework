@@ -170,7 +170,7 @@ body.ev-modal-open {
 
 .ev-modal-back {
 	float: left;
-	@extend %btn;
+	// @extend %btn;
 
 	.ev-btn-action {
 		color: $grey_6;

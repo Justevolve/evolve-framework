@@ -110,8 +110,15 @@
 // -----------------------------------------------------------------------------
 
 	.ev-field-header {
-		.ev-repeat-remove-all {
-			margin-top: $baseline/4;
+		&:not( .ev-field-header-label-hidden ):not( .ev-field-header-label-inline-hidden ) {
+			* + .ev-repeat-remove-all {
+				margin-top: $baseline/2;
+			}
+		}
+
+		&.ev-field-header-label-hidden,
+		&.ev-field-header-label-inline-hidden {
+			margin-bottom: $baseline/2;
 		}
 	}
 

@@ -4,9 +4,15 @@
 // $Radio
 // -----------------------------------------------------------------------------
 
+.ev-radio-wrapper {
+	@include clearfix;
+}
+
 .ev-radio {
-	display: block;
+	display: inline-block;
 	position: relative;
+	float: left;
+	clear: both;
 
 	input[type="radio"] {
 		@include ui_input_standard;
@@ -49,11 +55,13 @@
 // -----------------------------------------------------------------------------
 // $Switch style
 // -----------------------------------------------------------------------------
+
 .ev-radio-style-switch {
 	display: inline-block;
 
 	.ev-radio {
-		display: inline-block;
+		float: none;
+		clear: none;
 
 		input[type="radio"] {
 			border-radius: 0;

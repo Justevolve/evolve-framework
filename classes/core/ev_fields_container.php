@@ -188,7 +188,8 @@ abstract class Ev_FieldsContainer {
 					array(
 						'attrs' => array(
 							'data-callback' => $group_callback,
-						)
+						),
+						'size' => 'medium'
 					)
 				);
 

@@ -618,7 +618,8 @@ abstract class Ev_Field {
 					'attrs' => array(
 						'class'     => 'ev-repeat-remove-all',
 					),
-					'style'     => 'text',
+					'style' => 'text',
+					'size'  => 'large'
 				)
 			);
 
