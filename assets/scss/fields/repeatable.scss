@@ -161,6 +161,24 @@
 						@include position( absolute, null 0 (-( (($baseline+2) / 2) + $baseline/8 + 2) ) 0 );
 					}
 				}
+
+				// -------------------------------------------------------------
+				// $Sortable helper and placeholder
+				// -------------------------------------------------------------
+				&.ui-sortable-helper {
+					.ev-repeatable-controls {
+						display: none !important;
+					}
+
+					> .ev-field-panel-controls-wrapper {
+						display: block;
+					}
+				}
+
+				&.ui-sortable-placeholder {
+					border-color: $grey_2;
+					background-color: $grey_2;
+				}
 			}
 		}
 	}
@@ -214,7 +232,7 @@
 			// -----------------------------------------------------------------
 			&.ui-sortable-helper {
 				.ev-repeatable-controls {
-					display: none;
+					display: none !important;
 				}
 
 				> .ev-field-panel-controls-wrapper {
