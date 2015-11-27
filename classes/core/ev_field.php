@@ -530,6 +530,10 @@ abstract class Ev_Field {
 	 */
 	protected function _render_repeatable_controls( $mode )
 	{
+		if ( $this->_repeatable === false ) {
+			return;
+		}
+
 		$count = count( $this->value() );
 
 		printf( '<div class="ev-repeatable-controls" data-key="%s" data-count="%s">', esc_attr( $this->_handle ), esc_attr( $count ) );
