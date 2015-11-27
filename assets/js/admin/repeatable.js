@@ -36,7 +36,7 @@
 	/**
 	 * Adding the sortable component to the UI building queue.
 	 */
-	$.evf.ui.add( ".ev-sortable .ev-container-repeatable-inner-wrapper, .ev-sortable .ev-bundle-fields-wrapper", function() {
+	$.evf.ui.add( ".ev-container-repeatable-inner-wrapper", function() {
 		var ev_sortable_dragged_height = null;
 
 		/**
@@ -48,9 +48,18 @@
 				return false;
 			}
 
-			ev_sortable_dragged_height = $( this ).outerHeight();
+			var sortable = 0;
 
-			$( "#wpbody" ).css( "padding-bottom", ev_sortable_dragged_height );
+			if ( $( origin ).parents( ".ev-bundle-fields-wrapper" ).length ) {
+				sortable = $( origin ).parents( ".ev-bundle-fields-wrapper" ).first();
+			}
+			else {
+				sortable = $( origin ).parents( ".ev-field-inner" ).first();
+			}
+
+			ev_sortable_dragged_height = sortable.outerHeight();
+
+			$( "#wpbody" ).css( "padding-bottom", ev_sortable_dragged_height + 10 );
 
 			return false;
 		};
@@ -60,7 +69,7 @@
 		 */
 		var ev_repeatable_sortable_mouseup = function() {
 			ev_sortable_dragged_height = null;
-			$( "#wpbody" ).css( "padding-bottom", 0 );
+			$( "#wpbody" ).css( "padding-bottom", "" );
 		};
 
 		$( document )
@@ -72,7 +81,7 @@
 		} );
 
 		$( document ).on( "mouseup.ev_sortable", ".ev-sortable-handle", function() {
-			ev_repeatable_sortable_mouseup( $( this ) );
+			ev_repeatable_sortable_mouseup();
 		} );
 
 		$( this ).sortable( {
@@ -88,6 +97,9 @@
 				$( ".ui-sortable-placeholder" ).css( css );
 
 				ev_repeatable_sortable_mouseup();
+			},
+			sort: function() {
+				console.log( $( ".ui-sortable-placeholder" ).outerHeight() );
 			},
 			stop: function( e, ui ) {
 				var sortable = $( ui.item ).parents( ".ev-sortable" ).first(),
