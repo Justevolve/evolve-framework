@@ -36,7 +36,7 @@
 	/**
 	 * Adding the sortable component to the UI building queue.
 	 */
-	$.evf.ui.add( ".ev-sortable .ev-container, .ev-sortable .ev-bundle-fields-wrapper", function() {
+	$.evf.ui.add( ".ev-sortable .ev-container-repeatable-inner-wrapper, .ev-sortable .ev-bundle-fields-wrapper", function() {
 		var ev_sortable_dragged_height = null;
 
 		/**
@@ -48,9 +48,7 @@
 				return false;
 			}
 
-			var draggable = $( origin ).is( ".ui-sortable" ) ? $( origin ) : $( origin ).parents( ".ui-sortable" ).first();
-
-			ev_sortable_dragged_height = draggable.outerHeight();
+			ev_sortable_dragged_height = $( this ).outerHeight();
 
 			$( "#wpbody" ).css( "padding-bottom", ev_sortable_dragged_height );
 
@@ -222,7 +220,7 @@
 		else {
 			var html = $( $.evf.template( tpl, {} ) );
 
-			insert( html );
+			insert( html, mode );
 		}
 
 		return false;
