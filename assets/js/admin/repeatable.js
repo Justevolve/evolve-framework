@@ -37,9 +37,60 @@
 	 * Adding the sortable component to the UI building queue.
 	 */
 	$.evf.ui.add( ".ev-sortable .ev-container, .ev-sortable .ev-bundle-fields-wrapper", function() {
+		var ev_sortable_dragged_height = null;
+
+		/**
+		 * Add padding to the page wrap in order to avoid flickering when starting
+		 * to drag.
+		 */
+		var ev_repeatable_sortable_mousedown = function( origin ) {
+			if ( ev_sortable_dragged_height !== null ) {
+				return false;
+			}
+
+			var draggable = $( origin ).is( ".ui-sortable" ) ? $( origin ) : $( origin ).parents( ".ui-sortable" ).first();
+
+			ev_sortable_dragged_height = draggable.outerHeight();
+
+			$( "#wpbody" ).css( "padding-bottom", ev_sortable_dragged_height );
+
+			return false;
+		};
+
+		/**
+		 * Remove the padding to the page wrap.
+		 */
+		var ev_repeatable_sortable_mouseup = function() {
+			ev_sortable_dragged_height = null;
+			$( "#wpbody" ).css( "padding-bottom", 0 );
+		};
+
+		$( document )
+			.off( "mousedown.ev_sortable" )
+			.off( "mouseup.ev_sortable" );
+
+		$( document ).on( "mousedown.ev_sortable", ".ev-sortable-handle", function() {
+			ev_repeatable_sortable_mousedown( $( this ) );
+		} );
+
+		$( document ).on( "mouseup.ev_sortable", ".ev-sortable-handle", function() {
+			ev_repeatable_sortable_mouseup( $( this ) );
+		} );
+
 		$( this ).sortable( {
 			handle: ".ev-sortable-handle",
 			items: "> .ev-field-inner, .ev-bundle-fields-wrapper",
+			tolerance: "pointer",
+			distance: 10,
+			start: function( e, ui ) {
+				var css = {
+					height: ev_sortable_dragged_height,
+				};
+
+				$( ".ui-sortable-placeholder" ).css( css );
+
+				ev_repeatable_sortable_mouseup();
+			},
 			stop: function( e, ui ) {
 				var sortable = $( ui.item ).parents( ".ev-sortable" ).first(),
 					fields = $( "> .ev-field-inner, .ev-bundle-fields-wrapper", sortable ),
@@ -112,12 +163,19 @@
 		var ctrl 		= $( this ),
 			field 		= ctrl.parents( ".ev-field.ev-repeatable" ).first(),
 			inner 		= ctrl.parents( ".ev-field-inner, .ev-bundle-fields-wrapper" ).first(),
-			container 	= ctrl.parents( ".ev-container" ).first(),
+			container 	= ctrl.parents( ".ev-container-repeatable-inner-wrapper" ).first(),
 			empty_state = $( ".ev-empty-state", field );
 
 		var update_count = function() {
 			var current_count = parseInt( empty_state.attr( "data-count" ), 10 );
 
+			current_count = current_count + 1;
+			empty_state.attr( "data-count", current_count );
+
+			return current_count;
+		};
+
+		var update_names = function( count, field ) {
 			$( ".ev-field", field ).each( function() {
 				var control = $( ".ev-repeatable-controls", this ).first(),
 					count = parseInt( empty_state.attr( "data-count" ), 10 );
@@ -126,9 +184,6 @@
 					$( this ).attr( "name", this.name.replaceLast( "[]", "[" + count + "]" ) );
 				} );
 			} );
-
-			current_count = current_count + 1;
-			empty_state.attr( "data-count", current_count );
 		};
 
 		var key = empty_state.attr( "data-key" ),
@@ -136,7 +191,7 @@
 			mode = ctrl.attr( "data-mode" );
 
 		var insert = function( html, mode ) {
-			update_count();
+			var count = update_count();
 
 			if ( mode ) {
 				if ( mode === "append" ) {
@@ -149,6 +204,8 @@
 			else {
 				html.appendTo( container );
 			}
+
+			update_names( count, html );
 
 			field.removeClass( "ev-no-fields" );
 
