@@ -528,7 +528,7 @@ abstract class Ev_Field {
 	 * @since 0.1.0
 	 * @param string $append The addition mode of the repeatable control.
 	 */
-	protected function _render_repeatable_controls( $mode )
+	protected function _render_repeatable_controls( $mode, $size = 'small' )
 	{
 		if ( $this->_repeatable === false ) {
 			return;
@@ -547,7 +547,8 @@ abstract class Ev_Field {
 					),
 					'style'     => 'round',
 					'hide_text' => true,
-					'icon' => 'f529'
+					'icon' => 'f529',
+					'size' => $size
 				)
 			);
 		echo '</div>';
@@ -652,8 +653,10 @@ abstract class Ev_Field {
 
 		echo '<div class="ev-field-inner">';
 			echo '<div class="ev-field-panel-controls-wrapper">';
-				echo '<span class="ev-sortable-handle"></span>';
-				echo '<span class="ev-repeatable-remove"></span>';
+				echo '<div class="ev-field-panel-controls-inner-wrapper">';
+					echo '<span class="ev-repeatable-remove"></span>';
+					echo '<span class="ev-sortable-handle"></span>';
+				echo '</div>';
 			echo '</div>';
 
 			if ( $this->_bundle === false && ! ev_is_skipped_on_saving( $this->_type ) ) {
@@ -772,7 +775,9 @@ abstract class Ev_Field {
 					$this->_field_container_start();
 
 					if ( $this->_repeatable !== false ) {
-						$this->_render_inner_repeatable();
+						echo '<div class="ev-container-repeatable-inner-wrapper">';
+							$this->_render_inner_repeatable();
+						echo '</div>';
 					}
 					else {
 						$this->render_inner();

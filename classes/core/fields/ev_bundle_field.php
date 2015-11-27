@@ -101,12 +101,14 @@ class Ev_BundleField extends Ev_Field {
 
 		echo '<div class="ev-bundle-fields-wrapper">';
 			echo '<div class="ev-field-panel-controls-wrapper">';
-				echo '<span class="ev-sortable-handle"></span>';
-				echo '<span class="ev-repeatable-remove"></span>';
+				echo '<div class="ev-field-panel-controls-inner-wrapper">';
+					echo '<span class="ev-repeatable-remove"></span>';
+					echo '<span class="ev-sortable-handle"></span>';
+				echo '</div>';
 			echo '</div>';
 
 			if ( ! ev_is_skipped_on_saving( $this->_type ) ) {
-				$this->_render_repeatable_controls( 'prepend' );
+				$this->_render_repeatable_controls( 'prepend', 'medium' );
 			}
 
 			foreach ( $this->_fields as $index => $field_data ) {
@@ -123,7 +125,7 @@ class Ev_BundleField extends Ev_Field {
 			}
 
 			if ( ! ev_is_skipped_on_saving( $this->_type ) ) {
-				$this->_render_repeatable_controls( 'append' );
+				$this->_render_repeatable_controls( 'append', 'medium' );
 			}
 
 		echo '</div>';

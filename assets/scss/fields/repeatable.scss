@@ -1,8 +1,164 @@
 @import "../libs";
 
-// // -----------------------------------------------------------------------------
-// // $Fields repeatable
-// // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Repeatable fields
+// -----------------------------------------------------------------------------
+
+.ev-repeatable {
+
+	.ev-container-repeatable-inner-wrapper {
+		@include ui_input_standard;
+		padding: $baseline/4;
+	}
+
+	.ev-bundle-fields-wrapper,
+	.ev-field-inner {
+		background-color: $white;
+		position: relative;
+	}
+
+// -----------------------------------------------------------------------------
+// $Controls panel
+// -----------------------------------------------------------------------------
+
+	.ev-field-panel-controls-wrapper {
+		display: none;
+		@include position( absolute, -1px (-($baseline+1)) null null );
+		// TODO: Aggiungere bleeding edge
+
+		.ev-field-panel-controls-inner-wrapper {
+			@include size( $baseline $baseline*2 );
+			border: 1px solid $grey_1;
+			border-left: none;
+			background-color: $white;
+			border-top-right-radius: $radius;
+			border-bottom-right-radius: $radius;
+		}
+
+		.ev-sortable-handle {
+			display: inline-block;
+
+			&:before {
+				cursor: pointer;
+				color: $grey_3;
+				@include icon( "\f333" );
+				@include size( $baseline );
+				font-size: 16px;
+				line-height: $baseline;
+			}
+
+			&:hover:before {
+				color: $grey_6;
+			}
+		}
+
+		.ev-repeatable-remove {
+			display: inline-block;
+
+			&:before {
+				cursor: pointer;
+				color: $grey_3;
+				@include icon( "\f153" );
+				@include size( $baseline );
+				font-size: 16px;
+				line-height: $baseline;
+			}
+
+			&:hover:before {
+				color: $red;
+			}
+		}
+	}
+
+// -----------------------------------------------------------------------------
+// $Empty state
+// -----------------------------------------------------------------------------
+
+	.ev-empty-state {
+		display: none;
+	}
+
+	// Empty state
+	&.ev-no-fields {
+		.ev-empty-state {
+			display: block;
+		}
+	}
+
+// -----------------------------------------------------------------------------
+// $Remove all
+// -----------------------------------------------------------------------------
+
+	.ev-field-header {
+		.ev-repeat-remove-all {
+			margin-top: $baseline/4;
+		}
+	}
+
+// -----------------------------------------------------------------------------
+// $Bundle field repeatable
+// -----------------------------------------------------------------------------
+
+	&.ev-field-bundle {
+		&:hover {
+			.ev-repeatable-controls {
+				@include opacity( 100 );
+			}
+		}
+
+		.ev-repeatable-controls {
+			text-align: center;
+			display: none;
+			@include opacity( 0 );
+		}
+
+		.ev-bundle-fields-wrapper {
+			.ev-field-panel-controls-wrapper + .ev-repeatable-controls {
+				@include position( absolute, (-( (($baseline+2) / 2) + $baseline/8) ) 0 null 0 );
+				display: block;
+			}
+
+			+ * {
+				margin-top: $baseline/4;
+			}
+
+			&:hover {
+				border-color: $grey_4;
+				@include box-shadow( #{$ui_el_shadow_hover} );
+				border-top-right-radius: 0;
+
+				> .ev-field-panel-controls-wrapper {
+					display: block;
+
+					.ev-field-panel-controls-inner-wrapper {
+						border-color: $grey_4;
+					}
+				}
+			}
+
+			// -----------------------------------------------------------------
+			// $Sortable
+			// -----------------------------------------------------------------
+			&.ui-sortable-helper {}
+
+			&.ui-sortable-placeholder {
+				border-color: $grey_2;
+				background-color: $grey_2;
+			}
+		}
+
+		.ev-container-repeatable-inner-wrapper .ev-bundle-fields-wrapper:last-child {
+			.ev-repeatable-controls {
+				display: block;
+				@include position( absolute, null 0 (-( (($baseline+2) / 2) + $baseline/8) ) 0 );
+			}
+		}
+	}
+
+// -----------------------------------------------------------------------------
+
+}
+
 
 // .ev-repeatable-remove:before {
 // 	display: none;
