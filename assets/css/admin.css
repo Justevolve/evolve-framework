@@ -388,6 +388,9 @@
 .ev-repeatable.ev-field-bundle .ev-bundle-fields-wrapper.ui-sortable-helper > .ev-field-panel-controls-wrapper { display: block; }
 .ev-repeatable.ev-field-bundle .ev-bundle-fields-wrapper.ui-sortable-placeholder { border-color: #f2f2f2; background-color: #f2f2f2; }
 .ev-repeatable.ev-field-bundle .ev-container-repeatable-inner-wrapper .ev-bundle-fields-wrapper:last-child .ev-repeatable-controls:last-child { display: block; position: absolute; right: 0; bottom: -24px; left: 0; }
+.ev-repeatable .ev-bundle-fields-wrapper-heading { border: 1px solid #428DA6; border-radius: 3px; background-color: #428DA6; color: #fff; font-weight: bold; padding: 12px 6px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.ev-repeatable .ev-bundle-fields-wrapper-heading:after { content: ""; display: table; clear: both; }
+.ev-repeatable .ev-bundle-fields-wrapper-heading + .ev-container-repeatable-inner-wrapper { border-top-left-radius: 0; border-top-right-radius: 0; }
 
 .ev-select-wrapper { border: 1px solid #f0f0f0; background-color: #fafafa; display: inline-block; border-radius: 3px; font-size: 14px; position: relative; max-width: 100%; }
 .ev-select-wrapper:hover { background-color: #f2f2f2; border-color: #ccc; box-shadow: none; }

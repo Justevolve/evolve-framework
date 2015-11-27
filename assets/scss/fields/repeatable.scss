@@ -255,6 +255,27 @@
 	}
 
 // -----------------------------------------------------------------------------
+// $Grid
+// -----------------------------------------------------------------------------
+
+	.ev-bundle-fields-wrapper-heading {
+		@include clearfix;
+		border: 1px solid $blue_1;
+		border-radius: $radius;
+		background-color: $blue_1;
+		color: $white;
+		font-weight: bold;
+		padding: $baseline/2 $baseline/4;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+
+		+ .ev-container-repeatable-inner-wrapper {
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+		}
+	}
+
+// -----------------------------------------------------------------------------
 
 }
 
