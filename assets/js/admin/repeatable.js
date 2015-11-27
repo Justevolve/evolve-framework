@@ -30,7 +30,7 @@
 	 * Replace a string at a given position.
 	 */
 	function ev_repeatable_replace_at( string, index, character, how_many ) {
-	    return string.substr( 0, index ) + character + string.substr( index + how_many );
+		return string.substr( 0, index ) + character + string.substr( index + how_many );
 	}
 
 	/**
@@ -83,11 +83,7 @@
 		current_field.remove();
 
 		if ( ! $( ".ev-field-inner", container ).length ) {
-			if ( $( ".ev-empty-state", container ).length ) {
-				container.addClass( "ev-container-empty" );
-			}
-
-			container.addClass( "ev-no-fields" );
+			current_master_field.addClass( "ev-no-fields" );
 		}
 
 		return false;
@@ -103,11 +99,7 @@
 
 		fields.remove();
 
-		if ( $( ".ev-empty-state", container ).length ) {
-			container.addClass( "ev-container-empty" );
-		}
-
-		container.addClass( "ev-no-fields" );
+		current_master_field.addClass( "ev-no-fields" );
 
 		return false;
 	} );
@@ -117,13 +109,18 @@
 	 * it to the set of already created fields.
 	 */
 	$.evf.delegate( ".ev-field .ev-repeat", "click", "repeatable", function() {
-		var nested_fields = $( this ).parents( ".ev-field" ),
+		var ctrl = $( this ),
+			nested_fields = $( this ).parents( ".ev-field" ),
 			current_field = nested_fields.first(),
+			current_field_inner = $( this ).parents( ".ev-field-inner" ).first(),
 			current_control = $( ".ev-repeatable-controls", current_field ),
+			current_master_field = $( this ).parents( ".ev-field.ev-repeatable" ).first(),
 			current_count = parseInt( current_control.first().attr( "data-count" ), 10 ),
 			container = current_control.first().parents( ".ev-container" ).first(),
+			current_container = $( this ).parents( ".ev-container" ).first(),
 			key = current_control.first().attr( "data-key" ),
-			tpl = $( "script[type='text/template'][data-template='" + key + "']", current_control.first() );
+			tpl = $( "script[type='text/template'][data-template='" + key + "']" ),
+			mode = $( this ).attr( "data-mode" );
 
 		var sanitize_and_insert = function( html ) {
 			nested_fields.each( function() {
@@ -142,20 +139,21 @@
 			current_count = current_count + 1;
 			current_control.attr( "data-count", current_count );
 
-			var first_inner_field = $( ".ev-field-inner", container ).first();
+			if ( ! current_field_inner.length ) {
+				current_field_inner = ctrl.parents( ".ev-bundle-fields-wrapper" ).first();
+			}
 
-			if ( current_field.hasClass( "ev-repeatable-prepend" ) && first_inner_field.length ) {
-				html.insertBefore( first_inner_field );
+			if ( mode === "append" ) {
+				html.insertAfter( current_field_inner );
+			}
+			else if ( mode === "prepend" ) {
+				html.insertBefore( current_field_inner );
 			}
 			else {
-				html.insertBefore( current_control.last() );
+				html.appendTo( current_container );
 			}
 
-			if ( $( ".ev-empty-state", container ).length ) {
-				container.removeClass( "ev-container-empty" );
-			}
-
-			container.removeClass( "ev-no-fields" );
+			current_master_field.removeClass( "ev-no-fields" );
 
 			setTimeout( function() {
 				$.evf.ui.build();

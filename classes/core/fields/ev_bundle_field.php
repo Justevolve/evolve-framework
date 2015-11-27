@@ -100,7 +100,14 @@ class Ev_BundleField extends Ev_Field {
 		}
 
 		echo '<div class="ev-bundle-fields-wrapper">';
-			echo '<span class="ev-sortable-handle"></span>';
+			echo '<div class="ev-field-panel-controls-wrapper">';
+				echo '<span class="ev-sortable-handle"></span>';
+				echo '<span class="ev-repeatable-remove"></span>';
+			echo '</div>';
+
+			if ( ! ev_is_skipped_on_saving( $this->_type ) ) {
+				$this->_render_repeatable_controls( 'prepend' );
+			}
 
 			foreach ( $this->_fields as $index => $field_data ) {
 				$field_class = $field_types[$field_data['type']];
@@ -115,7 +122,10 @@ class Ev_BundleField extends Ev_Field {
 				$fld->render();
 			}
 
-			echo '<span class="ev-repeatable-remove"></span>';
+			if ( ! ev_is_skipped_on_saving( $this->_type ) ) {
+				$this->_render_repeatable_controls( 'append' );
+			}
+
 		echo '</div>';
 	}
 }

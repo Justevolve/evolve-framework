@@ -445,14 +445,16 @@ abstract class Ev_Field {
 		}
 
 		if ( $this->_repeatable !== false ) {
+			$values = (array) $this->value();
+
 			$classes[] = 'ev-repeatable';
 
 			if ( isset( $this->_repeatable['sortable'] ) && $this->_repeatable['sortable'] === true ) {
 				$classes[] = 'ev-sortable';
 			}
 
-			if ( isset( $this->_repeatable['append'] ) && $this->_repeatable['append'] === false ) {
-				$classes[] = 'ev-repeatable-prepend';
+			if ( empty( $values ) || isset( $values[0] ) && empty( $values[0] ) ) {
+				$classes[] = 'ev-no-fields';
 			}
 		}
 
@@ -524,44 +526,27 @@ abstract class Ev_Field {
 	 * Render the field repeatable controls.
 	 *
 	 * @since 0.1.0
-	 * @param boolean $render_template Set to true to also render the repeatable template.
+	 * @param string $append The addition mode of the repeatable control.
 	 */
-	private function _render_repeatable_controls( $render_template = true )
+	protected function _render_repeatable_controls( $mode )
 	{
 		$count = count( $this->value() );
 
 		printf( '<div class="ev-repeatable-controls" data-key="%s" data-count="%s">', esc_attr( $this->_handle ), esc_attr( $count ) );
-			if ( isset( $this->_repeatable['controls'] ) && ! empty( $this->_repeatable['controls'] ) ) {
-				foreach ( $this->_repeatable['controls'] as $action => $label ) {
-					$controls[] = printf( '<a href="#" data-action="%s" class="ev-repeat">%s</a>', esc_attr( $action ), esc_html( $label ) );
-				}
-			}
-			else {
-				printf( '<a href="#" class="ev-repeat">%s</a>', esc_html( __( 'Add', 'ev_framework' ) ) );
-			}
-
-			printf( '<a href="#" class="ev-repeat-remove-all">%s</a>', esc_html( __( 'Remove all', 'ev_framework' ) ) );
-
-			if ( $render_template ) {
-				/* Print the repeatable field template for later use. */
-				$this->repeatable_template();
-			}
+			ev_btn(
+				__( 'Add', 'ev_framework' ),
+				'action',
+				array(
+					'attrs' => array(
+						'data-mode' => $mode,
+						'class'     => 'ev-repeat',
+					),
+					'style'     => 'round',
+					'hide_text' => true,
+					'icon' => 'f529'
+				)
+			);
 		echo '</div>';
-
-		if ( isset( $this->_repeatable['empty_state'] ) && $this->_repeatable['empty_state'] !== '' ) {
-			echo '<div class="ev-empty-state">';
-				$empty_state = esc_html( $this->_repeatable['empty_state'] );
-				$controls = array();
-
-				foreach ( $this->_repeatable['controls'] as $action => $label ) {
-					$controls[] = sprintf( '<a href="#" data-action="%s" class="ev-repeat">%s</a>', esc_attr( $action ), esc_html( $label ) );
-				}
-
-				$empty_state = ev_sprintf_array( $empty_state, $controls );
-
-				echo $empty_state;
-			echo '</div>';
-		}
 	}
 
 	/**
@@ -619,6 +604,34 @@ abstract class Ev_Field {
 				}
 			echo '</div>';
 		}
+
+		if ( $this->_repeatable !== false ) {
+			ev_btn(
+				__( 'Remove all', 'ev_framework' ),
+				'delete',
+				array(
+					'attrs' => array(
+						'class'     => 'ev-repeat-remove-all',
+					),
+					'style'     => 'text',
+				)
+			);
+
+			// printf( '<a href="#" class="ev-repeat-remove-all">%s</a>', esc_html( __( 'Remove all', 'ev_framework' ) ) );
+
+			/* Print the repeatable field template for later use. */
+			$this->repeatable_template();
+		}
+
+		/**
+		 * Print content after the field help. Useful for
+		 * outputting custom controls for the field.
+		 *
+		 * @since 0.4.0
+		 * @param Ev_Field
+		 */
+		do_action( 'ev_fw_after_field_help', $this );
+		do_action( "ev_fw_after_field_help[type:$this->_type]", $this );
 	}
 
 	/**
@@ -634,7 +647,14 @@ abstract class Ev_Field {
 		}
 
 		echo '<div class="ev-field-inner">';
-			echo '<span class="ev-sortable-handle"></span>';
+			echo '<div class="ev-field-panel-controls-wrapper">';
+				echo '<span class="ev-sortable-handle"></span>';
+				echo '<span class="ev-repeatable-remove"></span>';
+			echo '</div>';
+
+			if ( $this->_bundle === false && ! ev_is_skipped_on_saving( $this->_type ) ) {
+				$this->_render_repeatable_controls( 'prepend' );
+			}
 
 			$template = EV_FRAMEWORK_TEMPLATES_FOLDER . "fields/{$this->_type}";
 			$template = apply_filters( "ev_field_template[type:{$this->_type}]", $template );
@@ -643,7 +663,10 @@ abstract class Ev_Field {
 				'field' => $field
 			) );
 
-			echo '<span class="ev-repeatable-remove"></span>';
+			if ( $this->_bundle === false && ! ev_is_skipped_on_saving( $this->_type ) ) {
+				$this->_render_repeatable_controls( 'append' );
+			}
+
 		echo '</div>';
 	}
 
@@ -655,6 +678,17 @@ abstract class Ev_Field {
 	 */
 	private function _render_inner_repeatable()
 	{
+		$control = sprintf( '<a href="#" class="ev-repeat">%s</a>', esc_html( __( 'Add', 'ev_framework' ) ) );
+		$empty_state_html = $control;
+
+		if ( isset( $this->_repeatable['empty_state'] ) && $this->_repeatable['empty_state'] !== '' ) {
+			$empty_state_html = $this->_repeatable['empty_state'];
+		}
+
+		echo '<div class="ev-empty-state">';
+			echo $empty_state_html;
+		echo '</div>';
+
 		/* Retrieve the field value and cast it to array so that we can count how many times the field needs to be repeated. */
 		$values = (array) $this->value();
 
@@ -681,6 +715,7 @@ abstract class Ev_Field {
 			$field->value( $value );
 
 			$this->render_inner( $field );
+
 			$index++;
 		}
 	}
@@ -729,33 +764,11 @@ abstract class Ev_Field {
 				$values = (array) $this->value();
 				$container_class = '';
 
-				if ( isset( $this->_repeatable['empty_state'] ) && $this->_repeatable['empty_state'] !== '' ) {
-					if ( empty( $values ) || isset( $values[0] ) && empty( $values[0] ) ) {
-						$container_class .= ' ev-container-empty';
-					}
-				}
-
-				if ( $this->_repeatable !== false ) {
-					if ( empty( $values ) || isset( $values[0] ) && empty( $values[0] ) ) {
-						$container_class .= ' ev-no-fields';
-					}
-				}
-
 				printf( '<div class="ev-container %s">', esc_attr( $container_class ) );
 					$this->_field_container_start();
 
 					if ( $this->_repeatable !== false ) {
-						if ( ! ev_is_skipped_on_saving( $this->_type ) ) {
-							$this->_render_repeatable_controls();
-						}
-
 						$this->_render_inner_repeatable();
-
-						if ( ! isset( $this->_repeatable['append'] ) || $this->_repeatable['append'] === true ) {
-							if ( ! ev_is_skipped_on_saving( $this->_type ) ) {
-								$this->_render_repeatable_controls( false );
-							}
-						}
 					}
 					else {
 						$this->render_inner();
