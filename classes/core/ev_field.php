@@ -534,9 +534,9 @@ abstract class Ev_Field {
 			return;
 		}
 
-		$count = count( $this->value() );
+		// $count = count( $this->value() );
 
-		printf( '<div class="ev-repeatable-controls" data-key="%s" data-count="%s">', esc_attr( $this->_handle ), esc_attr( $count ) );
+		printf( '<div class="ev-repeatable-controls">' );
 			ev_btn(
 				__( 'Add', 'ev_framework' ),
 				'action',
@@ -689,12 +689,12 @@ abstract class Ev_Field {
 			$empty_state_html = $this->_repeatable['empty_state'];
 		}
 
-		echo '<div class="ev-empty-state">';
-			echo $empty_state_html;
-		echo '</div>';
-
 		/* Retrieve the field value and cast it to array so that we can count how many times the field needs to be repeated. */
 		$values = (array) $this->value();
+
+		printf( '<div class="ev-empty-state" data-key="%s" data-count="%s">', esc_attr( $this->_handle ), esc_attr( count( $values ) ) );
+			echo $empty_state_html;
+		echo '</div>';
 
 		if ( empty( $values ) || isset( $values[0] ) && empty( $values[0] ) ) {
 			return;
@@ -816,9 +816,14 @@ abstract class Ev_Field {
 			/* Ensuring that the field has a valid label. */
 			$messages[] = sprintf( 'Field "%s": missing label parameter.', $field['handle'] );
 		}
-		elseif ( array_key_exists( 'fields', $field ) && ! is_array( $field['fields'] ) ) {
-			/* Ensuring that the field has a valid set of fields, if any. */
-			$messages[] = sprintf( 'Field "%s": subfields must be in array form.', $field['handle'] );
+		elseif ( array_key_exists( 'fields', $field ) ) {
+			if ( ! is_array( $field['fields'] ) ) {
+				/* Ensuring that the field has a valid set of fields, if any. */
+				$messages[] = sprintf( 'Field "%s": subfields must be in array form.', $field['handle'] );
+			}
+			elseif ( ev_check_multi_key_exists( $field['fields'], 'repeatable' ) ) {
+				$messages[] = sprintf( 'Field "%s": repeatable fields cannot be nested.', $field['handle'] );
+			}
 		}
 		elseif ( array_key_exists( 'config', $field ) && ! is_array( $field['config'] ) ) {
 			/* Ensuring that the field has a valid set of configuration options, if any. */

@@ -228,15 +228,23 @@ function remove( &$array, $path = '' ) {
 }
 
 /**
- * Check if a specific subkey is set in a multidimensional array.
+ * Check if a multi-dimensional array contains a particular subkey.
  *
  * @since 0.4.0
  * @param array $array The haystack array.
- * @param string $path The search path.
+ * @param string $key The key to search for.
  * @return boolean
  */
-function is_set( $array, $path = '' ) {
-	$find = ev_array_find( $array, $path, null );
+function ev_check_multi_key_exists( $array, $key ) {
+	if ( array_key_exists( $key, $array ) ) {
+		return true;
+	}
 
-	return $find !== null;
+	foreach ( $array as $element ) {
+		if ( is_array( $element ) && ev_check_multi_key_exists( $element, $key ) ) {
+			return true;
+		}
+	}
+
+	return false;
 }

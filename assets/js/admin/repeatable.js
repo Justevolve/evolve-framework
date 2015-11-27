@@ -76,14 +76,14 @@
 	 * When clicking on a repeatable remove button, remove its parent field.
 	 */
 	$.evf.delegate( ".ev-repeatable-remove", "click", "repeatable", function() {
-		var current_master_field = $( this ).parents( ".ev-field" ).first(),
-			container = $( ".ev-container, .ev-bundle-fields-wrapper", current_master_field ).first(),
+		var field = $( this ).parents( ".ev-field" ).first(),
+			container = $( ".ev-container, .ev-bundle-fields-wrapper", field ).first(),
 			current_field = $( this ).parents( ".ev-field-inner, .ev-bundle-fields-wrapper" ).first();
 
 		current_field.remove();
 
 		if ( ! $( ".ev-field-inner", container ).length ) {
-			current_master_field.addClass( "ev-no-fields" );
+			field.addClass( "ev-no-fields" );
 		}
 
 		return false;
@@ -93,13 +93,13 @@
 	 * Remove all the added repeatable fields.
 	 */
 	$.evf.delegate( ".ev-repeat-remove-all", "click", "repeatable", function() {
-		var current_master_field = $( this ).parents( ".ev-field" ).first(),
-			container = $( ".ev-container", current_master_field ).first(),
+		var field = $( this ).parents( ".ev-field" ).first(),
+			container = $( ".ev-container", field ).first(),
 			fields = $( ".ev-field-inner, .ev-bundle-fields-wrapper", container );
 
 		fields.remove();
 
-		current_master_field.addClass( "ev-no-fields" );
+		field.addClass( "ev-no-fields" );
 
 		return false;
 	} );
@@ -108,28 +108,19 @@
 	 * When clicking on a repeatable control, load a field template and append
 	 * it to the set of already created fields.
 	 */
-	$.evf.delegate( ".ev-field .ev-repeat", "click", "repeatable", function() {
-		var ctrl = $( this ),
-			nested_fields = $( this ).parents( ".ev-field" ),
-			current_field = nested_fields.first(),
-			current_field_inner = $( this ).parents( ".ev-field-inner" ).first(),
-			current_control = $( ".ev-repeatable-controls", current_field ),
-			current_master_field = $( this ).parents( ".ev-field.ev-repeatable" ).first(),
-			current_count = parseInt( current_control.first().attr( "data-count" ), 10 ),
-			container = current_control.first().parents( ".ev-container" ).first(),
-			current_container = $( this ).parents( ".ev-container" ).first(),
-			key = current_control.first().attr( "data-key" ),
-			tpl = $( "script[type='text/template'][data-template='" + key + "']" ),
-			mode = $( this ).attr( "data-mode" );
+	$.evf.delegate( ".ev-field.ev-repeatable .ev-repeat", "click", "repeatable", function() {
+		var ctrl 		= $( this ),
+			field 		= ctrl.parents( ".ev-field.ev-repeatable" ).first(),
+			inner 		= ctrl.parents( ".ev-field-inner, .ev-bundle-fields-wrapper" ).first(),
+			container 	= ctrl.parents( ".ev-container" ).first(),
+			empty_state = $( ".ev-empty-state", field );
 
-		var sanitize_and_insert = function( html ) {
-			nested_fields.each( function() {
-				var control = $( ".ev-repeatable-controls", $( this ) ).first(),
-					count = parseInt( control.attr( "data-count" ), 10 );
+		var update_count = function() {
+			var current_count = parseInt( empty_state.attr( "data-count" ), 10 );
 
-				if ( ! control.is( current_control ) ) {
-					count = count - 1;
-				}
+			$( ".ev-field", field ).each( function() {
+				var control = $( ".ev-repeatable-controls", this ).first(),
+					count = parseInt( empty_state.attr( "data-count" ), 10 );
 
 				$( "[name]", html ).each( function() {
 					$( this ).attr( "name", this.name.replaceLast( "[]", "[" + count + "]" ) );
@@ -137,23 +128,29 @@
 			} );
 
 			current_count = current_count + 1;
-			current_control.attr( "data-count", current_count );
+			empty_state.attr( "data-count", current_count );
+		};
 
-			if ( ! current_field_inner.length ) {
-				current_field_inner = ctrl.parents( ".ev-bundle-fields-wrapper" ).first();
-			}
+		var key = empty_state.attr( "data-key" ),
+			tpl = $( "script[type='text/template'][data-template='" + key + "']" ),
+			mode = ctrl.attr( "data-mode" );
 
-			if ( mode === "append" ) {
-				html.insertAfter( current_field_inner );
-			}
-			else if ( mode === "prepend" ) {
-				html.insertBefore( current_field_inner );
+		var insert = function( html, mode ) {
+			update_count();
+
+			if ( mode ) {
+				if ( mode === "append" ) {
+					html.insertAfter( inner );
+				}
+				else if ( mode === "prepend" ) {
+					html.insertBefore( inner );
+				}
 			}
 			else {
-				html.appendTo( current_container );
+				html.appendTo( container );
 			}
 
-			current_master_field.removeClass( "ev-no-fields" );
+			field.removeClass( "ev-no-fields" );
 
 			setTimeout( function() {
 				$.evf.ui.build();
@@ -162,12 +159,13 @@
 			}, 1 );
 		};
 
-		if ( $( this ).attr( "data-action" ) ) {
-			window[$( this ).attr( "data-action" )]( tpl, sanitize_and_insert );
+		if ( ctrl.attr( "data-action" ) ) {
+			window[ctrl.attr( "data-action" )]( tpl, insert );
 		}
 		else {
 			var html = $( $.evf.template( tpl, {} ) );
-			sanitize_and_insert( html );
+
+			insert( html );
 		}
 
 		return false;
