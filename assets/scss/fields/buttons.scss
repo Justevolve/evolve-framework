@@ -242,9 +242,6 @@
 
 		i {
 			float: left;
-			@include opacity( 100 );
-			visibility: visible;
-			@include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
 		}
 
 		&.ev-btn-type-confirm,
@@ -253,13 +250,19 @@
 			&:before {
 				left: 50%;
 			}
-		}
 
-		&.ev-btn-success,
-		&.ev-btn-idle {
 			i {
-				@include opacity( 0 );
-				visibility: hidden;
+				@include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
+				@include opacity( 100 );
+				visibility: visible;
+			}
+
+			&.ev-btn-success,
+			&.ev-btn-idle {
+				i {
+					@include opacity( 0 );
+					visibility: hidden;
+				}
 			}
 		}
 	}
@@ -288,30 +291,23 @@
 		padding: 0 $gutter;
 		border-radius: $radius;
 
-		// i:before {
-		// 	bottom: -1px;
-		// }
-
 		&.ev-btn-type-confirm,
 		&.ev-btn-type-save {
+			@include transition( padding $transition_time*2 $ease-out-back );
+
 			&:after,
 			&:before {
 				right: $gutter;
 			}
 
 			&.ev-btn-size-small {
+				padding: 0 $gutter/2;
+
 				&:after,
 				&:before {
 					right: $gutter/2;
 				}
-			}
-		}
 
-		&.ev-btn-size-small {
-			padding: 0 $gutter/2;
-
-			&.ev-btn-type-confirm,
-			&.ev-btn-type-save {
 				&.ev-btn-idle {
 					padding-right: $gutter + 8px + 4;
 				}
@@ -351,6 +347,7 @@
 
 	// Types -------------------------------------------------------------------
 
+	// Action ------------------------------------------------------------------
 	&.ev-btn-type-action {
 		&.ev-btn-style-round,
 		&.ev-btn-style-button {
@@ -368,6 +365,7 @@
 		}
 	}
 
+	// Confirm -----------------------------------------------------------------
 	&.ev-btn-type-confirm {
 		&.ev-btn-style-round,
 		&.ev-btn-style-button {
@@ -380,6 +378,7 @@
 		}
 	}
 
+	// Delete ------------------------------------------------------------------
 	&.ev-btn-type-delete {
 		&.ev-btn-style-round,
 		&.ev-btn-style-button {
@@ -392,12 +391,12 @@
 		}
 	}
 
+	// Save --------------------------------------------------------------------
 	&.ev-btn-type-save {
 		&.ev-btn-style-round,
 		&.ev-btn-style-button {
 			background-color: $green;
 			border-color: $green;
-			@include transition( padding $transition_time*2 $ease-out-back );
 		}
 
 		&.ev-btn-style-text {

@@ -75,8 +75,12 @@ add_filter( 'ev_field_types', 'ev_register_attachment_field_type' );
  */
 function ev_attachment_upload_generic_placeholder_template() {
 	$placeholder_html = '<div class="ev-attachment-placeholder ev-attachment-%s-placeholder">
-		<span class="ev-sortable-handle"></span>
-		<a href="#" class="ev-upload-remove"><span class="screen-reader-text">%s</span></a>
+		<div class="ev-field-panel-controls-wrapper">
+			<div class="ev-field-panel-controls-inner-wrapper">
+				<a href="#" class="ev-upload-remove"><span class="screen-reader-text">%s</span></a>
+				<span class="ev-attachment-sortable-handle"></span>
+			</div>
+		</div>
 		<span class="ev-attachment-placeholder-icon" data-id="%s" alt=""></span>
 		<div class="ev-attachment-details">
 			<span class="ev-attachment-title">%s</span>
@@ -96,7 +100,7 @@ function ev_attachment_upload_generic_placeholder_template() {
 function ev_attachment_upload_placeholder_templates() {
 	/* Image upload template. */
 	echo '<script type="text/template" data-template="ev-attachment-placeholder">';
-		echo '<span class="ev-sortable-handle"></span>';
+		// echo '<span class="ev-sortable-handle"></span>';
 		printf(
 			ev_attachment_upload_generic_placeholder_template(),
 			'{{ type }}',

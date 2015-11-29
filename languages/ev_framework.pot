@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: classes/core/ev_field.php:541 classes/core/ev_field.php:688
+#: classes/core/ev_field.php:541 classes/core/ev_field.php:689
 msgid "Add"
 msgstr ""
 

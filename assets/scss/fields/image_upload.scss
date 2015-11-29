@@ -4,214 +4,346 @@
 // $Image upload
 // -----------------------------------------------------------------------------
 
-$upload_size: 80px;
-
-.ev-image-size-select-container {
-	clear: both;
-	margin-top: $baseline/2;
-
-	p {
-		padding-bottom: $baseline/6;
-	}
-}
+$image_upload_size: $gutter*4;
 
 .ev-image-upload-container {
 	@include clearfix;
-	display: inline-block;
 	position: relative;
-	float: left;
+	display: inline-block;
 
-	& + .ev-image-upload-container {
+	+ .ev-image-upload-container {
 		margin-left: $gutter/2;
 	}
+}
+
+.ev-image-upload-action {
+	display: block;
+	clear: both;
+}
+
+.ev-breakpoint-label {
+	display: inline-block;
+	color: $grey_4;
+	padding-bottom: $baseline/4;
 }
 
 .ev-image-upload {
 	display: inline-block;
+}
 
-	.ev-image-placeholder {
-		@include clearfix;
-		display: inline-block;
-		position: relative;
-		background-color: $grey_1;
-		@include size( $upload_size );
-		float: left;
-		margin-bottom: $gutter/4;
+.ev-image-placeholder {
+	@include clearfix;
+	display: inline-block;
+	position: relative;
+	@include ui_input_standard;
+	@include size( $image_upload_size );
+	float: left;
+	border-radius: $radius;
+	margin-bottom: $gutter/4;
+
+	[data-sortable] & {
+		cursor: all-scroll;
+	}
+
+	.ev-image-uploaded & {
+		@include size( auto );
+		margin-right: $gutter/4;
+		border-color: $white;
+
+		&:hover {
+			.ev-upload-remove {
+				display: block;
+			}
+		}
+	}
+
+	&.ui-sortable-placeholder {
+		border-color: $grey_2;
+		background-color: $grey_2;
+	}
+
+	&.ui-sortable-helper {
+		@include box-shadow( #{$ui_el_shadow_hover} );
+
+		.ev-upload-remove {
+			display: none !important;
+		}
+	}
+
+	.ev-upload-remove {
+		text-decoration: none;
+		display: none;
+		@include position( absolute, -4px -4px null null );
+		z-index: 10;
 
 		&:before {
-			@include icon( "\f128" );
-			font-size: 22px;
-			@include position( absolute, 50% null null 50% );
-			@include transform( translate3d( -50%, -50%, 0 ) );
-			color: $grey_0;
+			cursor: pointer;
+			color: $grey_3;
+			@include icon( "\f153" );
+			@include size( 16px );
+			font-size: 16px;
+			line-height: 16px;
+			background-color: $white;
+			border-radius: 50%;
 		}
 
-		&:after {
-			content: "";
-			display: block;
-			@include position( absolute, 0 0 0 0 );
-			border: 1px solid $grey_3;
+		&:hover:before {
+			color: $red;
 		}
+	}
 
+	&:before {
+		@include icon( "\f128" );
+		font-size: 22px;
+		@include position( absolute, 50% null null 50% );
+		@include transform( translate3d( -50%, -50%, 0 ) );
+		color: $grey_3;
+
+		.ev-image-uploaded & {
+			display: none;
+		}
+	}
+
+	&:hover {
 		img {
-			float: left;
-			display: none;
+			@include opacity( 40 );
 		}
 	}
 
-	&[data-multiple] {
-		.ev-image-placeholder {
-			visibility: hidden;
-		}
-
-		.ev-image-placeholder-container {
-			position: relative;
-
-			&:before {
-				@include icon( "\f161" );
-				font-size: 22px;
-				line-height: $upload_size;
-				@include size( $upload_size );
-				text-align: center;
-				float: left;
-				margin-bottom: $gutter/4;
-				color: $grey_0;
-			}
-
-			&:after {
-				content: "";
-				display: block;
-				@include size( ($upload_size - 2px) );
-				@include position( absolute, 0 null null 0 );
-				border: 1px dashed $grey_3;
-			}
-		}
-
-		.ev-remove-all-action {
-			display: none;
-		}
-
-		&.ev-image-uploaded {
-			.ev-remove-all-action {
-				display: inline-block;
-				margin-left: $gutter;
-				color: $red;
-
-				&:hover {
-					color: darken( $red, 20 );
-				}
-			}
-
-			&[data-sortable] {
-				.ev-image-placeholder {
-					cursor: move;
-				}
-			}
-
-			.ev-image-placeholder-container {
-				&:before, &:after {
-					display: none;
-				}
-			}
-
-			.ev-image-placeholder {
-				visibility: visible;
-				margin-right: $gutter/4;
-
-				&.ui-sortable-helper {
-					@include box-shadow( 0 1px 10px rgba( #000, .1 ) );
-				}
-
-				&.ui-sortable-placeholder {
-					visibility: visible !important;
-
-					&:after {
-						border-color: $grey_1;
-					}
-				}
-			}
-
-		}
-	}
-
-	.ev-density-label,
-	.ev-breakpoint-label {
-		padding-bottom: $baseline/6;
-	}
-
-	+ .ev-image-upload {
-		margin-left: $gutter/2;
-	}
-
-	.ev-image-upload-action {
-		clear: both;
-	}
-
-	.ev-edit-action {
+	img {
+		float: left;
 		display: none;
-	}
+		position: relative;
+		z-index: 1;
+		border-radius: $radius;
 
-	.ev-upload-action {
-		display: inline-block;
-	}
-
-	&.ev-image-uploaded {
-		+ .ev-image-upload-image-size-selection {
+		.ev-image-uploaded & {
 			display: block;
-			margin-top: $baseline/6;
-		}
-
-		.ev-upload-remove {}
-
-		.ev-edit-action {
-			display: inline-block;
-		}
-
-		.ev-upload-action {
-			display: none;
-		}
-
-		.ev-image-placeholder {
-			@include size( auto );
-
-			&:hover {
-				.ev-upload-remove {
-					&:before {
-						@include opacity( 100 );
-					}
-
-					&:hover {
-						&:before {
-							color: darken( $red, 20 );
-						}
-					}
-				}
-
-				&:after {
-					border: 3px solid $blue;
-					@include box-shadow( inset 0px 0px 0px 1px $white );
-				}
-			}
-
-			&:before {
-				display: none;
-			}
-
-			img {
-				display: block;
-				max-height: $upload_size;
-				width: auto;
-				height: $upload_size;
-			}
+			max-height: $image_upload_size;
+			width: auto;
+			height: $image_upload_size;
 		}
 	}
 }
 
 .ev-image-upload-image-size-selection {
-	display: none;
+	padding-top: $baseline/2;
 
-	span {
+	> span:not( .ev-select-wrapper ) {
 		display: block;
-		padding-bottom: $baseline/6;
+		color: $grey_4;
+		padding-bottom: $baseline/4;
 	}
 }
+
+// $upload_size: 80px;
+
+// .ev-image-size-select-container {
+// 	clear: both;
+// 	margin-top: $baseline/2;
+
+// 	p {
+// 		padding-bottom: $baseline/6;
+// 	}
+// }
+
+// .ev-image-upload-container {
+// 	@include clearfix;
+// 	display: inline-block;
+// 	position: relative;
+// 	float: left;
+
+// 	& + .ev-image-upload-container {
+// 		margin-left: $gutter/2;
+// 	}
+// }
+
+// .ev-image-upload {
+// 	display: inline-block;
+
+// 	.ev-image-placeholder {
+// 		@include clearfix;
+// 		display: inline-block;
+// 		position: relative;
+// 		background-color: $grey_1;
+// 		@include size( $upload_size );
+// 		float: left;
+// 		margin-bottom: $gutter/4;
+
+// 		&:before {
+// 			@include icon( "\f128" );
+// 			font-size: 22px;
+// 			@include position( absolute, 50% null null 50% );
+// 			@include transform( translate3d( -50%, -50%, 0 ) );
+// 			color: $grey_0;
+// 		}
+
+// 		&:after {
+// 			content: "";
+// 			display: block;
+// 			@include position( absolute, 0 0 0 0 );
+// 			border: 1px solid $grey_3;
+// 		}
+
+// 		img {
+// 			float: left;
+// 			display: none;
+// 		}
+// 	}
+
+// 	&[data-multiple] {
+// 		.ev-image-placeholder {
+// 			visibility: hidden;
+// 		}
+
+// 		.ev-image-placeholder-container {
+// 			position: relative;
+
+// 			&:before {
+// 				@include icon( "\f161" );
+// 				font-size: 22px;
+// 				line-height: $upload_size;
+// 				@include size( $upload_size );
+// 				text-align: center;
+// 				float: left;
+// 				margin-bottom: $gutter/4;
+// 				color: $grey_0;
+// 			}
+
+// 			&:after {
+// 				content: "";
+// 				display: block;
+// 				@include size( ($upload_size - 2px) );
+// 				@include position( absolute, 0 null null 0 );
+// 				border: 1px dashed $grey_3;
+// 			}
+// 		}
+
+// 		.ev-remove-all-action {
+// 			display: none;
+// 		}
+
+// 		&.ev-image-uploaded {
+// 			.ev-remove-all-action {
+// 				display: inline-block;
+// 				margin-left: $gutter;
+// 				color: $red;
+
+// 				&:hover {
+// 					color: darken( $red, 20 );
+// 				}
+// 			}
+
+// 			&[data-sortable] {
+// 				.ev-image-placeholder {
+// 					cursor: move;
+// 				}
+// 			}
+
+// 			.ev-image-placeholder-container {
+// 				&:before, &:after {
+// 					display: none;
+// 				}
+// 			}
+
+// 			.ev-image-placeholder {
+// 				visibility: visible;
+// 				margin-right: $gutter/4;
+
+// 				&.ui-sortable-helper {
+// 					@include box-shadow( 0 1px 10px rgba( #000, .1 ) );
+// 				}
+
+// 				&.ui-sortable-placeholder {
+// 					visibility: visible !important;
+
+// 					&:after {
+// 						border-color: $grey_1;
+// 					}
+// 				}
+// 			}
+
+// 		}
+// 	}
+
+// 	.ev-density-label,
+// 	.ev-breakpoint-label {
+// 		padding-bottom: $baseline/6;
+// 	}
+
+// 	+ .ev-image-upload {
+// 		margin-left: $gutter/2;
+// 	}
+
+// 	.ev-image-upload-action {
+// 		clear: both;
+// 	}
+
+// 	.ev-edit-action {
+// 		display: none;
+// 	}
+
+// 	.ev-upload-action {
+// 		display: inline-block;
+// 	}
+
+// 	&.ev-image-uploaded {
+// 		+ .ev-image-upload-image-size-selection {
+// 			display: block;
+// 			margin-top: $baseline/6;
+// 		}
+
+// 		.ev-upload-remove {}
+
+// 		.ev-edit-action {
+// 			display: inline-block;
+// 		}
+
+// 		.ev-upload-action {
+// 			display: none;
+// 		}
+
+// 		.ev-image-placeholder {
+// 			@include size( auto );
+
+// 			&:hover {
+// 				.ev-upload-remove {
+// 					&:before {
+// 						@include opacity( 100 );
+// 					}
+
+// 					&:hover {
+// 						&:before {
+// 							color: darken( $red, 20 );
+// 						}
+// 					}
+// 				}
+
+// 				&:after {
+// 					border: 3px solid $blue;
+// 					@include box-shadow( inset 0px 0px 0px 1px $white );
+// 				}
+// 			}
+
+// 			&:before {
+// 				display: none;
+// 			}
+
+// 			img {
+// 				display: block;
+// 				max-height: $upload_size;
+// 				width: auto;
+// 				height: $upload_size;
+// 			}
+// 		}
+// 	}
+// }
+
+// .ev-image-upload-image-size-selection {
+// 	display: none;
+
+// 	span {
+// 		display: block;
+// 		padding-bottom: $baseline/6;
+// 	}
+// }

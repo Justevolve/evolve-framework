@@ -71,10 +71,47 @@ printf( '<div class="ev-attachment-upload-container %s" %s>', esc_attr( $contain
 	?>
 
 	<div class="ev-attachment-upload-action">
-		<a href="#" class="ev-edit-action"><?php esc_html_e( 'Edit', 'ev_framework' ); ?></a>
-		<a href="#" class="ev-upload-action"><?php esc_html_e( 'Upload', 'ev_framework' ); ?></a>
+		<?php
+			ev_btn(
+				__( 'Edit', 'ev_framework' ),
+				'confirm',
+				array(
+					'attrs' => array(
+						'class'     => 'ev-edit-action',
+					),
+					'style' => 'text',
+					'size'  => 'medium'
+				)
+			);
+		?>
+		<?php
+			ev_btn(
+				__( 'Upload', 'ev_framework' ),
+				'confirm',
+				array(
+					'attrs' => array(
+						'class'     => 'ev-upload-action',
+					),
+					'style' => 'text',
+					'size'  => 'medium'
+				)
+			);
+		?>
+
 		<?php if ( $multiple ) : ?>
-			<a href="#" class="ev-remove-all-action"><?php esc_html_e( 'Remove all', 'ev_framework' ); ?></a>
+			<?php
+				ev_btn(
+					__( 'Remove all', 'ev_framework' ),
+					'delete',
+					array(
+						'attrs' => array(
+							'class'     => 'ev-remove-all-action',
+						),
+						'style' => 'text',
+						'size'  => 'medium'
+					)
+				);
+			?>
 		<?php endif; ?>
 	</div>
 

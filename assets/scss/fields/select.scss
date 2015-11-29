@@ -12,6 +12,10 @@
 	position: relative;
 	max-width: 100%;
 
+	.ev-select-small & {
+		font-size: $small_fsz;
+	}
+
 	&:hover {
 		@include ui_input_hover;
 		@include box-shadow( none );
@@ -47,6 +51,11 @@
 		margin-top: -$baseline/2;
 		@include size( 0 $baseline );
 		border-left: 1px solid $grey_1;
+
+		.ev-select-small & {
+			height: $baseline/2;
+			margin-top: -$baseline/4;
+		}
 	}
 
 	select {
@@ -61,5 +70,10 @@
 		cursor: pointer;
 		position: relative;
 		z-index: 10;
+
+		.ev-select-small & {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
 	}
 }

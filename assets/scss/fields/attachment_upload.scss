@@ -1,221 +1,242 @@
 @import "../libs";
 
-// // -----------------------------------------------------------------------------
-// // $Attachment upload
-// // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Attachment upload
+// -----------------------------------------------------------------------------
 
-// $attachment_upload_size: $gutter*2;
-// $attachment_generic    : "\f498";
-// $attachment_zip        : "\f501";
-// $attachment_image      : "\f128";
-// $attachment_audio      : "\f500";
-// $attachment_video      : "\f490";
-// $attachment_text       : "\f491";
-// $attachment_doc        : "\f497";
-// $attachment_interactive: "\f496";
-// $attachment_code       : "\f499";
-// $attachment_spreadsheet: "\f495";
+$attachment_upload_size: $gutter*2;
+$attachment_generic    : "\f498";
+$attachment_zip        : "\f501";
+$attachment_image      : "\f128";
+$attachment_audio      : "\f500";
+$attachment_video      : "\f490";
+$attachment_text       : "\f491";
+$attachment_doc        : "\f497";
+$attachment_interactive: "\f496";
+$attachment_code       : "\f499";
+$attachment_spreadsheet: "\f495";
 
-// .ev-attachment-upload-action {
-// 	.ev-edit-action {
-// 		display: none;
-// 	}
+.ev-attachment-upload-action {
+	@include clearfix;
+	margin-top: $baseline/4;
+	padding-bottom: $baseline/4;
 
-// 	.ev-remove-all-action {
-// 		display: none;
-// 	}
-// }
+	.ev-remove-all-action {
+		float: right;
+	}
 
-// .ev-attachment-uploaded .ev-attachment-upload-action {
-// 	.ev-edit-action {
-// 		display: inline;
-// 	}
+	.ev-edit-action {
+		margin-right: $gutter/2;
+	}
+}
 
-// 	.ev-remove-all-action {
-// 		display: inline;
-// 		margin-left: $gutter/2;
-// 	}
+.ev-attachment-upload-container {
+	@include ui_input_standard;
+	padding: 0 $baseline/4;
+}
 
-// 	.ev-upload-action {
-// 		display: none;
-// 	}
-// }
+.ev-attachment-placeholder {
+	@include clearfix;
+	position: relative;
+	background-color: $white;
+	@include box-sizing( border-box );
+	border: 1px solid $grey_1;
+	border-radius: $radius - 1;
+	margin-top: $baseline/4;
+	margin-bottom: $baseline/4;
+	padding: $baseline/2 $gutter/2;
 
-// .ev-attachment-placeholder {
-// 	position: relative;
-// 	margin-bottom: $baseline/2;
-// 	border: 1px solid $border_color;
-// 	padding: $baseline/2 ($gutter/2 + 18) $baseline/2 $gutter/2;
-// 	background-color: $white;
-// 	min-height: 42px + $baseline;
-// 	@include box-sizing( border-box );
+	&:hover {
+		border-color: $grey_4;
+		@include box-shadow( #{$ui_el_shadow_hover} );
+		border-top-right-radius: 0;
 
-// 	&:hover {
-// 		border: 1px solid $blue_medium;
+		.ev-field-panel-controls-wrapper {
+			display: block;
 
-// 		&:before,
-// 		&:after {
-// 			content: "";
-// 			display: block;
-// 			@include position( absolute, -1px null -1px null );
-// 			width: 1px;
-// 			background-color: $blue_medium;
-// 		}
+			.ev-field-panel-controls-inner-wrapper {
+				border-color: $grey_4;
+			}
+		}
+	}
 
-// 		&:before {
-// 			left: 0;
-// 		}
+	.ev-attachment-details {
+		padding-left: $attachment_upload_size + $gutter*1.5 + 1;
 
-// 		&:after {
-// 			right: 0;
-// 		}
-// 	}
+		.ev-attachment-title {
+			display: block;
+			font-weight: bold;
+			font-size: $main_fsz;
+		}
 
-// 	.ev-attachment-upload-container.ui-sortable & {
-// 		cursor: move;
+		.ev-attachment-extension {
+			clear: both;
+			display: inline-block;
+			font-style: italic;
+			color: $grey_4;
+			margin-top: $baseline/8;
 
-// 		.ev-sortable-handle {
-// 			@include ev_handle;
-// 			width: $gutter;
-// 			@include position( absolute, 0 null 0 0 );
+			&:hover {
+				color: $blue;
+			}
 
-// 			&:before {
-// 				@include position( absolute, 50% null null 50% );
-// 				margin-left: -3px;
-// 				margin-top: -7px;
-// 			}
-// 		}
+			&:focus {
+				@include box-shadow( none );
+			}
+		}
+	}
 
-// 		&:hover {
-// 			.ev-sortable-handle {
-// 				visibility: visible;
-// 			}
-// 		}
-// 	}
+	&.ui-sortable-placeholder {
+		background-color: $grey_2;
+		background-color: $grey_2;
+		visibility: visible !important;
+	}
 
-// 	&.ui-sortable-placeholder {
-// 		background-color: $grey_light_2;
-// 		visibility: visible !important;
-// 	}
+	&.ui-sortable-helper {
+		.ev-field-panel-controls-wrapper {
+			display: block;
+		}
+	}
 
-// 	.ev-upload-remove {
-// 		cursor: pointer;
+	.ev-attachment-placeholder-icon {
+		@include size( $attachment_upload_size );
+		float: left;
+		position: relative;
+		display: block;
+		margin-right: $gutter;
+		border-right: 1px solid $grey_2;
+		padding-right: $gutter/2;
 
-// 		&:before {
-// 			@extend %remove_icon;
-// 			background-color: $white;
-// 			border-radius: 50%;
-// 			margin-top: -9px;
-// 			@include position( absolute, 50% $gutter/2 null null );
-// 		}
+		&:before {
+			color: $grey_4;
+			@include size( $attachment_upload_size );
+			@include icon( $attachment_generic );
+			float: left;
+			line-height: $attachment_upload_size;
+			font-size: 32px;
+		}
+	}
 
-// 		&:hover:before {
-// 			color: darken( $red, 20 );
-// 		}
-// 	}
+	&[class*="video"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_video;
+		}
+	}
 
-// 	&:hover .ev-upload-remove:before {
-// 		@include opacity( 100 );
-// 	}
+	&[class*="image"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_image;
+			font-size: 22px;
+		}
+	}
 
-// 	.ev-attachment-details {
-// 		.ev-attachment-title {
-// 			font-weight: bold;
-// 			font-size: 14px;
-// 		}
+	&[class*="audio"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_audio;
+		}
+	}
 
-// 		.ev-attachment-extension {
-// 			display: block;
-// 			font-style: italic;
-// 			color: $text_light;
-// 			margin-top: $baseline/4;
+	&[class*="zip"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_zip;
+		}
+	}
 
-// 			&:hover {
-// 				color: $blue_dark;
-// 			}
+	&[class*="txt"],
+	&[class*="text-plain"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_text;
+		}
+	}
 
-// 			&:focus {
-// 				@include box-shadow( none );
-// 			}
-// 		}
-// 	}
+	&[class*="pdf"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_doc;
+		}
+	}
 
-// 	.ev-attachment-placeholder-icon {
-// 		@include size( $attachment_upload_size );
-// 		float: left;
-// 		position: relative;
-// 		display: block;
-// 		margin-right: $gutter;
-// 		border-right: 1px solid $border_color;
-// 		padding-right: $gutter/2;
+	&[class*="html"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_code;
+		}
+	}
 
-// 		&:before {
-// 			color: $text_light;
-// 			@include size( $attachment_upload_size );
-// 			@include icon( $attachment_generic );
-// 			float: left;
-// 			line-height: $attachment_upload_size;
-// 			font-size: 32px;
-// 		}
-// 	}
+	&[class*="key"],
+	&[class*="ppt"],
+	&[class*="keynote"],
+	&[class*="powerpoint"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_interactive;
+		}
+	}
 
-// 	&[class*="video"] {
-// 		.ev-attachment-placeholder-icon:before {
-// 			content: $attachment_video;
-// 		}
-// 	}
+	&[class*="xls"],
+	&[class*="excel"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_spreadsheet;
+		}
+	}
+}
 
-// 	&[class*="image"] {
-// 		.ev-attachment-placeholder-icon:before {
-// 			content: $attachment_image;
-// 			font-size: 22px;
-// 		}
-// 	}
+// -----------------------------------------------------------------------------
+// $Controls panel
+// -----------------------------------------------------------------------------
 
-// 	&[class*="audio"] {
-// 		.ev-attachment-placeholder-icon:before {
-// 			content: $attachment_audio;
-// 		}
-// 	}
+// TODO: vedere se possibile uniformare comportamento con repeatable
+.ev-field-panel-controls-wrapper {
+	display: none;
+	@include position( absolute, -1px (-($baseline+1)) null null );
+	// TODO: Aggiungere bleeding edge
 
-// 	&[class*="zip"] {
-// 		.ev-attachment-placeholder-icon:before {
-// 			content: $attachment_zip;
-// 		}
-// 	}
+	.ev-field-panel-controls-inner-wrapper {
+		@include size( $baseline );
+		border: 1px solid $grey_1;
+		border-left: none;
+		background-color: $white;
+		border-top-right-radius: $radius;
+		border-bottom-right-radius: $radius;
 
-// 	&[class*="txt"],
-// 	&[class*="text-plain"] {
-// 		.ev-attachment-placeholder-icon:before {
-// 			content: $attachment_text;
-// 		}
-// 	}
+		[data-sortable] & {
+			height: $baseline*2;
 
-// 	&[class*="pdf"] {
-// 		.ev-attachment-placeholder-icon:before {
-// 			content: $attachment_doc;
-// 		}
-// 	}
+			.ev-attachment-sortable-handle {
+				display: inline-block;
+			}
+		}
+	}
 
-// 	&[class*="html"] {
-// 		.ev-attachment-placeholder-icon:before {
-// 			content: $attachment_code;
-// 		}
-// 	}
+	.ev-attachment-sortable-handle {
+		display: none;
 
-// 	&[class*="key"],
-// 	&[class*="ppt"],
-// 	&[class*="keynote"],
-// 	&[class*="powerpoint"] {
-// 		.ev-attachment-placeholder-icon:before {
-// 			content: $attachment_interactive;
-// 		}
-// 	}
+		&:before {
+			cursor: all-scroll;
+			color: $grey_3;
+			@include icon( "\f333" );
+			@include size( $baseline );
+			font-size: 16px;
+			line-height: $baseline;
+		}
 
-// 	&[class*="xls"],
-// 	&[class*="excel"] {
-// 		.ev-attachment-placeholder-icon:before {
-// 			content: $attachment_spreadsheet;
-// 		}
-// 	}
-// }
+		&:hover:before {
+			color: $grey_6;
+		}
+	}
+
+	.ev-upload-remove {
+		display: inline-block;
+		text-decoration: none;
+
+		&:before {
+			cursor: pointer;
+			color: $grey_3;
+			@include icon( "\f153" );
+			@include size( $baseline );
+			font-size: 16px;
+			line-height: $baseline;
+		}
+
+		&:hover:before {
+			color: $red;
+		}
+	}
+}
