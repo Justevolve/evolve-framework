@@ -25,6 +25,10 @@ function ev_btn( $text, $type, $config = array() ) {
 		$config['attrs']['class'] = '';
 	}
 
+	if ( $config['icon'] ) {
+		$config['attrs']['class'] .= ' ev-btn-with-icon';
+	}
+
 	$config['attrs']['class'] .= ' ev-btn';
 	$config['attrs']['class'] .= ' ev-btn-type-' . $type;
 	$config['attrs']['class'] .= ' ev-btn-size-' . $config['size'];

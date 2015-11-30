@@ -8,7 +8,7 @@
 		@include spinner( $size, 2px, $color );
 		@include opacity( 0 );
 		visibility: hidden;
-		@include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
+		// @include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
 	}
 
 	&.ev-btn-idle {
@@ -29,7 +29,7 @@
 		border-radius: 50%;
 		@include opacity( 0 );
 		visibility: hidden;
-		@include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
+		// @include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
 		@include position( absolute, 50% null null null );
 		line-height: $size;
 		@include size( $size );
@@ -237,6 +237,34 @@
 		}
 	}
 
+	&.ev-btn-style-button,
+	&.ev-btn-style-round {
+		color: $white;
+		border: 1px solid;
+		font-weight: bold;
+
+		i:before {
+			bottom: -1px;
+		}
+
+		&:hover {
+			@include box-shadow( #{$ui_el_shadow_hover} );
+		}
+
+		&:active {
+			@include box-shadow( #{$ui_el_shadow} );
+			color: rgba( $grey_6, .3 );
+		}
+
+		&.ev-btn-idle,
+		&.ev-btn-success {
+			&:before,
+			&:after {
+				@include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
+			}
+		}
+	}
+
 	&.ev-btn-style-round {
 		border-radius: 50%;
 
@@ -267,42 +295,23 @@
 		}
 	}
 
-	&.ev-btn-style-button,
-	&.ev-btn-style-round {
-		color: $white;
-		border: 1px solid;
-		font-weight: bold;
-
-		i:before {
-			bottom: -1px;
-		}
-
-		&:hover {
-			@include box-shadow( #{$ui_el_shadow_hover} );
-		}
-
-		&:active {
-			@include box-shadow( #{$ui_el_shadow} );
-			color: rgba( $grey_6, .3 );
-		}
-	}
-
 	&.ev-btn-style-button {
-		padding: 0 $gutter;
 		border-radius: $radius;
 
 		&.ev-btn-type-confirm,
 		&.ev-btn-type-save {
 			@include transition( padding $transition_time*2 $ease-out-back );
+		}
 
-			&:after,
-			&:before {
-				right: $gutter;
+		&.ev-btn-size-small {
+			padding: 0 $gutter/2;
+
+			&.ev-btn-with-icon {
+				padding-left: $gutter/4;
 			}
 
-			&.ev-btn-size-small {
-				padding: 0 $gutter/2;
-
+			&.ev-btn-type-confirm,
+			&.ev-btn-type-save {
 				&:after,
 				&:before {
 					right: $gutter/2;
@@ -319,27 +328,51 @@
 		}
 
 		&.ev-btn-size-medium {
+			padding: 0 $gutter;
+
+			&.ev-btn-with-icon {
+				padding-left: $gutter/2;
+				padding-right: $gutter/2 * 1.5;
+			}
+
 			&.ev-btn-type-confirm,
 			&.ev-btn-type-save {
+				&:after,
+				&:before {
+					right: $gutter/2;
+				}
+
 				&.ev-btn-idle {
-					padding-right: $gutter*2 + 10px + 4;
+					padding-right: $gutter + 10px + 4;
 				}
 
 				&.ev-btn-complete {
-					padding-right: $gutter*2 + 14px;
+					padding-right: $gutter + 14px;
 				}
 			}
 		}
 
 		&.ev-btn-size-large {
+			padding: 0 $gutter*1.5;
+
+			&.ev-btn-with-icon {
+				padding-left: $gutter*1.5 / 2;
+				padding-right: $gutter;
+			}
+
 			&.ev-btn-type-confirm,
 			&.ev-btn-type-save {
+				&:after,
+				&:before {
+					right: $gutter*1.5 / 2;
+				}
+
 				&.ev-btn-idle {
-					padding-right: $gutter*2 + 12px + 4;
+					padding-right: ($gutter*1.5 / 2)*2 + 12px + 4;
 				}
 
 				&.ev-btn-complete {
-					padding-right: $gutter*2 + 16px;
+					padding-right: ($gutter*1.5 / 2)*2 + 16px;
 				}
 			}
 		}
@@ -362,6 +395,10 @@
 
 		&.ev-btn-style-text {
 			color: $blue_0;
+
+			&:hover {
+				color: $blue;
+			}
 		}
 	}
 
