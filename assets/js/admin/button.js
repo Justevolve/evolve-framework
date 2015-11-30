@@ -14,17 +14,23 @@
 	}
 
 	function ev_btn_handle_response( btn, response ) {
-		$( btn )
-			.addClass( "ev-btn-complete" )
-			.addClass( "ev-btn-" + response.type );
+		$( btn ).addClass( "ev-btn-complete" );
 
-		$( btn ).attr( "data-title", response.message );
-		ev_create_tooltip( btn );
+		if ( response ) {
+			$( btn )
+				.addClass( "ev-btn-" + response.type )
+				.attr( "data-title", response.message );
+
+			ev_create_tooltip( btn );
+		}
 
 		setTimeout( function() {
 			$( btn ).removeAttr( "data-title" );
 			$( btn ).removeClass( "ev-btn-complete" );
-			$( btn ).removeClass( "ev-btn-" + response.type );
+
+			if ( response ) {
+				$( btn ).removeClass( "ev-btn-" + response.type );
+			}
 		}, 1500 );
 	}
 
