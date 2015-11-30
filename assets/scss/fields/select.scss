@@ -8,12 +8,28 @@
 	@include ui_input_standard;
 	display: inline-block;
 	border-radius: $radius;
-	font-size: $main_fsz;
 	position: relative;
 	max-width: 100%;
 
-	.ev-select-small & {
-		font-size: $small_fsz;
+	&.ev-select-style-small {
+		select {
+			font-size: $small_fsz;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+		&:after {
+			height: $baseline/2;
+			margin-top: -$baseline/4;
+		}
+
+		&:before {
+			border-top-width: 4px;
+			border-left-width: 4px;
+			border-right-width: 4px;
+			margin-top: -2px;
+			right: $baseline/2+2;
+		}
 	}
 
 	&:hover {
@@ -51,14 +67,10 @@
 		margin-top: -$baseline/2;
 		@include size( 0 $baseline );
 		border-left: 1px solid $grey_1;
-
-		.ev-select-small & {
-			height: $baseline/2;
-			margin-top: -$baseline/4;
-		}
 	}
 
 	select {
+		font-size: $main_fsz;
 		padding: $baseline/4 $baseline*2 $baseline/4 $gutter/2;
 		@include appearance( none );
 		margin: 0;
@@ -70,10 +82,5 @@
 		cursor: pointer;
 		position: relative;
 		z-index: 10;
-
-		.ev-select-small & {
-			padding-top: 0;
-			padding-bottom: 0;
-		}
 	}
 }

@@ -1,0 +1,13 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Text input
+// -----------------------------------------------------------------------------
+
+.ev-field {
+	input[type="text"].ev-field-text-style-small {
+		font-size: $small_fsz;
+		line-height: $baseline - 4;
+		padding: 1px $gutter/4;
+	}
+}

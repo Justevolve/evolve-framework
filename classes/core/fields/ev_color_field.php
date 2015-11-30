@@ -31,6 +31,8 @@ class Ev_ColorField extends Ev_Field {
 		}
 
 		$data['config'] = wp_parse_args( $data['config'], array(
+			'style' => '',
+
 			/* Allows for multiple colors properties. */
 			'multiple' => false,
 

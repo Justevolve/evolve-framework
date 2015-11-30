@@ -49,10 +49,22 @@ function ev_image_upload( $handle, $id, $args = array() ) {
  * @param string $selected The select selected value.
  * @param boolean $echo Set to true to echo the select control.
  */
-function ev_select( $name, $options, $selected = '', $echo = true ) {
+function ev_select( $name, $options, $selected = '', $style = '', $echo = true ) {
 	$html = '';
+	$style = (array) $style;
+	$new_style = array();
 
-	$html .= '<span class="ev-select-wrapper">';
+	if ( ! empty( $style ) ) {
+		$style_class = 'ev-select-style-';
+
+		foreach ( $style as $s ) {
+			$new_style[] = $style_class . $s;
+		}
+	}
+
+	$new_style = implode( ' ', $new_style );
+
+	$html .= sprintf( '<span class="ev-select-wrapper %s">', esc_attr( $new_style ) );
 		$html .= sprintf( '<select name="%s">', esc_attr( $name ) );
 			foreach ( $options as $index => $option ) {
 				if ( ! is_array( $option ) ) {
@@ -192,10 +204,22 @@ function ev_multiple_select( $name, $data, $selected = '', $args = array() ) {
 function ev_radio( $name, $data, $value = '', $style = '', $echo = true ) {
 	$i=0;
 	$html = '';
+	$style = (array) $style;
+	$new_style = array();
+
+	if ( ! empty( $style ) ) {
+		$style_class = 'ev-radio-style-';
+
+		foreach ( $style as $s ) {
+			$new_style[] = $style_class . $s;
+		}
+	}
+
+	$new_style = implode( ' ', $new_style );
 
 	$graphic = $style == 'graphic';
 
-	$html .= sprintf( '<span class="ev-radio-wrapper ev-radio-style-%s">', esc_attr( $style ) );
+	$html .= sprintf( '<span class="ev-radio-wrapper %s">', esc_attr( $new_style ) );
 
 	foreach ( $data as $k => $v ) {
 		$checked = '';
@@ -253,12 +277,24 @@ function ev_radio( $name, $data, $value = '', $style = '', $echo = true ) {
 function ev_checkbox( $name, $value, $style = '', $echo = true ) {
 	$checked = '';
 	$html = '';
+	$style = (array) $style;
+	$new_style = array();
+
+	if ( ! empty( $style ) ) {
+		$style_class = 'ev-checkbox-style-';
+
+		foreach ( $style as $s ) {
+			$new_style[] = $style_class . $s;
+		}
+	}
+
+	$new_style = implode( ' ', $new_style );
 
 	if ( $value == 1 ) {
 		$checked = 'checked';
 	}
 
-	$html .= sprintf( '<span class="ev-checkbox-wrapper ev-checkbox-style-%s">', esc_attr( $style ) );
+	$html .= sprintf( '<span class="ev-checkbox-wrapper %s">', esc_attr( $new_style ) );
 		$html .= sprintf( '<input name="%s" type="hidden" value="0">', esc_attr( $name ) );
 		$html .= sprintf( '<input name="%s" type="checkbox" value="1" %s>',
 			esc_attr( $name ),
@@ -283,18 +319,30 @@ function ev_checkbox( $name, $value, $style = '', $echo = true ) {
  * @param boolean $echo Set to true to print the control.
  * @return string
  */
-function ev_color( $name, $value, $opacity = false, $echo = true ) {
+function ev_color( $name, $value, $opacity = false, $style = '', $echo = true ) {
 	$html          = '';
 	$opacity_data  = '';
 	$field_color   = $value;
 	$field_opacity = '1';
+	$style = (array) $style;
+	$new_style = array();
+
+	if ( ! empty( $style ) ) {
+		$style_class = 'ev-color-style-';
+
+		foreach ( $style as $s ) {
+			$new_style[] = $style_class . $s;
+		}
+	}
+
+	$new_style = implode( ' ', $new_style );
 
 	if ( is_array( $value ) ) {
 		$field_color   = isset( $value['color'] ) ? $value['color'] : '';
 		$field_opacity = isset( $value['opacity'] ) ? $value['opacity'] : '';
 	}
 
-	$html .= '<span class="ev-color-wrapper">';
+	$html .= sprintf( '<span class="ev-color-wrapper %s">', esc_attr( $new_style ) );
 
 		if ( $opacity ) {
 			$opacity_data = 'data-opacity=' . $field_opacity;

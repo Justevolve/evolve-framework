@@ -32,8 +32,8 @@ msgstr ""
 msgid "Need help?"
 msgstr ""
 
-#: classes/core/ev_field.php:615 templates/fields/attachment.php:77
-#: templates/fields/partials/image_upload.php:73
+#: classes/core/ev_field.php:615 templates/fields/attachment.php:104
+#: templates/fields/partials/image_upload.php:100
 msgid "Remove all"
 msgstr ""
 
@@ -62,7 +62,7 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: classes/core/fields/ev_attachment_field.php:103
+#: classes/core/fields/ev_attachment_field.php:107
 #: classes/core/fields/ev_image_field.php:89 templates/fields/attachment.php:63
 #: templates/fields/partials/image_upload.php:49
 #: templates/fields/partials/image_upload.php:62
@@ -74,8 +74,8 @@ msgid "All saved!"
 msgstr ""
 
 #: classes/core/fields_containers/ev_modal.php:54
-#: templates/fields/attachment.php:74
-#: templates/fields/partials/image_upload.php:69
+#: templates/fields/attachment.php:76
+#: templates/fields/partials/image_upload.php:71
 msgid "Edit"
 msgstr ""
 
@@ -103,7 +103,7 @@ msgstr ""
 msgid "Changelog"
 msgstr ""
 
-#: includes/admin/fields.php:318
+#: includes/admin/fields.php:366
 msgid "Presets"
 msgstr ""
 
@@ -159,8 +159,8 @@ msgstr ""
 msgid "New tab"
 msgstr ""
 
-#: templates/fields/attachment.php:75
-#: templates/fields/partials/image_upload.php:70
+#: templates/fields/attachment.php:89
+#: templates/fields/partials/image_upload.php:85
 msgid "Upload"
 msgstr ""
 
@@ -213,7 +213,7 @@ msgctxt "multiple icons found"
 msgid "%s found"
 msgstr ""
 
-#: includes/admin/fields.php:323
+#: includes/admin/fields.php:371
 msgctxt "save color preset"
 msgid "Save"
 msgstr ""

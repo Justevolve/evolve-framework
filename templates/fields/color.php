@@ -4,6 +4,7 @@ $multiple = $field->config( 'multiple' );
 $opacity  = $field->config( 'opacity' );
 $value    = $field->value();
 $handle   = $field->handle();
+$style    = $field->config( 'style' );
 
 if ( $multiple !== false && is_array( $multiple ) ) {
 
@@ -20,7 +21,7 @@ if ( $multiple !== false && is_array( $multiple ) ) {
 			echo '<span class="ev-sub-label">' . esc_html( $field_label ) . '</span>';
 
 			echo '<div class="ev-color-inner-wrapper">';
-				ev_color( $field_handle, $field_value, $opacity );
+				ev_color( $field_handle, $field_value, $opacity, $style );
 			echo '</div>';
 		echo '</div>';
 	}
@@ -28,6 +29,6 @@ if ( $multiple !== false && is_array( $multiple ) ) {
 }
 else {
 	echo '<div class="ev-color-inner-wrapper">';
-		ev_color( $handle, $value, $opacity );
+		ev_color( $handle, $value, $opacity, $style );
 	echo '</div>';
 }

@@ -5,9 +5,19 @@
 	$link = $field->config( 'link' );
 	$value = $field->value();
 	$handle = $field->handle();
+	$style = $field->config( 'style' );
+	$style = (array) $style;
 
 	if ( $full === true ) {
 		$classes[] = 'ev-field-input-size-full';
+	}
+
+	if ( ! empty( $style ) ) {
+		$style_class = 'ev-field-text-style-';
+
+		foreach ( $style as $s ) {
+			$classes[] = $style_class . $s;
+		}
 	}
 
 	$text_value = $value;

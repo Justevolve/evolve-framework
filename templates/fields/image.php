@@ -100,7 +100,8 @@ else {
 						ev_select(
 							$field->handle() . "[$breakpoint_key]" . '[1][image_size]',
 							ev_get_image_sizes_for_select(),
-							isset( $value[$breakpoint_key][1]['image_size'] ) ? $value[$breakpoint_key][1]['image_size'] : ''
+							isset( $value[$breakpoint_key][1]['image_size'] ) ? $value[$breakpoint_key][1]['image_size'] : '',
+							'small'
 						);
 
 					echo '</p>';

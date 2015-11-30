@@ -29,6 +29,85 @@ $image_upload_size: $gutter*4;
 
 .ev-image-upload {
 	display: inline-block;
+
+	.ev-edit-action,
+	.ev-remove-all-action {
+		display: none;
+	}
+
+	&.ev-image-uploaded {
+		.ev-edit-action {
+			display: inline-block;
+		}
+
+		.ev-remove-all-action {
+			display: inline-block;
+			float: right;
+		}
+	}
+
+	&[data-multiple] {
+
+		.ev-image-placeholder {
+			display: none;
+		}
+
+		.ev-image-placeholder-container {
+			position: relative;
+			@include size( $image_upload_size );
+
+			&:before {
+				@include icon( "\f161" );
+				font-size: 22px;
+				@include position( absolute, 50% null null 50% );
+				@include transform( translate3d( -50%, -50%, 0 ) );
+				color: $grey_3;
+				z-index: 10;
+			}
+
+			&:after {
+				content: "";
+				display: inline-block;
+				position: relative;
+				@include ui_input_standard;
+				@include size( $image_upload_size );
+				float: left;
+				border-radius: $radius;
+				margin-bottom: $gutter/4;
+			}
+		}
+
+		&.ev-image-uploaded {
+			@include ui_input_standard;
+			padding: $baseline/4;
+
+			.ev-image-placeholder-container {
+				@include size( auto );
+
+				&:before,
+				&:after {
+					display: none;
+				}
+			}
+
+			.ev-image-placeholder {
+				display: block;
+			}
+
+			.ui-sortable-placeholder {
+				border-color: $grey_2;
+				background-color: $grey_2;
+			}
+
+			.ui-sortable-helper {
+				@include box-shadow( #{$ui_el_shadow_hover} );
+
+				.ev-upload-remove {
+					display: none !important;
+				}
+			}
+		}
+	}
 }
 
 .ev-image-placeholder {
@@ -54,19 +133,6 @@ $image_upload_size: $gutter*4;
 			.ev-upload-remove {
 				display: block;
 			}
-		}
-	}
-
-	&.ui-sortable-placeholder {
-		border-color: $grey_2;
-		background-color: $grey_2;
-	}
-
-	&.ui-sortable-helper {
-		@include box-shadow( #{$ui_el_shadow_hover} );
-
-		.ev-upload-remove {
-			display: none !important;
 		}
 	}
 
@@ -135,6 +201,7 @@ $image_upload_size: $gutter*4;
 		padding-bottom: $baseline/4;
 	}
 }
+
 
 // $upload_size: 80px;
 

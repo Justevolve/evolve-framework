@@ -77,6 +77,23 @@
 				}
 			}
 		}
+
+		&.ev-checkbox-style-small {
+			input[type="checkbox"] {
+				@include size( $baseline*2 $baseline );
+				border-radius: $baseline;
+
+				&:after {
+					@include size( $baseline/2 + 4 );
+				}
+
+				&:checked {
+					&:after {
+						left: $baseline + 2;
+					}
+				}
+			}
+		}
 	}
 }
 

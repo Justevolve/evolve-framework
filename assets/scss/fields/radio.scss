@@ -105,6 +105,17 @@
 			border-bottom-right-radius: $radius;
 		}
 	}
+
+	// Small switch
+	&.ev-radio-style-small {
+		.ev-radio {
+			span {
+				font-size: $small_fsz;
+				line-height: $baseline - 4;
+				padding: 1px $gutter/2;
+			}
+		}
+	}
 }
 
 
