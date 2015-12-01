@@ -139,23 +139,23 @@ msgstr ""
 msgid "Choose your icon"
 msgstr ""
 
-#: includes/link.php:39
+#: includes/link.php:42
 msgid "Link"
 msgstr ""
 
-#: includes/link.php:68
+#: includes/link.php:84
 msgid "Tab"
 msgstr ""
 
-#: includes/link.php:74
+#: includes/link.php:90
 msgid "Open in tab"
 msgstr ""
 
-#: includes/link.php:78
+#: includes/link.php:94
 msgid "Same tab"
 msgstr ""
 
-#: includes/link.php:79
+#: includes/link.php:95
 msgid "New tab"
 msgstr ""
 

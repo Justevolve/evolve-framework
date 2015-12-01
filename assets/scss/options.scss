@@ -6,9 +6,8 @@
 
 .ev-admin-page {
 	@include box-sizing( border-box );
-	margin-left: 20px;
-	margin-right: 40px;
-	padding-top: $baseline;
+	margin-left: $gutter;
+	margin-right: $gutter*2;
 	@include clearfix;
 
 	@include ev-media( $media_mobile ) {
@@ -22,12 +21,18 @@
 // -----------------------------------------------------------------------------
 
 .ev-admin-page-heading {
-	margin-bottom: $baseline*2;
+	padding-bottom: $baseline*2;
+	margin: 0 -40px;
+	@include box-sizing( border-box );
+	padding: $baseline*2 $gutter*2;
+	background-color: $white;
 
 	h1 {
 		line-height: 1;
 		font-weight: 300;
 		font-size: 2em;
+		padding: 0;
+		margin: 0;
 
 		span {
 			font-weight: bold;
@@ -42,6 +47,16 @@
 		margin-top: $baseline/3;
 		font-style: italic;
 	}
+
+	+ div {
+		border-top: 1px solid #EBEBEB;
+		margin-top: $baseline*2;
+	}
+
+	+ .ev-admin-page-group-nav {
+		border-top: 1px solid $grey_0;
+		margin-top: 0;
+	}
 }
 
 // -----------------------------------------------------------------------------
@@ -55,7 +70,7 @@
 	margin-right: -40px;
 	padding-left: 40px;
 	padding-right: 40px;
-	border-bottom: 1px solid $grey_3;
+	border-bottom: 1px solid #EBEBEB;
 
 	ul {
 		font-size: 0.01em;
@@ -87,9 +102,13 @@
 				@include box-shadow( none );
 			}
 
+			&:hover {
+				background-color: $grey_0;
+			}
+
 			&.ev-active {
 				font-weight: bold;
-				background-color: $green;
+				background-color: $blue;
 				color: $white;
 			}
 		}
@@ -116,7 +135,7 @@
 .ev-admin-page {
 	.ev-tabs-nav.ev-vertical {
 		width: 20%;
-		padding-right: 20px;
+		padding-right: $gutter;
 		@include box-sizing( border-box );
 
 		@include ev-media( $media_tablet ) {
@@ -132,40 +151,46 @@
 		li {
 			margin-bottom: 0;
 
-			&:first-child {
-				a {
-					border-top-right-radius: $radius;
-					border-top-left-radius: $radius;
-					border-top: 1px solid $grey_1;
-				}
-			}
+			// &:first-child {
+			// 	a {
+			// 		border-top-right-radius: $radius;
+			// 		border-top-left-radius: $radius;
+			// 		border-top: 1px solid $grey_1;
+			// 	}
+			// }
 
-			&:last-child {
-				a {
-					border-bottom-right-radius: $radius;
-					border-bottom-left-radius: $radius;
-				}
-			}
+			// &:last-child {
+			// 	a {
+			// 		border-bottom-right-radius: $radius;
+			// 		border-bottom-left-radius: $radius;
+			// 	}
+			// }
 
 			a {
 				display: block;
 				position: relative;
-				background-color: $white;
+				// background-color: $white;
 				font-size: 13px;
 				padding: $baseline/2 $gutter/1.5;
 				text-decoration: none;
 				color: $grey_4;
-				border-left: 1px solid $grey_1;
-				border-right: 1px solid $grey_1;
-				border-bottom: 1px solid $grey_1;
+				// border-left: 1px solid $grey_1;
+				// border-right: 1px solid $grey_1;
+				// border-bottom: 1px solid $grey_2;
+				border-radius: $radius;
+				font-weight: bold;
 
 				&:focus {
 					@include box-shadow( none );
 				}
 
+				&:hover {
+					color: $grey_6;
+					background-color: rgba( $white, .5 );
+				}
+
 				&.ev-active {
-					font-weight: bold;
-					background-color: $green;
+					background-color: $blue;
 					color: $white;
 				}
 			}
@@ -188,7 +213,8 @@
 	}
 
 	.ev-tab-container {
-		border: 1px solid $grey_1;
+		border: 1px solid #EBEBEB;
+		border-radius: $radius;
 	}
 }
 
@@ -197,12 +223,50 @@
 // -----------------------------------------------------------------------------
 
 .ev-metabox {
+	@include clearfix;
 	@include vertical_tab_style;
+
+	.ev-tabs {
+		@include display( flex );
+	}
+
+	.ev-tabs-nav.ev-vertical {
+		margin-right: 0;
+		max-width: none;
+		background-color: $grey_6;
+		padding: $gutter $gutter/2;
+		width: 15%;
+
+		li {
+			a {
+				color: rgba( $white, .5 );
+				background-color: transparent;
+				border: none;
+				border-radius: $radius;
+				padding: $gutter/2;
+
+				&:hover {
+					color: $white;
+					background-color: rgba( $white, .3 );
+				}
+
+				&.ev-active {
+					background-color: $blue;
+					color: $white;
+				}
+			}
+		}
+	}
+
+	.ev-tab-container {
+		overflow: visible;
+		width: 85%;
+	}
 }
 
-.ev-tabs-nav.ev-vertical + .ev-tab-container {
-	border-left: 1px solid $grey_1;
-}
+// .ev-tabs-nav.ev-vertical + .ev-tab-container {
+// 	border-left: 1px solid $grey_1;
+// }
 
 // -----------------------------------------------------------------------------
 // $Options tab container
