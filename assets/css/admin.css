@@ -58,6 +58,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-modal-close { font-family: "dashicons"; position: absolute; top: 0; right: 0; text-decoration: none; }
 
 .ev-admin-page { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; margin-left: 20px; margin-right: 40px; padding-top: 24px; }
+.ev-admin-page:after { content: ""; display: table; clear: both; }
 @media only screen and (max-width: 782px) { .ev-admin-page { margin-right: 10px; margin-left: 0; } }
 
 .ev-admin-page-heading { margin-bottom: 48px; }

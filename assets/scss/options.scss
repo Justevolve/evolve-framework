@@ -9,6 +9,7 @@
 	margin-left: 20px;
 	margin-right: 40px;
 	padding-top: $baseline;
+	@include clearfix;
 
 	@include ev-media( $media_mobile ) {
 		margin-right: 10px;
