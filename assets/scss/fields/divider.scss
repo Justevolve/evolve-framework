@@ -9,6 +9,7 @@
 		display: inline-block;
 		font-size: 16px;
 		margin: 0;
+		padding: 0 !important;
 	}
 
 	// Section break
@@ -16,14 +17,16 @@
 		background-color: $grey_0;
 
 		h3 {
-			padding: $baseline 0 0 0;
+			padding: $baseline 0 0 0 !important;
 		}
 	}
 
 	// In page divider
 	&.ev-divider-style-in_page {
+
 		.ev-field-inner-wrapper {
-			border-bottom: 4px solid $grey_0;
+			padding-bottom: $baseline/2;
+			border-bottom: 4px solid $grey_3;
 		}
 	}
 }

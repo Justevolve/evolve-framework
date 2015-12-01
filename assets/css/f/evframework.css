@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'evframework';
+  src: url('evframework.eot');
+  src: url('evframework.eot#iefix') format('embedded-opentype'),
+       url('evframework.woff') format('woff'),
+       url('evframework.ttf') format('truetype'),
+       url('evframework.svg#evframework') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.evfw-ok-circled:before { content: '\e800'; } /* '' */
+.evfw-cancel-circled:before { content: '\e801'; } /* '' */
+.evfw-info-circled:before { content: '\e802'; } /* '' */
+.evfw-attention-circled:before { content: '\e803'; } /* '' */
+.evfw-link:before { content: '\e804'; } /* '' */

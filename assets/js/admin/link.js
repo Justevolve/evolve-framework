@@ -4,22 +4,23 @@
 	/**
 	 * Click on a link control.
 	 */
-	$.evf.delegate( ".ev-link-ctrl", "click", "link", function() {
+	$.evf.delegate( ".ev-link-ctrl-btn", "click", "link", function() {
         var key = "ev-link",
             ctrl = $( this ),
+            ctrl_wrapper = $( this ).parents( '.ev-link-ctrl' ).first(),
             data = {
-                "url": $( "[data-link-url]", ctrl ).val(),
-                "target": $( "[data-link-target]", ctrl ).val(),
-                "rel": $( "[data-link-rel]", ctrl ).val(),
-                "title": $( "[data-link-title]", ctrl ).val(),
+                "url": $( "[data-link-url]", ctrl_wrapper ).val(),
+                "target": $( "[data-link-target]", ctrl_wrapper ).val(),
+                "rel": $( "[data-link-rel]", ctrl_wrapper ).val(),
+                "title": $( "[data-link-title]", ctrl_wrapper ).val(),
             };
 
         var modal = new $.evf.modal( key, data, {
 			save: function( data, after_save, nonce ) {
-				$( "[data-link-url]", ctrl ).val( data["url"] );
-				$( "[data-link-target]", ctrl ).val( data["target"] );
-				$( "[data-link-rel]", ctrl ).val( data["rel"] );
-				$( "[data-link-title]", ctrl ).val( data["title"] );
+				$( "[data-link-url]", ctrl_wrapper ).val( data["url"] );
+				$( "[data-link-target]", ctrl_wrapper ).val( data["target"] );
+				$( "[data-link-rel]", ctrl_wrapper ).val( data["rel"] );
+				$( "[data-link-title]", ctrl_wrapper ).val( data["title"] );
 
 				ctrl.removeClass( "ev-link-on" );
 
@@ -32,7 +33,7 @@
         modal.open( function( content, key, _data ) {
 			var modal_data = {
 				"action": "ev_link_modal_load",
-				"nonce": ctrl.attr( "data-nonce" ),
+				"nonce": ctrl_wrapper.attr( "data-nonce" ),
 				"data": _data
 			};
 

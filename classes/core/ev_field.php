@@ -547,7 +547,7 @@ abstract class Ev_Field {
 					),
 					'style'     => 'round',
 					'hide_text' => true,
-					'icon' => 'f529',
+					'icon' => 'evfw-add',
 					'size' => $size
 				)
 			);

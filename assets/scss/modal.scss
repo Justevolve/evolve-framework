@@ -128,19 +128,19 @@ body.ev-modal-open {
 	.ev-save {
 		float: right;
 
-		.ev-btn-action {
-			background-color: $blue;
+		// .ev-btn-action {
+		// 	background-color: $blue;
 
-			&:hover {
-				background-color: darken( $blue, 10 );
-			}
-		}
+		// 	&:hover {
+		// 		background-color: darken( $blue, 10 );
+		// 	}
+		// }
 
-		&.ev-saving {
-			.ev-btn-action {
-				background-color: darken( $blue, 10 );
-			}
-		}
+		// &.ev-saving {
+		// 	.ev-btn-action {
+		// 		background-color: darken( $blue, 10 );
+		// 	}
+		// }
 	}
 }
 
@@ -172,22 +172,22 @@ body.ev-modal-open {
 	float: left;
 	// @extend %btn;
 
-	.ev-btn-action {
-		color: $grey_6;
-		background-color: $grey_1;
-		@include transition( background-color $transition_time*1.5 ease, width $transition_time*2.5 ease, padding $transition_time*2.5 $ease-out-back );
-		cursor: pointer;
+	// .ev-btn-action {
+	// 	color: $grey_6;
+	// 	background-color: $grey_1;
+	// 	@include transition( background-color $transition_time*1.5 ease, width $transition_time*2.5 ease, padding $transition_time*2.5 $ease-out-back );
+	// 	cursor: pointer;
 
-		&:before {
-			@include icon( "\f340" );
-			float: left;
-			margin-right: $gutter/4;
-		}
+	// 	&:before {
+	// 		@include icon( "\f340" );
+	// 		float: left;
+	// 		margin-right: $gutter/4;
+	// 	}
 
-		&:hover {
-			background-color: darken( $grey_1, 10 );
-		}
-	}
+	// 	&:hover {
+	// 		background-color: darken( $grey_1, 10 );
+	// 	}
+	// }
 }
 
 // -----------------------------------------------------------------------------

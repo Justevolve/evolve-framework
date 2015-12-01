@@ -42,6 +42,7 @@ class Ev_AdminController extends Ev_Controller {
 		$this->add_script( 'ev-admin', EV_FRAMEWORK_URI . 'assets/js/min/admin.min.js', array( 'underscore', 'jquery-ui-sortable', 'media-upload' ) );
 
 		/* Add the CSS file for admin components. */
+		$this->add_style( 'ev-admin-icons', EV_FRAMEWORK_URI . 'assets/css/f/evframework.css' );
 		$this->add_style( 'ev-admin', EV_FRAMEWORK_URI . 'assets/css/admin.css' );
 
 		/* Bind the enqueue of scripts and stylesheets. */

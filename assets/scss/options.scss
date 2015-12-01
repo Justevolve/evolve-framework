@@ -49,12 +49,16 @@
 
 .ev-admin-page .ev-admin-page-group-nav {
 	margin-bottom: $baseline*2;
+	background-color: $white;
+	margin-left: -40px;
+	margin-right: -40px;
+	padding-left: 40px;
+	padding-right: 40px;
+	border-bottom: 1px solid $grey_3;
 
 	ul {
 		font-size: 0.01em;
-		border: 1px solid $grey_1;
-		background-color: $white;
-		border-radius: $radius;
+		margin: 0;
 
 		li {
 			display: inline-block;
@@ -62,35 +66,30 @@
 			font-size: 100em;
 			margin-bottom: 0;
 
-			&:first-child a {
-				border-top-left-radius: $radius;
-				border-bottom-left-radius: $radius;
+			&:first-child {
+				a {
+					border-left: 1px solid $grey_1;
+				}
+			}
+		}
+
+		a {
+			display: block;
+			position: relative;
+			font-size: $main_fsz;
+			padding: $baseline/1.5 $gutter;
+			text-decoration: none;
+			color: $grey_4;
+			border-right: 1px solid $grey_1;
+
+			&:focus {
+				@include box-shadow( none );
 			}
 
-			&:last-child a {
-				border-top-right-radius: $radius;
-				border-bottom-right-radius: $radius;
-			}
-
-			a {
-				display: block;
-				position: relative;
-				background-color: $white;
-				font-size: 13px;
-				padding: $baseline/2 $gutter/1.5;
-				text-decoration: none;
-				color: $grey_4;
-				border-right: 1px solid $grey_1;
-
-				&:focus {
-					@include box-shadow( none );
-				}
-
-				&.ev-active {
-					font-weight: bold;
-					background-color: $green;
-					color: $white;
-				}
+			&.ev-active {
+				font-weight: bold;
+				background-color: $green;
+				color: $white;
 			}
 		}
 	}

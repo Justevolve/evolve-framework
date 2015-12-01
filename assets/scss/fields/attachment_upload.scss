@@ -23,16 +23,36 @@ $attachment_spreadsheet: "\f495";
 
 	.ev-remove-all-action {
 		float: right;
+		display: none;
+	}
+	.ev-upload-action {
+		float: left;
 	}
 
 	.ev-edit-action {
 		margin-right: $gutter/2;
+		display: none;
 	}
 }
 
 .ev-attachment-upload-container {
 	@include ui_input_standard;
 	padding: 0 $baseline/4;
+
+	&.ev-attachment-uploaded {
+		.ev-edit-action {
+			display: inline-block;
+			float: left;
+		}
+
+		.ev-remove-all-action {
+			display: inline-block;
+		}
+
+		.ev-upload-action {
+			display: none;
+		}
+	}
 }
 
 .ev-attachment-placeholder {

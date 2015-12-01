@@ -32,13 +32,29 @@ function ev_link_partial( $handle, $link ) {
 	$link_hidden_inputs .= sprintf( '<input data-link-rel type="hidden" value="%s" name="%s[rel]">', esc_attr( $rel ), esc_attr( $handle ) );
 	$link_hidden_inputs .= sprintf( '<input data-link-title type="hidden" value="%s" name="%s[title]">', esc_attr( $title ), esc_attr( $handle ) );
 
-	printf( '<span class="%s" data-nonce="%s" data-title="%s"><span class="screen-reader-text">%s</span>%s</span>',
+	printf( '<span class="%s" data-nonce="%s" data-title="%s">',
 		esc_attr( $link_class ),
 		esc_attr( wp_create_nonce( 'ev_link' ) ),
-		esc_attr( $url ),
-		esc_html( __( 'Link', 'ev_framework' ) ),
-		$link_hidden_inputs
+		esc_attr( $url )
 	);
+
+		ev_btn(
+			__( 'Link', 'ev_framework' ),
+			'confirm',
+			array(
+				'attrs' => array(
+					'class' => 'ev-link-ctrl-btn',
+				),
+				'size' => 'medium',
+				'icon' => 'evfw-link',
+				'style' => 'round',
+				'hide_text' => true
+			)
+		);
+
+		echo $link_hidden_inputs;
+
+	echo '</span>';
 }
 
 /**

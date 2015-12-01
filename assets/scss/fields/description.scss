@@ -1,33 +1,67 @@
 @import "../libs";
 
-// // -----------------------------------------------------------------------------
-// // $Field description
-// // -----------------------------------------------------------------------------
+$blue_medium : #B3D8E6;
+$blue_light  : #F7FCFE;
+$yellow_light: #F9E986;
 
-// .ev-field-description {
+// -----------------------------------------------------------------------------
+// $Field description
+// -----------------------------------------------------------------------------
 
-// 	// Standard message
-// 	&.ev-description-style-standard {
-// 		.ev-container {}
-// 	}
+.ev-field-description {
 
-// 	// Blue info notice
-// 	&.ev-description-style-info {
-// 		.ev-container {
-// 			padding: $baseline/1.5 $gutter;
-// 			border-radius: $radius;
-// 			background-color: $blue_light;
-// 			color: $blue_light_text;
-// 		}
-// 	}
+	.ev-container {
+		padding: $gutter;
+		border: 1px solid;
+		border-radius: $radius;
+	}
 
-// 	// Yellow important message
-// 	&.ev-description-style-important {
-// 		.ev-container {
-// 			padding: $baseline/1.5 $gutter;
-// 			border-radius: $radius;
-// 			background-color: $yellow_light;
-// 			color: $yellow_text;
-// 		}
-// 	}
-// }
+	// Standard message
+	&.ev-description-style-standard {
+		.ev-container {
+			background-color: $grey_0;
+			border-color: $grey_1;
+		}
+	}
+
+	// Blue info notice
+	&.ev-description-style-info {
+		.ev-container {
+			background-color: $blue_light;
+			border-color: $blue_medium;
+		}
+	}
+
+	// Yellow important message
+	&.ev-description-style-important {
+		.ev-container {
+			background-color: lightYellow;
+			border-color: $yellow_light;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Divider + description
+// -----------------------------------------------------------------------------
+
+.ev-field-divider.ev-divider-style-section_break + .ev-field-description {
+	padding-top: $baseline/2;
+	margin-top: -$baseline/2;
+	background-color: $grey_0;
+
+	&.ev-description-style-standard {
+		padding-top: 0;
+
+		.ev-container {
+			padding: 0;
+			border: none;
+			border-radius: none;
+			background-color: transparent;
+		}
+	}
+
+	.ev-field-inner-wrapper {
+		padding-top: 0;
+	}
+}

@@ -1,6 +1,6 @@
 @import "../libs";
 
-// States ----------------------------------------------------------------------
+// Mixins ----------------------------------------------------------------------
 
 @mixin btn_idle( $size, $color: $white ) {
 	&:before {
@@ -8,7 +8,7 @@
 		@include spinner( $size, 2px, $color );
 		@include opacity( 0 );
 		visibility: hidden;
-		// @include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
+		@include transition( opacity $transition_time*1.5 );
 	}
 
 	&.ev-btn-idle {
@@ -19,18 +19,13 @@
 	}
 }
 
-// ( 'notice', 'warning', 'success', 'error' ) // TODO: gestire ritorno
-
-// Success
-@mixin success_icon( $size ) {
+@mixin complete_icon( $size ) {
 	&:after {
-		content: "\f147"; // Valutare se necessario usare dashicon
-		font-family: $icons;
-		border-radius: 50%;
+		font-family: $fontello;
 		@include opacity( 0 );
 		visibility: hidden;
-		// @include transition( visibility $transition_time*1.5, opacity $transition_time*1.5 ease );
 		@include position( absolute, 50% null null null );
+		font-size: $size;
 		line-height: $size;
 		@include size( $size );
 		margin-top: -$size/2;
@@ -42,22 +37,84 @@
 			@include opacity( 100 );
 			visibility: visible;
 		}
+	}
+}
 
+@mixin message_icon() {
+	$success_icon : "\e800";
+	$error_icon   : "\e801";
+	$notice_icon  : "\e802";
+	$warning_icon : "\e803";
+
+	$success_color: $green;
+	$error_color  : $red;
+	$notice_color : $blue;
+	$warning_color: yellow;
+
+	&.ev-btn-complete {
+		// Success -------------------------------------------------------------
+		&.ev-btn-success {
+			&:after {
+				content: $success_icon;
+			}
+		}
+		// Error ---------------------------------------------------------------
+		&.ev-btn-error {
+			&:after {
+				content: $error_icon;
+			}
+		}
+		// Notice --------------------------------------------------------------
+		&.ev-btn-notice {
+			&:after {
+				content: $notice_icon;
+			}
+		}
+		// Warning -------------------------------------------------------------
+		&.ev-btn-warning {
+			&:after {
+				content: $warning_icon;
+			}
+		}
+
+		// ---------------------------------------------------------------------
+		// Styles --------------------------------------------------------------
+		// ---------------------------------------------------------------------
 		&.ev-btn-style-round,
 		&.ev-btn-style-button {
 			&:after {
-				color: $green;
-				background-color: $white;
+				color: $white;
 			}
 		}
 
 		&.ev-btn-style-text {
-			&:after {
-				color: $white;
-				background-color: $green;
+			// Success ---------------------------------------------------------
+			&.ev-btn-success {
+				&:after {
+					color: $success_color;
+				}
+			}
+			// Error -----------------------------------------------------------
+			&.ev-btn-error {
+				&:after {
+					color: $error_color;
+				}
+			}
+			// Notice ----------------------------------------------------------
+			&.ev-btn-notice {
+				&:after {
+					color: $notice_color;
+				}
+			}
+			// Warning ---------------------------------------------------------
+			&.ev-btn-warning {
+				&:after {
+					color: $warning_color;
+				}
 			}
 		}
 	}
+
 }
 
 // -----------------------------------------------------------------------------
@@ -71,6 +128,7 @@
 	border: none;
 	padding: 0;
 	background-color: transparent;
+	vertical-align: middle;
 
 	&:focus {
 		outline: none;
@@ -104,7 +162,9 @@
 		}
 	}
 
-	// Sizes -------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Sizes
+// -----------------------------------------------------------------------------
 
 	&.ev-btn-size-small {
 		line-height: $baseline;
@@ -126,7 +186,8 @@
 		&.ev-btn-type-confirm,
 		&.ev-btn-type-save {
 			@include btn_idle( 8px );
-			@include success_icon( 14px );
+			@include complete_icon( 14px );
+			@include message_icon();
 		}
 	}
 
@@ -150,7 +211,8 @@
 		&.ev-btn-type-confirm,
 		&.ev-btn-type-save {
 			@include btn_idle( 10px );
-			@include success_icon( 16px );
+			@include complete_icon( 18px );
+			@include message_icon();
 		}
 	}
 
@@ -174,11 +236,14 @@
 		&.ev-btn-type-confirm,
 		&.ev-btn-type-save {
 			@include btn_idle( 12px );
-			@include success_icon( 18px );
+			@include complete_icon( 22px );
+			@include message_icon();
 		}
 	}
 
-	// Styles ------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Styles
+// -----------------------------------------------------------------------------
 
 	&.ev-btn-style-text {
 		line-height: 1.25;
@@ -227,11 +292,11 @@
 				}
 
 				&.ev-btn-size-medium {
-					padding-right: $gutter/2 + 16px;
+					padding-right: $gutter/2 + 18px;
 				}
 
 				&.ev-btn-size-large {
-					padding-right: $gutter/2 + 18px;
+					padding-right: $gutter/2 + 22px;
 				}
 			}
 		}
@@ -242,10 +307,6 @@
 		color: $white;
 		border: 1px solid;
 		font-weight: bold;
-
-		i:before {
-			bottom: -1px;
-		}
 
 		&:hover {
 			@include box-shadow( #{$ui_el_shadow_hover} );
@@ -321,7 +382,10 @@
 					padding-right: $gutter + 8px + 4;
 				}
 
-				&.ev-btn-complete {
+				&.ev-btn-success,
+				&.ev-btn-error,
+				&.ev-btn-notice,
+				&.ev-btn-warning {
 					padding-right: $gutter + 12px;
 				}
 			}
@@ -346,8 +410,11 @@
 					padding-right: $gutter + 10px + 4;
 				}
 
-				&.ev-btn-complete {
-					padding-right: $gutter + 14px;
+				&.ev-btn-success,
+				&.ev-btn-error,
+				&.ev-btn-notice,
+				&.ev-btn-warning {
+					padding-right: $gutter + 18px;
 				}
 			}
 		}
@@ -371,14 +438,19 @@
 					padding-right: ($gutter*1.5 / 2)*2 + 12px + 4;
 				}
 
-				&.ev-btn-complete {
-					padding-right: ($gutter*1.5 / 2)*2 + 16px;
+				&.ev-btn-success,
+				&.ev-btn-error,
+				&.ev-btn-notice,
+				&.ev-btn-warning {
+					padding-right: ($gutter*1.5 / 2)*2 + 22px;
 				}
 			}
 		}
 	}
 
-	// Types -------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Types
+// -----------------------------------------------------------------------------
 
 	// Action ------------------------------------------------------------------
 	&.ev-btn-type-action {
@@ -439,12 +511,6 @@
 		&.ev-btn-style-text {
 			color: $green;
 		}
-	}
-
-	// TEMP
-	i[data-icon='f529']:before {
-		font-family: $icons;
-		content: "\f132";
 	}
 }
 
