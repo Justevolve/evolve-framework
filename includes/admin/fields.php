@@ -217,7 +217,7 @@ function ev_radio( $name, $data, $value = '', $style = '', $echo = true ) {
 
 	$new_style = implode( ' ', $new_style );
 
-	$graphic = $style == 'graphic';
+	$graphic = in_array( 'graphic', $style );
 
 	$html .= sprintf( '<span class="ev-radio-wrapper %s">', esc_attr( $new_style ) );
 
