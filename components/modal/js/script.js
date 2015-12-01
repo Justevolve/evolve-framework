@@ -45,7 +45,9 @@
 		var modals = $( ".ev-modal-container" );
 
 		if ( modals.length ) {
+			modals.last().data( "ev-modal" ).config.close();
 			modals.last().remove();
+
 			$( window ).trigger( "resize" );
 
 			if ( ! $( ".ev-modal-container" ).length ) {
@@ -65,8 +67,11 @@
 	 */
 	$.evf.modal = function( key, data, config ) {
 		config = $.extend( {
-			/* Callback function fired after the drawer transition starts. */
+			/* Callback function fired after the modal is saved. */
 			save: function() {},
+
+			/* Callback function fired after the modal is closed. */
+			close: function() {},
 
 			/* Additional CSS class to be passed to the modal container. */
 			class: "",
@@ -77,10 +82,14 @@
 
 		var self = this;
 
+		self.config = config;
+
 		/**
 		 * Close the modal.
 		 */
 		this.close = function() {
+			config.close();
+
 			$( ".ev-modal-container[data-key='" + key + "']" ).remove();
 			$( window ).trigger( "resize" );
 
@@ -133,13 +142,17 @@
 				html += '</div>';
 			html += '</div>';
 
+			html = $( html );
+
 			if ( ! $( "body" ).hasClass( "ev-modal-open" ) ) {
-				$( html ).appendTo( $( "body" ) );
+				html.appendTo( $( "body" ) );
 				$( "body" ).addClass( "ev-modal-open" );
 			}
 			else {
-				$( ".ev-modal-container" ).last().after( $( html ) );
+				$( ".ev-modal-container" ).last().after( html );
 			}
+
+			$( ".ev-modal-container" ).last().data( "ev-modal", self );
 
 			content(
 				$( origin + " .ev-modal-wrapper-inner" ),
