@@ -16,6 +16,9 @@
             };
 
         var modal = new $.evf.modal( key, data, {
+        	close: function() {
+        		$( window ).off( "keydown.ev_link" );
+        	},
 			save: function( data, after_save, nonce ) {
 				$( "[data-link-url]", ctrl_wrapper ).val( data["url"] );
 				$( "[data-link-target]", ctrl_wrapper ).val( data["target"] );
@@ -39,6 +42,16 @@
 
 			var origin = ".ev-modal-container[data-key='" + key + "']";
 			$( origin + " .ev-modal-wrapper" ).addClass( "ev-loading" );
+
+			$( window ).off( "keydown.ev_link" );
+			$( window ).on( "keydown.ev_link", function( e ) {
+				if ( e.which == 9 ) {
+					$( '.ev-modal-container[data-key="ev-link"]' ).addClass( 'ev-link-modal-expanded' );
+					$( window ).off( "keydown.ev_link" );
+
+					return false;
+				}
+			} );
 
 			$.post(
 				ajaxurl,
@@ -65,14 +78,6 @@
 		$( '.ev-modal-container[data-key="ev-link"]').addClass( 'ev-link-modal-expanded' );
 
 		return false;
-	} );
-
-	$( window ).on( "keydown.ev_link", function( e ) {
-		if ( e.which == 9 ) {
-			$( '.ev-modal-container[data-key="ev-link"]').addClass( 'ev-link-modal-expanded' );
-
-			return false;
-		}
 	} );
 
 } )( jQuery );
