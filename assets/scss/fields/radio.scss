@@ -50,6 +50,39 @@
 	+ .ev-radio {
 		margin-top: $baseline/2;
 	}
+
+// -----------------------------------------------------------------------------
+// $Graphic radio
+// -----------------------------------------------------------------------------
+
+	&.ev-graphic-radio {
+		float: left;
+		clear: none;
+
+		img {
+			display: block;
+			padding: 4px;
+			border: 4px solid $grey_1;
+			border-radius: $radius;
+		}
+
+		&:hover img {
+			border-color: $grey_3;
+		}
+
+		input {
+			display: none;
+
+			&:checked + img {
+				border-color: $green;
+			}
+		}
+
+		+ .ev-graphic-radio {
+			margin-left: $gutter/2;
+			margin-top: 0;
+		}
+	}
 }
 
 // -----------------------------------------------------------------------------
@@ -117,99 +150,3 @@
 		}
 	}
 }
-
-
-// .ev-radio {
-// 	display: block;
-
-// 	+ .ev-radio {
-// 		margin-top: $baseline/4;
-
-// 		@include ev_media( $media_tablet ) {
-// 			margin-top: $baseline/2;
-// 		}
-// 	}
-
-// 	&.ev-graphic-radio {
-// 		float: left;
-
-// 		img {
-// 			display: block;
-// 			padding: 4px;
-// 		}
-
-// 		input {
-// 			display: none;
-
-// 			&:checked + img {
-// 				border: 3px solid $blue_medium;
-// 				padding: 1px;
-// 				@include box-shadow( inset 0px 0px 0px 1px $white );
-// 			}
-// 		}
-
-// 		& + .ev-graphic-radio {
-// 			margin-left: $gutter/2;
-// 			margin-top: 0;
-// 		}
-// 	}
-// }
-
-// .ev-radio-style-switch {
-
-// 	.ev-radio {
-// 		display: inline-block;
-// 		color: $text_light;
-// 		position: relative;
-// 		padding: $baseline/4 $baseline/3;
-
-// 		input {
-// 			@include position( absolute, 0 0 0 0 );
-// 			border-radius: 0;
-// 			width: 100%;
-// 			height: 100%;
-// 			z-index: 0;
-// 			margin: 0;
-// 			border: none;
-// 			background-color: $border_color;
-// 			@include box-shadow( none );
-
-// 			&:checked {
-// 				background-color: $green;
-
-// 				+ span {
-// 					color: $white;
-// 				}
-
-// 				&:before {
-// 					display: none;
-// 				}
-// 			}
-
-// 			&:focus {
-// 				border-color: transparent;
-// 				@include box-shadow( none );
-// 			}
-// 		}
-
-// 		+ .ev-radio {
-// 			margin-top: 0;
-// 			margin-left: 1px;
-// 		}
-
-// 		span {
-// 			position: relative;
-// 			z-index: 1;
-// 		}
-
-// 		&:first-of-type input {
-// 			border-top-left-radius: 3px;
-// 			border-bottom-left-radius: 3px;
-// 		}
-
-// 		&:last-child input {
-// 			border-top-right-radius: 3px;
-// 			border-bottom-right-radius: 3px;
-// 		}
-// 	}
-// }
