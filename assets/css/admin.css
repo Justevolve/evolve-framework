@@ -271,6 +271,9 @@ body.ev-modal-open { overflow: hidden; }
 .ev-btn.ev-btn-style-text:hover { text-decoration: underline; }
 .ev-btn.ev-btn-style-text.ev-btn-type-confirm:before { border-top-color: #47AACC; border-left-color: #47AACC; }
 .ev-btn.ev-btn-style-text.ev-btn-type-save:before { border-top-color: #66CC66; border-left-color: #66CC66; }
+.ev-btn.ev-btn-style-text.ev-btn-size-small i { line-height: 15px; }
+.ev-btn.ev-btn-style-text.ev-btn-size-medium i { line-height: 16.25px; }
+.ev-btn.ev-btn-style-text.ev-btn-size-large i { line-height: 17.5px; }
 .ev-btn.ev-btn-style-text.ev-btn-type-confirm:after, .ev-btn.ev-btn-style-text.ev-btn-type-confirm:before, .ev-btn.ev-btn-style-text.ev-btn-type-save:after, .ev-btn.ev-btn-style-text.ev-btn-type-save:before { right: 0; }
 .ev-btn.ev-btn-style-text.ev-btn-type-confirm.ev-btn-idle.ev-btn-size-small, .ev-btn.ev-btn-style-text.ev-btn-type-save.ev-btn-idle.ev-btn-size-small { padding-right: 22px; }
 .ev-btn.ev-btn-style-text.ev-btn-type-confirm.ev-btn-idle.ev-btn-size-medium, .ev-btn.ev-btn-style-text.ev-btn-type-save.ev-btn-idle.ev-btn-size-medium { padding-right: 24px; }

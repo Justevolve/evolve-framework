@@ -265,6 +265,18 @@
 			}
 		}
 
+		&.ev-btn-size-small i {
+			line-height: 12px * 1.25;
+		}
+
+		&.ev-btn-size-medium i {
+			line-height: 13px * 1.25;
+		}
+
+		&.ev-btn-size-large i {
+			line-height: 14px * 1.25;
+		}
+
 		&.ev-btn-type-confirm,
 		&.ev-btn-type-save {
 			&:after,
