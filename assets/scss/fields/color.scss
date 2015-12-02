@@ -294,6 +294,13 @@
 
 .ev-color-default-presets {
 	border-top: 1px solid $grey_3;
+
+	h4 {
+		clear: both;
+		margin: 0;
+		padding-top: $baseline;
+		padding-bottom: $baseline;
+	}
 }
 
 .ev-color-preset {

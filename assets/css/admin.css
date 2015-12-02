@@ -394,6 +394,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-color-user-presets:after, .ev-color-default-presets:after { content: ""; display: table; clear: both; }
 
 .ev-color-default-presets { border-top: 1px solid #ccc; }
+.ev-color-default-presets h4 { clear: both; margin: 0; padding-top: 24px; padding-bottom: 24px; }
 
 .ev-color-preset { display: block; float: left; width: 48px; height: 48px; cursor: pointer; position: relative; }
 .ev-color-user-presets .ev-color-preset { margin-bottom: 10px; margin-right: 10px; }

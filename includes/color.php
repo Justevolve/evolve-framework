@@ -224,34 +224,3 @@ function ev_color_presets_modal_load() {
 }
 
 add_action( 'wp_ajax_ev_color_presets_modal_load', 'ev_color_presets_modal_load' );
-
-
-
-
-
-
-function ev_flat_ui_color_presets( $presets ) {
-	$presets['flat_ui'] = array(
-		'label' => 'Flat UI',
-		'presets' => array()
-	);
-
-	$presets['flat_ui']['presets'][] = array(
-		'hex' => '#1abc9c',
-		'label' => 'Turquoise'
-	);
-
-	$presets['flat_ui']['presets'][] = array(
-		'hex' => '#2ecc71',
-		'label' => 'Emerald'
-	);
-
-	$presets['flat_ui']['presets'][] = array(
-		'hex' => '#3498db',
-		'label' => 'Peter River'
-	);
-
-	return $presets;
-}
-
-add_filter( 'ev_color_presets', 'ev_flat_ui_color_presets' );
