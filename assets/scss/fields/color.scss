@@ -269,6 +269,13 @@
 	right: 25%;
 	top: 120px;
 	bottom: 120px;
+
+	.ev-color-presets-manager-wrapper {
+		@include position( absolute, 0 0 $modal_footer_height 0 );
+		@include box-sizing( border-box );
+		padding: 0 $gutter $baseline $gutter;
+		overflow-y: auto;
+	}
 }
 
 [data-color-presets] {
@@ -285,14 +292,71 @@
 	margin-bottom: $baseline;
 }
 
+.ev-color-default-presets {
+	border-top: 1px solid $grey_3;
+}
+
 .ev-color-preset {
 	display: block;
 	float: left;
 	@include size( $baseline*2 );
 	cursor: pointer;
+	position: relative;
+
+	.ev-color-user-presets & {
+		margin-bottom: $gutter/2;
+		margin-right: $gutter/2;
+	}
 
 	&.ev-selected {
-		@include opacity( 20 );
+		&:after {
+			content: "\e800";
+			font-family: $fontello;
+			@include position( absolute, 50% null null 50% );
+			font-size: 20px;
+			line-height: 26px;
+			@include size( 26px );
+			margin-top: -(26px/2);
+			margin-left: -(26px/2);
+			text-align: center;
+			color: $green;
+			border-radius: 50%;
+			background-color: $white;
+		}
+	}
+
+	&:hover {
+		.ev-color-default-presets & {
+			@include box-shadow( #{$ui_el_shadow_hover} );
+			z-index: 10;
+			position: relative;
+			@include transform( scale( 1.2 ) );
+		}
+
+		span[data-color-delete-preset] {
+			display: block;
+		}
+	}
+
+	span[data-color-delete-preset] {
+		display: none;
+		@include position( absolute, -4px -4px null null );
+		z-index: 10;
+
+		&:before {
+			cursor: pointer;
+			color: $grey_5;
+			@include icon( "\f153" );
+			@include size( 16px );
+			font-size: 16px;
+			line-height: 16px;
+			background-color: $white;
+			border-radius: 50%;
+		}
+
+		&:hover:before {
+			color: $red;
+		}
 	}
 }
 

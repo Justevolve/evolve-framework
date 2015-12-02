@@ -181,7 +181,7 @@ function ev_color_presets_modal_load() {
 
 				if ( ! empty( $user_presets ) ) {
 					foreach ( $user_presets as $index => $preset ) {
-						$content .= sprintf( '<span data-id="%s" class="ev-color-preset ev-tooltip" data-hex="%s" data-title="%s" style="background-color: %s"><span data-nonce="%s" data-color-delete-preset>%s</span></span>',
+						$content .= sprintf( '<span data-id="%s" class="ev-color-preset ev-tooltip" data-hex="%s" data-title="%s" style="background-color: %s"><span data-nonce="%s" data-color-delete-preset><span class="screen-reader-text">%s</span></span></span>',
 							isset( $preset['id'] ) ? esc_attr( $preset['id'] ) : '',
 							isset( $preset['hex'] ) ? esc_attr( $preset['hex'] ) : '',
 							isset( $preset['label'] ) ? esc_attr( $preset['label'] ) : '',

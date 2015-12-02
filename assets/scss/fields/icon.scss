@@ -65,11 +65,18 @@
 
 .ev-icon-sets-preview-wrapper {
 	border-top: 1px solid $grey_3;
-	height: 200px;
+	height: 300px;
 	width: 100%;
 	@include position( absolute, null 0 0 0 );
 	text-align: center;
-	padding-top: $baseline*2;
+	overflow: hidden;
+
+	.ev-selected-icon-preview {
+		line-height: 300px;
+		@include size( 100% );
+		display: block;
+		text-align: center;
+	}
 }
 
 .ev-icon-sets-preview-label {
