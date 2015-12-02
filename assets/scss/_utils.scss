@@ -155,36 +155,43 @@
 // -----------------------------------------------------------------------------
 
 @mixin vertical_tab_style {
+	.ev-tabs {
+		@include display( flex );
+	}
+
 	.ev-tabs-nav.ev-vertical {
-		width: 20%;
-		max-width: 220px;
-		margin-right: -1px;
-		z-index: 10;
-		position: relative;
+		margin-right: 0;
+		max-width: none;
+		background-color: $grey_6;
+		padding: $gutter $gutter/2;
+		width: 15%;
+		@include box-sizing( border-box );
 
 		li {
 			margin-bottom: 0;
 
 			a {
-				display: block;
-				position: relative;
-				background-color: $grey_1;
-				font-size: 13px;
-				padding: $baseline/2 $gutter/1.5;
+				color: rgba( $white, .5 );
+				background-color: transparent;
+				border: none;
+				border-radius: $radius;
+				padding: $gutter/2;
 				text-decoration: none;
-				color: $grey_4;
-				border-right: 1px solid $grey_3;
-				border-bottom: 1px solid $grey_3;
+				@include transition( none );
+				@include box-sizing( border-box );
 
 				&:focus {
 					@include box-shadow( none );
 				}
 
+				&:hover {
+					color: $white;
+					background-color: rgba( $white, .3 );
+				}
+
 				&.ev-active {
-					font-weight: bold;
-					background-color: $white;
-					border-right-color: $white;
-					color: $grey_6;
+					background-color: $blue;
+					color: $white;
 				}
 			}
 		}
@@ -196,7 +203,8 @@
 		border-top: 0;
 		position: relative;
 		z-index: 1;
-		overflow-y: auto;
+		width: 85%;
+		@include box-sizing( border-box );
 	}
 }
 

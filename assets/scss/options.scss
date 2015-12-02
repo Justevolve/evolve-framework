@@ -151,34 +151,16 @@
 		li {
 			margin-bottom: 0;
 
-			// &:first-child {
-			// 	a {
-			// 		border-top-right-radius: $radius;
-			// 		border-top-left-radius: $radius;
-			// 		border-top: 1px solid $grey_1;
-			// 	}
-			// }
-
-			// &:last-child {
-			// 	a {
-			// 		border-bottom-right-radius: $radius;
-			// 		border-bottom-left-radius: $radius;
-			// 	}
-			// }
-
 			a {
 				display: block;
 				position: relative;
-				// background-color: $white;
 				font-size: 13px;
 				padding: $baseline/2 $gutter/1.5;
 				text-decoration: none;
 				color: $grey_4;
-				// border-left: 1px solid $grey_1;
-				// border-right: 1px solid $grey_1;
-				// border-bottom: 1px solid $grey_2;
 				border-radius: $radius;
 				font-weight: bold;
+				@include transition( none );
 
 				&:focus {
 					@include box-shadow( none );
@@ -225,48 +207,7 @@
 .ev-metabox {
 	@include clearfix;
 	@include vertical_tab_style;
-
-	.ev-tabs {
-		@include display( flex );
-	}
-
-	.ev-tabs-nav.ev-vertical {
-		margin-right: 0;
-		max-width: none;
-		background-color: $grey_6;
-		padding: $gutter $gutter/2;
-		width: 15%;
-
-		li {
-			a {
-				color: rgba( $white, .5 );
-				background-color: transparent;
-				border: none;
-				border-radius: $radius;
-				padding: $gutter/2;
-
-				&:hover {
-					color: $white;
-					background-color: rgba( $white, .3 );
-				}
-
-				&.ev-active {
-					background-color: $blue;
-					color: $white;
-				}
-			}
-		}
-	}
-
-	.ev-tab-container {
-		overflow: visible;
-		width: 85%;
-	}
 }
-
-// .ev-tabs-nav.ev-vertical + .ev-tab-container {
-// 	border-left: 1px solid $grey_1;
-// }
 
 // -----------------------------------------------------------------------------
 // $Options tab container

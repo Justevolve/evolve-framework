@@ -90,7 +90,7 @@ body.ev-modal-open {
 			overflow-y: auto;
 			@include position( absolute, 0 auto 0 0 );
 			max-width: none;
-			width: 180px;
+			// width: 180px;
 			margin-right: 0;
 
 			@include ev-media( $media_mobile_small ) {
@@ -100,7 +100,7 @@ body.ev-modal-open {
 
 			+ .ev-tab-container {
 				overflow-y: auto;
-				@include position( absolute, 0 0 0 179px );
+				@include position( absolute, 0 0 0 null );
 
 				@include ev-media( $media_mobile_small ) {
 					position: relative;
@@ -210,6 +210,7 @@ body.ev-modal-open {
 	> .ev-tab-container {
 		@include position( absolute, ($modal_header_height + 1) 0 $modal_footer_height 0 );
 		overflow-y: auto;
+		width: auto;
 	}
 }
 

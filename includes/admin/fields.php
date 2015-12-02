@@ -296,8 +296,9 @@ function ev_checkbox( $name, $value, $style = '', $args = array(), $echo = true 
 
 	$html .= sprintf( '<span class="ev-checkbox-wrapper %s">', esc_attr( $new_style ) );
 		$html .= sprintf( '<input name="%s" type="hidden" value="0">', esc_attr( $name ) );
-		$html .= sprintf( '<input %s name="%s" type="checkbox" value="1" %s>',
-			esc_attr( $args ),
+		$html .= sprintf( '<input %s id="%s" name="%s" type="checkbox" value="1" %s>',
+			implode( ' ', array_map( 'esc_attr', $args ) ),
+			esc_attr( $name ),
 			esc_attr( $name ),
 			esc_attr( $checked )
 		);

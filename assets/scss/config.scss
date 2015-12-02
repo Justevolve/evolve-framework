@@ -22,13 +22,13 @@ $fontello: "evframework";
 
 // Colors
 
-$white  : #fff;
+$white  : #fff; // Input background focus
 $black  : #000;
 
-$grey_0 : #fafafa;
-$grey_1 : #f0f0f0;
-$grey_2 : #f2f2f2;
-$grey_3 : #ccc;
+$grey_0 : #fafafa; // Input background standard
+$grey_1 : #f0f0f0; // Input border standard
+$grey_2 : #f2f2f2; // Input border focus, Input background hover
+$grey_3 : #ccc; // Input border hover
 $grey_4 : #999; // Text light
 $grey_5 : #666;
 $grey_6 : #333; // Text
