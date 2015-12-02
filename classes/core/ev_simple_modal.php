@@ -55,12 +55,25 @@ class Ev_SimpleModal {
 			echo $content;
 
 			echo '<div class="ev-modal-footer">';
-				printf( '<div class="ev-btn ev-save" data-nonce="%s">', esc_attr( $this->_config['button_nonce'] ) );
-					echo '<input type="submit" value="">';
-					printf( '<span class="ev-btn-action">%s</span>',
-						esc_html( $this->_config['button'] )
-					);
-				echo '</div>';
+				ev_btn(
+					$this->_config['button'],
+					'confirm',
+					array(
+						'attrs' => array(
+							'data-nonce' => $this->_config['button_nonce'],
+							'class' => 'ev-save'
+						),
+						'size' => 'medium'
+					)
+				);
+
+
+				// printf( '<div class="ev-btn ev-save" data-nonce="%s">', esc_attr( $this->_config['button_nonce'] ) );
+				// 	echo '<input type="submit" value="">';
+				// 	printf( '<span class="ev-btn-action">%s</span>',
+				// 		esc_html( $this->_config['button'] )
+				// 	);
+				// echo '</div>';
 			echo '</div>';
 		echo '</form>';
 	}

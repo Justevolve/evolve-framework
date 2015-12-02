@@ -61,6 +61,8 @@
 					$( origin + " .ev-modal-wrapper" ).removeClass( "ev-loading" );
 					content.html( response );
 
+					$( "[data-icon-search]", content ).focus();
+
 					setTimeout( function() {
 						$.evf.ui.build();
 					}, 1 );
