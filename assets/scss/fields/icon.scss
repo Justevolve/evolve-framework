@@ -52,241 +52,166 @@
 	}
 }
 
-// .ev-selected-icon-wrapper {
-// 	position: relative;
-// 	@include size( $baseline*2 );
-// 	border: 1px solid $border_color;
-// 	float: left;
-// 	text-align: center;
-// 	cursor: pointer;
+// Icon modal
 
-// 	&:after {
-// 		content: "";
-// 		display: block;
-// 		@include position( absolute, 0 0 0 0 );
-// 	}
+.ev-icon-sets-controls-external-wrapper {
+	@include position( absolute, 0 null $modal_footer_height 0 );
+	width: 300px;
+}
 
-// 	&:hover {
-// 		border-color: $blue_medium;
+.ev-icon-sets-controls-wrapper {
+	padding: $baseline $gutter/2;
+}
 
-// 		&:after {
-// 			border: 1px solid $blue_medium;
-// 		}
-// 	}
+.ev-icon-sets-preview-wrapper {
+	border-top: 1px solid $grey_3;
+	height: 300px;
+	width: 100%;
+	@include position( absolute, null 0 0 0 );
+}
 
-// 	.ev-icon {
-// 		font-size: 24px;
-// 		line-height: $baseline*2;
-// 	}
+.ev-icon-sets-preview-label {
+	text-transform: uppercase;
+	color: $grey_4;
+	@include position( absolute, $baseline/2 null null $gutter/2 );
+	font-size: 12px;
+}
 
-// 	&.ev-empty {
-// 		background-color: $grey_light_2;
+.ev-icon-sets-inner-wrapper {
+	@include position( absolute, 0 0 0 300px );
+	@include box-shadow( -1px 0 0 $grey_3 );
 
-// 		&:before {
-// 			content: "";
-// 			display: block;
-// 			@include size( 24px );
-// 			border: 2px dashed $grey_light;
-// 			margin-top: 10px;
-// 			margin-left: 10px;
-// 		}
-// 		.ev-icon-remove {
-// 			display: none;
-// 		}
-// 	}
+	> h2 {
+		padding: 0 $baseline;
+		line-height: $modal_header_height;
+		margin: 0;
+		color: $grey_4;
+		border-bottom: 1px solid $grey_3;
+	}
+}
 
-// 	.ev-icon-remove {
-// 		cursor: pointer;
-// 		display: block;
+.ev-icon-sets-controls-field-wrapper {
 
-// 		&:before {
-// 			@extend %remove_icon;
-// 			background-color: $white;
-// 			border-radius: 50%;
-// 			@include position( absolute, -3px -3px null null );
-// 		}
-// 	}
+	+ * {
+		margin-top: $baseline;
+	}
 
-// 	&.ev-empty .ev-icon-remove {
-// 		display: none;
-// 	}
+	label {
+		font-weight: bold;
+		font-size: 14px;
+		color: $grey_6;
+		cursor: default;
+		display: block;
+		margin-bottom: $baseline/4;
+	}
+}
 
-// 	&:hover {
-// 		.ev-icon-remove {
-// 			&:before {
-// 				@include opacity( 100 );
-// 			}
+.ev-modal-container[data-key="ev-icon"] {
+	.ev-modal-footer {
+		width: 300px;
+		right: auto;
+		background-color: transparent;
+	}
+}
 
-// 			&:hover {
-// 				&:before {
-// 					color: darken( $red, 20 );
-// 				}
-// 			}
-// 		}
-// 	}
-// }
+.ev-icon-search-wrapper {
+	background-color: $grey_1;
+	height: $modal_header_height;
+	position: relative;
 
-// // Icon modal
+	input {
+		background-color: transparent;
+		width: 100%;
+		line-height: $modal_header_height;
+		padding: 0 $gutter/2;
+		border: none;
+		@include box-shadow( none );
+		@include transition( none );
+		margin: 0;
+		border-bottom: 1px solid $grey_3;
 
-// .ev-icon-sets-controls-external-wrapper {
-// 	@include position( absolute, 0 null $modal_footer_height 0 );
-// 	width: 300px;
-// }
+		&:focus {
+			border: none;
+			border-bottom: 1px solid $grey_3;
+			background-color: $white;
+			@include box-shadow( none );
+		}
+	}
+}
 
-// .ev-icon-sets-controls-wrapper {
-// 	padding: $baseline $gutter/2;
-// }
+.ev-icon-search-results {
+	font-size: 11px;
+	display: none;
+	position: absolute;
+	top: 100%;
+	right: 0;
+	background-color: $blue;
+	color: $white;
+	margin: -10px 0 0 0;
+	padding: 2px 6px;
 
-// .ev-icon-sets-preview-wrapper {
-// 	border-top: 1px solid $border_color;
-// 	height: 300px;
-// 	width: 100%;
-// 	@include position( absolute, null 0 0 0 );
-// }
+	&.ev-search-icon-results-visible {
+		display: block;
+	}
+}
 
-// .ev-icon-sets-preview-label {
-// 	text-transform: uppercase;
-// 	color: $text_light;
-// 	@include position( absolute, $baseline/2 null null $gutter/2 );
-// 	font-size: 12px;
-// }
+$icn: 24;
+$icon_size: $icn + ( $baseline/2 * 2 );
 
-// .ev-icon-sets-inner-wrapper {
-// 	@include position( absolute, 0 0 0 300px );
-// 	@include box-shadow( -1px 0 0 $border_color );
+.ev-icon-set-select-wrapper {
+	position: relative;
+	clear: both;
+	background-color: $grey_2;
+	padding: $baseline/2 $baseline;
+	float: left;
+	width: 100%;
+	@include box-sizing( border-box );
+	z-index: 1;
+}
 
-// 	> h2 {
-// 		padding: 0 $baseline;
-// 		line-height: $modal_header_height;
-// 		margin: 0;
-// 		color: $text_light;
-// 		border-bottom: 1px solid $border_color;
-// 	}
-// }
+.ev-icon-sets {
+	clear: both;
+	@include clearfix;
+	@include position( absolute, 60px 0 0 0 );
+	overflow-y: auto;
 
-// .ev-icon-sets-controls-field-wrapper {
+	> div {
+		clear: both;
+		@include clearfix;
+		padding: $baseline;
 
-// 	+ * {
-// 		margin-top: $baseline;
-// 	}
+		> h2 {
+			padding-bottom: $baseline/2;
+			border-bottom: 1px solid $grey_1;
+		}
+	}
 
-// 	label {
-// 		font-weight: bold;
-// 		font-size: 14px;
-// 		color: $text;
-// 		cursor: default;
-// 		display: block;
-// 		margin-bottom: $baseline/4;
-// 	}
-// }
+	i {
+		@include box-sizing( border-box );
+		float: left;
+		padding: $baseline/2;
+		font-size: #{$icn}px;
+		cursor: pointer;
+		line-height: 1;
+		@include size( $icon_size );
+		margin: 0;
+		text-align: center;
 
-// .ev-modal-container[data-key="ev-icon"] {
-// 	.ev-modal-footer {
-// 		width: 300px;
-// 		right: auto;
-// 		background-color: transparent;
-// 	}
-// }
+		&:hover {
+			background-color: $grey_2;
+		}
 
-// .ev-icon-search-wrapper {
-// 	background-color: $grey_light;
-// 	height: $modal_header_height;
-// 	position: relative;
+		&.ev-selected {
+			background-color: $blue;
+			color: $white;
+		}
+	}
 
-// 	input {
-// 		background-color: transparent;
-// 		width: 100%;
-// 		line-height: $modal_header_height;
-// 		padding: 0 $gutter/2;
-// 		border: none;
-// 		@include box-shadow( none );
-// 		@include transition( none );
-// 		margin: 0;
-// 		border-bottom: 1px solid $border_color;
+	&.ev-searching i {
+		display: none;
 
-// 		&:focus {
-// 			border: none;
-// 			border-bottom: 1px solid $border_color;
-// 			background-color: $white;
-// 			@include box-shadow( none );
-// 		}
-// 	}
-// }
-
-// .ev-icon-search-results {
-// 	@extend %label;
-// 	font-size: 11px;
-// 	display: none;
-// 	position: absolute;
-// 	top: 100%;
-// 	right: 0;
-// 	background-color: $blue_medium;
-// 	color: $white;
-// 	margin: -10px 0 0 0;
-// 	padding: 2px 6px;
-
-// 	&.ev-search-icon-results-visible {
-// 		display: block;
-// 	}
-// }
-
-// $icn: 24;
-// $icon_size: $icn + ( $baseline/2 * 2 );
-
-// .ev-icon-set-select-wrapper {
-// 	position: relative;
-// 	clear: both;
-// 	background-color: $grey_light_2;
-// 	padding: $baseline/2 $baseline;
-// 	float: left;
-// 	width: 100%;
-// 	@include box-sizing( border-box );
-// 	z-index: 1;
-// }
-
-// .ev-icon-sets {
-// 	clear: both;
-// 	@include clearfix;
-// 	@include position( absolute, 60px 0 0 0 );
-// 	overflow-y: auto;
-
-// 	> div {
-// 		clear: both;
-// 		@include clearfix;
-// 		padding: $baseline;
-
-// 		> h2 {
-// 			padding-bottom: $baseline/2;
-// 			border-bottom: 1px solid $grey_light;
-// 		}
-// 	}
-
-// 	i {
-// 		@include box-sizing( border-box );
-// 		float: left;
-// 		padding: $baseline/2;
-// 		font-size: #{$icn}px;
-// 		cursor: pointer;
-// 		line-height: 1;
-// 		@include size( $icon_size );
-// 		margin: 0;
-// 		text-align: center;
-
-// 		&:hover {
-// 			background-color: $grey_light_1;
-// 		}
-
-// 		&.ev-selected {
-// 			background-color: $blue_medium;
-// 			color: $white;
-// 		}
-// 	}
-
-// 	&.ev-searching i {
-// 		display: none;
-
-// 		&.ev-found {
-// 			display: block;
-// 		}
-// 	}
-// }
+		&.ev-found {
+			display: block;
+		}
+	}
+}
