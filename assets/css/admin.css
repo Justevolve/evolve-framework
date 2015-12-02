@@ -385,7 +385,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev .minicolors-inline .minicolors-panel { position: relative; top: auto; left: auto; box-shadow: none; z-index: auto; display: inline-block; }
 
 [data-key="ev-color-presets"] .ev-modal-wrapper { left: 25%; right: 25%; top: 120px; bottom: 120px; }
-[data-key="ev-color-presets"] .ev-modal-wrapper .ev-color-presets-manager-wrapper { position: absolute; top: 0; right: 0; bottom: 62px; left: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding: 0 20px 24px 20px; overflow-y: auto; }
+[data-key="ev-color-presets"] .ev-modal-wrapper .ev-color-presets-manager-wrapper { position: absolute; top: 1px; right: 0; bottom: 62px; left: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding: 0 20px 24px 20px; overflow-y: auto; }
 
 [data-color-presets] { display: none; }
 .ev-has-color-presets [data-color-presets] { display: inline-block; }
@@ -433,7 +433,7 @@ body.ev-modal-open { overflow: hidden; }
 
 .ev-icon-sets-controls-external-wrapper { position: absolute; top: 49px; bottom: 62px; left: 0; width: 300px; }
 
-.ev-icon-sets-controls-wrapper { padding: 24px 10px; }
+.ev-icon-sets-controls-wrapper { padding: 24px 20px; }
 
 .ev-icon-sets-preview-wrapper { border-top: 1px solid #ccc; height: 300px; width: 100%; position: absolute; right: 0; bottom: 0; left: 0; text-align: center; overflow: hidden; }
 .ev-icon-sets-preview-wrapper .ev-selected-icon-preview { line-height: 300px; width: 100%; height: 100%; display: block; text-align: center; }

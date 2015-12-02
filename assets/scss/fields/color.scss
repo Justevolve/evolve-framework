@@ -271,7 +271,7 @@
 	bottom: 120px;
 
 	.ev-color-presets-manager-wrapper {
-		@include position( absolute, 0 0 $modal_footer_height 0 );
+		@include position( absolute, 1px 0 $modal_footer_height 0 );
 		@include box-sizing( border-box );
 		padding: 0 $gutter $baseline $gutter;
 		overflow-y: auto;
