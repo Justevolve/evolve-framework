@@ -104,8 +104,8 @@ $image_upload_size: $gutter*4;
 			}
 
 			.ui-sortable-placeholder {
-				border-color: $grey_2;
-				background-color: $grey_2;
+				border-color: $grey_3;
+				background-color: $grey_3;
 			}
 
 			.ui-sortable-helper {
@@ -136,7 +136,6 @@ $image_upload_size: $gutter*4;
 	.ev-image-uploaded & {
 		@include size( auto );
 		margin-right: $gutter/4;
-		border-color: $white;
 
 		&:last-child {
 			margin-right: 0;
