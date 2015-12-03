@@ -49,12 +49,12 @@
 	}
 
 	+ div {
-		border-top: 1px solid #EBEBEB;
+		border-top: 1px solid $grey_1;
 		margin-top: $baseline*2;
 	}
 
 	+ .ev-admin-page-group-nav {
-		border-top: 1px solid $grey_0;
+		border-top: 1px solid #ebebeb;
 		margin-top: 0;
 	}
 }
@@ -70,7 +70,7 @@
 	margin-right: -40px;
 	padding-left: 40px;
 	padding-right: 40px;
-	border-bottom: 1px solid #EBEBEB;
+	border-bottom: 1px solid $grey_1;
 
 	ul {
 		font-size: 0.01em;
@@ -195,7 +195,7 @@
 	}
 
 	.ev-tab-container {
-		border: 1px solid #EBEBEB;
+		border: 1px solid $grey_1;
 		border-radius: $radius;
 	}
 }
@@ -289,7 +289,7 @@
 	@include box-sizing( content-box );
 	position: relative;
 	top: 1px;
-	background: #EBEBEB;
+	background: $grey_1;
 	color: #777;
 	cursor: pointer;
 	font: 13px/19px "Open Sans", sans-serif;

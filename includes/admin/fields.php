@@ -233,9 +233,9 @@ function ev_radio( $name, $data, $value = '', $style = '', $echo = true ) {
 			$class = 'ev-graphic-radio';
 		}
 
-		$html .= sprintf( '<label class="ev-radio %s">', esc_attr( $class ) );
-			$html .= sprintf( '<input name="%s" type="radio" value="%s" %s>', esc_attr( $name ), esc_attr( $k ), esc_attr( $checked ) );
+		$html .= sprintf( '<input id="%s" name="%s" type="radio" value="%s" %s>', esc_attr( $name ) . '-' . esc_attr( $k ), esc_attr( $name ), esc_attr( $k ), esc_attr( $checked ) );
 
+		$html .= sprintf( '<label for="%s" class="ev-radio %s">', esc_attr( $name ) . '-' . esc_attr( $k ), esc_attr( $class ) );
 			if ( $graphic ) {
 				$image = $v;
 				$label = '';
@@ -302,6 +302,7 @@ function ev_checkbox( $name, $value, $style = '', $args = array(), $echo = true 
 			esc_attr( $name ),
 			esc_attr( $checked )
 		);
+		$html .= sprintf( '<label for="%s"></label>', esc_attr( $name ) );
 	$html .= '</span>';
 
 	if ( $echo ) {
@@ -363,15 +364,43 @@ function ev_color( $name, $value, $opacity = false, $style = '', $echo = true ) 
 
 		$html .= '<div class="ev-color-controls-wrapper">';
 
-			$html .= sprintf( '<a href="#" data-color-presets data-nonce="%s">%s</a>',
-				esc_attr( wp_create_nonce( 'ev_color_presets' ) ),
-				esc_html( __( 'Presets', 'ev_framework' ) )
+			$html .= ev_btn(
+				__( 'Presets', 'ev_framework' ),
+				'action',
+				array(
+					'attrs' => array(
+						'data-color-presets' => '',
+						'data-nonce' => wp_create_nonce( 'ev_color_presets' ),
+					),
+					'style'     => 'text',
+					'size' => 'medium',
+					'echo'	=> false
+				)
 			);
 
-			$html .= sprintf( '<a href="#" data-color-save-preset data-nonce="%s">%s</a>',
-				esc_attr( wp_create_nonce( 'ev_color_save_preset' ) ),
-				esc_html( _x( 'Save', 'save color preset', 'ev_framework' ) )
+			$html .= ev_btn(
+				_x( 'Save', 'save color preset', 'ev_framework' ),
+				'confirm',
+				array(
+					'attrs' => array(
+						'data-color-save-preset' => '',
+						'data-nonce' => wp_create_nonce( 'ev_color_save_preset' ),
+					),
+					'style'     => 'text',
+					'size' => 'medium',
+					'echo'	=> false
+				)
 			);
+
+			// $html .= sprintf( '<a href="#" data-color-presets data-nonce="%s">%s</a>',
+			// 	esc_attr( wp_create_nonce( 'ev_color_presets' ) ),
+			// 	esc_html( __( 'Presets', 'ev_framework' ) )
+			// );
+
+			// $html .= sprintf( '<a href="#" data-color-save-preset data-nonce="%s">%s</a>',
+			// 	esc_attr( wp_create_nonce( 'ev_color_save_preset' ) ),
+			// 	esc_html( _x( 'Save', 'save color preset', 'ev_framework' ) )
+			// );
 
 		$html .= '</div>';
 

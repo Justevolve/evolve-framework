@@ -92,7 +92,7 @@
 					id: ev_framework.color.presets.length + 1
 				},
 				function( response ) {
-					ev_framework.color.presets.push( {
+					ev_framework.color.presets.user.push( {
 						user: true,
 						hex: hex,
 						label: preset_name

@@ -30,7 +30,7 @@
 	/**
 	 * Destroy all tooltips;
 	 */
-	function ev_seek_and_destroy_tooltips() {
+	window.ev_seek_and_destroy_tooltips = function() {
 		$( "." + tooltip_container ).remove();
 	};
 

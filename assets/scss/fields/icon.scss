@@ -45,10 +45,32 @@
 		}
 	}
 
-	.ev-icon-remove {}
+	.ev-icon-remove {
+		text-decoration: none;
+		display: none;
+		@include position( absolute, -4px -4px null null );
+		z-index: 10;
 
-	&:hover {
-		.ev-icon-remove {}
+		&:before {
+			cursor: pointer;
+			color: $grey_5;
+			@include icon( "\f153" );
+			@include size( 16px );
+			font-size: 16px;
+			line-height: 16px;
+			background-color: $white;
+			border-radius: 50%;
+		}
+
+		&:hover:before {
+			color: $red;
+		}
+	}
+
+	&:hover:not( .ev-empty ) {
+		.ev-icon-remove {
+			display: block;
+		}
 	}
 }
 
@@ -64,7 +86,7 @@
 }
 
 .ev-icon-sets-preview-wrapper {
-	border-top: 1px solid $grey_3;
+	border-top: 1px solid $grey_1;
 	height: 300px;
 	width: 100%;
 	@include position( absolute, null 0 0 0 );
@@ -88,14 +110,14 @@
 
 .ev-icon-sets-inner-wrapper {
 	@include position( absolute, ( $modal_header_height + 1px ) 0 0 300px );
-	@include box-shadow( -1px 0 0 $grey_3 );
+	@include box-shadow( -1px 0 0 $grey_1 );
 
 	> h2 {
 		padding: 0 $baseline;
 		line-height: $modal_header_height;
 		margin: 0;
 		color: $grey_4;
-		border-bottom: 1px solid $grey_3;
+		border-bottom: 1px solid $grey_1;
 	}
 }
 
@@ -137,7 +159,7 @@
 		@include box-shadow( none );
 		@include transition( none );
 		margin: 0;
-		border-bottom: 1px solid $grey_3;
+		border-bottom: 1px solid $grey_1;
 		border-radius: 0;
 		font-size: 16px;
 		font-weight: bold;

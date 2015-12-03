@@ -6,6 +6,18 @@
 
 .ev-radio-wrapper {
 	@include clearfix;
+
+	input[type="radio"] {
+		display: none;
+	}
+
+	label {
+		margin-top: $baseline/4;
+
+		&:first-of-type {
+			margin-top: 0;
+		}
+	}
 }
 
 .ev-radio {
@@ -14,30 +26,38 @@
 	float: left;
 	clear: both;
 
-	input[type="radio"] {
+	&:before {
 		@include ui_input_standard;
 		@include size( $baseline );
 		border-radius: 50%;
 		@include box-shadow( none );
 		margin-right: $gutter/2;
 		float: left;
+		display: block;
+		content: "";
+		@include box-sizing( border-box );
+	}
 
+	&:hover {
 		&:before {
+			@include ui_input_hover;
+		}
+	}
+
+	input[type="radio"]:checked + & {
+		&:before {
+			border-color: $green;
+			background-color: $green;
+		}
+
+		&:after {
 			content: "";
 			@include size( 10px );
 			background-color: $white;
 			border-radius: 50%;
 			@include box-shadow( #{$ui_el_shadow} );
 			margin: $baseline/4;
-		}
-
-		&:hover {
-			@include ui_input_hover;
-		}
-
-		&:checked {
-			border-color: $green;
-			background-color: $green;
+			@include position( absolute, 1px null null 1px );
 		}
 	}
 
@@ -58,6 +78,13 @@
 	&.ev-graphic-radio {
 		float: left;
 		clear: none;
+		margin-right: $gutter/2;
+		margin-top: 0;
+
+		&:before,
+		&:after {
+			display: none;
+		}
 
 		img {
 			display: block;
@@ -70,18 +97,19 @@
 			border-color: $grey_3;
 		}
 
-		input {
-			display: none;
-
-			&:checked + img {
+		input[type="radio"]:checked + & {
+			img {
 				border-color: $green;
 			}
 		}
 
-		+ .ev-graphic-radio {
-			margin-left: $gutter/2;
-			margin-top: 0;
-		}
+		// input {
+		// 	display: none;
+
+		// 	&:checked + img {
+		// 		border-color: $green;
+		// 	}
+		// }
 	}
 }
 
@@ -91,27 +119,25 @@
 
 .ev-radio-style-switch {
 	display: inline-block;
+	position: relative;
+
+	input[type="radio"]:checked + .ev-radio {
+		span {
+			color: $white;
+			border-color: $green;
+			background-color: $green;
+		}
+	}
 
 	.ev-radio {
 		float: none;
 		clear: none;
+		margin-top: 0;
+		margin-right: $gutter/4;
 
-		input[type="radio"] {
-			border-radius: 0;
-			@include position( absolute, 0 0 0 0 );
-			@include size( 100% );
-			z-index: 0;
-			margin: 0;
-
-			&:before {
-				display: none;
-			}
-
-			&:checked {
-				+ span {
-					color: $white;
-				}
-			}
+		&:before,
+		&:after {
+			display: none;
 		}
 
 		span {
@@ -121,21 +147,25 @@
 			font-size: $main_fsz;
 			line-height: $baseline;
 			padding: $baseline/4+1 $gutter/2;
+			@include ui_input_standard;
 		}
 
-		+ .ev-radio {
-			margin-top: 0;
-			margin-left: $gutter/5;
+		&:hover span {
+			@include ui_input_hover;
 		}
 
-		&:first-of-type input {
+		&:first-of-type span {
 			border-top-left-radius: $radius;
 			border-bottom-left-radius: $radius;
 		}
 
-		&:last-child input {
-			border-top-right-radius: $radius;
-			border-bottom-right-radius: $radius;
+		&:last-child {
+			margin-right: 0;
+
+			span {
+				border-top-right-radius: $radius;
+				border-bottom-right-radius: $radius;
+			}
 		}
 	}
 

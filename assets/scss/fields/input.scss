@@ -16,6 +16,7 @@
 		@include ui_input_standard;
 		font-size: $main_fsz;
 		@include box-shadow( none );
+		@include box-sizing( border-box );
 		margin: 0;
 		line-height: $baseline;
 		padding: $baseline/4 $gutter/2;

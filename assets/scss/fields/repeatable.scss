@@ -106,8 +106,30 @@
 
 	// Empty state
 	&.ev-no-fields {
+		.ev-container-repeatable-inner-wrapper {
+			border-style: dashed;
+
+			&:hover {
+				border-color: $blue;
+			}
+		}
+
 		.ev-empty-state {
 			display: block;
+			text-align: center;
+
+			a {
+				padding: $baseline/2 0;
+				display: block;
+
+				&:focus {
+					@include box-shadow( none );
+				}
+			}
+		}
+
+		.ev-repeat-remove-all {
+			display: none;
 		}
 	}
 

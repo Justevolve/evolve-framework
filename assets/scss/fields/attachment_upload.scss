@@ -87,6 +87,7 @@ $attachment_spreadsheet: "\f495";
 			display: block;
 			font-weight: bold;
 			font-size: $main_fsz;
+			-webkit-font-smoothing: antialiased;
 		}
 
 		.ev-attachment-extension {
