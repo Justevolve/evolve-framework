@@ -16,7 +16,7 @@ function ev_link_partial( $handle, $link ) {
 	}
 
 	$handle .= '[link]';
-	$link_class = 'ev-link-ctrl ev-tooltip';
+	$link_class = 'ev-link-ctrl';
 
 	if ( isset( $link['url'] ) && ! empty( $link['url'] ) ) {
 		$link_class .= ' ev-link-on';
@@ -32,10 +32,9 @@ function ev_link_partial( $handle, $link ) {
 	$link_hidden_inputs .= sprintf( '<input data-link-rel type="hidden" value="%s" name="%s[rel]">', esc_attr( $rel ), esc_attr( $handle ) );
 	$link_hidden_inputs .= sprintf( '<input data-link-title type="hidden" value="%s" name="%s[title]">', esc_attr( $title ), esc_attr( $handle ) );
 
-	printf( '<span class="%s" data-nonce="%s" data-title="%s">',
+	printf( '<span class="%s" data-nonce="%s">',
 		esc_attr( $link_class ),
-		esc_attr( wp_create_nonce( 'ev_link' ) ),
-		esc_attr( $url )
+		esc_attr( wp_create_nonce( 'ev_link' ) )
 	);
 
 		ev_btn(
@@ -80,13 +79,23 @@ function ev_link_modal_load() {
 
 	$content = '';
 	$content .= '<div class="ev-link-url-wrapper">';
-	   $content .= sprintf( '<input type="text" name="url" value="%s" placeholder="URL">', esc_attr( $url ) );
+		$content .= sprintf( '<select name="url" data-nonce="%s">', esc_attr( wp_create_nonce( 'ev_link_search_entries' ) ) );
+
+		if ( $url != '' ) {
+			$content .= sprintf( '<option value="%s" data-data="%s" selected></option>',
+				esc_attr( $url ),
+				htmlspecialchars( json_encode( ev_find_single_entry( $url ) ), ENT_QUOTES, 'UTF-8' )
+			);
+		}
+
+		$content .= '</select>';
+
 		$content .= sprintf( '<span class="ev-link-trigger"><span>%s</span></span>', esc_html( __( 'Tab', 'ev_framework' ) ) );
 	$content .= '</div>';
 
 	$content .= '<div class="ev-link-inner-wrapper">';
 		$content .= '<div class="ev-link-radio-wrapper">';
-			$content .= sprintf( '<p>%s</p>', esc_html( __( 'Open in tab', 'ev_framework' ) ) );
+			$content .= sprintf( '<p>%s</p>', esc_html( __( 'Open in', 'ev_framework' ) ) );
 			$content .= ev_radio(
 				'target',
 				array(
@@ -136,6 +145,10 @@ function ev_link( $data, $content, $echo = true ) {
 	$rel    = isset( $data['rel'] ) ? $data['rel'] : '';
 	$title  = isset( $data['title'] ) ? $data['title'] : '';
 
+	if ( is_numeric( $url ) ) {
+		$url = get_permalink( $url );
+	}
+
 	$link = sprintf( '<a href="%s"', esc_attr( $url ) );
 
 	if ( $target ) {
@@ -159,4 +172,71 @@ function ev_link( $data, $content, $echo = true ) {
 	}
 
 	return $content;
+}
+
+/**
+ * Search entries.
+ *
+ * @since 0.4.0
+ */
+function ev_link_search_entries() {
+	if ( empty( $_POST ) || ! isset( $_POST['search'] ) ) {
+		die( json_encode( array() ) );
+	}
+
+	$nonce = isset( $_POST['nonce'] ) ? $_POST['nonce'] : '';
+	$action = 'ev_link_search_entries';
+	$is_valid_nonce = wp_verify_nonce( $nonce, $action );
+
+	if ( ! $is_valid_nonce ) {
+		die( json_encode( array() ) );
+	}
+
+	$args = array(
+		'post_type' => 'any',
+		'post_status' => 'publish',
+		'posts_per_page' => 10
+	);
+
+	$args['s'] = sanitize_text_field( $_POST['search'] );
+	$results = array();
+	$query = new WP_Query( $args );
+
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+
+			$results[] = array(
+				'id' => get_the_ID(),
+				'text' => html_entity_decode( get_the_title() )
+			);
+		}
+	}
+
+	die( json_encode( $results ) );
+}
+
+add_action( 'wp_ajax_ev_link_search_entries', 'ev_link_search_entries' );
+
+/**
+ * Find a single entry by its ID.
+ *
+ * @since 1.0.0
+ * @param integer $id The entry ID.
+ * @return array
+ */
+function ev_find_single_entry( $id ) {
+	if ( is_numeric( $id ) ) {
+		$post = get_post( $id );
+
+		return array(
+			'id' => $id,
+			'text' => html_entity_decode( $post->post_title )
+		);
+	}
+
+	return array(
+		'id' => $id,
+		'text' => $id
+	);
 }

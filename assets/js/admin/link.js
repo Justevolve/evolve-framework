@@ -65,8 +65,6 @@
 
 					setTimeout( function() {
 						$.evf.ui.build();
-
-						$( "input[name=url]", content ).focus().select();
 					}, 1 );
 				}
 			);
@@ -79,6 +77,77 @@
 		$( '.ev-modal-container[data-key="ev-link"]').addClass( 'ev-link-modal-expanded' );
 
 		return false;
+	} );
+
+	/**
+	 * Check if a string represents a URL.
+	 */
+	function ev_is_url( s ) {
+	   var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+
+	   return regexp.test( s );
+	}
+
+	$.evf.ui.add( ".ev-link-url-wrapper [name='url']", function() {
+		var nonce = $( this ).attr( "data-nonce" );
+
+		$( this ).selectize( {
+			plugins: [],
+			valueField: "id",
+			labelField: "text",
+			searchField: [ "text" ],
+			dropdownParent: "body",
+			create: true,
+			createOnBlur: true,
+			maxItems: 1,
+			load: function( query, callback ) {
+				if ( ! query.length || ev_is_url( query ) ) {
+					return callback();
+				}
+
+				$.ajax( {
+					url: ajaxurl,
+					type: 'POST',
+					data: {
+						action: "ev_link_search_entries",
+						search: query,
+						nonce: nonce
+					},
+					error: function() {
+						callback();
+					},
+					success: function( res ) {
+						callback( $.parseJSON( res ) );
+					}
+				} );
+			},
+			render: {
+				item: function( item, escape ) {
+					var html = '<div>';
+
+					if ( item.spec && item.spec !== "" ) {
+						html += '<span>' + escape( item.spec ) + '</span>';
+					}
+
+					html += escape( item.text );
+					html += '</div>';
+
+					return html;
+				},
+				option: function( item, escape ) {
+					var html = '<div>';
+
+					if ( item.spec && item.spec !== "" ) {
+						html += '<span>' + escape( item.spec ) + '</span>';
+					}
+
+					html += escape( item.text );
+					html += '</div>';
+
+					return html;
+				}
+			}
+		} );
 	} );
 
 } )( jQuery );
