@@ -99,6 +99,8 @@
 		} )
 
 		_ev_position_tooltip( $link, $container );
+
+		return $container;
 	}
 
 	/**

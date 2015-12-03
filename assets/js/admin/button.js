@@ -13,6 +13,9 @@
 			.trigger( "start.ev_button" );
 	}
 
+	/**
+	 * Handle the button response.
+	 */
 	function ev_btn_handle_response( btn, response ) {
 		$( btn ).addClass( "ev-btn-complete" );
 
@@ -21,7 +24,7 @@
 				.addClass( "ev-btn-" + response.type )
 				.attr( "data-title", response.message );
 
-			ev_create_tooltip( btn );
+			var tooltip = ev_create_tooltip( btn );
 		}
 
 		setTimeout( function() {
@@ -29,6 +32,10 @@
 			$( btn ).removeClass( "ev-btn-complete" );
 
 			if ( response ) {
+				if ( tooltip.length ) {
+					ev_tooltip_destroy( tooltip );
+				}
+
 				$( btn ).removeClass( "ev-btn-" + response.type );
 			}
 		}, 1500 );
