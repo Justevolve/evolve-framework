@@ -33,7 +33,11 @@
 		}
 	}
 
-	.ev-color-controls-wrapper {}
+	.ev-color-controls-wrapper {
+		* + * {
+			margin-left: $gutter/2;
+		}
+	}
 
 // -----------------------------------------------------------------------------
 // $Minicolor

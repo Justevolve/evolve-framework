@@ -6,7 +6,7 @@
 
 .ev-checkbox-wrapper {
 	input[type="checkbox"] {
-		visibility: hidden;
+		display: none;
 	}
 
 	input[type="checkbox"]:checked + label {
