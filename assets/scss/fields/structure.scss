@@ -199,6 +199,18 @@
 		display: inline-block;
 	}
 
+	&.ev-help-tooltip {
+		cursor: help;
+	}
+
+	&.ev-help-popup {
+		cursor: pointer;
+	}
+
+	.ev-help-popup-text {
+		display: none;
+	}
+
 	&.ev-help-inline {
 		display: block;
 		clear: both;
@@ -208,5 +220,17 @@
 		b {
 			color: $grey_6;
 		}
+	}
+}
+
+.ev-modal-container[data-key="ev-help-popup"] {
+	.ev-modal-wrapper {
+		top: 25vh;
+		bottom: 25vh;
+		left: 25%;
+		right: 25%;
+		padding: $gutter;
+		font-size: $big_fsz;
+		line-height: 1.5;
 	}
 }

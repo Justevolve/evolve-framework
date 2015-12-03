@@ -100,13 +100,6 @@ class Ev_Modal extends Ev_FieldsContainer {
 							'size' => 'medium'
 						)
 					);
-
-					// printf( '<div class="ev-btn ev-save" data-nonce="%s">', esc_attr( $this->_config['button_nonce'] ) );
-					// 	echo '<input type="submit" value="">';
-					// 	printf( '<span class="ev-btn-action">%s</span>',
-					// 		esc_html( $this->_config['button'] )
-					// 	);
-					// echo '</div>';
 				}
 			echo '</div>';
 		echo '</form>';
@@ -148,3 +141,14 @@ class Ev_Modal extends Ev_FieldsContainer {
 	}
 
 }
+
+/**
+ * Display the container for framework-generated modals.
+ *
+ * @since 0.4.0
+ */
+function ev_modals_container_wrapper() {
+	echo '<div id="ev-modals-container"></div>';
+}
+
+add_action( 'admin_footer', 'ev_modals_container_wrapper' );

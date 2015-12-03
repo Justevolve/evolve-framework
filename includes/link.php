@@ -85,27 +85,23 @@ function ev_link_modal_load() {
 	$content .= '</div>';
 
 	$content .= '<div class="ev-link-inner-wrapper">';
-		$content .= '<div class="ev-link-field-row">';
-			$content .= '<div class="ev-link-radio-wrapper">';
-				$content .= sprintf( '<p>%s</p>', esc_html( __( 'Open in tab', 'ev_framework' ) ) );
-				$content .= ev_radio(
-					'target',
-					array(
-						''       => __( 'Same tab', 'ev_framework' ),
-						'_blank' => __( 'New tab', 'ev_framework' ),
-					),
-					$target,
-					'switch',
-					false
-				);
+		$content .= '<div class="ev-link-radio-wrapper">';
+			$content .= sprintf( '<p>%s</p>', esc_html( __( 'Open in tab', 'ev_framework' ) ) );
+			$content .= ev_radio(
+				'target',
+				array(
+					''       => __( 'Same tab', 'ev_framework' ),
+					'_blank' => __( 'New tab', 'ev_framework' ),
+				),
+				$target,
+				array( 'switch', 'small' ),
+				false
+			);
 		$content .= '</div>';
 
-			$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ) );
-		$content .= '</div>';
+		$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ) );
 
-		$content .= '<div class="ev-link-field-row">';
-			$content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ) );
-		$content .= '</div>';
+		$content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ) );
 	$content .= '</div>';
 
 	$m = new Ev_SimpleModal( 'ev-link' );

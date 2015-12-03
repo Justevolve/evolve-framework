@@ -76,8 +76,15 @@
 
 // Icon modal
 
+.ev-modal-container[data-key="ev-icon"] {
+	.ev-modal-wrapper {
+		top: 120px;
+		bottom: 120px;
+	}
+}
+
 .ev-icon-sets-controls-external-wrapper {
-	@include position( absolute, ( $modal_header_height + 1px ) null $modal_footer_height 0 );
+	@include position( absolute, ( $modal_header_height + 1px ) null 0 0 );
 	width: 300px;
 }
 
@@ -134,14 +141,6 @@
 		cursor: default;
 		display: block;
 		margin-bottom: $baseline/4;
-	}
-}
-
-.ev-modal-container[data-key="ev-icon"] {
-	.ev-modal-footer {
-		width: 300px;
-		right: auto;
-		background-color: transparent;
 	}
 }
 

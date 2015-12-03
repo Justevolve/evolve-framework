@@ -8,29 +8,8 @@ body.ev-modal-open {
 	overflow: hidden;
 }
 
-.ev-modal-container + .ev-modal-container {
-	top: 60px;
-	bottom: 60px;
-	left: 15%;
-	right: 15%;
-	background: rgba( #000, 0.5 );
-
-	@include ev_media( $media_tablet ) {
-		left: 5%;
-		right: 5%;
-	}
-
-	@include ev_media( $media_mobile ) {
-		left: 0;
-		right: 0;
-	}
-
-	.ev-modal-wrapper {
-		top: $baseline;
-		bottom: $baseline;
-		left: $baseline;
-		right: $baseline;
-	}
+#ev-modals-container .ev-modal-container:not( :last-child ) {
+	@include opacity( 0 );
 }
 
 .ev-modal-wrapper {
@@ -39,7 +18,7 @@ body.ev-modal-open {
 	left: 15%;
 	right: 15%;
 	background: $white;
-	overflow: hidden;
+	// overflow: hidden;
 
 	@include ev_media( $media_tablet ) {
 		left: 5%;
@@ -127,20 +106,6 @@ body.ev-modal-open {
 
 	.ev-save {
 		float: right;
-
-		// .ev-btn-action {
-		// 	background-color: $blue;
-
-		// 	&:hover {
-		// 		background-color: darken( $blue, 10 );
-		// 	}
-		// }
-
-		// &.ev-saving {
-		// 	.ev-btn-action {
-		// 		background-color: darken( $blue, 10 );
-		// 	}
-		// }
 	}
 }
 
@@ -170,24 +135,6 @@ body.ev-modal-open {
 
 .ev-modal-back {
 	float: left;
-	// @extend %btn;
-
-	// .ev-btn-action {
-	// 	color: $grey_6;
-	// 	background-color: $grey_1;
-	// 	@include transition( background-color $transition_time*1.5 ease, width $transition_time*2.5 ease, padding $transition_time*2.5 $ease-out-back );
-	// 	cursor: pointer;
-
-	// 	&:before {
-	// 		@include icon( "\f340" );
-	// 		float: left;
-	// 		margin-right: $gutter/4;
-	// 	}
-
-	// 	&:hover {
-	// 		background-color: darken( $grey_1, 10 );
-	// 	}
-	// }
 }
 
 // -----------------------------------------------------------------------------
@@ -208,7 +155,7 @@ body.ev-modal-open {
 	}
 
 	> .ev-tab-container {
-		@include position( absolute, ($modal_header_height + 1) 0 $modal_footer_height 0 );
+		@include position( absolute, ($modal_header_height + 1) 1px $modal_footer_height 0 );
 		overflow-y: auto;
 		width: auto;
 	}
@@ -219,3 +166,34 @@ body.ev-modal-open {
 // -----------------------------------------------------------------------------
 
 @include ev_modal_reset();
+
+// -----------------------------------------------------------------------------
+// $Simple modal
+// -----------------------------------------------------------------------------
+
+.ev-modal-container-simple {
+	.ev-modal-close {
+		top: -$baseline*1.5;
+		margin-right: 0;
+		color: $white;
+		padding-top: 0;
+
+		&:hover {
+			color: $red;
+		}
+	}
+
+	.ev-modal {
+		border-top: none;
+
+		.ev-modal-footer {
+			border-top: none;
+			@include position( absolute, 100% 0 0 0 );
+			padding: 0;
+			border-top: none;
+			background-color: transparent;
+			margin-top: $baseline;
+		}
+
+	}
+}

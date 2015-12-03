@@ -244,7 +244,7 @@ abstract class Ev_Field {
 		$help_types = array(
 			'inline',
 			'tooltip',
-			// 'popup'
+			'popup'
 		);
 
 		$field_help = array(
@@ -588,21 +588,26 @@ abstract class Ev_Field {
 		do_action( "ev_fw_before_field_help[type:$this->_type]", $this );
 
 		if ( $help !== false && $help['text'] != '' ) {
+			$help_allowed_html = array(
+				'code' => array(),
+				'strong' => array(),
+				'b' => array()
+			);
+
 			printf( '<div class="ev-help ev-help-%s">', esc_attr( $help['type'] ) );
 				switch( $help['type'] ) {
 					case 'tooltip':
-						printf( '<div href="#" class="ev-help-handle ev-tooltip" title="%s"><span>%s</span></div>', esc_attr( $help['text'] ), __( 'Need help?', 'ev_framework' ) );
+						printf( '<div class="ev-help-handle ev-tooltip" data-title="%s"><span>%s</span></div>', esc_attr( $help['text'] ), __( 'Need help?', 'ev_framework' ) );
 						break;
-					// case 'popup':
-					// 	printf( '<div href="#" class="ev-help-handle"><span>%s</span></div>', __( 'Need help?', 'ev_framework' ) );
-					// 	break;
+					case 'popup':
+						printf( '<div class="ev-help-handle"><span>%s</span><span class="ev-help-popup-text">%s</span></div>',
+							__( 'Need help?', 'ev_framework' ),
+							wp_kses( $help['text'], $help_allowed_html )
+						);
+						break;
 					case 'inline':
 					default:
-						$help_text = wp_kses( $help['text'], array(
-							'code' => array(),
-							'strong' => array(),
-							'b' => array()
-						) );
+						$help_text = wp_kses( $help['text'], $help_allowed_html );
 
 						echo $help_text;
 						break;

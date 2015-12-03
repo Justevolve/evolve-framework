@@ -16,6 +16,7 @@
             };
 
         var modal = new $.evf.modal( key, data, {
+        	class: 'ev-modal-container-simple',
         	close: function() {
         		$( window ).off( "keydown.ev_link" );
         	},

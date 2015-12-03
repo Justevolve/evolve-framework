@@ -1,6 +1,22 @@
 ( function( $ ) {
 	"use strict";
 
+	$.evf.delegate( ".ev-help-popup .ev-help-handle", "click", "field", function() {
+		var data = {},
+			key = "ev-help-popup",
+			text = $( ".ev-help-popup-text", this ).html();
+
+		var modal = new $.evf.modal( key, data, {
+			class: 'ev-modal-container-simple',
+		} );
+
+		modal.open( function( content, key, _data ) {
+			content.html( text );
+		} );
+
+		return false;
+	} );
+
 	/**
 	 * Get the input field of a controller.
 	 */

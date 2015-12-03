@@ -380,7 +380,7 @@ function ev_color( $name, $value, $opacity = false, $style = '', $echo = true ) 
 
 			$html .= ev_btn(
 				_x( 'Save', 'save color preset', 'ev_framework' ),
-				'confirm',
+				'save',
 				array(
 					'attrs' => array(
 						'data-color-save-preset' => '',

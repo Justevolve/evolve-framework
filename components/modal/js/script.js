@@ -145,7 +145,7 @@
 			html = $( html );
 
 			if ( ! $( "body" ).hasClass( "ev-modal-open" ) ) {
-				html.appendTo( $( "body" ) );
+				html.appendTo( $( "#ev-modals-container" ) );
 				$( "body" ).addClass( "ev-modal-open" );
 			}
 			else {
