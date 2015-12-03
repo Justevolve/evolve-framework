@@ -164,21 +164,27 @@
 	 */
 	$.evf.ui.add( "input.ev-color-input", function() {
 		$( this ).each( function() {
-			var wrapper = $( this ).parents( ".ev-color-inner-wrapper" ).first(),
-				opacity = $( this ).attr( "data-opacity" ),
+			var input = $( this ),
+				wrapper = input.parents( ".ev-color-inner-wrapper" ).first(),
+				opacity = input.attr( "data-opacity" ),
 				options = {
-					control: "wheel"
+					control: "wheel",
+					change: function( value, op ) {
+						input.css( "border-color", value );
+
+						if ( opacity !== undefined ) {
+							$( "[data-input-color-opacity]", wrapper ).val( opacity );
+						}
+					}
 				};
 
 			if ( opacity !== undefined ) {
 				options.opacity = true;
-
-				options.change = function( value, opacity ) {
-					$( "[data-input-color-opacity]", wrapper ).val( opacity );
-				}
 			}
 
-			$( this ).minicolors( options );
+			$( this )
+				.minicolors( options )
+				.trigger( "change" );
 		} );
 	} );
 

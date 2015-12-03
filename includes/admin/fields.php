@@ -324,11 +324,11 @@ function ev_checkbox( $name, $value, $style = '', $args = array(), $echo = true 
  */
 function ev_color( $name, $value, $opacity = false, $style = '', $echo = true ) {
 	$html          = '';
-	$opacity_data  = '';
+	$attrs         = '';
 	$field_color   = $value;
 	$field_opacity = '1';
-	$style = (array) $style;
-	$new_style = array();
+	$style         = (array) $style;
+	$new_style     = array();
 
 	if ( ! empty( $style ) ) {
 		$style_class = 'ev-color-style-';
@@ -348,7 +348,7 @@ function ev_color( $name, $value, $opacity = false, $style = '', $echo = true ) 
 	$html .= sprintf( '<span class="ev-color-wrapper %s">', esc_attr( $new_style ) );
 
 		if ( $opacity ) {
-			$opacity_data = 'data-opacity=' . $field_opacity;
+			$attrs .= 'data-opacity=' . $field_opacity;
 
 			$html .= sprintf( '<input type="hidden" data-input-color-opacity name="%s" value="%s">',
 				esc_attr( $name . '[opacity]' ),
@@ -356,10 +356,14 @@ function ev_color( $name, $value, $opacity = false, $style = '', $echo = true ) 
 			);
 		}
 
+		if ( $field_color ) {
+			$attrs .= ' style=border-color:' . $field_color;
+		}
+
 		$html .= sprintf( '<input type="text" class="ev-color-input" name="%s" value="%s" %s>',
 			esc_attr( $name . '[color]' ),
 			esc_attr( $field_color ),
-			esc_attr( $opacity_data )
+			esc_attr( $attrs )
 		);
 
 		$html .= '<div class="ev-color-controls-wrapper">';
