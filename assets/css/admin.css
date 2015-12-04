@@ -206,14 +206,14 @@ body.ev-modal-open { overflow: hidden; }
 
 .ev-field-panel-controls-wrapper { display: none; position: absolute; top: -21px; right: -45px; bottom: -20px; padding: 20px 20px 20px 0; }
 .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper { width: 24px; height: 24px; border: 1px solid #DBDBDB; border-left: none; background-color: #fff; border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
-[data-sortable] .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper { height: 48px; }
-[data-sortable] .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper .ev-attachment-sortable-handle { display: inline-block; }
-.ev-field-panel-controls-wrapper .ev-attachment-sortable-handle { display: none; }
-.ev-field-panel-controls-wrapper .ev-attachment-sortable-handle:before { cursor: all-scroll; color: #B3B3B3; font-family: "dashicons"; font-weight: 400; font-size: inherit; line-height: 1; text-rendering: auto; text-transform: none; text-indent: 0; display: block; speak: none; text-align: center; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; content: ""; width: 24px; height: 24px; font-size: 16px; line-height: 24px; }
-.ev-field-panel-controls-wrapper .ev-attachment-sortable-handle:hover:before { color: #333; }
-.ev-field-panel-controls-wrapper .ev-upload-remove { display: inline-block; text-decoration: none; }
-.ev-field-panel-controls-wrapper .ev-upload-remove:before { cursor: pointer; color: #B3B3B3; font-family: "dashicons"; font-weight: 400; font-size: inherit; line-height: 1; text-rendering: auto; text-transform: none; text-indent: 0; display: block; speak: none; text-align: center; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; content: ""; width: 24px; height: 24px; font-size: 16px; line-height: 24px; }
-.ev-field-panel-controls-wrapper .ev-upload-remove:hover:before { color: #CC4747; }
+.ui-sortable .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper { height: 48px; }
+.ui-sortable .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper .ev-sortable-handle { display: inline-block; }
+.ev-field-panel-controls-wrapper .ev-sortable-handle { display: none; }
+.ev-field-panel-controls-wrapper .ev-sortable-handle:before { cursor: all-scroll; color: #B3B3B3; font-family: "dashicons"; font-weight: 400; font-size: inherit; line-height: 1; text-rendering: auto; text-transform: none; text-indent: 0; display: block; speak: none; text-align: center; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; content: ""; width: 24px; height: 24px; font-size: 16px; line-height: 24px; }
+.ev-field-panel-controls-wrapper .ev-sortable-handle:hover:before { color: #333; }
+.ev-field-panel-controls-wrapper .ev-repeatable-remove { display: inline-block; text-decoration: none; }
+.ev-field-panel-controls-wrapper .ev-repeatable-remove:before { cursor: pointer; color: #B3B3B3; font-family: "dashicons"; font-weight: 400; font-size: inherit; line-height: 1; text-rendering: auto; text-transform: none; text-indent: 0; display: block; speak: none; text-align: center; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; content: ""; width: 24px; height: 24px; font-size: 16px; line-height: 24px; }
+.ev-field-panel-controls-wrapper .ev-repeatable-remove:hover:before { color: #CC4747; }
 
 .ev-field-bundle .ev-bundle-fields-wrapper { border: 1px solid #DBDBDB; border-radius: 3px; }
 .ev-field-bundle .ev-bundle-fields-wrapper:after { content: ""; display: table; clear: both; }
@@ -595,20 +595,7 @@ input[type="radio"]:checked + .ev-radio.ev-graphic-radio img { border-color: #66
 .ev-radio-style-switch .ev-radio:last-child span { border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
 .ev-radio-style-switch.ev-radio-style-small .ev-radio span { font-size: 12px; line-height: 20px; padding: 1px 10px; }
 
-
-.ev-repeatable:not(.ev-sortable) .ev-field-panel-controls-wrapper .ev-sortable-handle { display: none; }
-.ev-repeatable.ev-sortable .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper { height: 48px; }
-
 [data-icon='evfw-add']:before { font-family: "dashicons"; content: "\f132"; bottom: -1px; }
-
-.ev-field-panel-controls-wrapper { display: none; }
-.ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper { width: 24px; height: 24px; border: 1px solid #DBDBDB; border-left: none; background-color: #fff; border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
-.ev-field-panel-controls-wrapper .ev-sortable-handle { display: inline-block; }
-.ev-field-panel-controls-wrapper .ev-sortable-handle:before { cursor: all-scroll; color: #B3B3B3; font-family: "dashicons"; font-weight: 400; font-size: inherit; line-height: 1; text-rendering: auto; text-transform: none; text-indent: 0; display: block; speak: none; text-align: center; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; content: ""; width: 24px; height: 24px; font-size: 16px; line-height: 24px; }
-.ev-field-panel-controls-wrapper .ev-sortable-handle:hover:before { color: #333; }
-.ev-field-panel-controls-wrapper .ev-repeatable-remove { display: inline-block; }
-.ev-field-panel-controls-wrapper .ev-repeatable-remove:before { cursor: pointer; color: #B3B3B3; font-family: "dashicons"; font-weight: 400; font-size: inherit; line-height: 1; text-rendering: auto; text-transform: none; text-indent: 0; display: block; speak: none; text-align: center; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; content: ""; width: 24px; height: 24px; font-size: 16px; line-height: 24px; }
-.ev-field-panel-controls-wrapper .ev-repeatable-remove:hover:before { color: #CC4747; }
 
 .ev-repeatable .ev-container-repeatable-inner-wrapper { border: 1px solid #DBDBDB; background-color: #fcfcfc; padding: 0 6px; }
 .ev-repeatable .ev-bundle-fields-wrapper, .ev-repeatable .ev-field-inner { background-color: #fff; position: relative; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }

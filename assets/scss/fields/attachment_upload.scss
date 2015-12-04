@@ -204,7 +204,6 @@ $attachment_spreadsheet: "\f495";
 // $Controls panel
 // -----------------------------------------------------------------------------
 
-// TODO: vedere se possibile uniformare comportamento con repeatable
 .ev-field-panel-controls-wrapper {
 	display: none;
 	@include position( absolute, (-(1px + $gutter)) (-($baseline+1 + $gutter)) (-$gutter) null );
@@ -218,16 +217,16 @@ $attachment_spreadsheet: "\f495";
 		border-top-right-radius: $radius;
 		border-bottom-right-radius: $radius;
 
-		[data-sortable] & {
+		.ui-sortable & {
 			height: $baseline*2;
 
-			.ev-attachment-sortable-handle {
+			.ev-sortable-handle {
 				display: inline-block;
 			}
 		}
 	}
 
-	.ev-attachment-sortable-handle {
+	.ev-sortable-handle {
 		display: none;
 
 		&:before {
@@ -244,7 +243,7 @@ $attachment_spreadsheet: "\f495";
 		}
 	}
 
-	.ev-upload-remove {
+	.ev-repeatable-remove {
 		display: inline-block;
 		text-decoration: none;
 

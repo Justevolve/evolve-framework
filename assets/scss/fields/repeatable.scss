@@ -5,17 +5,17 @@
 // -----------------------------------------------------------------------------
 
 .ev-repeatable {
-	&:not( .ev-sortable ) .ev-field-panel-controls-wrapper {
-		.ev-sortable-handle {
-			display: none;
-		}
-	}
+	// &:not( .ev-sortable ) .ev-field-panel-controls-wrapper {
+	// 	.ev-sortable-handle {
+	// 		display: none;
+	// 	}
+	// }
 
-	&.ev-sortable {
-		.ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper {
-			height: $baseline*2;
-		}
-	}
+	// &.ev-sortable {
+	// 	.ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper {
+	// 		height: $baseline*2;
+	// 	}
+	// }
 
 }
 
@@ -29,54 +29,54 @@
 // $Controls panel
 // -----------------------------------------------------------------------------
 
-.ev-field-panel-controls-wrapper {
-	display: none;
-	// @include position( absolute, -1px (-($baseline+1)) null null );
-	// TODO: Aggiungere bleeding edge
+// .ev-field-panel-controls-wrapper {
+// 	display: none;
+// 	// @include position( absolute, -1px (-($baseline+1)) null null );
+// 	// TODO: Aggiungere bleeding edge
 
-	.ev-field-panel-controls-inner-wrapper {
-		@include size( $baseline );
-		border: 1px solid $grey_1;
-		border-left: none;
-		background-color: $white;
-		border-top-right-radius: $radius;
-		border-bottom-right-radius: $radius;
-	}
+// 	.ev-field-panel-controls-inner-wrapper {
+// 		@include size( $baseline );
+// 		border: 1px solid $grey_1;
+// 		border-left: none;
+// 		background-color: $white;
+// 		border-top-right-radius: $radius;
+// 		border-bottom-right-radius: $radius;
+// 	}
 
-	.ev-sortable-handle {
-		display: inline-block;
+// 	.ev-sortable-handle {
+// 		display: inline-block;
 
-		&:before {
-			cursor: all-scroll;
-			color: $grey_3;
-			@include icon( "\f333" );
-			@include size( $baseline );
-			font-size: 16px;
-			line-height: $baseline;
-		}
+// 		&:before {
+// 			cursor: all-scroll;
+// 			color: $grey_3;
+// 			@include icon( "\f333" );
+// 			@include size( $baseline );
+// 			font-size: 16px;
+// 			line-height: $baseline;
+// 		}
 
-		&:hover:before {
-			color: $grey_6;
-		}
-	}
+// 		&:hover:before {
+// 			color: $grey_6;
+// 		}
+// 	}
 
-	.ev-repeatable-remove {
-		display: inline-block;
+// 	.ev-repeatable-remove {
+// 		display: inline-block;
 
-		&:before {
-			cursor: pointer;
-			color: $grey_3;
-			@include icon( "\f153" );
-			@include size( $baseline );
-			font-size: 16px;
-			line-height: $baseline;
-		}
+// 		&:before {
+// 			cursor: pointer;
+// 			color: $grey_3;
+// 			@include icon( "\f153" );
+// 			@include size( $baseline );
+// 			font-size: 16px;
+// 			line-height: $baseline;
+// 		}
 
-		&:hover:before {
-			color: $red;
-		}
-	}
-}
+// 		&:hover:before {
+// 			color: $red;
+// 		}
+// 	}
+// }
 
 // -----------------------------------------------------------------------------
 // $Repeatable fields

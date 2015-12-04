@@ -77,8 +77,8 @@ function ev_attachment_upload_generic_placeholder_template() {
 	$placeholder_html = '<div class="ev-attachment-placeholder ev-attachment-%s-placeholder">
 		<div class="ev-field-panel-controls-wrapper">
 			<div class="ev-field-panel-controls-inner-wrapper">
-				<a href="#" class="ev-upload-remove"><span class="screen-reader-text">%s</span></a>
-				<span class="ev-attachment-sortable-handle"></span>
+				<a href="#" class="ev-repeatable-remove ev-upload-remove"><span class="screen-reader-text">%s</span></a>
+				<span class="ev-sortable-handle ev-attachment-sortable-handle"></span>
 			</div>
 		</div>
 		<span class="ev-attachment-placeholder-icon" data-id="%s" alt=""></span>
