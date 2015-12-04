@@ -36,7 +36,7 @@
 	/**
 	 * Adding the sortable component to the UI building queue.
 	 */
-	$.evf.ui.add( ".ev-container-repeatable-inner-wrapper", function() {
+	$.evf.ui.add( ".ev-sortable .ev-container-repeatable-inner-wrapper", function() {
 		var ev_sortable_dragged_height = null;
 
 		/**
