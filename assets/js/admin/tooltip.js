@@ -71,28 +71,37 @@
 	/**
 	 * Create a tooltip on a specific element.
 	 */
-	window.ev_create_tooltip = function( element ) {
-		var $link = $( element ),
-			link_title = $link.attr( "data-" + tooltip_attr ) || $link.attr( tooltip_attr );
+	window.ev_create_tooltip = function( element, tooltip_content, config ) {
+		var $link = $( element );
 
-		if ( typeof link_title === "undefined" || link_title === "" ) {
-			return false;
+		if ( typeof tooltip_content === "undefined" || ! tooltip_content ) {
+			tooltip_content = $link.attr( "data-" + tooltip_attr ) || $link.attr( tooltip_attr );
+
+			if ( typeof tooltip_content === "undefined" || tooltip_content === "" ) {
+				return false;
+			}
 		}
+
+		/**
+		 * Configuration.
+		 */
+		config = $.extend( true, {}, {
+			'class': ''
+		}, config );
 
 		ev_seek_and_destroy_tooltips();
 
-		var $container = $( '<div class="' + tooltip_container + '"></div>' ).appendTo( "body" );
+		var tooltip_class = tooltip_container + ' ' + config.class,
+			$container = $( '<div class="' + tooltip_class + '"></div>' ).appendTo( "body" );
 
 		$link.data( "ev-tooltip", $container );
 
 		$container
-			.html( link_title )
+			.html( tooltip_content )
 			.css( {
 				top       : 0,
 				left      : 0
-			} )
-			.addClass( 'ev-tooltip-active' )
-			.show();
+			} );
 
 		$( window ).on( "resize scroll", function() {
 			_ev_position_tooltip( $link, $container );
@@ -100,15 +109,19 @@
 
 		_ev_position_tooltip( $link, $container );
 
+		$container.show();
+
+		$container.addClass( 'ev-tooltip-active' );
+
 		return $container;
-	}
+	};
 
 	/**
 	 * When hovering a tooltip market, show the related tooltip.
 	 */
 	$.evf.delegate( tooltip_selector, "mouseover", "tooltip", function() {
 		ev_create_tooltip( $( this ) );
-	});
+	} );
 
 	/**
 	 * When moving away from a tooltip marker, hide the tooltip.
@@ -119,12 +132,12 @@
 		if ( tooltip ) {
 			window.ev_tooltip_destroy( tooltip );
 		}
-	});
+	} );
 
 	/**
 	 * When clicking on a persistent tooltip, hide the tooltip.
 	 */
 	$.evf.delegate( tooltip_container_selector, "click", "tooltip", function() {
 		window.ev_tooltip_destroy( $( this ) );
-	});
+	} );
 } )( jQuery );

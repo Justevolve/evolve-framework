@@ -358,7 +358,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-checkbox-wrapper.ev-checkbox-style-switch.ev-checkbox-style-small label:after { width: 16px; height: 16px; }
 
 
-.ev .minicolors input[type="text"] { padding-left: 48px; }
+.ev .minicolors input[type="text"] { padding-left: 48px; font-family: monospace; }
 .ev .minicolors input[type="text"]:hover { background-color: #fff; }
 .ev .ev-color-style-small .minicolors input[type="text"] { padding: 1px 12px 1px 36px; font-size: 12px; line-height: 20px; }
 .ev .ev-sub-label { color: #999; margin-bottom: 6px; display: inline-block; }
@@ -734,6 +734,6 @@ input[type="radio"]:checked + .ev-radio.ev-graphic-radio img { border-color: #66
 .ev-help.ev-help-inline { display: block; clear: both; padding-top: 6px; }
 .ev-help.ev-help-inline strong, .ev-help.ev-help-inline b { color: #333; }
 
-.ev-modal-container[data-key="ev-help-popup"] .ev-modal-wrapper { top: 25vh; bottom: 25vh; left: 25%; right: 25%; padding: 20px; font-size: 16px; line-height: 1.5; }
+.ev-modal-container[data-key="ev-help-popup"] .ev-modal-wrapper { width: 400px; height: 300px; padding: 20px; font-size: 16px; line-height: 1.5; }
 
 .ev input[type="text"].ev-field-text-style-small { font-size: 12px; line-height: 20px; padding: 1px 5px; }
