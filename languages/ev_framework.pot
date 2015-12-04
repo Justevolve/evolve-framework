@@ -155,6 +155,18 @@ msgstr ""
 msgid "New tab"
 msgstr ""
 
+#: includes/link.php:115
+msgid "Rel attribute"
+msgstr ""
+
+#: includes/link.php:121
+msgid "Title attribute"
+msgstr ""
+
+#: includes/link.php:127
+msgid "Class attribute"
+msgstr ""
+
 #: templates/fields/attachment.php:89
 #: templates/fields/partials/image_upload.php:85
 msgid "Upload"
@@ -216,5 +228,5 @@ msgstr ""
 
 #: includes/icons.php:151
 msgctxt "icon search"
-msgid "Choose your icon&hellip;"
+msgid "Search&hellip;"
 msgstr ""
