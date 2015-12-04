@@ -13,6 +13,7 @@
                 "target": $( "[data-link-target]", ctrl_wrapper ).val(),
                 "rel": $( "[data-link-rel]", ctrl_wrapper ).val(),
                 "title": $( "[data-link-title]", ctrl_wrapper ).val(),
+                "class": $( "[data-link-class]", ctrl_wrapper ).val(),
             };
 
         var modal = new $.evf.modal( key, data, {
@@ -25,6 +26,7 @@
 				$( "[data-link-target]", ctrl_wrapper ).val( data["target"] );
 				$( "[data-link-rel]", ctrl_wrapper ).val( data["rel"] );
 				$( "[data-link-title]", ctrl_wrapper ).val( data["title"] );
+				$( "[data-link-class]", ctrl_wrapper ).val( data["class"] );
 
 				ctrl.removeClass( "ev-link-on" );
 
@@ -42,6 +44,11 @@
 			};
 
 			var origin = ".ev-modal-container[data-key='" + key + "']";
+
+			if ( _data["rel"] || data["title"] || data["class"] ) {
+				$( origin ).addClass( "ev-link-modal-expanded" );
+			}
+
 			$( origin + " .ev-modal-wrapper" ).addClass( "ev-loading" );
 
 			$( window ).off( "keydown.ev_link" );

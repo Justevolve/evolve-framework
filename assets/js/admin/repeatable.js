@@ -98,9 +98,6 @@
 
 				ev_repeatable_sortable_mouseup();
 			},
-			sort: function() {
-				console.log( $( ".ui-sortable-placeholder" ).outerHeight() );
-			},
 			stop: function( e, ui ) {
 				var sortable = $( ui.item ).parents( ".ev-sortable" ).first(),
 					fields = $( "> .ev-field-inner, .ev-bundle-fields-wrapper", sortable ),
