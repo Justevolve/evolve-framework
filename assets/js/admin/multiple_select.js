@@ -11,7 +11,8 @@
 				label = $( this ).attr( "data-label-field" ),
 				search = $( this ).attr( "data-search-field" ),
 				nonce = $( this ).attr( "data-nonce" ),
-				max = $( this ).attr( "data-max" ) ? parseInt( $( this ).attr( "data-max" ), 10 ) : 1000;
+				max = $( this ).attr( "data-max" ) ? parseInt( $( this ).attr( "data-max" ), 10 ) : 1000,
+				create = $( this ).attr( "data-create" ) ? parseInt( $( this ).attr( "data-create" ), 10 ) : 0;
 
 			$( this ).selectize( {
 				plugins: ['remove_button', 'drag_drop'],
@@ -19,7 +20,7 @@
 				labelField: label,
 				searchField: [ search ],
 				dropdownParent: "body",
-				create: false,
+				create: create,
 				maxItems: max,
 				load: function( query, callback ) {
 					if ( ! query.length ) {

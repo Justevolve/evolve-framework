@@ -566,6 +566,8 @@ body.ev-modal-open { overflow: hidden; }
 .ev-link-radio-wrapper { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 .ev-link-radio-wrapper > p { margin-top: 0; display: inline-block; margin-right: 20px; color: #999; margin-bottom: 0; }
 
+.selectize-dropdown .ev-link-create { display: none; }
+
 .ev-radio-wrapper:after { content: ""; display: table; clear: both; }
 .ev-radio-wrapper input[type="radio"] { display: none; }
 .ev-radio-wrapper label { margin-top: 6px; }
@@ -653,7 +655,7 @@ input[type="radio"]:checked + .ev-radio.ev-graphic-radio img { border-color: #66
 .selectize-input:hover:not(.disabled) > div { box-shadow: 0px 1px 2px rgba(0,0,0,.2); border-color: #B3B3B3; }
 .selectize-input.dropdown-active, .selectize-input:hover:not(.disabled) { background-color: #F7F7F7; border-color: #B3B3B3; }
 .selectize-input.dropdown-active { border-color: #B3B3B3; border-bottom-left-radius: 0; border-bottom-right-radius: 0; box-shadow: 0px 2px 3px rgba(0,0,0,.2); }
-.selectize-input > input { color: #333; display: inline-block !important; padding: 5px 0 !important; min-height: 0 !important; max-height: none !important; max-width: 100% !important; margin: 0 4px 0 8px !important; text-indent: 0 !important; border: 0 none !important; background: none !important; line-height: inherit !important; -webkit-user-select: auto !important; -webkit-box-shadow: none !important; box-shadow: none !important; font-size: 12px !important; }
+.selectize-input > input { color: #333; display: inline-block !important; padding: 5px 0 !important; min-height: 0 !important; max-height: none !important; max-width: 100% !important; margin: 0 4px 0 8px !important; text-indent: 0 !important; border: 0 none !important; background: none !important; line-height: inherit !important; -webkit-user-select: auto !important; -webkit-box-shadow: none !important; box-shadow: none !important; font-size: 14px !important; }
 .ev-multiple-select-vertical .selectize-input > input { left: 0 !important; position: relative !important; }
 .selectize-input > input::-ms-clear { display: none; }
 .selectize-input > input:after { content: ' '; display: block; clear: left; }

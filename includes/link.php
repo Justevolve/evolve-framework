@@ -22,15 +22,17 @@ function ev_link_partial( $handle, $link ) {
 		$link_class .= ' ev-link-on';
 	}
 
-	$url = isset( $link['url'] ) ? $link['url'] : '';
+	$url    = isset( $link['url'] ) ? $link['url'] : '';
 	$target = isset( $link['target'] ) ? $link['target'] : '';
-	$rel = isset( $link['rel'] ) ? $link['rel'] : '';
-	$title = isset( $link['title'] ) ? $link['title'] : '';
+	$rel    = isset( $link['rel'] ) ? $link['rel'] : '';
+	$title  = isset( $link['title'] ) ? $link['title'] : '';
+	$class  = isset( $link['class'] ) ? $link['class'] : '';
 
 	$link_hidden_inputs = sprintf( '<input data-link-url type="hidden" value="%s" name="%s[url]">', esc_attr( $url ), esc_attr( $handle ) );
 	$link_hidden_inputs .= sprintf( '<input data-link-target type="hidden" value="%s" name="%s[target]">', esc_attr( $target ), esc_attr( $handle ) );
 	$link_hidden_inputs .= sprintf( '<input data-link-rel type="hidden" value="%s" name="%s[rel]">', esc_attr( $rel ), esc_attr( $handle ) );
 	$link_hidden_inputs .= sprintf( '<input data-link-title type="hidden" value="%s" name="%s[title]">', esc_attr( $title ), esc_attr( $handle ) );
+	$link_hidden_inputs .= sprintf( '<input data-link-class type="hidden" value="%s" name="%s[class]">', esc_attr( $class ), esc_attr( $handle ) );
 
 	printf( '<span class="%s" data-nonce="%s">',
 		esc_attr( $link_class ),
@@ -76,6 +78,7 @@ function ev_link_modal_load() {
 	$target = isset( $data['target'] ) ? $data['target'] : '';
 	$rel    = isset( $data['rel'] ) ? $data['rel'] : '';
 	$title  = isset( $data['title'] ) ? $data['title'] : '';
+	$class  = isset( $data['class'] ) ? $data['class'] : '';
 
 	$content = '';
 	$content .= '<div class="ev-link-url-wrapper">';
@@ -111,6 +114,8 @@ function ev_link_modal_load() {
 		$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ) );
 
 		$content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ) );
+
+		$content .= sprintf( '<input type="text" name="class" value="%s" placeholder="class">', esc_attr( $class ) );
 	$content .= '</div>';
 
 	$m = new Ev_SimpleModal( 'ev-link' );
@@ -144,6 +149,7 @@ function ev_link( $data, $content, $echo = true ) {
 	$target = isset( $data['target'] ) ? $data['target'] : '';
 	$rel    = isset( $data['rel'] ) ? $data['rel'] : '';
 	$title  = isset( $data['title'] ) ? $data['title'] : '';
+	$class  = isset( $data['class'] ) ? $data['class'] : '';
 
 	if ( is_numeric( $url ) ) {
 		$url = get_permalink( $url );
@@ -161,6 +167,10 @@ function ev_link( $data, $content, $echo = true ) {
 
 	if ( $title ) {
 		$link .= sprintf( ' title="%s"', esc_attr( $title ) );
+	}
+
+	if ( $class ) {
+		$link .= sprintf( ' class="%s"', esc_attr( $class ) );
 	}
 
 	$link .= '>';
@@ -184,13 +194,13 @@ function ev_link_search_entries() {
 		die( json_encode( array() ) );
 	}
 
-	$nonce = isset( $_POST['nonce'] ) ? $_POST['nonce'] : '';
-	$action = 'ev_link_search_entries';
-	$is_valid_nonce = wp_verify_nonce( $nonce, $action );
+	// $nonce = isset( $_POST['nonce'] ) ? $_POST['nonce'] : '';
+	// $action = 'ev_link_search_entries';
+	// $is_valid_nonce = wp_verify_nonce( $nonce, $action );
 
-	if ( ! $is_valid_nonce ) {
-		die( json_encode( array() ) );
-	}
+	// if ( ! $is_valid_nonce ) {
+	// 	die( json_encode( array() ) );
+	// }
 
 	$args = array(
 		'post_type' => 'any',

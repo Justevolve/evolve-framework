@@ -9,6 +9,10 @@
 		$args['max'] = (int) $field->config( 'max' );
 	}
 
+	if ( $field->config( 'create' ) !== false ) {
+		$args['create'] = (int) $field->config( 'create' );
+	}
+
 	$data = $field->config( 'data' );
 
 	if ( is_array( $data ) ) {

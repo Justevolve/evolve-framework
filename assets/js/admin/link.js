@@ -145,6 +145,9 @@
 					html += '</div>';
 
 					return html;
+				},
+				option_create: function(data, escape) {
+					return '<div class="ev-link-create create"></div>';
 				}
 			}
 		} );
