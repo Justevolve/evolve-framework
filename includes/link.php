@@ -112,18 +112,21 @@ function ev_link_modal_load() {
 		$content .= '</div>';
 
 		$content .= '<div class="ev-link-input-wrapper">';
-			$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ) );
-			$content .= '<span>Rel</span>';
+			$label = __( 'Rel attribute', 'ev_framework' );
+			$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ), esc_attr( $label ) );
+			$content .= sprintf( '<span>%s</span>', $label );
 		$content .= '</div>';
 
 		$content .= '<div class="ev-link-input-wrapper">';
-			$content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ) );
-			$content .= '<span>Title</span>';
+			$label = __( 'Title attribute', 'ev_framework' );
+			$content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ), esc_attr( $label ) );
+			$content .= sprintf( '<span>%s</span>', $label );
 		$content .= '</div>';
 
 		$content .= '<div class="ev-link-input-wrapper">';
-			$content .= sprintf( '<input type="text" name="class" value="%s" placeholder="class">', esc_attr( $class ) );
-			$content .= '<span>Class</span>';
+			$label = __( 'Class attribute', 'ev_framework' );
+			$content .= sprintf( '<input type="text" name="class" value="%s" placeholder="class">', esc_attr( $class ), esc_attr( $label ) );
+			$content .= sprintf( '<span>%s</span>', $label );
 		$content .= '</div>';
 	$content .= '</div>';
 

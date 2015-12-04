@@ -2,6 +2,18 @@
 	"use strict";
 
 	/**
+	 * Check empty status on link inputs.
+	 */
+	$( document ).on( "input.ev_link", ".ev-link-input-wrapper input", function() {
+		if ( $( this ).val() !== "" ) {
+			$( this ).parent().addClass( "ev-not-empty" );
+		}
+		else {
+			$( this ).parent().removeClass( "ev-not-empty" );
+		}
+	} );
+
+	/**
 	 * Click on a link control.
 	 */
 	$.evf.delegate( ".ev-link-ctrl-btn", "click", "link", function() {
@@ -90,10 +102,14 @@
 	 * Check if a string represents a URL.
 	 */
 	function ev_is_url( s ) {
-	   var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+		var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
-	   return regexp.test( s );
+		return regexp.test( s );
 	}
+
+	$.evf.ui.add( ".ev-link-input-wrapper input", function() {
+		$( this ).trigger( "input.ev_link" );
+	} );
 
 	$.evf.ui.add( ".ev-link-url-wrapper [name='url']", function() {
 		var nonce = $( this ).attr( "data-nonce" );

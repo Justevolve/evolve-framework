@@ -80,7 +80,6 @@
 
 	input[type="text"] {
 		width: 100%;
-		margin-top: $gutter;
 	}
 
 	.ev-link-modal-expanded & {
@@ -103,19 +102,28 @@
 
 .ev-link-input-wrapper {
 	position: relative;
+	margin-top: $gutter;
 
 	span {
-		@include position( absolute, 4px null null $gutter/2 );
+		@include position( absolute, 10px null null $gutter/2 );
 		font-size: $small_fsz;
 		line-height: 1;
 		color: $grey_4;
+		visibility: hidden;
+		@include transition( visibility $transition_time*2 ease );
 	}
 
 	input {
+		@include transition( padding $transition_time*2 ease );
+	}
 
-		&:not([value='']) {
+	&.ev-not-empty {
+		span {
+			visibility: visible;
+		}
+
+		input {
 			padding-top: $baseline;
-			// padding-top: $baseline/4;
 		}
 	}
 }

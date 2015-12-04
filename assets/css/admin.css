@@ -561,15 +561,17 @@ body.ev-modal-open { overflow: hidden; }
 .ev-link-modal-expanded .ev-link-trigger { display: none; }
 
 .ev-link-inner-wrapper { display: none; padding: 20px; border-top: 1px solid #DBDBDB; background-color: #fcfcfc; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; }
-.ev-link-inner-wrapper input[type="text"] { width: 100%; margin-top: 20px; }
+.ev-link-inner-wrapper input[type="text"] { width: 100%; }
 .ev-link-modal-expanded .ev-link-inner-wrapper { display: block; }
 
 .ev-link-radio-wrapper { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 .ev-link-radio-wrapper > p { margin-top: 0; display: inline-block; margin-right: 20px; color: #999; margin-bottom: 0; }
 
-.ev-link-input-wrapper { position: relative; }
-.ev-link-input-wrapper span { position: absolute; top: 4px; left: 10px; font-size: 12px; line-height: 1; color: #999; }
-.ev-link-input-wrapper input:not([value='']) { padding-top: 24px; }
+.ev-link-input-wrapper { position: relative; margin-top: 20px; }
+.ev-link-input-wrapper span { position: absolute; top: 10px; left: 10px; font-size: 12px; line-height: 1; color: #999; visibility: hidden; -webkit-transition: visibility 0.2s ease; -moz-transition: visibility 0.2s ease; transition: visibility 0.2s ease; }
+.ev-link-input-wrapper input { -webkit-transition: padding 0.2s ease; -moz-transition: padding 0.2s ease; transition: padding 0.2s ease; }
+.ev-link-input-wrapper.ev-not-empty span { visibility: visible; }
+.ev-link-input-wrapper.ev-not-empty input { padding-top: 24px; }
 
 .ev-radio-wrapper:after { content: ""; display: table; clear: both; }
 .ev-radio-wrapper input[type="radio"] { display: none; }
