@@ -122,6 +122,10 @@ function ev_multiple_select_ajax( $name, $action, $selected = '', $args = array(
 		$attrs[] = 'data-max=' . $args['max'];
 	}
 
+	if ( isset( $args['create'] ) && is_numeric( $args['create'] ) ) {
+		$attrs[] = 'data-create=' . (int) $args['create'];
+	}
+
 	printf( '<select %s class="%s" name="%s">',
 		implode( ' ', array_map( 'esc_attr', $attrs ) ),
 		esc_attr( $class ),

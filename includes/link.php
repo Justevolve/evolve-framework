@@ -194,13 +194,13 @@ function ev_link_search_entries() {
 		die( json_encode( array() ) );
 	}
 
-	$nonce = isset( $_POST['nonce'] ) ? $_POST['nonce'] : '';
-	$action = 'ev_link_search_entries';
-	$is_valid_nonce = wp_verify_nonce( $nonce, $action );
+	// $nonce = isset( $_POST['nonce'] ) ? $_POST['nonce'] : '';
+	// $action = 'ev_link_search_entries';
+	// $is_valid_nonce = wp_verify_nonce( $nonce, $action );
 
-	if ( ! $is_valid_nonce ) {
-		die( json_encode( array() ) );
-	}
+	// if ( ! $is_valid_nonce ) {
+	// 	die( json_encode( array() ) );
+	// }
 
 	$args = array(
 		'post_type' => 'any',
