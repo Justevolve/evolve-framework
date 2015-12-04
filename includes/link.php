@@ -136,15 +136,14 @@ function ev_link_modal_load() {
 add_action( 'wp_ajax_ev_link_modal_load', 'ev_link_modal_load' );
 
 /**
- * Print a link.
+ * Print a link opening tag.
  *
  * @since 0.4.0
  * @param array $data The link data.
- * @param string $content The link content.
  * @param boolean $echo Set to true to echo the link.
  * @return string
  */
-function ev_link( $data, $content, $echo = true ) {
+function ev_link_open( $data, $echo = true ) {
 	if ( ! isset( $data['url'] ) || empty( $data['url'] ) ) {
 		if ( $echo ) {
 			echo $content;
@@ -183,14 +182,61 @@ function ev_link( $data, $content, $echo = true ) {
 	}
 
 	$link .= '>';
-	$link .= $content;
-	$link .= '</a>';
 
 	if ( $echo ) {
-		echo $content;
+		echo $link;
 	}
 
-	return $content;
+	return $link;
+}
+
+/**
+ * Print a link closing tag.
+ *
+ * @since 0.4.0
+ * @param boolean $echo Set to true to echo the link.
+ * @return string
+ */
+function ev_link_close( $echo = true ) {
+	$link = '</a>';
+
+	if ( $echo ) {
+		echo $link;
+	}
+
+	return $link;
+}
+
+/**
+ * Print a link.
+ *
+ * @since 0.4.0
+ * @param array $data The link data.
+ * @param string $content The link content.
+ * @param boolean $echo Set to true to echo the link.
+ * @return string
+ */
+function ev_link( $data, $content, $echo = true ) {
+	if ( ! isset( $data['url'] ) || empty( $data['url'] ) ) {
+		if ( $echo ) {
+			echo $content;
+		}
+		else {
+			return $content;
+		}
+	}
+
+	$link = '';
+
+	$link .= ev_link_open( $data, false );
+		$link .= $content;
+	$link .= ev_link_close( false );
+
+	if ( $echo ) {
+		echo $link;
+	}
+
+	return $link;
 }
 
 /**

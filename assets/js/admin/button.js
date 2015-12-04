@@ -17,14 +17,17 @@
 	 * Handle the button response.
 	 */
 	function ev_btn_handle_response( btn, response ) {
+		var tooltip = false;
+
 		$( btn ).addClass( "ev-btn-complete" );
 
 		if ( response ) {
 			$( btn )
-				.addClass( "ev-btn-" + response.type )
-				.attr( "data-title", response.message );
+				.addClass( "ev-btn-" + response.type );
 
-			var tooltip = ev_create_tooltip( btn );
+			tooltip = ev_create_tooltip( btn, response.message, {
+				class: "ev-tooltip-response-" + response.type
+			} );
 		}
 
 		setTimeout( function() {
@@ -32,7 +35,7 @@
 			$( btn ).removeClass( "ev-btn-complete" );
 
 			if ( response ) {
-				if ( tooltip.length ) {
+				if ( tooltip ) {
 					ev_tooltip_destroy( tooltip );
 				}
 

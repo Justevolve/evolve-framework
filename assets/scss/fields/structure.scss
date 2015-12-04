@@ -225,10 +225,8 @@
 
 .ev-modal-container[data-key="ev-help-popup"] {
 	.ev-modal-wrapper {
-		top: 25vh;
-		bottom: 25vh;
-		left: 25%;
-		right: 25%;
+		width: 400px;
+		height: 300px;
 		padding: $gutter;
 		font-size: $big_fsz;
 		line-height: 1.5;

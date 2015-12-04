@@ -138,8 +138,6 @@
 			}
 		} );
 
-		console.log( input.split( "," ) );
-
 		media.open( input.split( "," ) );
 
 		return false;
