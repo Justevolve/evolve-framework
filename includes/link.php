@@ -111,11 +111,20 @@ function ev_link_modal_load() {
 			);
 		$content .= '</div>';
 
-		$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ) );
+		$content .= '<div class="ev-link-input-wrapper">';
+			$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ) );
+			$content .= '<span>Rel</span>';
+		$content .= '</div>';
 
-		$content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ) );
+		$content .= '<div class="ev-link-input-wrapper">';
+			$content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ) );
+			$content .= '<span>Title</span>';
+		$content .= '</div>';
 
-		$content .= sprintf( '<input type="text" name="class" value="%s" placeholder="class">', esc_attr( $class ) );
+		$content .= '<div class="ev-link-input-wrapper">';
+			$content .= sprintf( '<input type="text" name="class" value="%s" placeholder="class">', esc_attr( $class ) );
+			$content .= '<span>Class</span>';
+		$content .= '</div>';
 	$content .= '</div>';
 
 	$m = new Ev_SimpleModal( 'ev-link' );

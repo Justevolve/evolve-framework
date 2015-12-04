@@ -31,8 +31,15 @@
 	position: relative;
 	padding: $gutter;
 
-	input[type="text"] {
-		width: 100%;
+	.selectize-control.single .selectize-input {
+		&:before,
+		&:after {
+			display: none;
+
+			.ev-link-modal-expanded & {
+				display: block;
+			}
+		}
 	}
 }
 
@@ -52,7 +59,7 @@
 
 	span {
 		display: inline-block;
-		border: 1px solid $grey_2;
+		border: 1px solid $grey_3;
 		padding: 2px 6px;
 		border-radius: $radius;
 		margin-top: 7px;
@@ -94,10 +101,21 @@
 	}
 }
 
-// -----------------------------------------------------------------------------
-// $Link selectize
-// -----------------------------------------------------------------------------
+.ev-link-input-wrapper {
+	position: relative;
 
-.selectize-dropdown .ev-link-create {
-	display: none;
+	span {
+		@include position( absolute, 4px null null $gutter/2 );
+		font-size: $small_fsz;
+		line-height: 1;
+		color: $grey_4;
+	}
+
+	input {
+
+		&:not([value='']) {
+			padding-top: $baseline;
+			// padding-top: $baseline/4;
+		}
+	}
 }

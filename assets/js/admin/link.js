@@ -147,7 +147,7 @@
 					return html;
 				},
 				option_create: function(data, escape) {
-					return '<div class="ev-link-create create"></div>';
+					return '<div class="ev-link-create create">Insert this URL</div>'; // TODO: tradurre
 				}
 			}
 		} );

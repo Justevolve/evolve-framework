@@ -40,7 +40,6 @@
 		}
 	}
 
-
 	&.dropdown-active,
 	&:hover:not( .disabled ) {
 		@include ui_input_hover;
@@ -56,11 +55,11 @@
 	> input {
 		color: $grey_6;
 		display: inline-block !important;
-		padding: ($baseline/8 + 2) 0 !important;
+		padding: ($gutter/5) 0 ($gutter/5 + 1) ($baseline/3 - 1) !important;
 		min-height: 0 !important;
 		max-height: none !important;
 		max-width: 100% !important;
-		margin: 0 $baseline/6 0 $baseline/3 !important;
+		margin: 0 $baseline/6 0 0 !important;
 		text-indent: 0 !important;
 		border: 0 none !important;
 		background: none !important;
@@ -69,6 +68,8 @@
 		-webkit-box-shadow: none !important;
 		box-shadow: none !important;
 		font-size: $main_fsz !important;
+		@include box-sizing( border-box );
+		float: left;
 
 		.ev-multiple-select-vertical & {
 			left: 0 !important;
@@ -86,6 +87,11 @@
 		}
 
 		&:focus { outline: none !important; }
+	}
+
+	[data-value] + input {
+		padding-left: 0 !important;
+		float: none;
 	}
 
 	> div {
@@ -208,6 +214,7 @@
 				border-color: transparent !important;
 				font-size: 14px;
 				padding-right: 0;
+				margin-left: 0;
 				margin-right: 0;
 			}
 
@@ -234,18 +241,27 @@
 .selectize-dropdown {
 	@include position( absolute, 100% null null 0 );
 	z-index: 10000;
-	border: 1px solid $grey_3;
-	background-color: $white;
-	margin: -1px 0 0 0;
-	@include box-sizing( border-box );
-	@include box-shadow( #{$ui_el_shadow_hover} );
-	color: $grey_4;
-	padding: $baseline/4 0;
 
 	[data-selectable] {
 		padding: $baseline/8 $gutter/2;
 		color: $grey_4;
 		cursor: pointer;
+
+		&:first-child {
+			margin-top: $baseline/4;
+
+			&:last-child {
+				margin-bottom: $baseline/4;
+			}
+		}
+
+		&.create + [data-selectable] {
+			margin-top: $baseline/4;
+		}
+
+		&:last-child {
+			margin-bottom: $baseline/4;
+		}
 
 		&.active {
 			color: $grey_6;
@@ -258,10 +274,17 @@
 	overflow-x: hidden;
 	max-height: 200px;
 
-	> div {
-		span {
-			margin-right: 5px;
-		}
+	border: 1px solid $grey_3;
+	background-color: $white;
+	margin: -1px 0 0 0;
+	@include box-sizing( border-box );
+	@include box-shadow( #{$ui_el_shadow_hover} );
+	color: $grey_4;
+	padding: 0;
+
+	.highlight {
+		background-color: lightYellow;
+		text-decoration: underline;
 	}
 }
 
