@@ -103,7 +103,7 @@ msgstr ""
 msgid "Changelog"
 msgstr ""
 
-#: includes/admin/fields.php:368
+#: includes/admin/fields.php:376
 msgid "Presets"
 msgstr ""
 
@@ -135,23 +135,23 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: includes/link.php:42
+#: includes/link.php:43
 msgid "Link"
 msgstr ""
 
-#: includes/link.php:84
+#: includes/link.php:96
 msgid "Tab"
 msgstr ""
 
-#: includes/link.php:89
-msgid "Open in tab"
+#: includes/link.php:101
+msgid "Open in"
 msgstr ""
 
-#: includes/link.php:93
+#: includes/link.php:105
 msgid "Same tab"
 msgstr ""
 
-#: includes/link.php:94
+#: includes/link.php:106
 msgid "New tab"
 msgstr ""
 
@@ -209,7 +209,7 @@ msgctxt "multiple icons found"
 msgid "%s found"
 msgstr ""
 
-#: includes/admin/fields.php:382
+#: includes/admin/fields.php:390
 msgctxt "save color preset"
 msgid "Save"
 msgstr ""
