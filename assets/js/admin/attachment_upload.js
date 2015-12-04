@@ -30,9 +30,9 @@
 			multiple = container.attr( "data-multiple" ) !== undefined,
 			input = $( "input[data-id]", container );
 
-		if ( multiple ) {
-			upload.remove();
+		upload.remove();
 
+		if ( multiple ) {
 			var remaining_placeholders = $( ".ev-attachment-placeholder", container );
 
 			if ( ! remaining_placeholders.length ) {
