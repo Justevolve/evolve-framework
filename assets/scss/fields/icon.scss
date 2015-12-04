@@ -78,14 +78,18 @@
 
 .ev-modal-container[data-key="ev-icon"] {
 	.ev-modal-wrapper {
-		top: 120px;
-		bottom: 120px;
+		width: 700px;
+		height: 600px;
 	}
 }
 
 .ev-icon-sets-controls-external-wrapper {
 	@include position( absolute, ( $modal_header_height + 1px ) null 0 0 );
 	width: 300px;
+
+	@include ev_media( $media_mobile ) {
+		width: 50%;
+	}
 }
 
 .ev-icon-sets-controls-wrapper {
@@ -100,11 +104,19 @@
 	text-align: center;
 	overflow: hidden;
 
+	@include ev_media( $media_mobile ) {
+		height: 200px;
+	}
+
 	.ev-selected-icon-preview {
 		line-height: 300px;
 		@include size( 100% );
 		display: block;
 		text-align: center;
+
+		@include ev_media( $media_mobile ) {
+			line-height: 200px;
+		}
 	}
 }
 
@@ -118,6 +130,10 @@
 .ev-icon-sets-inner-wrapper {
 	@include position( absolute, ( $modal_header_height + 1px ) 0 0 300px );
 	@include box-shadow( -1px 0 0 $grey_1 );
+
+	@include ev_media( $media_mobile ) {
+		left: 50%;
+	}
 
 	> h2 {
 		padding: 0 $baseline;

@@ -31,7 +31,7 @@
 
 .ev-field-panel-controls-wrapper {
 	display: none;
-	@include position( absolute, -1px (-($baseline+1)) null null );
+	// @include position( absolute, -1px (-($baseline+1)) null null );
 	// TODO: Aggiungere bleeding edge
 
 	.ev-field-panel-controls-inner-wrapper {

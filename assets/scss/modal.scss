@@ -18,6 +18,7 @@ body.ev-modal-open {
 	left: 15%;
 	right: 15%;
 	background: $white;
+	@include box-sizing( border-box );
 	// overflow: hidden;
 
 	@include ev_media( $media_tablet ) {
@@ -28,8 +29,8 @@ body.ev-modal-open {
 	@include ev_media( $media_mobile ) {
 		left: 0;
 		right: 0;
-		top: 0;
-		bottom: 0;
+		top: $admin_bar_mobile;
+		bottom: $admin_bar_mobile;
 	}
 
 	&.ev-loading {
@@ -172,11 +173,52 @@ body.ev-modal-open {
 // -----------------------------------------------------------------------------
 
 .ev-modal-container-simple {
+	@include align-items(center);
+	@include display(flex);
+	@include flex-direction(row);
+	@include justify-content(center);
+
+	.ev-modal-wrapper {
+		@include position( relative, auto auto auto auto );
+		border-radius: $radius;
+	}
+
+	@include ev_media( $media_mobile ) {
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+
+		.ev-modal-wrapper {
+			@include position( absolute, $admin_bar_mobile 0 $admin_bar_mobile 0 );
+			padding-top: $modal_header_height;
+			padding-bottom: $modal_footer_height;
+			background-color: $white;
+			border-radius: 0;
+			width: auto !important;
+			height: auto !important;
+
+			.ev-modal-wrapper-inner {
+				border-top: 1px solid $grey_1;
+				border-bottom: 1px solid $grey_1;
+				width: 100% !important;
+				height: 100% !important;
+				position: relative;
+			}
+		}
+	}
+
 	.ev-modal-close {
 		top: -$baseline*1.5;
 		margin-right: 0;
 		color: $white;
 		padding-top: 0;
+
+		@include ev_media( $media_mobile ) {
+			color: $grey_6;
+			margin-right: $gutter;
+			top: $baseline/2;
+		}
 
 		&:hover {
 			color: $red;
@@ -193,6 +235,11 @@ body.ev-modal-open {
 			border-top: none;
 			background-color: transparent;
 			margin-top: $baseline;
+
+			@include ev_media( $media_mobile ) {
+				padding: $baseline/2 $gutter;
+				margin-top: 0;
+			}
 		}
 
 	}

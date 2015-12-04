@@ -27,6 +27,13 @@
 	padding: $baseline*2 $gutter*2;
 	background-color: $white;
 
+	@include ev_media( $media_mobile ) {
+		margin-left: -10px;
+		margin-right: -10px;
+		padding-left: $gutter;
+		padding-right: $gutter;
+	}
+
 	h1 {
 		line-height: 1;
 		font-weight: 300;
@@ -71,6 +78,13 @@
 	padding-left: 40px;
 	padding-right: 40px;
 	border-bottom: 1px solid $grey_1;
+
+	@include ev_media( $media_mobile ) {
+		margin-left: -10px;
+		margin-right: -10px;
+		padding-left: 0;
+		padding-right: 0;
+	}
 
 	ul {
 		font-size: 0.01em;

@@ -20,18 +20,9 @@
 // $Link
 // -----------------------------------------------------------------------------
 
-$link_modal_height: $baseline*2;
-
-[data-key="ev-link"] {
-	@include align-items(center);
-	@include display(flex);
-	@include flex-direction(row);
-	@include justify-content(center);
-
+.ev-modal-container[data-key="ev-link"] {
 	.ev-modal-wrapper {
-		@include position( relative, auto auto auto auto );
 		width: 400px;
-		border-radius: $radius;
 		overflow: visible;
 	}
 }
@@ -64,6 +55,7 @@ $link_modal_height: $baseline*2;
 		border: 1px solid $grey_2;
 		padding: 2px 6px;
 		border-radius: $radius;
+		margin-top: 7px;
 	}
 
 	.ev-link-modal-expanded & {

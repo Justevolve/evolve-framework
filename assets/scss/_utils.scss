@@ -102,8 +102,8 @@
 
 @mixin ui_input_focus {
 	background-color: $white;
-	border-color: $grey_2;
-	@include box-shadow( #{$ui_el_shadow_hover} );
+	border-color: $blue;
+	// @include box-shadow( #{$ui_el_shadow_hover} );
 }
 
 // // -----------------------------------------------------------------------------

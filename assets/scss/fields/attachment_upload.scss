@@ -38,6 +38,7 @@ $attachment_spreadsheet: "\f495";
 .ev-attachment-upload-container {
 	@include ui_input_standard;
 	padding: 0 $baseline/4;
+	border-radius: $radius;
 
 	&.ev-attachment-uploaded {
 		.ev-edit-action {
@@ -206,8 +207,8 @@ $attachment_spreadsheet: "\f495";
 // TODO: vedere se possibile uniformare comportamento con repeatable
 .ev-field-panel-controls-wrapper {
 	display: none;
-	@include position( absolute, -1px (-($baseline+1)) null null );
-	// TODO: Aggiungere bleeding edge
+	@include position( absolute, (-(1px + $gutter)) (-($baseline+1 + $gutter)) (-$gutter) null );
+	padding: $gutter $gutter $gutter 0;
 
 	.ev-field-panel-controls-inner-wrapper {
 		@include size( $baseline );
