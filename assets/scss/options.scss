@@ -28,6 +28,7 @@
 	@include box-sizing( border-box );
 	padding: $baseline*2 $gutter*2;
 	background-color: $white;
+	border-bottom: 1px solid $grey_1;
 
 	@include ev_media( $media_mobile ) {
 		margin-left: -10px;
@@ -58,12 +59,10 @@
 	}
 
 	+ div {
-		border-top: 1px solid $grey_1;
 		margin-top: $baseline*2;
 	}
 
 	+ .ev-admin-page-group-nav {
-		border-top: 1px solid #ebebeb;
 		margin-top: 0;
 	}
 }

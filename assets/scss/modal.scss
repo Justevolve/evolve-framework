@@ -80,6 +80,7 @@ body.ev-modal-open {
 
 			+ .ev-tab-container {
 				overflow-y: auto;
+				overflow-x: hidden;
 				@include position( absolute, 0 0 0 null );
 
 				@include ev-media( $media_mobile_small ) {
