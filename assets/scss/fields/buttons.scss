@@ -468,21 +468,21 @@
 	&.ev-btn-type-action {
 		&.ev-btn-style-round,
 		&.ev-btn-style-button {
-			background-color: $blue_0;
-			border-color: $blue_0;
+			background-color: $blue;
+			border-color: $blue;
 
-			&:hover {
-				background-color: $blue;
-				border-color: $blue;
-			}
+			// &:hover {
+			// 	background-color: $blue;
+			// 	border-color: $blue;
+			// }
 		}
 
 		&.ev-btn-style-text {
-			color: $blue_0;
+			color: $blue;
 
-			&:hover {
-				color: $blue;
-			}
+			// &:hover {
+			// 	color: $blue;
+			// }
 		}
 	}
 
@@ -490,12 +490,12 @@
 	&.ev-btn-type-confirm {
 		&.ev-btn-style-round,
 		&.ev-btn-style-button {
-			background-color: $blue;
-			border-color: $blue;
+			background-color: $green;
+			border-color: $green;
 		}
 
 		&.ev-btn-style-text {
-			color: $blue;
+			color: $green;
 		}
 	}
 

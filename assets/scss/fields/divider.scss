@@ -7,16 +7,17 @@
 .ev-field-divider {
 	h3 {
 		display: inline-block;
-		font-size: 16px;
+		font-size: 24px !important;
 		margin: 0;
 		padding: 0 !important;
+		color: $green_2;
 	}
 
 	// Section break
 	&.ev-divider-style-section_break {
-		background-color: $grey_0;
-		border-top: 1px solid $grey_1;
-		border-bottom: 1px solid $grey_1;
+		background-color: $green_0;
+		// border-top: 1px solid $grey_1;
+		// border-bottom: 1px solid $grey_1;
 
 		h3 {
 			padding: $baseline 0 0 0 !important;
@@ -28,7 +29,7 @@
 
 		.ev-field-inner-wrapper {
 			padding-bottom: $baseline/2;
-			border-bottom: 4px solid $grey_1;
+			border-bottom: 4px solid $green_0;
 		}
 	}
 }

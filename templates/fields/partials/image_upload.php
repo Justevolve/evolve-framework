@@ -69,7 +69,7 @@
 		<?php
 			ev_btn(
 				__( 'Edit', 'ev_framework' ),
-				'confirm',
+				'action',
 				array(
 					'attrs' => array(
 						'class'     => 'ev-edit-action',
@@ -83,7 +83,7 @@
 		<?php
 			ev_btn(
 				__( 'Upload', 'ev_framework' ),
-				'confirm',
+				'action',
 				array(
 					'attrs' => array(
 						'class'     => 'ev-upload-action',

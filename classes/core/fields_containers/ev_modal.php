@@ -91,7 +91,7 @@ class Ev_Modal extends Ev_FieldsContainer {
 				if ( ! empty( $elements ) ) {
 					ev_btn(
 						$this->_config['button'],
-						'confirm',
+						'save',
 						array(
 							'attrs' => array(
 								'data-nonce' => $this->_config['button_nonce'],

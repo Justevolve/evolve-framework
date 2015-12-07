@@ -212,8 +212,8 @@ body.ev-modal-open {
 	.ev-modal-close {
 		top: -$baseline*1.5;
 		margin-right: 0;
-		color: $white;
 		padding-top: 0;
+		color: $white;
 
 		@include ev_media( $media_mobile ) {
 			color: $grey_6;
@@ -222,7 +222,7 @@ body.ev-modal-open {
 		}
 
 		&:hover {
-			color: $red;
+			color: rgba( $white, .5 );
 		}
 	}
 

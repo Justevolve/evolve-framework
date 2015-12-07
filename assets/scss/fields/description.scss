@@ -46,22 +46,34 @@ $yellow_light: #F9E986;
 // -----------------------------------------------------------------------------
 
 .ev-field-divider.ev-divider-style-section_break + .ev-field-description {
-	padding-top: $baseline/2;
+	// padding-top: $baseline/2;
 	margin-top: -$baseline/2;
 	background-color: $grey_0;
 
 	&.ev-description-style-standard {
-		padding-top: 0;
+		background-color: $green_0;
+
+		.ev-field-inner-wrapper {
+			padding-top: 0;
+		}
 
 		.ev-container {
-			padding: 0;
-			border: none;
-			border-radius: none;
 			background-color: transparent;
 		}
 	}
 
-	.ev-field-inner-wrapper {
-		padding-top: 0;
+	.ev-container {
+		padding: 0;
+		border: none;
+		border-radius: none;
+		background-color: transparent;
+	}
+
+	&.ev-description-style-info {
+		background-color: $blue_light;
+	}
+
+	&.ev-description-style-important {
+		background-color: lightYellow;
 	}
 }

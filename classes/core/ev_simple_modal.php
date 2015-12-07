@@ -57,7 +57,7 @@ class Ev_SimpleModal {
 			echo '<div class="ev-modal-footer">';
 				ev_btn(
 					$this->_config['button'],
-					'confirm',
+					'save',
 					array(
 						'attrs' => array(
 							'data-nonce' => $this->_config['button_nonce'],

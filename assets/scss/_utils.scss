@@ -102,7 +102,7 @@
 
 @mixin ui_input_focus {
 	background-color: $white;
-	border-color: $blue;
+	border-color: $green;
 	// @include box-shadow( #{$ui_el_shadow_hover} );
 }
 
@@ -162,16 +162,17 @@
 	.ev-tabs-nav.ev-vertical {
 		margin-right: 0;
 		max-width: none;
-		background-color: $grey_6;
+		background-color: $white;
 		padding: $gutter $gutter/2;
 		width: 15%;
 		@include box-sizing( border-box );
+		@include box-shadow( inset -1px 0 0 $grey_1);
 
 		li {
 			margin-bottom: 0;
 
 			a {
-				color: rgba( $white, .5 );
+				color: rgba( $grey_6, .5 );
 				background-color: transparent;
 				border: none;
 				border-radius: $radius;
@@ -179,18 +180,19 @@
 				text-decoration: none;
 				@include transition( none );
 				@include box-sizing( border-box );
+				font-weight: bold;
 
 				&:focus {
 					@include box-shadow( none );
 				}
 
 				&:hover {
-					color: $white;
-					background-color: rgba( $white, .3 );
+					color: $grey_6	;
+					background-color: rgba( $grey_3, .1 );
 				}
 
 				&.ev-active {
-					background-color: $blue;
+					background-color: $green;
 					color: $white;
 				}
 			}

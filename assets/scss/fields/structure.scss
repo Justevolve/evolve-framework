@@ -197,6 +197,19 @@
 	&.ev-help-tooltip,
 	&.ev-help-popup {
 		display: inline-block;
+
+		.ev-help-handle span {
+			&:before {
+				@include icon( "\f223" );
+				display: block;
+				float: right;
+				font-size: 20px;
+				top: -1px;
+				position: relative;
+				margin-left: $gutter/4;
+				color: $grey_3;
+			}
+		}
 	}
 
 	&.ev-help-tooltip {
