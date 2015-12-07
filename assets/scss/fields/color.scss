@@ -34,10 +34,8 @@
 		}
 	}
 
-	.ev-color-controls-wrapper {
-		* + * {
-			margin-left: $gutter/2;
-		}
+	.ev-color-controls-wrapper > * {
+		margin-right: $gutter/2;
 	}
 
 // -----------------------------------------------------------------------------
