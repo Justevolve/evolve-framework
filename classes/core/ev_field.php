@@ -539,7 +539,7 @@ abstract class Ev_Field {
 		printf( '<div class="ev-repeatable-controls">' );
 			ev_btn(
 				__( 'Add', 'ev_framework' ),
-				'action',
+				'confirm',
 				array(
 					'attrs' => array(
 						'data-mode' => $mode,

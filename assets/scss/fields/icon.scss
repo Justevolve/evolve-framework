@@ -29,7 +29,7 @@
 			content: "";
 			display: block;
 			@include size( $baseline );
-			border: 2px dashed $grey_2;
+			border: 2px dashed $grey_3;
 			margin-top: $baseline/4 - 2;
 			margin-left: $baseline/4 - 2;
 		}

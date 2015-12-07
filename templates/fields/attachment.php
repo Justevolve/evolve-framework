@@ -74,7 +74,7 @@ printf( '<div class="ev-attachment-upload-container %s" %s>', esc_attr( $contain
 		<?php
 			ev_btn(
 				__( 'Edit', 'ev_framework' ),
-				'confirm',
+				'action',
 				array(
 					'attrs' => array(
 						'class'     => 'ev-edit-action',
@@ -87,7 +87,7 @@ printf( '<div class="ev-attachment-upload-container %s" %s>', esc_attr( $contain
 		<?php
 			ev_btn(
 				__( 'Upload', 'ev_framework' ),
-				'confirm',
+				'action',
 				array(
 					'attrs' => array(
 						'class'     => 'ev-upload-action',

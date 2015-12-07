@@ -113,8 +113,8 @@
 		@include transition( visibility $transition_time*2 ease );
 	}
 
-	input {
-		@include transition( padding $transition_time*2 ease );
+	input[type="text"] {
+		@include transition( padding $transition_time*2 ease, background-color $transition_time*2 ease, border-color $transition_time*2 ease );
 	}
 
 	&.ev-not-empty {
