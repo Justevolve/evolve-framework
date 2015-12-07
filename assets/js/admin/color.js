@@ -92,6 +92,10 @@
 					id: ev_framework.color.presets.length + 1
 				},
 				function( response ) {
+					if ( ! ev_framework.color.presets.user ) {
+						ev_framework.color.presets.user = [];
+					}
+
 					ev_framework.color.presets.user.push( {
 						user: true,
 						hex: hex,

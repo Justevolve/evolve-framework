@@ -77,6 +77,31 @@ function ev_color_save_preset() {
 add_action( 'wp_ajax_ev_color_save_preset', 'ev_color_save_preset' );
 
 /**
+ * Check if there are color presets available.
+ *
+ * @since 0.4.0
+ * @return boolean
+ */
+function ev_has_color_presets() {
+	$presets = ev_get_color_presets();
+
+	if ( empty( $presets ) ) {
+		return false;
+	}
+
+	$empty = true;
+
+	foreach ( $presets as $preset_key => $preset_colors ) {
+		if ( ! empty( $preset_colors ) ) {
+			$empty = false;
+			break;
+		}
+	}
+
+	return ! $empty;
+}
+
+/**
  * Add a body class to the admin body if we have saved at least one color
  * preset is available.
  *
@@ -85,9 +110,7 @@ add_action( 'wp_ajax_ev_color_save_preset', 'ev_color_save_preset' );
  * @return string
  */
 function ev_color_presets_body_class( $class ) {
-	$presets = ev_get_color_presets();
-
-	if ( ! empty( $presets ) ) {
+	if ( ev_has_color_presets() ) {
 		$class .= ' ev-has-color-presets';
 	}
 

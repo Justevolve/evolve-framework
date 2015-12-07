@@ -35,8 +35,8 @@
 	}
 
 	.ev-color-controls-wrapper {
-		* + * {
-			margin-left: $gutter/2;
+		* {
+			margin-right: $gutter/2;
 		}
 	}
 

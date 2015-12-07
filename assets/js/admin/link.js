@@ -174,6 +174,8 @@
 				}
 			}
 		} );
+
+		$( this ).get( 0 ).selectize.focus();
 	} );
 
 } )( jQuery );
