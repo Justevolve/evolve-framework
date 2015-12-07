@@ -13,6 +13,7 @@
 	float: left;
 	@include box-sizing( border-box );
 	border: 1px solid $grey_1;
+	@include transition( border-color $transition_time*2 ease );
 
 	&.has-items {
 		padding-left: $gutter/10;
@@ -189,6 +190,7 @@
 				@include position( absolute, 50% $baseline/2+1 null null );
 				@include triangle( 12px, $grey_3, down );
 				margin-top: -3px;
+				@include transition( border-color $transition_time*2 ease );
 			}
 
 			&:after {
@@ -198,6 +200,7 @@
 				margin-top: -$baseline/2;
 				@include size( 0 $baseline );
 				border-left: 1px solid $grey_1;
+				@include transition( border-color $transition_time*2 ease );
 			}
 
 			&:hover {

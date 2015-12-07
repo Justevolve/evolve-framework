@@ -41,7 +41,7 @@ function ev_link_partial( $handle, $link ) {
 
 		ev_btn(
 			__( 'Link', 'ev_framework' ),
-			'confirm',
+			'action',
 			array(
 				'attrs' => array(
 					'class' => 'ev-link-ctrl-btn',

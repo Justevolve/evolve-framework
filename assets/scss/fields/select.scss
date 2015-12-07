@@ -10,6 +10,7 @@
 	border-radius: $radius;
 	position: relative;
 	max-width: 100%;
+	@include transition( background-color $transition_time*2 ease, border-color $transition_time*2 ease );
 
 	&.ev-select-style-small {
 		select {
@@ -58,6 +59,7 @@
 		@include position( absolute, 50% $baseline/2+1 null null );
 		@include triangle( 12px, $grey_3, down );
 		margin-top: -3px;
+		@include transition( border-color $transition_time*2 ease );
 	}
 
 	&:after {
@@ -67,6 +69,7 @@
 		margin-top: -$baseline/2;
 		@include size( 0 $baseline );
 		border-left: 1px solid $grey_1;
+		@include transition( border-color $transition_time*2 ease );
 	}
 
 	select {
