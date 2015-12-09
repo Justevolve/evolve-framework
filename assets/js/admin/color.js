@@ -80,7 +80,7 @@
 		if ( hex ) {
 			var preset_name = prompt( ev_framework.color.new_preset_name );
 
-			ctrl.addClass( "ev-saving" );
+			ev_idle_button( ctrl );
 
 			$.post(
 				ajaxurl,
@@ -103,7 +103,8 @@
 					} );
 
 					$( "body" ).addClass( "ev-has-color-presets" );
-					ctrl.removeClass( "ev-saving" );
+
+					ev_unidle_button( ctrl );
 				}
 			);
 		}
@@ -169,7 +170,7 @@
 	$.evf.ui.add( "input.ev-color-input", function() {
 		$( this ).each( function() {
 			var input = $( this ),
-				wrapper = input.parents( ".ev-color-inner-wrapper" ).first(),
+				wrapper = input.parents( ".ev-color-wrapper" ).first(),
 				opacity = input.attr( "data-opacity" ),
 				options = {
 					control: "wheel",
@@ -178,6 +179,13 @@
 
 						if ( opacity !== undefined ) {
 							$( "[data-input-color-opacity]", wrapper ).val( opacity );
+						}
+
+						if ( value !== '' ) {
+							wrapper.addClass( "ev-color-can-be-saved" );
+						}
+						else {
+							wrapper.removeClass( "ev-color-can-be-saved" );
 						}
 					}
 				};
