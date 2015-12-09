@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 .ev-field input[type="text"], .ev-field input[type="number"], .ev-field textarea { max-width: 100%; }
 @media only screen and (max-width: 782px) { .ev-field input[type="text"], .ev-field input[type="number"], .ev-field textarea { width: 100%; } }
 .ev-field select { max-width: 100%; }
@@ -510,6 +509,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-image-upload { display: inline-block; }
 .ev-image-upload .ev-edit-action, .ev-image-upload .ev-remove-all-action { display: none; }
 .ev-image-upload .ev-edit-action { margin-right: 10px; }
+.ev-image-upload .ev-edit-action, .ev-image-upload .ev-upload-action { float: left; }
 .ev-image-upload.ev-image-uploaded .ev-edit-action { display: inline-block; }
 .ev-image-upload.ev-image-uploaded .ev-remove-all-action { display: inline-block; float: right; }
 .ev-image-upload.ev-image-uploaded .ev-upload-action { display: none; }

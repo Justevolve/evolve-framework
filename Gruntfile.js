@@ -321,6 +321,25 @@ module.exports = function( grunt ) {
 	grunt.task.run( "notify_hooks" );
 
 	// -------------------------------------------------------------------------
+	// EVENTS
+	// -------------------------------------------------------------------------
+
+	/**
+	 * Target and run specific operations according to the type of file that has
+	 * been modified.
+	 */
+	grunt.event.on( 'watch', function( action, filepath, target ) {
+		switch ( target ) {
+			case "admin_css":
+				grunt.config( 'sass.admin.files.0.src', [ filepath.replace( "assets/scss/", "" ) ] );
+
+				break;
+			default:
+				break;
+		}
+	} );
+
+	// -------------------------------------------------------------------------
 	// TASKS
 	// -------------------------------------------------------------------------
 
