@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 .ev-field input[type="text"], .ev-field input[type="number"], .ev-field textarea { max-width: 100%; }
 @media only screen and (max-width: 782px) { .ev-field input[type="text"], .ev-field input[type="number"], .ev-field textarea { width: 100%; } }
 .ev-field select { max-width: 100%; }
@@ -405,6 +404,9 @@ body.ev-modal-open { overflow: hidden; }
 
 [data-color-presets] { display: none; }
 .ev-has-color-presets [data-color-presets] { display: inline-block; }
+
+[data-color-save-preset] { visibility: hidden; }
+.ev-color-can-be-saved [data-color-save-preset] { visibility: visible; }
 
 .ev-color-user-presets, .ev-color-default-presets { margin-bottom: 24px; }
 .ev-color-user-presets:after, .ev-color-default-presets:after { content: ""; display: table; clear: both; }

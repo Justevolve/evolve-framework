@@ -38,6 +38,8 @@
 		margin-right: $gutter/2;
 	}
 
+
+
 // -----------------------------------------------------------------------------
 // $Minicolor
 // -----------------------------------------------------------------------------
@@ -286,6 +288,14 @@
 
 	.ev-has-color-presets & {
 		display: inline-block;
+	}
+}
+
+[data-color-save-preset] {
+	visibility: hidden;
+
+	.ev-color-can-be-saved & {
+		visibility: visible;
 	}
 }
 

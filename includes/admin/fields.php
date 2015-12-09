@@ -342,12 +342,16 @@ function ev_color( $name, $value, $opacity = false, $style = '', $echo = true ) 
 		}
 	}
 
-	$new_style = implode( ' ', $new_style );
-
 	if ( is_array( $value ) ) {
 		$field_color   = isset( $value['color'] ) ? $value['color'] : '';
 		$field_opacity = isset( $value['opacity'] ) ? $value['opacity'] : '';
 	}
+
+	if ( ! empty( $field_color ) ) {
+		$new_style[] = 'ev-color-can-be-saved';
+	}
+
+	$new_style = implode( ' ', $new_style );
 
 	$html .= sprintf( '<span class="ev-color-wrapper %s">', esc_attr( $new_style ) );
 
