@@ -54,6 +54,8 @@
 
 		$container.removeClass( "ev-tooltip-expand-top ev-tooltip-expand-bottom ev-tooltip-vertical" );
 
+		offset_top += 2;
+
 		if ( livetip_height <= scroll ) {
 			$container.addClass( "ev-tooltip-expand-top" );
 			style.top = offset_top - livetip_height;
