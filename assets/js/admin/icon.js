@@ -92,8 +92,6 @@
 		$( "[data-preview]", field ).attr( "class", "ev-icon ev-component" )
 			.css( "color", "" );
 
-		// TODO: sbiancare preview
-
 		return false;
 	} );
 

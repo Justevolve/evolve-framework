@@ -170,7 +170,7 @@
 					return html;
 				},
 				option_create: function(data, escape) {
-					return '<div class="ev-link-create create">Insert this URL</div>'; // TODO: tradurre
+					return '<div class="ev-link-create create">' + ev_framework.link.create + '</div>';
 				}
 			}
 		} );

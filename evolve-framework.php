@@ -177,6 +177,9 @@ class Ev_Framework {
 			'color' => array(
 				'presets' => ev_get_color_presets(),
 				'new_preset_name' => __( 'Insert a name for the preset', 'ev_framework' )
+			),
+			'link' => array(
+				'create' => __( 'Insert this URL', 'ev_framework' )
 			)
 		) );
 	}

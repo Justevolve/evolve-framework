@@ -106,22 +106,21 @@
 		return false;
 	} );
 
-	// TODO: rimuovere
-	$.evf.on( ".ev-tab .ev-field-ev_debug_button .ev-btn", "click", "asd", function() {
-		var btn = $( this ),
-			response = {
-				message: '',
-				type: 'success'
-			};
+	// $.evf.on( ".ev-tab .ev-field-ev_debug_button .ev-btn", "click", "asd", function() {
+	// 	var btn = $( this ),
+	// 		response = {
+	// 			message: '',
+	// 			type: 'success'
+	// 		};
 
-		ev_idle_button( btn );
+	// 	ev_idle_button( btn );
 
-		setTimeout( function() {
-			ev_unidle_button( btn, response );
-		}, 1000 );
+	// 	setTimeout( function() {
+	// 		ev_unidle_button( btn, response );
+	// 	}, 1000 );
 
-		return false;
-	} );
+	// 	return false;
+	// } );
 
 	/**
 	 * Hooks to the click event of admin pages forms save buttons in order to
