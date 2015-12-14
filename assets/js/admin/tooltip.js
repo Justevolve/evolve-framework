@@ -54,13 +54,13 @@
 
 		$container.removeClass( "ev-tooltip-expand-top ev-tooltip-expand-bottom ev-tooltip-vertical" );
 
-		offset_top += 2;
-
 		if ( livetip_height <= scroll ) {
+			offset_top += 2;
 			$container.addClass( "ev-tooltip-expand-top" );
 			style.top = offset_top - livetip_height;
 		}
 		else {
+			offset_top -= 2;
 			$container.addClass( "ev-tooltip-expand-bottom" );
 			style.top = offset_top + link_height + ( arrow_size / 2 );
 		}
