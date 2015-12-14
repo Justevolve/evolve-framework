@@ -20,6 +20,11 @@ function ev_btn( $text, $type, $config = array() ) {
 
 	$html = '';
 
+	/* Type */
+	if ( ! isset( $config['attrs']['type'] ) ) {
+		$config['attrs']['type'] = 'button';
+	}
+
 	/* Classes */
 	if ( ! isset( $config['attrs']['class'] ) ) {
 		$config['attrs']['class'] = '';

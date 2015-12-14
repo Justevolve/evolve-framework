@@ -95,7 +95,8 @@ class Ev_Modal extends Ev_FieldsContainer {
 						array(
 							'attrs' => array(
 								'data-nonce' => $this->_config['button_nonce'],
-								'class' => 'ev-save'
+								'class' => 'ev-save',
+								'type' => 'submit'
 							),
 							'size' => 'medium'
 						)
