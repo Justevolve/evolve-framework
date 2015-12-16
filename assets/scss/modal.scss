@@ -8,6 +8,11 @@ body.ev-modal-open {
 	overflow: hidden;
 }
 
+#ev-modals-container {
+	position: relative;
+	z-index: 100001;
+}
+
 #ev-modals-container .ev-modal-container:not( :last-child ) {
 	@include opacity( 0 );
 }

@@ -99,7 +99,11 @@ msgstr ""
 msgid "Insert a name for the preset"
 msgstr ""
 
-#: evolve-framework.php:489
+#: evolve-framework.php:182
+msgid "Insert this URL"
+msgstr ""
+
+#: evolve-framework.php:492
 msgid "Changelog"
 msgstr ""
 
