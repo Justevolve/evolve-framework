@@ -64,9 +64,7 @@
 	 * @return {Boolean}
 	 */
 	window.ev_save_options_tab = function( tab ) {
-		if ( typeof tinymce !== 'undefined' ) {
-			tinymce.triggerSave();
-		}
+		$.evSaveRichTextareas( tab );
 
 		var form = $( "form", tab ).first(),
 			action = $( ".ev-btn-type-save[data-callback]", form ).first(),
@@ -78,15 +76,11 @@
 
 		ev_idle_button( action );
 
-		// window.ev_save_options_tab_button.call( action, "on" );
-
 		$.post(
 			form.attr( "action" ),
 			data,
 			function( response ) {
 				ev_unidle_button( action, response );
-
-				// window.ev_save_options_tab_button.call( action, "off", response );
 			},
 			'json'
 		);

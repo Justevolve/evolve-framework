@@ -180,12 +180,10 @@
 			} );
 
 			$.evf.delegate( form, "submit", modal_namespace, function() {
-				if ( typeof tinymce !== 'undefined' ) {
-					tinymce.triggerSave();
-				}
+				$.evSaveRichTextareas( this );
 
 				$(save_btn).addClass( "ev-saving");
-				self.save( $( form ).serializeObject() );
+				self.save( $( this ).serializeObject() );
 
 				$.evf.undelegate( "submit", modal_namespace );
 				$.evf.undelegate( "click", modal_namespace );

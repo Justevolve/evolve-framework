@@ -1,6 +1,14 @@
 "use strict";
 
 (function($){
+	$.evSaveRichTextareas = function( context ) {
+		if ( typeof tinymce !== 'undefined' ) {
+			$( ".ev-rich", context ).each( function() {
+				tinymce.get( this.id ).save();
+			} );
+		}
+	};
+
 	/**
 	 * Serialize a <form> element into an Object.
 	 *
