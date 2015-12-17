@@ -12,7 +12,7 @@
 	input[type="password"],
 	input[type="email"],
 	input[type="tel"],
-	textarea {
+	textarea:not( .ev-rich ) {
 		@include ui_input_standard;
 		font-size: $main_fsz;
 		@include box-shadow( none );
