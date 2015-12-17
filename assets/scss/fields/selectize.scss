@@ -243,7 +243,7 @@
 
 .selectize-dropdown {
 	@include position( absolute, 100% null null 0 );
-	z-index: 10000;
+	z-index: 100001;
 
 	[data-selectable] {
 		padding: $baseline/8 $gutter/2;

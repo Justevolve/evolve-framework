@@ -697,7 +697,7 @@ input[type="radio"]:checked + .ev-radio.ev-graphic-radio img { border-color: #66
 .selectize-control.single .selectize-input:hover:not(.disabled) > div { box-shadow: none; border-color: transparent; }
 .selectize-control.single .selectize-input.full > input { margin-left: 0 !important; }
 
-.selectize-dropdown { position: absolute; top: 100%; left: 0; z-index: 10000; }
+.selectize-dropdown { position: absolute; top: 100%; left: 0; z-index: 100001; }
 .selectize-dropdown [data-selectable] { padding: 3px 10px; color: #999; cursor: pointer; }
 .selectize-dropdown [data-selectable]:first-child { margin-top: 6px; }
 .selectize-dropdown [data-selectable]:first-child:last-child { margin-bottom: 6px; }
