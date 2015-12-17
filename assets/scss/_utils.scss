@@ -197,6 +197,10 @@
 				}
 			}
 		}
+
+		+ .ev-tab-container {
+			width: 85%;
+		}
 	}
 
 	.ev-tab-container {
@@ -205,7 +209,7 @@
 		border-top: 0;
 		position: relative;
 		z-index: 1;
-		width: 85%;
+		width: 100%;
 		@include box-sizing( border-box );
 	}
 }
