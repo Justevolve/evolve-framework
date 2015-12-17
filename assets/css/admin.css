@@ -45,8 +45,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-modal .ev-tabs-nav.ev-vertical li a:focus { box-shadow: none; }
 .ev-modal .ev-tabs-nav.ev-vertical li a:hover { color: #333; background-color: rgba(179, 179, 179, 0.1); }
 .ev-modal .ev-tabs-nav.ev-vertical li a.ev-active { background-color: #66CC66; color: #fff; }
-.ev-modal .ev-tabs-nav.ev-vertical + .ev-tab-container { width: 85%; }
-.ev-modal .ev-tab-container { border-right: 0; border-bottom: 0; border-top: 0; position: relative; z-index: 1; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.ev-modal .ev-tab-container { border-right: 0; border-bottom: 0; border-top: 0; position: relative; z-index: 1; width: 85%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 .ev-modal > .ev-tabs { position: absolute; top: 49px; right: 0; bottom: 62px; left: 0; overflow-y: auto; background: #DBDBDB; }
 .ev-modal > .ev-tabs .ev-tab-container { min-height: 100%; }
 .ev-modal > .ev-tab-container { position: absolute; top: 49px; right: 1px; bottom: 62px; left: 0; overflow-y: auto; width: auto; }
@@ -139,8 +138,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-metabox .ev-tabs-nav.ev-vertical li a:focus { box-shadow: none; }
 .ev-metabox .ev-tabs-nav.ev-vertical li a:hover { color: #333; background-color: rgba(179, 179, 179, 0.1); }
 .ev-metabox .ev-tabs-nav.ev-vertical li a.ev-active { background-color: #66CC66; color: #fff; }
-.ev-metabox .ev-tabs-nav.ev-vertical + .ev-tab-container { width: 85%; }
-.ev-metabox .ev-tab-container { border-right: 0; border-bottom: 0; border-top: 0; position: relative; z-index: 1; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.ev-metabox .ev-tab-container { border-right: 0; border-bottom: 0; border-top: 0; position: relative; z-index: 1; width: 85%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
 .ev-tab-container { background-color: #fff; }
 .ev-tab-container.ev-tab-container-loaded:before { -khtml-opacity: 0; -moz-opacity: 0; opacity: 0; filter: alpha(opacity=0); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; z-index: -1; }
@@ -160,8 +158,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-native-meta .ev-tabs .ev-tabs-nav.ev-vertical li a:focus { box-shadow: none; }
 .ev-native-meta .ev-tabs .ev-tabs-nav.ev-vertical li a:hover { color: #333; background-color: rgba(179, 179, 179, 0.1); }
 .ev-native-meta .ev-tabs .ev-tabs-nav.ev-vertical li a.ev-active { background-color: #66CC66; color: #fff; }
-.ev-native-meta .ev-tabs .ev-tabs-nav.ev-vertical + .ev-tab-container { width: 85%; }
-.ev-native-meta .ev-tabs .ev-tab-container { border-right: 0; border-bottom: 0; border-top: 0; position: relative; z-index: 1; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.ev-native-meta .ev-tabs .ev-tab-container { border-right: 0; border-bottom: 0; border-top: 0; position: relative; z-index: 1; width: 85%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
 .ev-metabox { background-color: #DBDBDB; margin: -6px -12px -12px; }
 
