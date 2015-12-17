@@ -64,5 +64,11 @@ if ( ! function_exists( 'js_wp_editor' ) ) {
 		wp_localize_script( 'jquery', 'ap_vars', $ap_vars );
 	}
 
+	function js_wp_editor_enqueue_scripts() {
+		wp_enqueue_style( 'js-wp-editor-css', includes_url() . 'css/editor.css' );
+	}
+
+	add_action( 'admin_enqueue_scripts', 'js_wp_editor_enqueue_scripts' );
+
 	add_action( 'admin_init', 'js_wp_editor' );
 }
