@@ -555,9 +555,10 @@ body.ev-modal-open { overflow: hidden; }
 
 .ev-link-ctrl { position: relative; display: inline-block; top: -1px; margin-left: 10px; }
 
-.ev-modal-container[data-key="ev-link"] .ev-modal-wrapper { width: 400px; overflow: visible; }
+.ev-modal-container[data-key="ev-link"] .ev-modal-wrapper { max-height: 500px; }
+.ev-modal-container[data-key="ev-link"] .ev-modal-wrapper-inner { padding-top: 49px; }
 
-.ev-link-url-wrapper { position: relative; padding: 20px; }
+.ev-link-url-wrapper { padding: 20px; position: relative; }
 .ev-link-url-wrapper .selectize-control.single .selectize-input:before, .ev-link-url-wrapper .selectize-control.single .selectize-input:after { display: none; }
 .ev-link-modal-expanded .ev-link-url-wrapper .selectize-control.single .selectize-input:before, .ev-link-modal-expanded .ev-link-url-wrapper .selectize-control.single .selectize-input:after { display: block; }
 

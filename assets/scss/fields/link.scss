@@ -21,15 +21,22 @@
 // -----------------------------------------------------------------------------
 
 .ev-modal-container[data-key="ev-link"] {
+	// .ev-modal-wrapper {
+	// 	width: 400px;
+	// 	overflow: visible;
+	// }
+
 	.ev-modal-wrapper {
-		width: 400px;
-		overflow: visible;
+		max-height: 500px;
+	}
+	.ev-modal-wrapper-inner {
+		padding-top: $modal_header_height + 1;
 	}
 }
 
 .ev-link-url-wrapper {
-	position: relative;
 	padding: $gutter;
+	position: relative;
 
 	.selectize-control.single .selectize-input {
 		&:before,
