@@ -57,7 +57,7 @@ msgstr ""
 msgid "Full width"
 msgstr ""
 
-#: classes/core/ev_simple_modal.php:37
+#: classes/core/ev_simple_modal.php:40
 #: classes/core/fields_containers/ev_modal.php:57
 msgid "OK"
 msgstr ""
@@ -127,6 +127,10 @@ msgstr ""
 msgid "Default presets"
 msgstr ""
 
+#: includes/color.php:243
+msgid "Color presets"
+msgstr ""
+
 #: includes/icons.php:159
 msgid "Color"
 msgstr ""
@@ -137,6 +141,10 @@ msgstr ""
 
 #: includes/icons.php:174
 msgid "Preview"
+msgstr ""
+
+#: includes/icons.php:218
+msgid "Icon"
 msgstr ""
 
 #: includes/link.php:43

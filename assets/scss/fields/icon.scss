@@ -84,7 +84,7 @@
 // }
 
 .ev-icon-sets-controls-external-wrapper {
-	@include position( absolute, ( $modal_header_height*2 + 1px ) null ( $modal_footer_height + 1 ) 0 );
+	@include position( absolute, ( $modal_header_height + $baseline*4 + 1px ) null ( $modal_footer_height + 1 ) 0 );
 	width: 300px;
 
 	@include ev_media( $media_mobile ) {
@@ -128,7 +128,7 @@
 }
 
 .ev-icon-sets-inner-wrapper {
-	@include position( absolute, ( $modal_header_height*2 + 1px ) 0 ( $modal_footer_height + 1 ) 300px );
+	@include position( absolute, ( $modal_header_height + $baseline*4 + 1px ) 0 ( $modal_footer_height + 1 ) 300px );
 	@include box-shadow( -1px 0 0 $grey_1 );
 
 	@include ev_media( $media_mobile ) {
@@ -161,31 +161,50 @@
 }
 
 .ev .ev-icon-search-wrapper {
+	padding: $baseline $gutter;
+	height: $baseline*4;
+	@include box-sizing( border-box );
 	background-color: $grey_1;
-	height: $modal_header_height;
 	position: relative;
 
 	input[type="text"] {
-		background-color: transparent;
+		display: block;
 		width: 100%;
-		line-height: $modal_header_height - 1px;
-		padding: 0 $gutter;
-		border: none;
-		@include box-shadow( none );
-		@include transition( none );
-		margin: 0;
-		border-bottom: 1px solid $grey_1;
-		border-radius: 0;
-		font-size: 16px;
-		font-weight: bold;
+		@include box-sizing( border-box );
+		line-height: $baseline;
+		padding: $baseline/2 $gutter/2;
 
 		&:focus {
-			border: none;
-			border-bottom: 1px solid $grey_3;
-			background-color: $white;
-			@include box-shadow( none );
+			border-color: $grey_1;
+			outline: none;
+			box-shadow: none;
 		}
 	}
+
+	// height: $modal_header_height;
+	// position: relative;
+
+	// input[type="text"] {
+	// 	background-color: transparent;
+	// 	width: 100%;
+	// 	line-height: $modal_header_height - 1px;
+	// 	padding: 0 $gutter;
+	// 	border: none;
+	// 	@include box-shadow( none );
+	// 	@include transition( none );
+	// 	margin: 0;
+	// 	border-bottom: 1px solid $grey_1;
+	// 	border-radius: 0;
+	// 	font-size: 16px;
+	// 	font-weight: bold;
+
+	// 	&:focus {
+	// 		border: none;
+	// 		border-bottom: 1px solid $grey_3;
+	// 		background-color: $white;
+	// 		@include box-shadow( none );
+	// 	}
+	// }
 }
 
 .ev-icon-search-results {
@@ -196,7 +215,7 @@
 	left: 10px;
 	background-color: $blue;
 	color: $white;
-	margin: -10px 0 0 0;
+	margin: -28px 0 0 20px;
 	padding: 2px 6px;
 
 	&.ev-search-icon-results-visible {
