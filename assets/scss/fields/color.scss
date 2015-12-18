@@ -270,10 +270,10 @@
 // -----------------------------------------------------------------------------
 
 .ev-modal-container[data-key="ev-color-presets"] {
-	.ev-modal-wrapper {
-		width: 700px;
-		height: 500px;
-	}
+	// .ev-modal-wrapper {
+	// 	width: 700px;
+	// 	height: 500px;
+	// }
 
 	.ev-color-presets-manager-wrapper {
 		@include position( absolute, 1px 0 $modal_footer_height 0 );
