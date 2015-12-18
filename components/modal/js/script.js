@@ -24,14 +24,7 @@
 	 * @return {boolean}
 	 */
 	$.evf.delegate( ".ev-modal-close", "click", namespace, function( e ) {
-		$( this ).parents( ".ev-modal-container" ).first().remove();
-		$( window ).trigger( "resize" );
-
-		var modals = $( ".ev-modal-container" );
-
-		if ( ! modals.length ) {
-			$( "body" ).removeClass( "ev-modal-open" );
-		}
+		$( this ).parents( ".ev-modal-container" ).first().data( "ev-modal" ).close();
 
 		return false;
 	} );
@@ -45,14 +38,7 @@
 		var modals = $( ".ev-modal-container" );
 
 		if ( modals.length ) {
-			modals.last().data( "ev-modal" ).config.close();
-			modals.last().remove();
-
-			$( window ).trigger( "resize" );
-
-			if ( ! $( ".ev-modal-container" ).length ) {
-				$( "body" ).removeClass( "ev-modal-open" );
-			}
+			modals.last().data( "ev-modal" ).close();
 
 			return false;
 		}
@@ -77,7 +63,10 @@
 			class: "",
 
 			/* Wait for the save function to be completed before closing the modal. */
-			wait: false
+			wait: false,
+
+			/* Set to true if the modal is reduced in size. */
+			simple: false,
 		}, config );
 
 		var self = this;
@@ -90,6 +79,7 @@
 		this.close = function() {
 			config.close();
 
+			$( ".ev-modal-container[data-key='" + key + "']" ).nextAll( ".ev-modal-container" ).remove();
 			$( ".ev-modal-container[data-key='" + key + "']" ).remove();
 			$( window ).trigger( "resize" );
 
@@ -133,7 +123,13 @@
 
 			$( origin ).remove();
 
-			var html = '<div class="ev-modal-container ' + config.class + '" data-key="' + key + '">';
+			var modal_class = config.class;
+
+			if ( config.simple ) {
+				modal_class += " ev-modal-container-simple";
+			}
+
+			var html = '<div class="ev-modal-container ' + modal_class + '" data-key="' + key + '">';
 				html += '<div class="ev-modal-wrapper">';
 					html += '<a class="ev-modal-close" href="#"><i data-icon="ev-modal-close" class="ev-icon ev-component" aria-hidden="true"></i></a>';
 

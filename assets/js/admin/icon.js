@@ -18,7 +18,8 @@
 			};
 
 		var modal = new $.evf.modal( key, data, {
-			class: 'ev-modal-container-simple',
+			simple: true,
+
 			save: function( data, after_save, nonce ) {
 				$( "[data-prefix]", field ).val( data["prefix"] );
 				$( "[data-set]", field ).val( data["set"] );

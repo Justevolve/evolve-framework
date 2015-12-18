@@ -215,7 +215,7 @@ function ev_icon_modal_load() {
 		$content .= '</div>';
 	$content .= '</div>';
 
-	$m = new Ev_SimpleModal( 'ev-icon' );
+	$m = new Ev_SimpleModal( 'ev-icon', array( 'title' => __( 'Icon', 'ev_framework' ) ) );
 	$m->render( $content );
 
 	die();

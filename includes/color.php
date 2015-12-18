@@ -240,7 +240,7 @@ function ev_color_presets_modal_load() {
 		$content .= '</div>';
 	$content .= '</div>';
 
-	$m = new Ev_SimpleModal( 'ev-color-presets' );
+	$m = new Ev_SimpleModal( 'ev-color-presets', array( 'title' => __( 'Color presets', 'ev_framework' ) ) );
 	$m->render( $content );
 
 	die();

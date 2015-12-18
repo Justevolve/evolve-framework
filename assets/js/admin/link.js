@@ -29,7 +29,8 @@
             };
 
         var modal = new $.evf.modal( key, data, {
-        	class: 'ev-modal-container-simple',
+        	simple: true,
+
         	close: function() {
         		$( window ).off( "keydown.ev_link" );
         	},

@@ -125,7 +125,8 @@
 			};
 
 		var modal = new $.evf.modal( key, data, {
-			class: 'ev-modal-container-simple',
+			simple: true,
+
 			save: function( data, after_save, nonce ) {
 				if ( data["hex"] ) {
 					input

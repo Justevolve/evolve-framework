@@ -33,6 +33,9 @@ class Ev_SimpleModal {
 	function __construct( $handle, $config = array() )
 	{
 		$this->_config = wp_parse_args( $config, array(
+			/* Title of the modal. */
+			'title' => '',
+
 			/* Text of the close button for the modal. */
 			'button' => __( 'OK', 'ev_framework' ),
 
@@ -49,6 +52,14 @@ class Ev_SimpleModal {
 	*/
 	public function render( $content )
 	{
+		$title = $this->_config['title'];
+
+		if ( $title ) {
+			echo '<div class="ev-modal-header">';
+				echo '<h1>' . esc_html( $title ) . '</h1>';
+			echo '</div>';
+		}
+
 		echo '<form class="ev ev-modal">';
 			wp_nonce_field( 'ev_modal', 'ev', false );
 

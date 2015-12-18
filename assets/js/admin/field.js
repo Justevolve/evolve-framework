@@ -7,7 +7,8 @@
 			text = $( ".ev-help-popup-text", this ).html();
 
 		var modal = new $.evf.modal( key, data, {
-			class: 'ev-modal-container-simple',
+			simple: true,
+
 		} );
 
 		modal.open( function( content, key, _data ) {
