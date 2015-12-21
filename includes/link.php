@@ -8,6 +8,8 @@
  * @param array $link The link data.
  */
 function ev_link_partial( $handle, $link ) {
+	$link = (array) $link;
+
 	if ( ! isset( $link['link'] ) ) {
 		$link = array();
 	}
@@ -147,13 +149,10 @@ add_action( 'wp_ajax_ev_link_modal_load', 'ev_link_modal_load' );
  * @return string
  */
 function ev_link_open( $data, $echo = true ) {
+	$data = (array) $data;
+
 	if ( ! isset( $data['url'] ) || empty( $data['url'] ) ) {
-		if ( $echo ) {
-			echo $content;
-		}
-		else {
-			return $content;
-		}
+		return '';
 	}
 
 	$url    = isset( $data['url'] ) ? $data['url'] : '';
@@ -220,13 +219,14 @@ function ev_link_close( $echo = true ) {
  * @return string
  */
 function ev_link( $data, $content, $echo = true ) {
+	$data = (array) $data;
+
 	if ( ! isset( $data['url'] ) || empty( $data['url'] ) ) {
 		if ( $echo ) {
 			echo $content;
 		}
-		else {
-			return $content;
-		}
+
+		return $content;
 	}
 
 	$link = '';
