@@ -288,6 +288,20 @@
 	.highlight {
 		background-color: lightYellow;
 		text-decoration: underline;
+		margin-right: 0;
+
+		&:after {
+			display: none;
+		}
+	}
+
+	span {
+		margin-right: 4px;
+
+		&:after {
+			content: ":";
+			display: inline-block;
+		}
 	}
 }
 

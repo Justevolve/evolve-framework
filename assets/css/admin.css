@@ -704,7 +704,10 @@ input[type="radio"]:checked + .ev-radio.ev-graphic-radio img { border-color: #66
 .selectize-dropdown [data-selectable].active { color: #333; }
 
 .selectize-dropdown-content { overflow-y: auto; overflow-x: hidden; max-height: 200px; border: 1px solid #B3B3B3; background-color: #fff; margin: -1px 0 0 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; box-shadow: 0px 2px 3px rgba(0,0,0,.2); color: #999; padding: 0; }
-.selectize-dropdown-content .highlight { background-color: lightYellow; text-decoration: underline; }
+.selectize-dropdown-content .highlight { background-color: lightYellow; text-decoration: underline; margin-right: 0; }
+.selectize-dropdown-content .highlight:after { display: none; }
+.selectize-dropdown-content span { margin-right: 4px; }
+.selectize-dropdown-content span:after { content: ":"; display: inline-block; }
 
 
 .ev-field { display: block; float: left; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding: 0 20px; }
