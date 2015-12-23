@@ -290,11 +290,22 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 	 * @param array $element The element structure.
 	 * @param string|array $element_value The element value.
 	 */
-	private function _save_single_field( $element, $value )
+	protected function _save_single_field( $element, $value )
 	{
 		$value = Ev_Field::sanitize( $element, $value );
 
 		ev_update_option( $element['handle'], $value );
+	}
+
+	/**
+	 * Delete a single custom option contained in the page or tab.
+	 *
+	 * @since 0.4.0
+	 * @param string $handle The element handle.
+	 */
+	protected function _delete_single_field( $handle )
+	{
+		ev_delete_option( $handle );
 	}
 
 	/**
@@ -334,7 +345,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 					foreach ( $element['fields'] as $field ) {
 						if ( ! ev_is_skipped_on_saving( $field['type'] ) ) {
 							if ( ! isset( $_POST[$field['handle']] ) ) {
-								ev_delete_option( $field['handle'] );
+								$this->_delete_single_field( $field['handle'] );
 							}
 							else {
 								$this->_save_single_field( $field, $_POST[$field['handle']] );
@@ -347,7 +358,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 				else {
 					if ( ! ev_is_skipped_on_saving( $element['type'] ) ) {
 						if ( ! isset( $_POST[$element['handle']] ) ) {
-							ev_delete_option( $element['handle'] );
+							$this->_delete_single_field( $element['handle'] );
 						}
 						else {
 							$this->_save_single_field( $element, $_POST[$element['handle']] );
