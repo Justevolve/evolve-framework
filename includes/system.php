@@ -256,6 +256,17 @@ function ev_get_options_key() {
 		$key .= get_option( 'stylesheet' );
 	}
 
+	// if ( is_multisite() ) {
+	// 	/* Makes sure the plugin is defined before trying to use it. */
+	// 	if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+	// 	    require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+	// 	}
+
+	// 	if ( ! is_plugin_active_for_network( EV_FRAMEWORK_MAIN_FILE_PATH ) ) {
+	// 		$key .= '_' . get_current_blog_id();
+	// 	}
+	// }
+
 	return apply_filters( 'ev_options_key', $key );
 }
 

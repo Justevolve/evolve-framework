@@ -125,6 +125,9 @@ class Ev_Framework {
 		/* Framework folder. */
 		define( 'EV_FRAMEWORK_FOLDER', trailingslashit( dirname( __FILE__ ) ) );
 
+		/* Framework main file path. */
+		define( 'EV_FRAMEWORK_MAIN_FILE_PATH', basename( EV_FRAMEWORK_FOLDER ) . '/evolve-framework.php' );
+
 		/* Framework URI. */
 		define( 'EV_FRAMEWORK_URI', plugin_dir_url( __FILE__ ) );
 
