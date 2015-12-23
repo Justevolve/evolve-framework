@@ -12,8 +12,18 @@
 .ev-link-ctrl {
 	position: relative;
 	display: inline-block;
-	top: -1px;
+	top: -2px;
 	margin-left: $gutter/2;
+
+	.ev-btn.ev-link-ctrl-btn {
+		background-color: $blue_0;
+		border-color: $blue_0;
+
+		&.ev-link-on {
+			background-color: $blue;
+			border-color: $blue;
+		}
+	}
 }
 
 // -----------------------------------------------------------------------------
@@ -81,9 +91,6 @@
 	display: none;
 	padding: $gutter;
 	border-top: 1px solid $grey_1;
-	background-color: $grey_0;
-	border-bottom-right-radius: $radius;
-	border-bottom-left-radius: $radius;
 
 	input[type="text"] {
 		width: 100%;

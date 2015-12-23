@@ -36,7 +36,7 @@
 		display: block;
 		content: "";
 		@include box-sizing( border-box );
-		@include transition( background-color $transition_time*2 ease, border-color $transition_time*2 ease );
+		@include transition( background-color $transition_time ease, border-color $transition_time ease );
 	}
 
 	&:hover {

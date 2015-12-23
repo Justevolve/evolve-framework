@@ -33,7 +33,7 @@
 		border-radius: $radius;
 		position: relative;
 		@include box-shadow( none );
-		@include transition( background-color $transition_time*2 ease, border-color $transition_time*2 ease );
+		@include transition( background-color $transition_time ease, border-color $transition_time ease );
 		@include box-sizing( border-box );
 
 		&:hover {
@@ -65,6 +65,7 @@
 			border-radius: $baseline*1.5;
 			@include box-shadow( none );
 			position: relative;
+			@include transition( background-color $transition_time*2 ease, border-color $transition_time*2 ease );
 
 			&:after {
 				@include size( $baseline + 4 );

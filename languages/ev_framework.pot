@@ -147,35 +147,35 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: includes/link.php:43
+#: includes/link.php:45
 msgid "Link"
 msgstr ""
 
-#: includes/link.php:96
+#: includes/link.php:98
 msgid "Tab"
 msgstr ""
 
-#: includes/link.php:101
+#: includes/link.php:103
 msgid "Open in"
 msgstr ""
 
-#: includes/link.php:105
+#: includes/link.php:107
 msgid "Same tab"
 msgstr ""
 
-#: includes/link.php:106
+#: includes/link.php:108
 msgid "New tab"
 msgstr ""
 
-#: includes/link.php:115
+#: includes/link.php:117
 msgid "Rel attribute"
 msgstr ""
 
-#: includes/link.php:121
+#: includes/link.php:123
 msgid "Title attribute"
 msgstr ""
 
-#: includes/link.php:127
+#: includes/link.php:129
 msgid "Class attribute"
 msgstr ""
 

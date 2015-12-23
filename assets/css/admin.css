@@ -346,13 +346,13 @@ body.ev-modal-open { overflow: hidden; }
 .ev-checkbox-wrapper input[type="checkbox"] { display: none; }
 .ev-checkbox-wrapper input[type="checkbox"]:checked + label { background-color: #66CC66; border-color: #66CC66; }
 .ev-checkbox-wrapper input[type="checkbox"]:checked + label:before { font-family: "dashicons"; font-weight: 400; font-size: inherit; line-height: 1; text-rendering: auto; text-transform: none; text-indent: 0; display: block; speak: none; text-align: center; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; content: ""; display: block; color: #fff; text-shadow: 0px 1px 2px rgba(0,0,0,.2); margin: 0; width: 24px; height: 24px; line-height: 24px; position: absolute; top: 0; left: -2px; font-size: 25px; }
-.ev-checkbox-wrapper label { border: 1px solid #DBDBDB; background-color: #fcfcfc; display: inline-block; width: 24px; height: 24px; border-radius: 3px; position: relative; box-shadow: none; -webkit-transition: background-color 0.2s ease, border-color 0.2s ease; -moz-transition: background-color 0.2s ease, border-color 0.2s ease; transition: background-color 0.2s ease, border-color 0.2s ease; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.ev-checkbox-wrapper label { border: 1px solid #DBDBDB; background-color: #fcfcfc; display: inline-block; width: 24px; height: 24px; border-radius: 3px; position: relative; box-shadow: none; -webkit-transition: background-color 0.1s ease, border-color 0.1s ease; -moz-transition: background-color 0.1s ease, border-color 0.1s ease; transition: background-color 0.1s ease, border-color 0.1s ease; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 .ev-checkbox-wrapper label:hover { background-color: #F7F7F7; border-color: #B3B3B3; box-shadow: none; }
 .ev-checkbox-wrapper label:focus { box-shadow: none; }
 .ev-checkbox-wrapper.ev-checkbox-style-switch input[type="checkbox"]:checked + label { background-color: #66CC66; }
 .ev-checkbox-wrapper.ev-checkbox-style-switch input[type="checkbox"]:checked + label:before { display: none; }
 .ev-checkbox-wrapper.ev-checkbox-style-switch input[type="checkbox"]:checked + label:after { left: 38px; }
-.ev-checkbox-wrapper.ev-checkbox-style-switch label { width: 72px; height: 36px; border-radius: 36px; box-shadow: none; position: relative; }
+.ev-checkbox-wrapper.ev-checkbox-style-switch label { width: 72px; height: 36px; border-radius: 36px; box-shadow: none; position: relative; -webkit-transition: background-color 0.2s ease, border-color 0.2s ease; -moz-transition: background-color 0.2s ease, border-color 0.2s ease; transition: background-color 0.2s ease, border-color 0.2s ease; }
 .ev-checkbox-wrapper.ev-checkbox-style-switch label:after { width: 28px; height: 28px; content: ""; display: block; position: absolute; top: 3px; left: 4px; -webkit-transition: left 0.2s cubic-bezier(0.86, 0, 0.07, 1); -moz-transition: left 0.2s cubic-bezier(0.86, 0, 0.07, 1); transition: left 0.2s cubic-bezier(0.86, 0, 0.07, 1); background-color: #fff; border-radius: 50%; box-shadow: 0px 1px 2px rgba(0,0,0,.2); }
 .ev-checkbox-wrapper.ev-checkbox-style-switch label:hover:after { box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4); }
 .ev-checkbox-wrapper.ev-checkbox-style-switch.ev-checkbox-style-small input[type="checkbox"]:checked + label:after { left: 26px; }
@@ -553,7 +553,9 @@ body.ev-modal-open { overflow: hidden; }
 
 [data-icon='evfw-link']:before { font-family: "evframework"; content: "\e804"; }
 
-.ev-link-ctrl { position: relative; display: inline-block; top: -1px; margin-left: 10px; }
+.ev-link-ctrl { position: relative; display: inline-block; top: -2px; margin-left: 10px; }
+.ev-link-ctrl .ev-btn.ev-link-ctrl-btn { background-color: #DAE3E6; border-color: #DAE3E6; }
+.ev-link-ctrl .ev-btn.ev-link-ctrl-btn.ev-link-on { background-color: #47AACC; border-color: #47AACC; }
 
 .ev-modal-container[data-key="ev-link"] .ev-modal-wrapper { max-height: 500px; }
 .ev-modal-container[data-key="ev-link"] .ev-modal-wrapper-inner { padding-top: 49px; }
@@ -567,7 +569,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-link-trigger span { display: inline-block; border: 1px solid #B3B3B3; padding: 2px 6px; border-radius: 3px; margin-top: 7px; }
 .ev-link-modal-expanded .ev-link-trigger { display: none; }
 
-.ev-link-inner-wrapper { display: none; padding: 20px; border-top: 1px solid #DBDBDB; background-color: #fcfcfc; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; }
+.ev-link-inner-wrapper { display: none; padding: 20px; border-top: 1px solid #DBDBDB; }
 .ev-link-inner-wrapper input[type="text"] { width: 100%; }
 .ev-link-modal-expanded .ev-link-inner-wrapper { display: block; }
 
@@ -586,7 +588,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-radio-wrapper label:first-of-type { margin-top: 0; }
 
 .ev-radio { display: inline-block; position: relative; float: left; clear: both; }
-.ev-radio:before { border: 1px solid #DBDBDB; background-color: #fcfcfc; width: 24px; height: 24px; border-radius: 50%; box-shadow: none; margin-right: 10px; float: left; display: block; content: ""; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; -webkit-transition: background-color 0.2s ease, border-color 0.2s ease; -moz-transition: background-color 0.2s ease, border-color 0.2s ease; transition: background-color 0.2s ease, border-color 0.2s ease; }
+.ev-radio:before { border: 1px solid #DBDBDB; background-color: #fcfcfc; width: 24px; height: 24px; border-radius: 50%; box-shadow: none; margin-right: 10px; float: left; display: block; content: ""; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; -webkit-transition: background-color 0.1s ease, border-color 0.1s ease; -moz-transition: background-color 0.1s ease, border-color 0.1s ease; transition: background-color 0.1s ease, border-color 0.1s ease; }
 .ev-radio:hover:before { background-color: #F7F7F7; border-color: #B3B3B3; }
 input[type="radio"]:checked + .ev-radio:before { border-color: #66CC66; background-color: #66CC66; }
 input[type="radio"]:checked + .ev-radio:after { content: ""; width: 10px; height: 10px; background-color: #fff; border-radius: 50%; box-shadow: 0px 1px 2px rgba(0,0,0,.2); margin: 6px; position: absolute; top: 1px; left: 1px; }
