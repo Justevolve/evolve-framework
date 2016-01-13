@@ -193,7 +193,6 @@
 							$(self).before('<link rel="stylesheet" type="text/css" href="' + this + '">');
 					} );
 
-				// TODO: includere statico
 				// $(self).before('<link rel="stylesheet" id="editor-buttons-css" href="' + ap_vars.includes_url + 'css/editor.css" type="text/css" media="all">');
 
 				$(self).before(wrap);
