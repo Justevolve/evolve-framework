@@ -3,7 +3,7 @@
  * by Evolve, info@justevolve.it
  * http://justevolve.it
  *
- * Copyright (c) 2015 Andrea Gandino, Simone Maranzana
+ * Copyright (c) 2016 Andrea Gandino, Simone Maranzana
  * Licensed under the GPL (http://www.gnu.org/licenses/quick-guide-gplv3.html) license.
  *
  * Version: 1.0.2, 07.08.2015

@@ -46,7 +46,7 @@ if ( ! ( version_compare( $wp_version, '4.0.0' ) >= 0 ) ) {
  *
  * @package   EvolveFramework
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 

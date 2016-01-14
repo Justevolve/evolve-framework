@@ -1,6 +1,6 @@
 /**
  * Evolve Framework Javascript bootstrap
- * Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * Licensed under GPL (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  */
 

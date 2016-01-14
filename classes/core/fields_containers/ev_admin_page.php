@@ -10,7 +10,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -240,18 +240,6 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 	}
 
-    /**
-	 * Set the value for a specific field inside the container.
-	 *
-	 * @since 0.1.0
-	 * @param string $key The field key.
-	 * @return mixed The value of the field. Returns boolean false if the field has no value.
-	 */
-	public function set_field_value( $key = '' )
-	{
-		return ev_get_option( $key );
-	}
-
 	/**
 	 * Return the list of the elements that belong to the fields container.
 	 *
@@ -281,6 +269,18 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 
 		/* Ensuring that the structure contains only the fields the current user actually has access to. */
 		return self::_parse_fields_structure( $fields );
+	}
+
+    /**
+	 * Set the value for a specific field inside the container.
+	 *
+	 * @since 0.1.0
+	 * @param string $key The field key.
+	 * @return mixed The value of the field. Returns boolean false if the field has no value.
+	 */
+	public function set_field_value( $key = '' )
+	{
+		return ev_get_option( $key );
 	}
 
 	/**

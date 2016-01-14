@@ -10,7 +10,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -29,12 +29,12 @@ class Ev_SubmenuPage extends Ev_MenuPage {
 	 * the method also binds the "register" method of the class to the
 	 * "admin_menu" action on admin.
 	 *
+	 * @since 0.1.0
 	 * @param string $parent A slug-like definition of the parent page.
 	 * @param string $handle A slug-like definition of the page.
 	 * @param string $title A human-readable definition of the page.
 	 * @param array $fields An array containing a default set of fields that belong to the admin page.
 	 * @param array $args An array containing a set of arguments that define the admin page.
-	 * @since 0.1.0
 	 */
 	function __construct( $parent, $handle, $title, $fields = array(), $args = array() )
 	{
