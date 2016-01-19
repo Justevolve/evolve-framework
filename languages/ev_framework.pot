@@ -58,7 +58,7 @@ msgid "Full width"
 msgstr ""
 
 #: classes/core/ev_simple_modal.php:40
-#: classes/core/fields_containers/ev_modal.php:57
+#: classes/core/fields_containers/ev_modal.php:60
 msgid "OK"
 msgstr ""
 

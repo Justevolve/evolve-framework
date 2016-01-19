@@ -53,6 +53,9 @@ class Ev_Modal extends Ev_FieldsContainer {
 			/* Title of the modal. */
 			'title' => __( 'Edit', 'ev_framework' ),
 
+			/* Title controls. */
+			'title_controls' => '',
+
 			/* Text of the close button for the modal. */
 			'button' => __( 'OK', 'ev_framework' ),
 
@@ -77,6 +80,16 @@ class Ev_Modal extends Ev_FieldsContainer {
 	{
 		echo '<div class="ev-modal-header">';
 			echo '<h1>' . esc_html( $this->title() ) . '</h1>';
+
+			if ( ! empty( $this->_config['title_controls'] ) ) {
+				printf( '<div class="ev-modal-header-title-controls">%s</div>', wp_kses( $this->_config['title_controls'], array(
+					'a' => array(
+						'href' => array(),
+						'title' => array(),
+						'target' => array()
+					)
+				) ) );
+			}
 		echo '</div>';
 
 		echo '<form class="ev ev-modal">';

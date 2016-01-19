@@ -16,7 +16,9 @@ body.ev-modal-open { overflow: hidden; }
 .ev-modal-wrapper.ev-loading:before { z-index: 100000; content: ""; display: block; margin-left: -13px; margin-top: -13px; width: 20px; height: 20px; border-top-width: 3px; border-top-style: solid; border-right-width: 3px; border-right-style: solid; border-right-color: transparent; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: transparent; border-left-width: 3px; border-left-style: solid; border-top-color: #333; border-left-color: #333; border-radius: 50%; -webkit-animation: spinner 400ms linear infinite; -moz-animation: spinner 400ms linear infinite; -ms-animation: spinner 400ms linear infinite; -o-animation: spinner 400ms linear infinite; animation: spinner 400ms linear infinite; position: absolute; top: 50%; left: 50%; margin-left: -10px; margin-top: -10px; }
 
 .ev-modal-header { padding: 12px 54px 12px 20px; min-height: 48px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
-.ev-modal-header h1 { font-size: 16px; line-height: 24px; margin: 0; font-weight: bold; }
+.ev-modal-header:after { content: ""; display: table; clear: both; }
+.ev-modal-header h1 { font-size: 16px; line-height: 24px; margin: 0; font-weight: bold; float: left; display: inline-block; }
+.ev-modal-header .ev-modal-header-title-controls { float: left; line-height: 24px; margin-left: 40px; }
 
 .ev-modal { border-top: 1px solid #DBDBDB; }
 .ev-modal > .ev-tabs { position: absolute; top: 0; left: 0; right: 0; bottom: 62px; }

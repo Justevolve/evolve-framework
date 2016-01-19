@@ -56,6 +56,12 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 
 		parent::__construct( $handle, $title, $fields );
 
+		/* Context. */
+		$this->_context = apply_filters( "ev_metabox_context[metabox:{$handle}]", $this->_context );
+
+		/* Priority. */
+		$this->_priority = apply_filters( "ev_metabox_priority[metabox:{$handle}]", $this->_priority );
+
 		/* Register the meta box in WordPress. */
 		add_action( 'add_meta_boxes', array( $this, 'register' ) );
 
