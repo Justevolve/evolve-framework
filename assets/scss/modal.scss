@@ -52,12 +52,21 @@ body.ev-modal-open {
 	padding: $baseline/2 ($gutter*1.5 + $baseline) $baseline/2 $gutter;
 	min-height: $modal_header_height;
 	@include box-sizing( border-box );
+	@include clearfix();
 
 	h1 {
 		font-size: 16px;
 		line-height: $baseline;
 		margin: 0;
 		font-weight: bold;
+		float: left;
+		display: inline-block;
+	}
+
+	.ev-modal-header-title-controls {
+		float: left;
+		line-height: $baseline;
+		margin-left: $gutter*2;
 	}
 }
 
