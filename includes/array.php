@@ -88,7 +88,7 @@ function ev_array_find( $array, $path = '', $default = null, $return = 'value' )
 						if ( $sv == $ev[$sk] ) {
 							$found = true;
 							$value = $ev;
-							$element = $element[$ek];
+							$element = $ev;
 							$ids[] = $ek;
 						}
 					}
