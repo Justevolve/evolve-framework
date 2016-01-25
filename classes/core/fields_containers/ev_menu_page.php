@@ -35,7 +35,7 @@ class Ev_MenuPage extends Ev_AdminPage {
 	/**
 	 * Get the icon of the page in the administration menu.
 	 *
-	 * @since  0.1.0
+	 * @since  0.4.0
 	 * @return mixed The icon URL of the page in the administration menu.
 	 */
 	public function icon()
