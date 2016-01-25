@@ -48,7 +48,7 @@ function ev_link_partial( $handle, $link ) {
 				'attrs' => array(
 					'class' => 'ev-link-ctrl-btn',
 				),
-				'size' => 'medium',
+				'size' => 'small',
 				'icon' => 'evfw-link',
 				'style' => 'round',
 				'hide_text' => true
