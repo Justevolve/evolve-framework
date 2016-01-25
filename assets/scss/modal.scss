@@ -183,6 +183,10 @@ body.ev-modal-open {
 
 @include ev_modal_reset();
 
+.ev-modal-container + .ev-modal-container:not( .ev-modal-container-simple ) {
+	background: transparent;
+}
+
 // -----------------------------------------------------------------------------
 // $Simple modal
 // -----------------------------------------------------------------------------

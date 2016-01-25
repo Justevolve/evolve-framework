@@ -30,7 +30,7 @@
 ?>
 
 <?php if ( $link !== false ) : ?>
-	<span class="ev-field-text-link-wrapper">
+	<span class="ev-field-text-link-wrapper <?php if ( $full === true ) : ?>ev-field-input-size-full<?php endif; ?>">
 <?php endif; ?>
 
 <input type="text" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" size="<?php echo esc_attr( $size ); ?>" name="<?php echo esc_attr( $handle . $handle_suffix ); ?>" value="<?php echo esc_attr( $text_value ); ?>">

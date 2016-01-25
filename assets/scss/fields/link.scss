@@ -8,6 +8,10 @@
 	position: relative;
 	display: inline-block;
 
+	&.ev-field-input-size-full {
+		width: 100%;
+	}
+
 	input[type="text"] {
 		padding-right: 26px + 6;
 	}

@@ -59,6 +59,8 @@ body.ev-modal-open { overflow: hidden; }
 
 .ev-modal-close { font-family: "dashicons"; position: absolute; top: 0; right: 0; text-decoration: none; }
 
+.ev-modal-container + .ev-modal-container:not(.ev-modal-container-simple) { background: transparent; }
+
 .ev-modal-container + .ev-modal-container-simple { top: 109px; bottom: 60px; left: 15%; right: 15%; background: rgba(0, 0, 0, 0.75); }
 @media only screen and (max-width: 960px) { .ev-modal-container + .ev-modal-container-simple { left: 5%; right: 5%; } }
 @media only screen and (max-width: 782px) { .ev-modal-container + .ev-modal-container-simple { left: 0; right: 0; top: 95px; bottom: 46px; } }
@@ -554,6 +556,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev textarea { line-height: 1.5; }
 
 .ev-field-text-link-wrapper { position: relative; display: inline-block; }
+.ev-field-text-link-wrapper.ev-field-input-size-full { width: 100%; }
 .ev-field-text-link-wrapper input[type="text"] { padding-right: 32px; }
 
 [data-icon='evfw-link']:before { font-family: "evframework"; content: "\e804"; }
