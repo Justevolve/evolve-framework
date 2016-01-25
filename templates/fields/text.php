@@ -29,10 +29,13 @@
 	}
 ?>
 
+<?php if ( $link !== false ) : ?>
+	<span class="ev-field-text-link-wrapper">
+<?php endif; ?>
+
 <input type="text" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" size="<?php echo esc_attr( $size ); ?>" name="<?php echo esc_attr( $handle . $handle_suffix ); ?>" value="<?php echo esc_attr( $text_value ); ?>">
 
-<?php
-
-if ( $link !== false ) {
-	ev_link_partial( $handle, $value );
-}
+<?php if ( $link !== false ) : ?>
+	<?php ev_link_partial( $handle, $value ); ?>
+	</span>
+<?php endif; ?>

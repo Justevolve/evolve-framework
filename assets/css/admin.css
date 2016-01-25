@@ -553,10 +553,13 @@ body.ev-modal-open { overflow: hidden; }
 .ev input[type="text"]:focus, .ev input[type="number"]:focus, .ev input[type="url"]:focus, .ev input[type="password"]:focus, .ev input[type="email"]:focus, .ev input[type="tel"]:focus, .ev textarea:not(.ev-rich):focus { background-color: #fff; border-color: #66CC66; }
 .ev textarea { line-height: 1.5; }
 
+.ev-field-text-link-wrapper { position: relative; display: inline-block; }
+.ev-field-text-link-wrapper input[type="text"] { padding-right: 32px; }
+
 [data-icon='evfw-link']:before { font-family: "evframework"; content: "\e804"; }
 
-.ev-link-ctrl { position: relative; display: inline-block; top: -2px; margin-left: 10px; }
-.ev-link-ctrl .ev-btn.ev-link-ctrl-btn { background-color: #DAE3E6; border-color: #DAE3E6; }
+.ev-link-ctrl { position: absolute; top: 6px; right: 6px; display: inline-block; }
+.ev-link-ctrl .ev-btn.ev-link-ctrl-btn { background-color: #DAE3E6; border-color: #DAE3E6; border-radius: 3px; }
 .ev-link-ctrl .ev-btn.ev-link-ctrl-btn.ev-link-on { background-color: #47AACC; border-color: #47AACC; }
 
 .ev-modal-container[data-key="ev-link"] .ev-modal-wrapper { max-height: 500px; }

@@ -1,6 +1,19 @@
 @import "../libs";
 
 // -----------------------------------------------------------------------------
+// $Link text field
+// -----------------------------------------------------------------------------
+
+.ev-field-text-link-wrapper {
+	position: relative;
+	display: inline-block;
+
+	input[type="text"] {
+		padding-right: 26px + 6;
+	}
+}
+
+// -----------------------------------------------------------------------------
 // $Link button
 // -----------------------------------------------------------------------------
 
@@ -10,14 +23,15 @@
 }
 
 .ev-link-ctrl {
-	position: relative;
+	position: absolute;
+	top: 6px;
+	right: 6px;
 	display: inline-block;
-	top: -2px;
-	margin-left: $gutter/2;
 
 	.ev-btn.ev-link-ctrl-btn {
 		background-color: $blue_0;
 		border-color: $blue_0;
+		border-radius: $radius;
 
 		&.ev-link-on {
 			background-color: $blue;
