@@ -111,23 +111,23 @@ msgstr ""
 msgid "Presets"
 msgstr ""
 
-#: includes/color.php:203
+#: includes/color.php:256
 msgid "User-defined presets"
 msgstr ""
 
-#: includes/color.php:213
+#: includes/color.php:266
 msgid "Delete preset"
 msgstr ""
 
-#: includes/color.php:218
+#: includes/color.php:271
 msgid "You haven't saved any color presets yet!"
 msgstr ""
 
-#: includes/color.php:223
+#: includes/color.php:276
 msgid "Default presets"
 msgstr ""
 
-#: includes/color.php:243
+#: includes/color.php:296
 msgid "Color presets"
 msgstr ""
 

@@ -84,7 +84,8 @@
 // }
 
 .ev-icon-sets-controls-external-wrapper {
-	@include position( absolute, ( $modal_header_height + $baseline*4 + 1px ) null ( $modal_footer_height + 1 ) 0 );
+	@include position( absolute, ( $modal_header_height + 1px ) null ( $modal_footer_height + 1 ) 0 );
+	// @include position( absolute, ( $modal_header_height + $baseline*4 + 1px ) null ( $modal_footer_height + 1 ) 0 );
 	width: 300px;
 
 	@include ev_media( $media_mobile ) {
@@ -98,25 +99,17 @@
 
 .ev-icon-sets-preview-wrapper {
 	border-top: 1px solid $grey_1;
-	height: 300px;
+	height: 150px;
 	width: 100%;
 	@include position( absolute, null 0 0 0 );
 	text-align: center;
 	overflow: hidden;
 
-	@include ev_media( $media_mobile ) {
-		height: 200px;
-	}
-
 	.ev-selected-icon-preview {
-		line-height: 300px;
+		line-height: 150px;
 		@include size( 100% );
 		display: block;
 		text-align: center;
-
-		@include ev_media( $media_mobile ) {
-			line-height: 200px;
-		}
 	}
 }
 
@@ -166,6 +159,12 @@
 	@include box-sizing( border-box );
 	background-color: $grey_1;
 	position: relative;
+	margin-left: 300px;
+	@include box-shadow( -1px 0 0 $grey_1 );
+
+	@include ev_media( $media_mobile ) {
+		margin-left: 50%;
+	}
 
 	input[type="text"] {
 		display: block;
