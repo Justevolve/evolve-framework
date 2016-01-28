@@ -1,6 +1,59 @@
 <?php
 
 /**
+ * Convert a color from Hex to RGB.
+ *
+ * @since 0.4.0
+ * @param string $hex The hex color code.
+ * @return array
+ */
+function ev_color_hex_to_rgb( $hex ) {
+	$hex = substr( $hex, 1 );
+
+	if ( strlen( $hex ) === 3 ) {
+		$long_hex = array();
+
+		foreach ( str_split( $hex ) as $val ) {
+			$long_hex[] = $val . $val;
+		}
+
+		$hex = $long_hex;
+	}
+	else {
+		$hex = str_split( $hex, 2 );
+	}
+
+	return array_map( 'hexdec', $hex );
+}
+
+/**
+ * Get a color YIQ value.
+ *
+ * @since 0.4.0
+ * @param string $hex The hex color code.
+ * @return float
+ */
+function ec_color_get_yiq( $hex ) {
+	$rgb = ev_color_hex_to_rgb( $hex );
+
+	return (($rgb[0]*299)+($rgb[1]*587)+($rgb[2]*114))/1000;
+}
+
+/**
+ * Check if a color is bright.
+ *
+ * @since 0.4.0
+ * @param string $hex The hex color code.
+ * @return boolean
+ */
+function ev_color_is_bright( $hex ) {
+	$yiq = ec_color_get_yiq( $hex );
+	$threshold = (int) apply_filters( 'ev_color_is_bright_threshold', 204 ); // Based on #ccc
+
+	return $yiq > $threshold;
+}
+
+/**
  * Delete a color preset.
  *
  * @since 0.4.0
