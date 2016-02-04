@@ -91,11 +91,17 @@ class Ev_MediaManager {
 		global $_wp_additional_image_sizes;
 
 		$sizes = array(
-			'thumbnail' => array(
-				'width'  => intval( get_option( 'thumbnail_size_w' ) ),
-				'height' => intval( get_option( 'thumbnail_size_h' ) ),
-				'crop'   => (bool) get_option( 'thumbnail_crop' ),
-				'label' => __( 'Thumbnail', 'ev_framework' )
+			'full' => array(
+				'width'  => true,
+				'height' => true,
+				'crop'   => false,
+				'label' => __( 'Full size', 'ev_framework' )
+			),
+			'large' => array(
+				'width'  => intval( get_option( 'large_size_w' ) ),
+				'height' => intval( get_option( 'large_size_h' ) ),
+				'crop'   => false,
+				'label' => __( 'Large', 'ev_framework' )
 			),
 			'medium' => array(
 				'width'  => intval( get_option( 'medium_size_w' ) ),
@@ -103,11 +109,11 @@ class Ev_MediaManager {
 				'crop'   => false,
 				'label' => __( 'Medium', 'ev_framework' )
 			),
-			'large' => array(
-				'width'  => intval( get_option( 'large_size_w' ) ),
-				'height' => intval( get_option( 'large_size_h' ) ),
-				'crop'   => false,
-				'label' => __( 'Large', 'ev_framework' )
+			'thumbnail' => array(
+				'width'  => intval( get_option( 'thumbnail_size_w' ) ),
+				'height' => intval( get_option( 'thumbnail_size_h' ) ),
+				'crop'   => (bool) get_option( 'thumbnail_crop' ),
+				'label' => __( 'Thumbnail', 'ev_framework' )
 			),
 		);
 
@@ -123,13 +129,6 @@ class Ev_MediaManager {
 				$sizes[$handle] = $size;
 			}
 		}
-
-		$sizes['full'] = array(
-			'width'  => true,
-			'height' => true,
-			'crop'   => false,
-			'label' => __( 'Full width', 'ev_framework' )
-		);
 
 		return $sizes;
 	}
