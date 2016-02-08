@@ -147,12 +147,18 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 	public function render()
 	{
 		$handle = $this->handle();
+		$class = '';
+		$is_group = isset( $this->_args['group'] ) && ! empty( $this->_args['group'] );
 
-		printf( '<div id="ev-admin-page-%s" class="ev ev-admin-page">', esc_attr( $handle ) );
+		if ( $is_group ) {
+			$class .= 'ev-admin-page-group-' . $this->_args['group'];
+		}
+
+		printf( '<div id="ev-admin-page-%s" class="ev ev-admin-page %s">', esc_attr( $handle ), esc_attr( $class ) );
 			wp_nonce_field( 'ev_admin_page', 'ev' );
 			$this->render_heading();
 
-			if ( isset( $this->_args['group'] ) ) {
+			if ( $is_group ) {
 				$this->render_group_navigation();
 			}
 
