@@ -192,6 +192,14 @@ if ( typeof jQuery === "undefined" ) {
 					escape:      /\{\{([^\}]+?)\}\}(?!\})/g
 				}
 			);
+
+			// var template = _.template( raw.html(), {
+			// 	evaluate:    /<#([\s\S]+?)#>/g,
+			// 	interpolate: /\{\{\{([\s\S]+?)\}\}\}/g,
+			// 	escape:      /\{\{([^\}]+?)\}\}(?!\})/g
+			// } );
+
+			// return template( data );
 		}
 	};
 
