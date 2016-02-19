@@ -211,6 +211,8 @@ abstract class Ev_FieldsContainer {
 	{
 		$elements = $this->elements();
 
+		do_action( "ev_before_field_container_elements[handle:{$this->handle()}]" );
+
 		if ( ! empty( $elements ) ) {
 			$current_element = current( $elements );
 			$current_key = key( $elements );
