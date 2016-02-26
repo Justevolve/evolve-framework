@@ -3,6 +3,9 @@
 	"title": "Evolve Framework",
 	"folder": "evolve-framework",
 	"version": "0.4.0",
+	"wordpress": {
+	  "text_domain": "ev_framework"
+	},
 	"devDependencies": {
 		"grunt": "~0.4.1",
 		"grunt-contrib-sass": "^0.8.1",
