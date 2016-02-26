@@ -216,8 +216,11 @@ $attachment_spreadsheet: "\f495";
 		background-color: $white;
 		border-top-right-radius: $radius;
 		border-bottom-right-radius: $radius;
+	}
 
-		.ui-sortable & {
+	.ev-sortable &,
+	[data-sortable] & {
+		.ev-field-panel-controls-inner-wrapper {
 			height: $baseline*2;
 
 			.ev-sortable-handle {

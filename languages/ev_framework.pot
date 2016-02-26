@@ -42,19 +42,19 @@ msgid "Save"
 msgstr ""
 
 #: classes/core/ev_media_manager.php:98
-msgid "Thumbnail"
+msgid "Full size"
 msgstr ""
 
 #: classes/core/ev_media_manager.php:104
-msgid "Medium"
-msgstr ""
-
-#: classes/core/ev_media_manager.php:110
 msgid "Large"
 msgstr ""
 
-#: classes/core/ev_media_manager.php:131
-msgid "Full width"
+#: classes/core/ev_media_manager.php:110
+msgid "Medium"
+msgstr ""
+
+#: classes/core/ev_media_manager.php:116
+msgid "Thumbnail"
 msgstr ""
 
 #: classes/core/ev_simple_modal.php:40
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: classes/core/fields_containers/ev_admin_page.php:371
+#: classes/core/fields_containers/ev_admin_page.php:377
 msgid "All saved!"
 msgstr ""
 

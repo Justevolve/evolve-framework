@@ -214,8 +214,8 @@ body.ev-modal-open { overflow: hidden; }
 
 .ev-field-panel-controls-wrapper { display: none; position: absolute; top: -21px; right: -45px; bottom: -20px; padding: 20px 20px 20px 0; }
 .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper { width: 24px; height: 24px; border: 1px solid #DBDBDB; border-left: none; background-color: #fff; border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
-.ui-sortable .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper { height: 48px; }
-.ui-sortable .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper .ev-sortable-handle { display: inline-block; }
+.ev-sortable .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper, [data-sortable] .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper { height: 48px; }
+.ev-sortable .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper .ev-sortable-handle, [data-sortable] .ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper .ev-sortable-handle { display: inline-block; }
 .ev-field-panel-controls-wrapper .ev-sortable-handle { display: none; }
 .ev-field-panel-controls-wrapper .ev-sortable-handle:before { cursor: all-scroll; color: #B3B3B3; font-family: "dashicons"; font-weight: 400; font-size: inherit; line-height: 1; text-rendering: auto; text-transform: none; text-indent: 0; display: block; speak: none; text-align: center; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; content: ""; width: 24px; height: 24px; font-size: 16px; line-height: 24px; }
 .ev-field-panel-controls-wrapper .ev-sortable-handle:hover:before { color: #333; }
