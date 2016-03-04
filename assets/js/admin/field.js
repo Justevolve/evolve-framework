@@ -1,6 +1,9 @@
 ( function( $ ) {
 	"use strict";
 
+	/**
+	 * Popup help.
+	 */
 	$.evf.delegate( ".ev-help-popup .ev-help-handle", "click", "field", function() {
 		var data = {},
 			key = "ev-help-popup",

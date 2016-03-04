@@ -431,6 +431,8 @@ body.ev-modal-open { overflow: hidden; }
 .ev-no-user-color-presets-warning { display: block; }
 .ev-color-has-user-presets .ev-no-user-color-presets-warning { display: none; }
 
+.ev input[type="text"].ev-field-date-style-small { font-size: 12px; line-height: 20px; padding: 1px 5px; }
+
 .ev-field-description .ev-container { padding: 20px; border: 1px solid; border-radius: 3px; }
 .ev-field-description.ev-description-style-standard .ev-container { background-color: #fcfcfc; border-color: #DBDBDB; }
 .ev-field-description.ev-description-style-info .ev-container { background-color: #F7FCFE; border-color: #B3D8E6; }

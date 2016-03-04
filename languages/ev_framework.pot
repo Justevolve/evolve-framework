@@ -103,7 +103,7 @@ msgstr ""
 msgid "Insert this URL"
 msgstr ""
 
-#: evolve-framework.php:495
+#: evolve-framework.php:496
 msgid "Changelog"
 msgstr ""
 

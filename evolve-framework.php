@@ -360,6 +360,7 @@ class Ev_Framework {
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_description_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_color_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_icon_field.php' );
+		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_date_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_bundle_field.php' );
 
 		/* Fields container. */

@@ -1,0 +1,15 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Date input
+// -----------------------------------------------------------------------------
+
+// TODO: fare lo stile al dropdown di selezione della data
+
+.ev {
+	input[type="text"].ev-field-date-style-small {
+		font-size: $small_fsz;
+		line-height: $baseline - 4;
+		padding: 1px $gutter/4;
+	}
+}

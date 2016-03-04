@@ -117,6 +117,7 @@ function get_modules_admin_scripts() {
 	scripts.push( "assets/js/admin/field.js" );
 	scripts.push( "assets/js/admin/link.js" );
 	scripts.push( "assets/js/admin/button.js" );
+	scripts.push( "assets/js/admin/date.js" );
 
 	return scripts;
 }
