@@ -123,6 +123,22 @@ class Ev_AdminController extends Ev_Controller {
 	}
 
 	/**
+	 * Register and add a meta box to a term editing interface binding it to
+	 * one or more taxonomies.
+	 *
+	 * @since 0.4.0
+	 * @param string $handle A slug-like definition of the taxonomy meta box.
+	 * @param string $title A human-readable definition of the taxonomy meta box.
+	 * @param string|array $taxonomies A string or array of taxonomies.
+	 * @param array $fields An array containing a default set of fields that belong to the taxonomy meta box.
+	 * @return Ev_UserMetaBox
+	 */
+	public function add_taxonomy_meta_box( $handle, $title, $taxonomies = '', $fields = array() )
+	{
+		return new Ev_TaxonomyMetaBox( $handle, $title, $taxonomies, $fields );
+	}
+
+	/**
 	 * Hook for custom admin notices.
 	 *
 	 * @since 0.1.0

@@ -2,7 +2,7 @@
 
 global $wp_version;
 
-if ( ! ( version_compare( $wp_version, '4.0.0' ) >= 0 ) ) {
+if ( ! ( version_compare( $wp_version, '4.4.0' ) >= 0 ) ) {
 	/**
 	 * Check if the framework meets the basic WordPress version requirement.
 	 *
@@ -387,6 +387,9 @@ class Ev_Framework {
 
 		/* User meta box fields container. */
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_user_meta_box.php' );
+
+		/* Taxonomy meta box fields container. */
+		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_taxonomy_meta_box.php' );
 	}
 
 	/**
