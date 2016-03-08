@@ -171,7 +171,10 @@ class Ev_Framework {
 	 */
 	public function i18n_strings()
 	{
+		global $wp_version;
+
 		wp_localize_script( 'jquery', 'ev_framework', array(
+			'wp_version' => $wp_version,
 			'editor' => array(
 				'text' => __( 'Text', 'ev_framework' ),
 				'visual' => __( 'Visual', 'ev_framework' ),

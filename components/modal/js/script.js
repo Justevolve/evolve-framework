@@ -178,7 +178,8 @@
 			$.evf.delegate( form, "submit", modal_namespace, function() {
 				$.evSaveRichTextareas( this );
 
-				$(save_btn).addClass( "ev-saving");
+				ev_idle_button( $( save_btn ) );
+
 				self.save( $( this ).serializeObject() );
 
 				$.evf.undelegate( "submit", modal_namespace );

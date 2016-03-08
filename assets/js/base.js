@@ -31,6 +31,8 @@ if ( typeof jQuery === "undefined" ) {
 
 			signature: "ev-ui",
 
+			components: [],
+
 			components_count: 0,
 
 			components_built: 0,
@@ -42,30 +44,50 @@ if ( typeof jQuery === "undefined" ) {
 			 * @param  {Function} The UI component creation callback.
 			 */
 			add: function( selector, callback ) {
-				$.evf.ui.components_count++;
+				$.evf.ui.components.push( {
+					"selector": selector,
+					"callback": callback
+				} );
 
-				$( window ).on( $.evf.resolveEventName( $.evf.ui.event, $.evf.namespace ), function() {
+				$.evf.ui.components_count++;
+			},
+
+			/**
+			 * Actually perform the building of the UI.
+			 */
+			do_build: function() {
+				$.each( $.evf.ui.components, function() {
 					$.evf.ui.components_built++;
 
-					if ( $.evf.ui.components_count === $.evf.ui.components_built ) {
-						setTimeout( function() {
-							$( ".ev-tab-container" ).addClass( "ev-tab-container-loaded" );
-						}, 5 );
-					}
+					var selector = this.selector,
+						callback = this.callback;
 
 					var elements = $( selector );
 
 					elements = elements.filter( function() {
-						return $( this ).data( $.evf.signature ) !== true;
+						return $( this ).attr( "data-" + $.evf.ui.signature ) !== "1";
 					} );
 
 					if ( ! elements.length ) {
+						$.evf.ui.end_build();
 						return;
 					}
 
-					elements.data( $.evf.signature, true );
+					elements.attr( "data-" + $.evf.ui.signature, "1" );
 					callback.call( elements );
+					$.evf.ui.end_build();
 				} );
+			},
+
+			/**
+			 * Declare finished the building process.
+			 */
+			end_build: function() {
+				if ( $.evf.ui.components_count === $.evf.ui.components_built ) {
+					setTimeout( function() {
+						$( ".ev-tab-container" ).addClass( "ev-tab-container-loaded" );
+					}, 5 );
+				}
 			},
 
 			/**
@@ -77,6 +99,7 @@ if ( typeof jQuery === "undefined" ) {
 			build: function() {
 				$.evf.ui.components_built = 0;
 
+				$.evf.ui.do_build();
 				$( window ).trigger( $.evf.resolveEventName( $.evf.ui.event, $.evf.namespace ) );
 			},
 		},
@@ -183,23 +206,25 @@ if ( typeof jQuery === "undefined" ) {
 				return '';
 			}
 
-			return _.template(
-				raw.html(),
-				data,
-				{
+			var template_settings = {
 					evaluate:    /<#([\s\S]+?)#>/g,
 					interpolate: /\{\{\{([\s\S]+?)\}\}\}/g,
 					escape:      /\{\{([^\}]+?)\}\}(?!\})/g
-				}
-			);
+				},
+				version = parseFloat( ev_framework.wp_version );
 
-			// var template = _.template( raw.html(), {
-			// 	evaluate:    /<#([\s\S]+?)#>/g,
-			// 	interpolate: /\{\{\{([\s\S]+?)\}\}\}/g,
-			// 	escape:      /\{\{([^\}]+?)\}\}(?!\})/g
-			// } );
+			if ( version < 4.5 ) {
+				return _.template(
+					raw.html(),
+					data,
+					template_settings
+				);
+			}
+			else {
+				var template = _.template( raw.html(), template_settings );
 
-			// return template( data );
+				return template( data );
+			}
 		}
 	};
 
