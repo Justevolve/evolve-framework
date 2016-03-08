@@ -199,7 +199,7 @@ function ev_array_update( &$array, $path = '', $replacement = null ) {
  * @param array &$array The haystack array.
  * @param string $path The search path.
  */
-function remove( &$array, $path = '' ) {
+function ev_array_remove( &$array, $path = '' ) {
 	$value = null;
 	$element = $array;
 
