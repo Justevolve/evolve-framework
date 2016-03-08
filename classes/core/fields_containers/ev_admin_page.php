@@ -212,6 +212,10 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 			printf( '<h1>%s <span>%s</span></h1>', esc_html( $pre_title ), esc_html( $title ) );
 			do_action( "ev_admin_page_subheading" );
 			do_action( "ev_admin_page_subheading[page:{$this->handle()}]" );
+
+			if ( isset( $this->_args['group'] ) ) {
+				do_action( "ev_admin_page_subheading[group:{$this->_args['group']}]" );
+			}
 		echo '</div>';
 	}
 
