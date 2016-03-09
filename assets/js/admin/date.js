@@ -13,7 +13,8 @@
 				monthNamesShort: ev_date_field.monthNamesShort,
 				monthNames     : ev_date_field.monthNames,
 				prevText       : ev_date_field.prevText,
-				nextText       : ev_date_field.nextText
+				nextText       : ev_date_field.nextText,
+				showAnim: ""
 			} );
 		} );
 	} );
