@@ -1,4 +1,3 @@
 node_modules
 .sass-cache
 assets/scss/compiled
-assets/scss_backup/compiled
