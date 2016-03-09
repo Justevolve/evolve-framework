@@ -199,7 +199,7 @@ function ev_array_update( &$array, $path = '', $replacement = null ) {
  * @param array &$array The haystack array.
  * @param string $path The search path.
  */
-function remove( &$array, $path = '' ) {
+function ev_array_remove( &$array, $path = '' ) {
 	$value = null;
 	$element = $array;
 
@@ -247,4 +247,24 @@ function ev_check_multi_key_exists( $array, $key ) {
 	}
 
 	return false;
+}
+
+/**
+ * Escapes slashes in a multi-dimensional array.
+ *
+ * @since 0.4.0
+ * @param array $arr The multi-dimensional array.
+ * @return array
+ */
+function ev_escape_slashes_deep( $arr ) {
+	foreach ( $arr as $k => $v ) {
+		if ( ! is_array( $arr[$k] ) ) {
+			$arr[$k] = str_replace( '\\', '\\\\', $arr[$k] );
+		}
+		else {
+			$arr[$k] = ev_escape_slashes_deep( $arr[$k] );
+		}
+	}
+
+	return $arr;
 }

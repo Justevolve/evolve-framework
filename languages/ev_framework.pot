@@ -190,7 +190,7 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#: classes/core/fields_containers/ev_admin_page.php:377
+#: classes/core/fields_containers/ev_admin_page.php:381
 msgid "All saved!"
 msgstr ""
 
@@ -204,27 +204,27 @@ msgstr ""
 msgid "Evolve Framework not activated: at least WordPress 4.0 is required."
 msgstr ""
 
-#: evolve-framework.php:176
+#: evolve-framework.php:179
 msgid "Text"
 msgstr ""
 
-#: evolve-framework.php:177
+#: evolve-framework.php:180
 msgid "Visual"
 msgstr ""
 
-#: evolve-framework.php:178
+#: evolve-framework.php:181
 msgid "Add Media"
 msgstr ""
 
-#: evolve-framework.php:182
+#: evolve-framework.php:185
 msgid "Insert a name for the preset"
 msgstr ""
 
-#: evolve-framework.php:185
+#: evolve-framework.php:188
 msgid "Insert this URL"
 msgstr ""
 
-#: evolve-framework.php:496
+#: evolve-framework.php:502
 msgid "Changelog"
 msgstr ""
 

@@ -1,6 +1,21 @@
 <?php if ( ! defined( 'EV_FW' ) ) die( 'Forbidden' );
 
 /**
+ * Allow SVG uploads.
+ *
+ * @since 0.4.0
+ * @param array $mimes An array of MIME types.
+ * @return array
+ */
+function ev_allow_svg_uploads( $mimes ) {
+	$mimes['svg'] = 'image/svg+xml';
+
+	return $mimes;
+}
+
+add_filter( 'upload_mimes', 'ev_allow_svg_uploads' );
+
+/**
  * Register a new image size.
  *
  * @since 0.1.0
