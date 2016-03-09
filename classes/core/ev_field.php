@@ -399,9 +399,12 @@ abstract class Ev_Field {
 	private function attrs()
 	{
 		$attrs = array(
-			'data-type=' . $this->_type,
-			'data-handle=' . $this->_handle
+			'data-type=' . $this->_type
 		);
+
+		if ( $this->_handle ) {
+			$attrs[] = 'data-handle=' . $this->_handle;
+		}
 
 		$slave = $this->config( 'visible' );
 		$controller = $this->config( 'controller' );

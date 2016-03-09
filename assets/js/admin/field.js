@@ -62,8 +62,13 @@
 			return;
 		}
 
-		var ctrl_value = ctrl_field.val(),
-			expected_value = field.attr( "data-controller-value" );
+		var ctrl_value = ctrl_field.val();
+
+		if ( ctrl_field.is( "[type='checkbox']" ) ) {
+			ctrl_value = ctrl_field.is( ":checked" ) ? '1' : '0';
+		}
+
+		var expected_value = field.attr( "data-controller-value" );
 
 		if ( expected_value.indexOf( ',' ) != -1 ) {
 			expected_value = expected_value.split( ',' );

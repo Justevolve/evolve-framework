@@ -69,6 +69,127 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
+#: classes/core/fields/ev_date_field.php:66
+msgid "Sunday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:67
+msgid "Monday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:68
+msgid "Tuesday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:69
+msgid "Wednesday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:70
+msgid "Thursday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:71
+msgid "Friday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:72
+msgid "Saturday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:84
+msgid "January"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:85
+msgid "February"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:86
+msgid "March"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:87
+msgid "April"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:88
+#: classes/core/fields/ev_date_field.php:102
+msgid "May"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:89
+msgid "June"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:90
+msgid "July"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:91
+msgid "August"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:92
+msgid "September"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:93
+msgid "October"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:94
+msgid "November"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:95
+msgid "December"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:98
+msgid "Jan"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:99
+msgid "Feb"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:100
+msgid "Mar"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:101
+msgid "Apr"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:103
+msgid "Jun"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:104
+msgid "Jul"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:105
+msgid "Aug"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:106
+msgid "Sep"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:107
+msgid "Oct"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:108
+msgid "Nov"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:109
+msgid "Dec"
+msgstr ""
+
 #: classes/core/fields_containers/ev_admin_page.php:377
 msgid "All saved!"
 msgstr ""
@@ -216,6 +337,51 @@ msgstr ""
 #: classes/core/ev_media_manager.php:55
 msgctxt "standard desktop media query"
 msgid "Desktop"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:75
+msgctxt "jquery ui datepicker short day name"
+msgid "Su"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:76
+msgctxt "jquery ui datepicker short day name"
+msgid "Mo"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:77
+msgctxt "jquery ui datepicker short day name"
+msgid "Tu"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:78
+msgctxt "jquery ui datepicker short day name"
+msgid "We"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:79
+msgctxt "jquery ui datepicker short day name"
+msgid "Th"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:80
+msgctxt "jquery ui datepicker short day name"
+msgid "Fr"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:81
+msgctxt "jquery ui datepicker short day name"
+msgid "Sa"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:111
+msgctxt "jquery ui datepicker prev text"
+msgid "Prev"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:112
+msgctxt "jquery ui datepicker next text"
+msgid "Next"
 msgstr ""
 
 #: classes/core/fields/ev_icon_field.php:63
