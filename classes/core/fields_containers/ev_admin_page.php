@@ -118,6 +118,25 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 	}
 
 	/**
+	 * Return the title of the page when displayed in the page heading section.
+	 *
+	 * @since 0.4.0
+	 * @return string A human-readable definition of the admin page.
+	 */
+	public function heading_title()
+	{
+		$page_title = $this->title();
+		$is_group = isset( $this->_args['group'] ) && ! empty( $this->_args['group'] );
+
+		if ( $is_group ) {
+			$page_title = apply_filters( "ev_admin_page_heading_title[group:{$this->_args['group']}]", $page_title );
+			$page_title = apply_filters( "ev_admin_page_heading_title[page:{$this->handle()}][group:{$this->_args['group']}]", $page_title );
+		}
+
+		return $page_title;
+	}
+
+	/**
 	 * Get the capability that's required to access the page.
 	 *
 	 * @since  0.1.0
@@ -190,7 +209,6 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 			$theme = $parent_data->get( 'Name' );
 		}
 
-		$title = $this->title();
 		$pre_title = '';
 
 		if ( isset( $this->_args['group'] ) ) {
@@ -206,7 +224,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 
 		$pre_title = apply_filters( 'ev_admin_pages_pre_title', $pre_title );
-		$title = apply_filters( "ev_admin_page_title[page:{$this->handle()}]", $title );
+		$title = $this->heading_title();
 
 		echo '<div class="ev-admin-page-heading">';
 			printf( '<h1>%s <span>%s</span></h1>', esc_html( $pre_title ), esc_html( $title ) );

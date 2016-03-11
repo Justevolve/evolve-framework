@@ -594,7 +594,11 @@ abstract class Ev_Field {
 			$help_allowed_html = array(
 				'code' => array(),
 				'strong' => array(),
-				'b' => array()
+				'b' => array(),
+				'a' => array(
+					'href' => array()
+				),
+				'br' => array()
 			);
 
 			printf( '<div class="ev-help ev-help-%s">', esc_attr( $help['type'] ) );
