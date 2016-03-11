@@ -536,7 +536,7 @@ body.ev-modal-open { overflow: hidden; }
 
 .ev-image-upload-action { display: block; clear: both; }
 
-.ev-breakpoint-label { display: inline-block; color: #999; padding-bottom: 6px; }
+.ev-breakpoint-label, .ev-density-label { display: inline-block; color: #999; padding-bottom: 6px; }
 
 .ev-image-upload { display: inline-block; }
 .ev-image-upload .ev-edit-action, .ev-image-upload .ev-remove-all-action { display: none; }

@@ -149,3 +149,61 @@ function ev_get_image_description( $attachment_id ) {
 		return '';
 	}
 }
+
+/**
+ * Return the markup for an image specifying a different srcset parameter according
+ * to the available densities.
+ *
+ * @since 1.0.0
+ * @param array $data The image data.
+ * @param string $type The image size.
+ * @param string $breakpoint The breakpoint name.
+ * @return string
+ */
+function ev_get_density_image( $data, $size = 'full', $breakpoint = 'desktop' ) {
+	if ( empty( $data[$breakpoint]['1']['id'] ) ) {
+		return '';
+	}
+
+	$src = wp_get_attachment_image_url( $data[$breakpoint]['1']['id'], $size );
+
+	if ( empty( $src ) ) {
+		return '';
+	}
+
+	$srcset = array();
+	$densities = ev_get_densities();
+
+	array_shift( $densities );
+
+	foreach ( $densities as $density => $label ) {
+		$density_src = wp_get_attachment_image_url( $data[$breakpoint][$density]['id'], $size );
+
+		if ( ! empty( $density_src ) ) {
+			$srcset[] = $density_src . ' ' . $density . 'x';
+		}
+	}
+
+	$args = array();
+
+	if ( ! empty( $srcset ) ) {
+		$args['srcset'] = esc_attr( implode( ', ', $srcset ) );
+	}
+
+
+	return wp_get_attachment_image( $data[$breakpoint]['1']['id'], $size, false, $args );
+}
+
+/**
+ * Display the markup for an image specifying a different srcset parameter according
+ * to the available densities.
+ *
+ * @since 1.0.0
+ * @param array $data The image data.
+ * @param string $type The image size.
+ * @param string $breakpoint The breakpoint name.
+ * @return string
+ */
+function ev_density_image( $data, $size = 'full', $breakpoint = 'desktop' ) {
+	echo ev_get_density_image( $data, $size, $breakpoint );
+}

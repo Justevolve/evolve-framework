@@ -21,7 +21,8 @@ $image_upload_size: $gutter*4;
 	clear: both;
 }
 
-.ev-breakpoint-label {
+.ev-breakpoint-label,
+.ev-density-label {
 	display: inline-block;
 	color: $grey_4;
 	padding-bottom: $baseline/4;
