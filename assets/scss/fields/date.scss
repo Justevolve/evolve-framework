@@ -15,6 +15,11 @@
 
 	.ev-date-input {
 		cursor: pointer;
+
+		&:focus {
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
 	}
 }
 
@@ -26,11 +31,12 @@ $datepicker_base: 30px;
 
 .ui-datepicker {
 	background: #fff;
-	border: 1px solid $grey_1;
+	border: 1px solid $green;
 	border-radius: $radius;
+	border-top-left-radius: 0;
 	line-height: $datepicker_base;
 	display: none;
-	margin-top: 1px;
+	margin-top: -1px;
 	overflow: hidden;
 
 	.ui-datepicker-header {
