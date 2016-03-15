@@ -488,3 +488,13 @@ function ev_is_post_nonce_valid( $action, $key = 'nonce' ) {
 
 	return $is_valid_nonce;
 }
+
+/**
+ * Get the context of the current screen on frontend.
+ *
+ * @since 1.0.0
+ * @return array
+ */
+function ev_get_context() {
+	return ev_fw()->frontend()->context();
+}
