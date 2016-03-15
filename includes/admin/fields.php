@@ -64,9 +64,13 @@ function ev_select( $name, $options, $selected = '', $style = '', $echo = true )
 
 	$new_style = implode( ' ', $new_style );
 
+	$selected = strval( $selected );
+
 	$html .= sprintf( '<span class="ev-select-wrapper %s">', esc_attr( $new_style ) );
 		$html .= sprintf( '<select name="%s">', esc_attr( $name ) );
 			foreach ( $options as $index => $option ) {
+				$index = strval( $index );
+
 				if ( ! is_array( $option ) ) {
 					$selected_attr = $index == $selected ? 'selected' : '';
 					$value = $index;
