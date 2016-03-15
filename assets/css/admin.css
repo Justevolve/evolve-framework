@@ -434,8 +434,9 @@ body.ev-modal-open { overflow: hidden; }
 
 .ev input[type="text"].ev-field-date-style-small { font-size: 12px; line-height: 20px; padding: 1px 5px; }
 .ev .ev-date-input { cursor: pointer; }
+.ev .ev-date-input:focus { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
 
-.ui-datepicker { background: #fff; border: 1px solid #DBDBDB; border-radius: 3px; line-height: 30px; display: none; margin-top: 1px; overflow: hidden; }
+.ui-datepicker { background: #fff; border: 1px solid #66CC66; border-radius: 3px; border-top-left-radius: 0; line-height: 30px; display: none; margin-top: -1px; overflow: hidden; }
 .ui-datepicker .ui-datepicker-header { position: relative; background: #fcfcfc; line-height: 30px; }
 .ui-datepicker .ui-datepicker-header .ui-datepicker-prev, .ui-datepicker .ui-datepicker-header .ui-datepicker-next { font-weight: bold; cursor: pointer; text-align: center; color: #333; position: absolute; top: 0; bottom: 0; }
 .ui-datepicker .ui-datepicker-header .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-header .ui-datepicker-next span { display: none; }
