@@ -321,6 +321,24 @@ function ev_update_option( $key, $value ) {
 }
 
 /**
+ * Get a post meta value. Return boolean false if the key wasn't found.
+ *
+ * @since 1.0.0
+ * @param integer $post_id The post ID.
+ * @param string $key The post meta key.
+ * @return mixed
+ */
+function ev_get_post_meta( $post_id, $key ) {
+	$custom_fields = get_post_custom( $post_id );
+
+	if ( array_key_exists( $key, $custom_fields ) ) {
+		return get_post_meta( $post_id, $key, true );
+	}
+
+	return false;
+}
+
+/**
  * Remove a field with a particular handle value from the fields list.
  *
  * @since 0.1.0

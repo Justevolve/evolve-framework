@@ -148,11 +148,7 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 		global $post;
 
 		if ( $post && $post->ID ) {
-			$custom_fields = get_post_custom( $post->ID );
-
-			if ( array_key_exists( $key, $custom_fields ) ) {
-				return get_post_meta( $post->ID, $key, true );
-			}
+			return ev_get_post_meta( $post->ID, $key );
 		}
 
 		return false;
