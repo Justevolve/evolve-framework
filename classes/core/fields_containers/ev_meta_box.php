@@ -62,11 +62,38 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 		/* Priority. */
 		$this->_priority = apply_filters( "ev_metabox_priority[metabox:{$handle}]", $this->_priority );
 
-		/* Register the meta box in WordPress. */
-		add_action( 'add_meta_boxes', array( $this, 'register' ) );
+		/* Bind initialization. */
+		add_action( 'current_screen', array( $this, 'bind' ), 11 );
 
 		/* Register the saving action. */
 		add_action( 'save_post', array( $this, 'save' ) );
+	}
+
+	/**
+	 * Component initialization.
+	 *
+	 * @since 0.4.0
+	 */
+	public function bind()
+	{
+		$current_screen = get_current_screen();
+
+		if ( ! $current_screen ) {
+			return;
+		}
+
+		$current_screen_post_type = $current_screen->post_type;
+
+		if ( ! in_array( $current_screen_post_type, $this->_post_types ) ) {
+			return;
+		}
+
+		if ( empty( $this->elements() ) ) {
+			return;
+		}
+
+		/* Register the meta box in WordPress. */
+		add_action( 'add_meta_boxes', array( $this, 'register' ) );
 	}
 
 	/**
@@ -80,8 +107,17 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 		global $post;
 		$page_template = '';
 
+		$post_id = 0;
+
 		if ( $post ) {
-			$page_template = get_post_meta( $post->ID, '_wp_page_template', true );
+			$post_id = $post->ID;
+		}
+		elseif ( isset( $_GET['post'] ) ) {
+			$post_id = absint( $_GET['post'] );
+		}
+
+		if ( $post_id ) {
+			$page_template = get_post_meta( $post_id, '_wp_page_template', true );
 		}
 
 		if ( empty( $page_template ) ) {
@@ -162,8 +198,12 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 	 */
 	public function elements()
 	{
-		$current_screen = get_current_screen();
-		$post_type = $current_screen->post_type;
+		global $post_type;
+
+		if ( ! $post_type ) {
+			$current_screen = get_current_screen();
+			$post_type = $current_screen->post_type;
+		}
 
 		$fields = apply_filters( "ev[post_type:{$post_type}][metabox:{$this->handle()}]", $this->_fields );
 
@@ -229,32 +269,36 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 			return;
 		}
 
+		global $post_type;
+
+		if ( ! in_array( $post_type, $this->_post_types ) ) {
+			return;
+		}
+
 		$elements = $this->elements();
 
-		if ( ! empty( $elements ) ) {
-			$skip_field_types = ev_skip_on_saving_field_types();
+		$skip_field_types = ev_skip_on_saving_field_types();
 
-			foreach ( $elements as $index => $element ) {
-				if ( $element['type'] === 'group' ) {
-					foreach ( $element['fields'] as $field ) {
-						if ( ! ev_is_skipped_on_saving( $field['type'] ) ) {
-							if ( ! isset( $_POST[$field['handle']] ) ) {
-								delete_post_meta( $post_id, $field['handle'] );
-							}
-							else {
-								$this->_save_single_field( $post_id, $field, $_POST[$field['handle']] );
-							}
+		foreach ( $elements as $index => $element ) {
+			if ( $element['type'] === 'group' ) {
+				foreach ( $element['fields'] as $field ) {
+					if ( ! ev_is_skipped_on_saving( $field['type'] ) ) {
+						if ( ! isset( $_POST[$field['handle']] ) ) {
+							delete_post_meta( $post_id, $field['handle'] );
+						}
+						else {
+							$this->_save_single_field( $post_id, $field, $_POST[$field['handle']] );
 						}
 					}
 				}
-				else {
-					if ( ! ev_is_skipped_on_saving( $element['type'] ) ) {
-						if ( ! isset( $_POST[$element['handle']] ) ) {
-							delete_post_meta( $post_id, $element['handle'] );
-						}
-						else {
-							$this->_save_single_field( $post_id, $element, $_POST[$element['handle']] );
-						}
+			}
+			else {
+				if ( ! ev_is_skipped_on_saving( $element['type'] ) ) {
+					if ( ! isset( $_POST[$element['handle']] ) ) {
+						delete_post_meta( $post_id, $element['handle'] );
+					}
+					else {
+						$this->_save_single_field( $post_id, $element, $_POST[$element['handle']] );
 					}
 				}
 			}

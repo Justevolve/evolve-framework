@@ -150,7 +150,14 @@ function ev_array_add( &$array, $path = '', $add = null ) {
 			ev_array_add( $array[$path], implode( $delimiter, $find ), $add );
 
 			if ( count( $find ) === 0 ) {
-				$array[$path][] = $add;
+				if ( is_array( $add ) ) {
+					foreach ( $add as $a ) {
+						$array[$path][] = $a;
+					}
+				}
+				else {
+					$array[$path][] = $add;
+				}
 			}
 		}
 	}
