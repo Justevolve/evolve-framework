@@ -331,8 +331,10 @@ function ev_update_option( $key, $value ) {
 function ev_get_post_meta( $post_id, $key ) {
 	$custom_fields = get_post_custom( $post_id );
 
-	if ( array_key_exists( $key, $custom_fields ) ) {
-		return get_post_meta( $post_id, $key, true );
+	if ( is_array( $custom_fields ) ) {
+		if ( array_key_exists( $key, $custom_fields ) ) {
+			return get_post_meta( $post_id, $key, true );
+		}
 	}
 
 	return false;
