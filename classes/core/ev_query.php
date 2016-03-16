@@ -42,6 +42,33 @@ class Ev_Query {
 	}
 
 	/**
+	 * Get the query parameters.
+	 *
+	 * @since 0.4.0
+	 * @return array
+	 */
+	public function get_query_args()
+	{
+		return $this->_args;
+	}
+
+	/**
+	 * Get a query parameter.
+	 *
+	 * @since 0.4.0
+	 * @param string $arg The query parameter.
+	 * @return mixed
+	 */
+	public function get_query_arg( $arg )
+	{
+		if ( isset( $this->_args[$arg] ) ) {
+			return $this->_args[$arg];
+		}
+
+		return false;
+	}
+
+	/**
 	 * Set a query parameter.
 	 *
 	 * @since 0.1.0
