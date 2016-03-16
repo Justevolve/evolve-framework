@@ -34,7 +34,7 @@ class Ev_TaxonomyMetaBox extends Ev_FieldsContainer {
 	function __construct( $handle, $title, $taxonomies = array(), $fields = array() )
 	{
 		$taxonomies = apply_filters( "ev_taxonomy_metabox_taxonomies[metabox:{$handle}]", $taxonomies );
-		$this->_taxonomies = $taxonomies;
+		$this->_taxonomies = (array) $taxonomies;
 
 		parent::__construct( $handle, $title, $fields );
 
