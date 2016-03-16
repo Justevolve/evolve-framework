@@ -31,6 +31,13 @@ class Ev_Query {
 	public $_query = null;
 
 	/**
+	 * Maximum number of pages in the query.
+	 *
+	 * @var integer
+	 */
+	public $max_num_pages = 1;
+
+	/**
 	 * Constructor for the query class.
 	 *
 	 * @since 0.1.0
@@ -78,6 +85,18 @@ class Ev_Query {
 	public function set_query_arg( $arg, $value )
 	{
 		$this->_args[$arg] = $value;
+	}
+
+	/**
+	 * Set a query parameter. Alias for set_query_arg().
+	 *
+	 * @since 0.4.0
+	 * @param string $arg The query parameter.
+	 * @param mixed $value The query parameter value.
+	 */
+	public function set( $arg, $value )
+	{
+		$this->set_query_arg( $arg, $value );
 	}
 
 	/**
@@ -214,6 +233,7 @@ class Ev_Query {
 	{
 		$this->_args = apply_filters( 'ev_query_args', $this->_args );
 		$this->_query = new WP_Query( $this->_args );
+		$this->max_num_pages = $this->_query->max_num_pages;
 	}
 
 	/**
