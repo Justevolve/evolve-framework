@@ -518,3 +518,28 @@ function ev_is_post_nonce_valid( $action, $key = 'nonce' ) {
 function ev_get_context() {
 	return ev_fw()->frontend()->context();
 }
+
+/**
+ * Get the template of a page.
+ *
+ * @since 1.0.0
+ * @param integer $post_id The page ID.
+ * @return string
+ */
+function ev_get_page_template( $post_id ) {
+	$page_template = '';
+
+	if ( ! get_post_type( $post_id ) === 'page' ) {
+		return false;
+	}
+
+	if ( $post_id ) {
+		$page_template = get_post_meta( $post_id, '_wp_page_template', true );
+	}
+
+	if ( empty( $page_template ) ) {
+		$page_template = 'default';
+	}
+
+	return $page_template;
+}

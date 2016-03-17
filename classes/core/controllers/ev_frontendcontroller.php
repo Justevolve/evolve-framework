@@ -340,6 +340,23 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 				$this->_context[] = 'singular';
 				$this->_context[] = "singular-{$object->post_type}";
 				$this->_context[] = "singular-{$object->post_type}-{$object_id}";
+
+				if ( $object->post_type === 'page' ) {
+					$templates = wp_get_theme()->get_page_templates( $object );
+					$page_template = ev_get_page_template( $object_id );
+					$template = '';
+
+					if ( in_array( $page_template, array_keys( $templates ) ) ) {
+						$template = current( $templates );
+					}
+					else {
+						$template = $page_template;
+					}
+
+					$template = sanitize_title( $template );
+
+					$this->_context[] = 'page-template-' . $template;
+				}
 			}
 			elseif ( is_archive() ) {
 				/* Archive views. */

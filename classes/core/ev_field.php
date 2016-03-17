@@ -192,10 +192,12 @@ abstract class Ev_Field {
 	private function set_label( $label )
 	{
 		$label_types = array(
-			'inline',
-			'block',
-			'inline-hidden',
-			'hidden'
+			'inline', // Label and help text are on the side of the field
+			'block', // Label and help text are above the field
+			'inline-hidden', // Label is hidden and help text is on the side of the field
+			'hidden', // Label is hidden and help text is above the field
+			'shifted', // Label and help text are above the field, extra padding on the side of the field
+			'shifted-hidden' // Label is hidden and help text is above the field, extra padding on the side of the field
 		);
 
 		$field_label = array(
@@ -776,9 +778,18 @@ abstract class Ev_Field {
 		printf( '<div class="%s" %s>', esc_attr( implode( ' ', $this->classes() ) ), $this->attrs() );
 			echo '<div class="ev-field-inner-wrapper">';
 
-				echo '<div class="ev-field-header ev-field-header-label-' . esc_attr( $label["type"] ) . '">';
-					$this->_render_label();
-					$this->_render_help();
+				$is_shifted = in_array( $label['type'], array( 'shifted', 'shifted-hidden' ) );
+				$main_label_type = $label['type'];
+
+				if ( $is_shifted ) {
+					$main_label_type = 'inline-hidden';
+				}
+
+				echo '<div class="ev-field-header ev-field-header-label-' . esc_attr( $main_label_type ) . '">';
+					if ( ! $is_shifted ) {
+						$this->_render_label();
+						$this->_render_help();
+					}
 				echo '</div>';
 
 				$values = (array) $this->value();
@@ -786,6 +797,21 @@ abstract class Ev_Field {
 
 				printf( '<div class="ev-container %s">', esc_attr( $container_class ) );
 					$this->_field_container_start();
+
+					if ( $is_shifted ) {
+						$shifted_label_type = 'block';
+
+						switch ( $label['type'] ) {
+							case 'shifted-hidden':
+								$shifted_label_type = 'hidden';
+								break;
+						}
+
+						echo '<div class="ev-field-header ev-field-header-label-' . esc_attr( $shifted_label_type ) . '">';
+							$this->_render_label();
+							$this->_render_help();
+						echo '</div>';
+					}
 
 					if ( $this->_repeatable !== false ) {
 						echo '<div class="ev-container-repeatable-inner-wrapper">';

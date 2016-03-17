@@ -105,7 +105,6 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 	private function _get_page_template()
 	{
 		global $post;
-		$page_template = '';
 
 		$post_id = 0;
 
@@ -116,15 +115,7 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 			$post_id = absint( $_GET['post'] );
 		}
 
-		if ( $post_id ) {
-			$page_template = get_post_meta( $post_id, '_wp_page_template', true );
-		}
-
-		if ( empty( $page_template ) ) {
-			$page_template = 'default';
-		}
-
-		return $page_template;
+		return ev_get_page_template( $post_id );
 	}
 
 	/**

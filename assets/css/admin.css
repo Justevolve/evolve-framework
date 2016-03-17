@@ -227,7 +227,8 @@ body.ev-modal-open { overflow: hidden; }
 .ev-field-bundle .ev-bundle-fields-wrapper:after { content: ""; display: table; clear: both; }
 .ev-field-bundle .ev-bundle-fields-wrapper .ev-field:first-of-type .ev-field-inner-wrapper { border-top: none !important; }
 .ev-field-bundle:hover .ev-bundle-fields-wrapper { border-color: #B3B3B3; }
-.ev-field-bundle .ev-field .ev-field-header .ev-label { font-size: 12px; }
+.ev-field-bundle .ev-field .ev-field-header .ev-help { font-size: 12px; }
+.ev-field-bundle .ev-field .ev-field-header .ev-label { font-size: 13px; }
 
 
 .ev-btn { position: relative; display: inline-block; cursor: pointer; border: none; padding: 0; background-color: transparent; vertical-align: middle; }
@@ -616,6 +617,8 @@ body.ev-modal-open { overflow: hidden; }
 .ev-link-input-wrapper input[type="text"] { -webkit-transition: padding 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; -moz-transition: padding 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; transition: padding 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; }
 .ev-link-input-wrapper.ev-not-empty span { visibility: visible; }
 .ev-link-input-wrapper.ev-not-empty input { padding-top: 24px; }
+
+.ev input[type="number"].ev-field-number-style-small { font-size: 12px; line-height: 20px; padding: 1px 5px; }
 
 .ev-radio-wrapper:after { content: ""; display: table; clear: both; }
 .ev-radio-wrapper input[type="radio"] { display: none; }

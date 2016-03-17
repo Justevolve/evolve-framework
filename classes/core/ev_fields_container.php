@@ -162,7 +162,18 @@ abstract class Ev_FieldsContainer {
 			esc_attr( $class )
 		);
 
+		$can_be_saved = false;
+
 		if ( $this->_groups_with_form === true ) {
+			foreach ( $group['fields'] as $index => $field ) {
+				if ( ! ev_is_skipped_on_saving( $field['type'] ) ) {
+					$can_be_saved = true;
+					break;
+				}
+			}
+		}
+
+		if ( $can_be_saved && $this->_groups_with_form === true ) {
 			printf(
 				'<form method="%s" action="%s">',
 				'post',
@@ -177,7 +188,7 @@ abstract class Ev_FieldsContainer {
 			$this->render_field( $field );
 		}
 
-		if ( $this->_groups_with_form === true ) {
+		if ( $can_be_saved && $this->_groups_with_form === true ) {
 			$group_callback = 'ev_save_options_tab';
 
 				echo '<div class="ev-form-submit-container">';

@@ -1,0 +1,13 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Number input
+// -----------------------------------------------------------------------------
+
+.ev {
+	input[type="number"].ev-field-number-style-small {
+		font-size: $small_fsz;
+		line-height: $baseline - 4;
+		padding: 1px $gutter/4;
+	}
+}
