@@ -38,6 +38,13 @@ class Ev_Query {
 	public $max_num_pages = 1;
 
 	/**
+	 * An array of posts.
+	 *
+	 * @var array
+	 */
+	public $posts = array();
+
+	/**
 	 * Constructor for the query class.
 	 *
 	 * @since 0.1.0
@@ -231,9 +238,10 @@ class Ev_Query {
 	 */
 	private function run()
 	{
-		$this->_args = apply_filters( 'ev_query_args', $this->_args );
-		$this->_query = new WP_Query( $this->_args );
+		$this->_args         = apply_filters( 'ev_query_args', $this->_args );
+		$this->_query        = new WP_Query( $this->_args );
 		$this->max_num_pages = $this->_query->max_num_pages;
+		$this->posts         = $this->_query->posts;
 	}
 
 	/**

@@ -109,7 +109,7 @@ function ev_select( $name, $options, $selected = '', $style = '', $echo = true )
  * @param array $args The multiple select arguments.
  */
 function ev_multiple_select_ajax( $name, $action, $selected = '', $args = array() ) {
-	$class = 'ev-multiple-select-input-ajax';
+	$class = 'ev-multiple-select ev-multiple-select-input-ajax';
 	$value_field = isset( $args['value_field'] ) && ! empty( $args['value_field'] ) ? $args['value_field'] : 'id';
 	$label_field = isset( $args['label_field'] ) && ! empty( $args['label_field'] ) ? $args['label_field'] : 'text';
 	$search_field = isset( $args['search_field'] ) && ! empty( $args['search_field'] ) ? $args['search_field'] : 'text';
@@ -158,7 +158,7 @@ function ev_multiple_select_ajax( $name, $action, $selected = '', $args = array(
  * @param array $args The multiple select arguments.
  */
 function ev_multiple_select( $name, $data, $selected = '', $args = array() ) {
-	$class = 'ev-multiple-select-input';
+	$class = 'ev-multiple-select ev-multiple-select-input';
 
 	if ( isset( $args['vertical'] ) && $args['vertical'] === true ) {
 		$class .= ' ev-multiple-select-vertical';
