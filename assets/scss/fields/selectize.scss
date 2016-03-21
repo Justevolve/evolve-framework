@@ -19,21 +19,11 @@
 		&.has-items {
 			padding-left: $gutter/10;
 			padding-right: $gutter/10;
-
-			.ev-multiple-select-vertical & {
-				padding: $gutter/10 $gutter/5;
-			}
 		}
 
 		&:not( .has-items ):not( .disabled ) {
 			cursor: text;
 		}
-
-		// &.full:not( .disabled ) {
-		// 	> input {
-		// 		display: none !important;
-		// 	}
-		// }
 
 		&:hover:not( .disabled ) {
 			> div {
@@ -73,11 +63,6 @@
 			@include box-sizing( border-box );
 			float: left;
 
-			.ev-multiple-select-vertical & {
-				left: 0 !important;
-				position: relative !important;
-			}
-
 			&::-ms-clear {
 				display: none;
 			}
@@ -105,23 +90,13 @@
 			font-size: 12px;
 			border-radius: $radius - 1;
 			@include box-sizing( border-box );
-			margin-left: $gutter/10;
-			margin-right: $gutter/10;
+			margin: 2px $gutter/10;
 			cursor: pointer;
 			position: relative;
 
 			&:hover {
 				border-color: $grey_4 !important;
 				@include box-shadow( #{$ui_el_shadow_hover} );
-			}
-
-			.ev-multiple-select-vertical & {
-				width: 100%;
-				margin: $gutter/10 0;
-			}
-
-			.plugin-remove_button:not( .single ) & {
-				padding-right: $baseline/3 + $baseline/2 + $baseline/3;
 			}
 
 			.remove {
@@ -165,6 +140,24 @@
 			}
 
 		}
+	}
+
+	.ev-multiple-select-vertical .selectize-input.has-items {
+		padding: $gutter/10 $gutter/5;
+	}
+
+	.plugin-remove_button:not( .single ) .selectize-input > div {
+		padding-right: $baseline/3 + $baseline/2 + $baseline/3;
+	}
+
+	.ev-multiple-select-vertical .selectize-input > input {
+		left: 0 !important;
+		position: relative !important;
+	}
+
+	.ev-multiple-select-vertical .selectize-input > div {
+		width: 100%;
+		margin: $gutter/10 0;
 	}
 
 	.selectize-control {

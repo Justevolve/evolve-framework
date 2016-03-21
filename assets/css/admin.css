@@ -702,26 +702,26 @@ input[type="radio"]:checked + .ev-radio.ev-graphic-radio img { border-color: #66
 
 .ev .selectize-input { padding: 4px; border-radius: 3px; display: block; width: 100%; position: relative; float: left; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border: 1px solid #DBDBDB; -webkit-transition: border-color 0.2s ease; -moz-transition: border-color 0.2s ease; transition: border-color 0.2s ease; }
 .ev .selectize-input.has-items { padding-left: 2px; padding-right: 2px; }
-.ev-multiple-select-vertical .ev .selectize-input.has-items { padding: 2px 4px; }
 .ev .selectize-input:not(.has-items):not(.disabled) { cursor: text; }
 .ev .selectize-input:hover:not(.disabled) > div { box-shadow: 0px 1px 2px rgba(0,0,0,.2); border-color: #B3B3B3; }
 .ev .selectize-input.dropdown-active, .ev .selectize-input:hover:not(.disabled) { background-color: #F7F7F7; border-color: #B3B3B3; }
 .ev .selectize-input.dropdown-active { border-color: #B3B3B3; border-bottom-left-radius: 0; border-bottom-right-radius: 0; box-shadow: 0px 2px 3px rgba(0,0,0,.2); }
 .ev .selectize-input > input { color: #333; display: inline-block !important; padding: 4px 0 5px 7px !important; min-height: 0 !important; max-height: none !important; max-width: 100% !important; margin: 0 4px 0 0 !important; text-indent: 0 !important; border: 0 none !important; background: none !important; line-height: inherit !important; -webkit-user-select: auto !important; -webkit-box-shadow: none !important; box-shadow: none !important; font-size: 14px !important; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; float: left; }
-.ev-multiple-select-vertical .ev .selectize-input > input { left: 0 !important; position: relative !important; }
 .ev .selectize-input > input::-ms-clear { display: none; }
 .ev .selectize-input > input:after { content: ' '; display: block; clear: left; }
 .ev .selectize-input > input:focus { outline: none !important; }
 .ev .selectize-input [data-value] + input { padding-left: 0 !important; float: none; }
-.ev .selectize-input > div { display: block; float: left; padding: 4px 8px; border: 1px solid #DBDBDB; background-color: #fff; font-size: 12px; border-radius: 2px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; margin-left: 2px; margin-right: 2px; cursor: pointer; position: relative; }
+.ev .selectize-input > div { display: block; float: left; padding: 4px 8px; border: 1px solid #DBDBDB; background-color: #fff; font-size: 12px; border-radius: 2px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; margin: 2px 2px; cursor: pointer; position: relative; }
 .ev .selectize-input > div:hover { border-color: #999 !important; box-shadow: 0px 2px 3px rgba(0,0,0,.2); }
-.ev-multiple-select-vertical .ev .selectize-input > div { width: 100%; margin: 2px 0; }
-.plugin-remove_button:not(.single) .ev .selectize-input > div { padding-right: 28px; }
 .ev .selectize-input > div .remove { position: absolute; top: 50%; right: 8px; width: 12px; height: 24px; margin-top: -12px; text-align: center; line-height: 24px; font-size: 16px; text-decoration: none; display: block; color: #B3B3B3; font-weight: bold; }
 .ev .selectize-input > div .remove:hover { color: #CC4747; }
 .ev .selectize-input > div span { margin-right: 5px; color: #999; }
 .ev .selectize-input > div.ui-sortable-placeholder { background-color: #B3B3B3 !important; border-color: #B3B3B3 !important; -webkit-box-shadow: none !important; box-shadow: none !important; max-height: 28px !important; }
 .ev .selectize-input > div.ui-sortable-helper { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-height: 28px !important; }
+.ev .ev-multiple-select-vertical .selectize-input.has-items { padding: 2px 4px; }
+.ev .plugin-remove_button:not(.single) .selectize-input > div { padding-right: 28px; }
+.ev .ev-multiple-select-vertical .selectize-input > input { left: 0 !important; position: relative !important; }
+.ev .ev-multiple-select-vertical .selectize-input > div { width: 100%; margin: 2px 0; }
 .ev .selectize-control { position: relative; background-color: #fcfcfc; }
 .ev .selectize-control:after { content: ""; display: table; clear: both; }
 .ev .selectize-control.single .selectize-input { padding-right: 48px; cursor: pointer; }
