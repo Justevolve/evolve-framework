@@ -48,7 +48,8 @@
 			font-weight: bold;
 		}
 
-		+ div {
+		~ div {
+			display: inline-block;
 			margin-top: $baseline/2 !important;
 		}
 	}

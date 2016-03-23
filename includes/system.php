@@ -451,7 +451,7 @@ function ev_backup_configuration( $export = array() ) {
 		$filename .= '-mods';
 	}
 
-	$exp = base64_encode( serialize( $data ) );
+	$exp = serialize( $data );
 	$filename .= '.' . date( 'Y-m-d' ) . '.txt';
 
 	header( 'Content-disposition: attachment; filename=' . $filename );
@@ -471,7 +471,7 @@ function ev_backup_configuration( $export = array() ) {
  * @param array $data The serialized data.
  */
 function ev_restore_configuration( $data = array() ) {
-	$data = maybe_unserialize( base64_decode( $data ) );
+	$data = maybe_unserialize( $data );
 
 	if ( ! is_array( $data ) ) {
 		return;
