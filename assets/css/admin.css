@@ -83,7 +83,7 @@ body.ev-modal-open { overflow: hidden; }
 @media only screen and (max-width: 782px) { .ev-admin-page-heading { margin-left: -10px; margin-right: -10px; padding-left: 20px; padding-right: 20px; } }
 .ev-admin-page-heading h1 { line-height: 1; font-weight: 300; font-size: 2em; padding: 0; margin: 0; }
 .ev-admin-page-heading h1 span { font-weight: bold; }
-.ev-admin-page-heading h1 ~ div { display: inline-block; margin-top: 12px !important; }
+.ev-admin-page-heading h1 ~ div { margin-top: 12px !important; }
 .ev-admin-page-heading p { margin-top: 8px; font-style: italic; }
 .ev-admin-page-heading + div { margin-top: 48px; }
 .ev-admin-page-heading + .ev-admin-page-group-nav { margin-top: 0; }
