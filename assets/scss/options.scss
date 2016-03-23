@@ -29,6 +29,7 @@
 	padding: $baseline*2 $gutter*2;
 	background-color: $white;
 	border-bottom: 1px solid $grey_1;
+	@include clearfix();
 
 	@include ev_media( $media_mobile ) {
 		margin-left: -10px;
