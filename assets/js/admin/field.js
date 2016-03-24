@@ -83,7 +83,17 @@
 			}
 		}
 		else {
-			if ( expected_value != ctrl_value || ctrl.hasClass( "ev-hidden" ) ) {
+			var check = true;
+
+			if ( expected_value.indexOf( "!=" ) !== -1 ) {
+				expected_value = expected_value.replace( "!=", "" );
+				check = expected_value == ctrl_value;
+			}
+			else {
+				check = expected_value != ctrl_value;
+			}
+
+			if ( check || ctrl.hasClass( "ev-hidden" ) ) {
 				field.addClass( "ev-hidden" );
 				$( "[data-slave='" + field.attr( "data-controller" ) + "']", container ).addClass( "ev-hidden" );
 			}
