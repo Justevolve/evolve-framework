@@ -93,10 +93,10 @@ body.ev-modal-open { overflow: hidden; }
 .ev-admin-page .ev-admin-page-group-nav ul { font-size: 0.01em; margin: 0; }
 .ev-admin-page .ev-admin-page-group-nav ul li { display: inline-block; list-style: none; font-size: 100em; margin-bottom: 0; }
 .ev-admin-page .ev-admin-page-group-nav ul li:first-child a { border-left: 1px solid #DBDBDB; }
+.ev-admin-page .ev-admin-page-group-nav ul li.ev-active a { font-weight: bold; background-color: #66CC66; color: #fff; }
 .ev-admin-page .ev-admin-page-group-nav ul a { display: block; position: relative; font-size: 14px; padding: 16px 20px; text-decoration: none; color: #999; border-right: 1px solid #DBDBDB; }
 .ev-admin-page .ev-admin-page-group-nav ul a:focus { box-shadow: none; }
 .ev-admin-page .ev-admin-page-group-nav ul a:hover { background-color: #fcfcfc; }
-.ev-admin-page .ev-admin-page-group-nav ul a.ev-active { font-weight: bold; background-color: #66CC66; color: #fff; }
 
 .ev-page-container { background-color: #fff; border: 1px solid #DBDBDB; padding: 24px 20px; }
 .ev-page-container:after { content: ""; display: table; clear: both; }

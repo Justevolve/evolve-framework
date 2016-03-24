@@ -103,6 +103,12 @@
 					border-left: 1px solid $grey_1;
 				}
 			}
+
+			&.ev-active a {
+				font-weight: bold;
+				background-color: $green;
+				color: $white;
+			}
 		}
 
 		a {
@@ -120,12 +126,6 @@
 
 			&:hover {
 				background-color: $grey_0;
-			}
-
-			&.ev-active {
-				font-weight: bold;
-				background-color: $green;
-				color: $white;
 			}
 		}
 	}

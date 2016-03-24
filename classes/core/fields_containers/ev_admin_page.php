@@ -251,15 +251,19 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 
 		$group = $groups[$this->_args['group']];
+		$group['pages'] = apply_filters( "ev_admin_page_group_pages[group:{$this->_args['group']}]", $group['pages'] );
 
 		if ( count( $group['pages'] ) > 1 ) {
 			echo '<div class="ev-admin-page-group-nav">';
 				echo '<ul>';
 					foreach ( $group['pages'] as $page ) {
+						$page_class = isset( $_GET['page'] ) && $_GET['page'] === $page['handle'] ? 'ev-active' : '';
+						$page_class .= ' ev-group-page-' . $page['handle'];
+
 						printf(
-							'<li><a href="%s" class="%s">%s</a></li>',
+							'<li class="%s"><a href="%s">%s</a></li>',
+							esc_attr( $page_class ),
 							esc_attr( $page['url'] ),
-							isset( $_GET['page'] ) && $_GET['page'] === $page['handle'] ? esc_attr( 'ev-active' ) : '',
 							esc_html( $page['title'] )
 						);
 					}
