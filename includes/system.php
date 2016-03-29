@@ -429,12 +429,10 @@ function ev_is_login_page() {
 function ev_backup_configuration( $export = array() ) {
 	$export_options = true;
 	$export_mods = true;
-	$export_widgets = true;
 
 	if ( ! empty( $export ) ) {
 		$export_options = isset( $export['options'] ) && $export['options'] == true;
 		$export_mods = isset( $export['mods'] ) && $export['mods'] == true;
-		$export_widgets = isset( $export['widgets'] ) && $export['widgets'] == true;
 	}
 
 	$data = array(
@@ -453,18 +451,13 @@ function ev_backup_configuration( $export = array() ) {
 		$filename .= '-mods';
 	}
 
-	if ( $export_widgets ) {
-		$data['widgets'] = wp_get_sidebars_widgets();
-		$filename .= '-widgets';
-	}
-
 	$filename .= '.' . date( 'Y-m-d' ) . '.txt';
 
 	header( 'Content-disposition: attachment; filename=' . $filename );
 	header( 'Content-type: text/plain' );
 
 	ob_start();
-	echo serialize( $exp );
+	echo serialize( $data );
 	ob_end_flush();
 
 	die();
@@ -485,7 +478,6 @@ function ev_restore_configuration( $data = array() ) {
 
 	$import_options = isset( $data['options'] );
 	$import_mods    = isset( $data['mods'] );
-	$import_widgets = isset( $data['widgets'] );
 
 	if ( ! isset( $data['ev'] ) || ! $data['ev'] ) {
 		return;
@@ -499,10 +491,6 @@ function ev_restore_configuration( $data = array() ) {
 	if ( $import_mods ) {
 		$theme = get_option( 'stylesheet' );
 		update_option( "theme_mods_$theme", $data['mods'] );
-	}
-
-	if ( $import_widgets ) {
-		update_option( 'sidebars_widgets', $data['widgets'] );
 	}
 }
 
