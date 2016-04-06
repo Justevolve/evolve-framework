@@ -10,7 +10,7 @@ if ( ! ( version_compare( $wp_version, '4.4.0' ) >= 0 ) ) {
 	 */
 	function ev_framework_wrong_wp_version_notice() {
 		printf( '<div class="error"><p>%s</p></div>',
-			__( 'Evolve Framework not activated: at least WordPress 4.0 is required.', 'ev_framework' )
+			esc_html( __( 'Evolve Framework not activated: at least WordPress 4.4.0 is required.', 'ev_framework' ) )
 		);
 	}
 
