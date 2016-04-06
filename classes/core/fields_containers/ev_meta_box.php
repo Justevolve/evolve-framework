@@ -88,7 +88,9 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 			return;
 		}
 
-		if ( empty( $this->elements() ) ) {
+		$elements = $this->elements();
+
+		if ( empty( $elements ) ) {
 			return;
 		}
 
