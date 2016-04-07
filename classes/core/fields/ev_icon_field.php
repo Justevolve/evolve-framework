@@ -7,7 +7,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -60,7 +60,7 @@ add_filter( 'ev_field_types', 'ev_register_icon_field_type' );
  */
 function ev_icon_field_i18n() {
 	wp_localize_script( 'jquery', 'ev_icon_field', array(
-		'0' => __( 'Nothing found', 'ev_framework' ),
+		'0' => _x( 'Nothing found', 'no icons found', 'ev_framework' ),
 		'1' => _x( '%s found', 'one icon found', 'ev_framework' ),
 		'2' => _x( '%s found', 'multiple icons found', 'ev_framework' ),
 	) );

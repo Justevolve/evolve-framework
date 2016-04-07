@@ -2,7 +2,7 @@
 
 global $wp_version;
 
-if ( ! ( version_compare( $wp_version, '4.0.0' ) >= 0 ) ) {
+if ( ! ( version_compare( $wp_version, '4.4.0' ) >= 0 ) ) {
 	/**
 	 * Check if the framework meets the basic WordPress version requirement.
 	 *
@@ -10,7 +10,7 @@ if ( ! ( version_compare( $wp_version, '4.0.0' ) >= 0 ) ) {
 	 */
 	function ev_framework_wrong_wp_version_notice() {
 		printf( '<div class="error"><p>%s</p></div>',
-			__( 'Evolve Framework not activated: at least WordPress 4.0 is required.', 'ev_framework' )
+			esc_html( __( 'Evolve Framework not activated: at least WordPress 4.4.0 is required.', 'ev_framework' ) )
 		);
 	}
 
@@ -23,7 +23,7 @@ if ( ! ( version_compare( $wp_version, '4.0.0' ) >= 0 ) ) {
  * Plugin Name: Evolve Framework
  * Plugin URI: https://github.com/Justevolve/evolve-framework
  * Description: A WordPress development framework.
- * Version: 0.3.0
+ * Version: 0.4.0
  * Author: Evolve
  * Author URI: http://justevolve.it
  * Text Domain: ev_framework
@@ -46,7 +46,7 @@ if ( ! ( version_compare( $wp_version, '4.0.0' ) >= 0 ) ) {
  *
  * @package   EvolveFramework
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -108,7 +108,7 @@ class Ev_Framework {
 		define( 'EV_FW', true );
 
 		/* Framework version number. */
-		define( 'EV_FRAMEWORK_VERSION', '0.3.0' );
+		define( 'EV_FRAMEWORK_VERSION', '0.4.0' );
 
 		/* Theme folder. */
 		define( 'EV_THEME_FOLDER', trailingslashit( get_template_directory() ) );
@@ -124,6 +124,9 @@ class Ev_Framework {
 
 		/* Framework folder. */
 		define( 'EV_FRAMEWORK_FOLDER', trailingslashit( dirname( __FILE__ ) ) );
+
+		/* Framework main file path. */
+		define( 'EV_FRAMEWORK_MAIN_FILE_PATH', basename( EV_FRAMEWORK_FOLDER ) . '/evolve-framework.php' );
 
 		/* Framework URI. */
 		define( 'EV_FRAMEWORK_URI', plugin_dir_url( __FILE__ ) );
@@ -156,6 +159,35 @@ class Ev_Framework {
 	{
 		/* Load the text domain for framework files. */
 		load_plugin_textdomain( 'ev_framework', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
+		/* Localize framework strings. */
+		add_action( 'admin_enqueue_scripts', array( $this, 'i18n_strings' ) );
+	}
+
+	/**
+	 * Localize framework strings.
+	 *
+	 * @since 0.4.0
+	 */
+	public function i18n_strings()
+	{
+		global $wp_version;
+
+		wp_localize_script( 'jquery', 'ev_framework', array(
+			'wp_version' => $wp_version,
+			'editor' => array(
+				'text' => __( 'Text', 'ev_framework' ),
+				'visual' => __( 'Visual', 'ev_framework' ),
+				'add_media' => __( 'Add Media', 'ev_framework' ),
+			),
+			'color' => array(
+				'presets' => ev_get_color_presets(),
+				'new_preset_name' => __( 'Insert a name for the preset', 'ev_framework' )
+			),
+			'link' => array(
+				'create' => __( 'Insert this URL', 'ev_framework' )
+			)
+		) );
 	}
 
 	/**
@@ -241,6 +273,9 @@ class Ev_Framework {
 		/* General system utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'system.php' );
 
+		/* Button utilities. */
+		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'button.php' );
+
 		/* Templating utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'templates.php' );
 
@@ -255,6 +290,12 @@ class Ev_Framework {
 
 		/* Array utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'array.php' );
+
+		/* Link utilities. */
+		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'link.php' );
+
+		/* Color utilities. */
+		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'color.php' );
 
 		/* Notices utilities. */
 		require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'admin/notices.php' );
@@ -317,10 +358,12 @@ class Ev_Framework {
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_multiple_select_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_select_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_image_field.php' );
+		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_attachment_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_divider_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_description_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_color_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_icon_field.php' );
+		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_date_field.php' );
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields/ev_bundle_field.php' );
 
 		/* Fields container. */
@@ -329,8 +372,9 @@ class Ev_Framework {
 		/* Meta box fields container. */
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_meta_box.php' );
 
-		/* Modal fields container. */
+		/* Modal fields containers. */
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_modal.php' );
+		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/ev_simple_modal.php' );
 
 		/* Admin page fields container. */
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_admin_page.php' );
@@ -343,6 +387,9 @@ class Ev_Framework {
 
 		/* User meta box fields container. */
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_user_meta_box.php' );
+
+		/* Taxonomy meta box fields container. */
+		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_taxonomy_meta_box.php' );
 	}
 
 	/**
@@ -452,7 +499,7 @@ class Ev_Framework {
 		if ( $framework_changelog_url !== '' ) {
 			$plugin_meta[] = sprintf( '<a target="_blank" data-changelog href="%s">%s</a>',
 				esc_url( $framework_changelog_url ),
-				__( 'Changelog', 'ev_framework' )
+				esc_html( __( 'Changelog', 'ev_framework' ) )
 			);
 		}
 

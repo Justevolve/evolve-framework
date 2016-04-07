@@ -1,6 +1,21 @@
 <?php if ( ! defined( 'EV_FW' ) ) die( 'Forbidden' );
 
 /**
+ * Allow SVG uploads.
+ *
+ * @since 0.4.0
+ * @param array $mimes An array of MIME types.
+ * @return array
+ */
+function ev_allow_svg_uploads( $mimes ) {
+	$mimes['svg'] = 'image/svg+xml';
+
+	return $mimes;
+}
+
+add_filter( 'upload_mimes', 'ev_allow_svg_uploads' );
+
+/**
  * Register a new image size.
  *
  * @since 0.1.0
@@ -51,9 +66,144 @@ function ev_get_image_sizes_for_select() {
  * @return string The attachment ID image size URL.
  **/
 function ev_fw_get_image( $id, $size = 'full' ) {
+	return ev_get_image( $id, $size );
+}
+
+/**
+ * Return the image size from its attachment ID.
+ *
+ * @since 0.4.0
+ * @param integer|string $id The attachment ID.
+ * @param string $size The desired image size; defaults to 'full'.
+ * @return string The attachment ID image size URL.
+ */
+function ev_get_image( $id, $size = 'full' ) {
 	if ( ! empty( $id ) && is_array( $image = wp_get_attachment_image_src( $id, $size ) ) ) {
 		return esc_url( current( $image ) );
 	}
 
 	return '';
+}
+
+/**
+ * Get the current post's featured image attachment ID.
+ *
+ * @param  int $post_id The post ID.
+ * @return integer The attachment ID.
+ */
+function ev_get_featured_image_id( $post_id = null ) {
+	if ( ! $post_id ) {
+		$post_id = get_the_ID();
+	}
+
+	return get_post_thumbnail_id( $post_id );
+}
+
+/**
+ * Get the current post's featured image URL.
+ *
+ * @param  string $size The image size.
+ * @param  int $post_id The post ID.
+ * @return string
+ */
+function ev_get_featured_image( $size = 'full', $post_id = null ) {
+	if ( ! $post_id ) {
+		$post_id = get_the_ID();
+	}
+
+	return ev_get_image( ev_get_featured_image_id( $post_id ), $size );
+}
+
+/**
+ * Get the caption of an attachment in the Media Library.
+ *
+ * @since 1.0.0
+ * @param integer $attachment_id The attachment ID.
+ * @return string
+ */
+function ev_get_image_caption( $attachment_id ) {
+	$image_data = get_post( $attachment_id );
+
+	if ( $image_data ) {
+		return $image_data->post_excerpt;
+	}
+	else {
+		return '';
+	}
+}
+
+/**
+ * Get the description of an attachment in the Media Library.
+ *
+ * @since 1.0.0
+ * @param integer $attachment_id The attachment ID.
+ * @return string
+ */
+function ev_get_image_description( $attachment_id ) {
+	$image_data = get_post( $attachment_id );
+
+	if ( $image_data ) {
+		return $image_data->post_content;
+	}
+	else {
+		return '';
+	}
+}
+
+/**
+ * Return the markup for an image specifying a different srcset parameter according
+ * to the available densities.
+ *
+ * @since 1.0.0
+ * @param array $data The image data.
+ * @param string $type The image size.
+ * @param string $breakpoint The breakpoint name.
+ * @return string
+ */
+function ev_get_density_image( $data, $size = 'full', $breakpoint = 'desktop' ) {
+	if ( empty( $data[$breakpoint]['1']['id'] ) ) {
+		return '';
+	}
+
+	$src = wp_get_attachment_image_url( $data[$breakpoint]['1']['id'], $size );
+
+	if ( empty( $src ) ) {
+		return '';
+	}
+
+	$srcset = array();
+	$densities = ev_get_densities();
+
+	array_shift( $densities );
+
+	foreach ( $densities as $density => $label ) {
+		$density_src = wp_get_attachment_image_url( $data[$breakpoint][$density]['id'], $size );
+
+		if ( ! empty( $density_src ) ) {
+			$srcset[] = $density_src . ' ' . $density . 'x';
+		}
+	}
+
+	$args = array();
+
+	if ( ! empty( $srcset ) ) {
+		$args['srcset'] = esc_attr( implode( ', ', $srcset ) );
+	}
+
+
+	return wp_get_attachment_image( $data[$breakpoint]['1']['id'], $size, false, $args );
+}
+
+/**
+ * Display the markup for an image specifying a different srcset parameter according
+ * to the available densities.
+ *
+ * @since 1.0.0
+ * @param array $data The image data.
+ * @param string $type The image size.
+ * @param string $breakpoint The breakpoint name.
+ * @return string
+ */
+function ev_density_image( $data, $size = 'full', $breakpoint = 'desktop' ) {
+	echo ev_get_density_image( $data, $size, $breakpoint );
 }

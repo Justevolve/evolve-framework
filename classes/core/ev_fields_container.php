@@ -10,7 +10,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -162,7 +162,18 @@ abstract class Ev_FieldsContainer {
 			esc_attr( $class )
 		);
 
+		$can_be_saved = false;
+
 		if ( $this->_groups_with_form === true ) {
+			foreach ( $group['fields'] as $index => $field ) {
+				if ( ! ev_is_skipped_on_saving( $field['type'] ) ) {
+					$can_be_saved = true;
+					break;
+				}
+			}
+		}
+
+		if ( $can_be_saved && $this->_groups_with_form === true ) {
 			printf(
 				'<form method="%s" action="%s">',
 				'post',
@@ -173,22 +184,28 @@ abstract class Ev_FieldsContainer {
 			printf( '<input type="hidden" name="context" value="%s">', esc_attr( $this->handle() ) );
 		}
 
-			foreach ( $group['fields'] as $index => $field ) {
-				$this->render_field( $field );
-			}
+		foreach ( $group['fields'] as $index => $field ) {
+			$this->render_field( $field );
+		}
 
-		if ( $this->_groups_with_form === true ) {
+		if ( $can_be_saved && $this->_groups_with_form === true ) {
 			$group_callback = 'ev_save_options_tab';
 
-			echo '<div class="ev-form-submit-container">';
+				echo '<div class="ev-form-submit-container">';
 
-				echo '<div class="ev-btn ev-save">';
-					echo '<input type="submit" value="">';
-					printf( '<span class="ev-btn-action" data-callback="%s">%s</span>', esc_attr( $group_callback ), __( 'Save', 'ev_framework' ) );
-					echo '<span class="ev-btn-message"></span>';
+					ev_btn(
+						__( 'Save', 'ev_framework' ),
+						'save',
+						array(
+							'attrs' => array(
+								'data-callback' => $group_callback,
+								'type' => 'submit'
+							),
+							'size' => 'medium'
+						)
+					);
+
 				echo '</div>';
-
-			echo '</div>';
 
 			echo '</form>';
 		}
@@ -204,6 +221,8 @@ abstract class Ev_FieldsContainer {
 	protected function render_elements()
 	{
 		$elements = $this->elements();
+
+		do_action( "ev_before_field_container_elements[handle:{$this->handle()}]" );
 
 		if ( ! empty( $elements ) ) {
 			$current_element = current( $elements );

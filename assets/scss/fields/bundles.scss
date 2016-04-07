@@ -1,0 +1,37 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Bundle
+// -----------------------------------------------------------------------------
+
+.ev-field-bundle {
+	.ev-bundle-fields-wrapper {
+		@include clearfix;
+		border: 1px solid $grey_1;
+		border-radius: $radius;
+
+		.ev-field:first-of-type {
+			.ev-field-inner-wrapper {
+				border-top: none !important;
+			}
+		}
+	}
+
+	&:hover {
+		.ev-bundle-fields-wrapper {
+			border-color: $grey_3;
+		}
+	}
+
+	.ev-field {
+		.ev-field-header {
+			.ev-help {
+				font-size: 12px;
+			}
+
+			.ev-label {
+				font-size: 13px;
+			}
+		}
+	}
+}

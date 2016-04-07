@@ -2,7 +2,10 @@
 	"name": "Evolve-Framework",
 	"title": "Evolve Framework",
 	"folder": "evolve-framework",
-	"version": "0.3.0",
+	"version": "0.4.0",
+	"wordpress": {
+	  "text_domain": "ev_framework"
+	},
 	"devDependencies": {
 		"grunt": "~0.4.1",
 		"grunt-contrib-sass": "^0.8.1",
@@ -13,6 +16,8 @@
 		"grunt-notify": "*",
 		"grunt-string-replace": "*",
 		"grunt-markdown": "*",
-		"grunt-wp-i18n": "*"
+		"grunt-wp-i18n": "*",
+		"grunt-contrib-clean": "",
+		"grunt-file-append": ""
 	}
 }

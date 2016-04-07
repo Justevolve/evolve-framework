@@ -24,8 +24,7 @@
 	 * @return {boolean}
 	 */
 	$.evf.delegate( ".ev-modal-close", "click", namespace, function( e ) {
-		$( this ).parents( ".ev-modal-container" ).first().remove();
-		$( "body" ).removeClass( "ev-modal-open" );
+		$( this ).parents( ".ev-modal-container" ).first().data( "ev-modal" ).close();
 
 		return false;
 	} );
@@ -39,8 +38,7 @@
 		var modals = $( ".ev-modal-container" );
 
 		if ( modals.length ) {
-			modals.last().remove();
-			$( "body" ).removeClass( "ev-modal-open" );
+			modals.last().data( "ev-modal" ).close();
 
 			return false;
 		}
@@ -55,18 +53,41 @@
 	 */
 	$.evf.modal = function( key, data, config ) {
 		config = $.extend( {
-			/* Callback function fired after the drawer transition starts. */
-			save: function() {}
+			/* Callback function fired after the modal is saved. */
+			save: function() {},
+
+			/* Callback function fired after the modal is closed. */
+			close: function() {},
+
+			/* Additional CSS class to be passed to the modal container. */
+			class: "",
+
+			/* Wait for the save function to be completed before closing the modal. */
+			wait: false,
+
+			/* Set to true if the modal is reduced in size. */
+			simple: false,
 		}, config );
 
 		var self = this;
+
+		self.config = config;
 
 		/**
 		 * Close the modal.
 		 */
 		this.close = function() {
+			config.close();
+
+			$( ".ev-modal-container[data-key='" + key + "']" ).nextAll( ".ev-modal-container" ).remove();
 			$( ".ev-modal-container[data-key='" + key + "']" ).remove();
-			$( "body" ).removeClass( "ev-modal-open" );
+			$( window ).trigger( "resize" );
+
+			var modals = $( ".ev-modal-container" );
+
+			if ( ! modals.length ) {
+				$( "body" ).removeClass( "ev-modal-open" );
+			}
 		};
 
 		/**
@@ -75,8 +96,17 @@
 		 * @param {Object} data The modal serialized data.
 		 */
 		this.save = function( data ) {
-			config.save( data );
-			this.close();
+			var origin = ".ev-modal-container[data-key='" + key + "']",
+				save_btn = origin + " .ev-modal-footer .ev-save",
+				nonce = $( save_btn ).attr( "data-nonce" );
+
+			if ( config.wait ) {
+				config.save( data, this.close, nonce );
+			}
+			else {
+				config.save( data, null, nonce );
+				this.close();
+			}
 		};
 
 		/**
@@ -93,7 +123,13 @@
 
 			$( origin ).remove();
 
-			var html = '<div class="ev-modal-container" data-key="' + key + '">';
+			var modal_class = config.class;
+
+			if ( config.simple ) {
+				modal_class += " ev-modal-container-simple";
+			}
+
+			var html = '<div class="ev-modal-container ' + modal_class + '" data-key="' + key + '">';
 				html += '<div class="ev-modal-wrapper">';
 					html += '<a class="ev-modal-close" href="#"><i data-icon="ev-modal-close" class="ev-icon ev-component" aria-hidden="true"></i></a>';
 
@@ -102,32 +138,17 @@
 				html += '</div>';
 			html += '</div>';
 
-			$( html ).appendTo( $( "body" ) );
-			$( "body" ).addClass( "ev-modal-open" );
+			html = $( html );
 
-			var save_btn = origin + " .ev-modal-footer .ev-save",
-				form = origin + " form";
+			if ( ! $( "body" ).hasClass( "ev-modal-open" ) ) {
+				html.appendTo( $( "#ev-modals-container" ) );
+				$( "body" ).addClass( "ev-modal-open" );
+			}
+			else {
+				$( ".ev-modal-container" ).last().after( html );
+			}
 
-			namespace += "-form";
-
-			$.evf.delegate( save_btn, "click", namespace, function() {
-				$( form ).trigger( "submit." + namespace );
-
-				return false;
-			} );
-
-			$.evf.delegate( form, "submit", namespace, function() {
-				if ( typeof tinymce !== 'undefined' ) {
-					tinymce.triggerSave();
-				}
-
-				self.save( $( form ).serializeObject() );
-
-				$.evf.undelegate( "submit", namespace );
-				$.evf.undelegate( "click", namespace );
-
-				return false;
-			} );
+			$( ".ev-modal-container" ).last().data( "ev-modal", self );
 
 			content(
 				$( origin + " .ev-modal-wrapper-inner" ),
@@ -135,5 +156,39 @@
 				data
 			);
 		};
+
+		/**
+		 * Initialize the component.
+		 */
+		this.init = function() {
+			var origin = ".ev-modal-container[data-key='" + key + "']",
+				save_btn = origin + " .ev-modal-footer .ev-save",
+				form = origin + " form",
+				modal_namespace = namespace + "-form-" + key;
+
+			$.evf.undelegate( "submit", modal_namespace );
+			$.evf.undelegate( "click", modal_namespace );
+
+			$.evf.delegate( save_btn, "click", modal_namespace, function() {
+				$( form ).trigger( "submit." + modal_namespace );
+
+				return false;
+			} );
+
+			$.evf.delegate( form, "submit", modal_namespace, function() {
+				$.evSaveRichTextareas( this );
+
+				ev_idle_button( $( save_btn ) );
+
+				self.save( $( this ).serializeObject() );
+
+				$.evf.undelegate( "submit", modal_namespace );
+				$.evf.undelegate( "click", modal_namespace );
+
+				return false;
+			} );
+		};
+
+		this.init();
 	};
 } )( jQuery );

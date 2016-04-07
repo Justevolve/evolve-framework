@@ -1,0 +1,103 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Checkbox
+// -----------------------------------------------------------------------------
+
+.ev-checkbox-wrapper {
+	input[type="checkbox"] {
+		display: none;
+	}
+
+	input[type="checkbox"]:checked + label {
+		background-color: $green;
+		border-color: $green;
+
+		&:before {
+			@include icon( '\f147' );
+			display: block;
+			color: $white;
+			text-shadow: #{$ui_el_shadow};
+			margin: 0;
+			@include size( $baseline );
+			line-height: $baseline;
+			@include position( absolute, 0 null null -2px );
+			font-size: 25px;
+		}
+	}
+
+	label {
+		@include ui_input_standard;
+		display: inline-block;
+		@include size( $baseline );
+		border-radius: $radius;
+		position: relative;
+		@include box-shadow( none );
+		@include transition( background-color $transition_time ease, border-color $transition_time ease );
+		@include box-sizing( border-box );
+
+		&:hover {
+			@include ui_input_hover;
+			@include box-shadow( none );
+		}
+
+		&:focus {
+			@include box-shadow( none );
+		}
+
+	}
+
+	&.ev-checkbox-style-switch {
+		input[type="checkbox"]:checked + label {
+			background-color: $green;
+
+			&:before {
+				display: none;
+			}
+
+			&:after {
+				left: $baseline*1.5 + 2;
+			}
+		}
+
+		label {
+			@include size( $baseline*3 $baseline*1.5 );
+			border-radius: $baseline*1.5;
+			@include box-shadow( none );
+			position: relative;
+			@include transition( background-color $transition_time*2 ease, border-color $transition_time*2 ease );
+
+			&:after {
+				@include size( $baseline + 4 );
+				content: "";
+				display: block;
+				@include position( absolute, 3px null null 4px );
+				@include transition( left $transition_time*2 $ease-in-out-quint );
+				background-color: $white;
+				border-radius: 50%;
+				@include box-shadow( #{$ui_el_shadow} );
+			}
+
+			&:hover:after {
+				@include box-shadow( 0px 1px 2px rgba(0,0,0,.4) );
+			}
+		}
+
+		&.ev-checkbox-style-small {
+			input[type="checkbox"]:checked + label {
+				&:after {
+					left: $baseline + 2;
+				}
+			}
+
+			label {
+				@include size( $baseline*2 $baseline );
+				border-radius: $baseline;
+
+				&:after {
+					@include size( $baseline/2 + 4 );
+				}
+			}
+		}
+	}
+}

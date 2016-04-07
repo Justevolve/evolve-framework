@@ -1,0 +1,185 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Radio
+// -----------------------------------------------------------------------------
+
+.ev-radio-wrapper {
+	@include clearfix;
+
+	input[type="radio"] {
+		display: none;
+	}
+
+	label {
+		margin-top: $baseline/4;
+
+		&:first-of-type {
+			margin-top: 0;
+		}
+	}
+}
+
+.ev-radio {
+	display: inline-block;
+	position: relative;
+	float: left;
+	clear: both;
+
+	&:before {
+		@include ui_input_standard;
+		@include size( $baseline );
+		border-radius: 50%;
+		@include box-shadow( none );
+		margin-right: $gutter/2;
+		float: left;
+		display: block;
+		content: "";
+		@include box-sizing( border-box );
+		@include transition( background-color $transition_time ease, border-color $transition_time ease );
+	}
+
+	&:hover {
+		&:before {
+			@include ui_input_hover;
+		}
+	}
+
+	input[type="radio"]:checked + & {
+		&:before {
+			border-color: $green;
+			background-color: $green;
+		}
+
+		&:after {
+			content: "";
+			@include size( 10px );
+			background-color: $white;
+			border-radius: 50%;
+			@include box-shadow( #{$ui_el_shadow} );
+			margin: $baseline/4;
+			@include position( absolute, 1px null null 1px );
+		}
+	}
+
+	span {
+		display: inline-block;
+		font-size: $main_fsz;
+		line-height: $baseline;
+	}
+
+	+ .ev-radio {
+		margin-top: $baseline/2;
+	}
+
+// -----------------------------------------------------------------------------
+// $Graphic radio
+// -----------------------------------------------------------------------------
+
+	&.ev-graphic-radio {
+		float: left;
+		clear: none;
+		margin-right: $gutter/2;
+		margin-bottom: $gutter/2;
+		margin-top: 0;
+
+		&:before,
+		&:after {
+			display: none;
+		}
+
+		img {
+			display: block;
+			padding: 4px;
+			border: 4px solid $grey_1;
+			border-radius: $radius;
+			@include transition( border-color $transition_time*2 ease );
+		}
+
+		&:hover img {
+			border-color: $grey_3;
+		}
+
+		input[type="radio"]:checked + & {
+			img {
+				border-color: $green;
+			}
+		}
+
+		// input {
+		// 	display: none;
+
+		// 	&:checked + img {
+		// 		border-color: $green;
+		// 	}
+		// }
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Switch style
+// -----------------------------------------------------------------------------
+
+.ev-radio-style-switch {
+	display: inline-block;
+	position: relative;
+
+	input[type="radio"]:checked + .ev-radio {
+		span {
+			color: $white;
+			border-color: $green;
+			background-color: $green;
+		}
+	}
+
+	.ev-radio {
+		float: none;
+		clear: none;
+		margin-top: 0;
+		margin-right: $gutter/4;
+
+		&:before,
+		&:after {
+			display: none;
+		}
+
+		span {
+			display: block;
+			position: relative;
+			z-index: 1;
+			font-size: $main_fsz;
+			line-height: $baseline;
+			padding: $baseline/4+1 $gutter/2;
+			@include ui_input_standard;
+		}
+
+		&:hover span {
+			@include ui_input_hover;
+		}
+
+		&:first-of-type span {
+			border-top-left-radius: $radius;
+			border-bottom-left-radius: $radius;
+		}
+
+		&:last-child {
+			margin-right: 0;
+
+			span {
+				border-top-right-radius: $radius;
+				border-bottom-right-radius: $radius;
+			}
+		}
+	}
+
+	// Small switch
+	&.ev-radio-style-small {
+		.ev-radio {
+			span {
+				font-size: $small_fsz;
+				line-height: $baseline - 4;
+				padding: 1px $gutter/2;
+			}
+		}
+	}
+}

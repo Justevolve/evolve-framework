@@ -39,7 +39,7 @@
 		<?php if ( $multiple ) : ?>
 			<?php foreach ( $id as $_id ) : ?>
 				<?php
-					$image_url = ev_fw_get_image( $_id, $thumb_size );
+					$image_url = ev_get_image( $_id, $thumb_size );
 
 					printf(
 						$placeholder_html,
@@ -52,7 +52,7 @@
 			<?php endforeach; ?>
 		<?php else : ?>
 			<?php
-				$image_url = ev_fw_get_image( $id, $thumb_size );
+				$image_url = ev_get_image( $id, $thumb_size );
 
 				printf(
 					$placeholder_html,
@@ -66,8 +66,49 @@
 	</div>
 
 	<div class="ev-image-upload-action">
-		<a href="#" class="ev-edit-action"><?php esc_html_e( 'Edit', 'ev_framework' ); ?></a>
-		<a href="#" class="ev-upload-action"><?php esc_html_e( 'Upload', 'ev_framework' ); ?></a>
+		<?php
+			ev_btn(
+				__( 'Edit', 'ev_framework' ),
+				'action',
+				array(
+					'attrs' => array(
+						'class'     => 'ev-edit-action',
+					),
+					'style' => 'text',
+					'size'  => 'medium'
+				)
+			);
+		?>
+
+		<?php
+			ev_btn(
+				__( 'Upload', 'ev_framework' ),
+				'action',
+				array(
+					'attrs' => array(
+						'class'     => 'ev-upload-action',
+					),
+					'style' => 'text',
+					'size'  => 'medium'
+				)
+			);
+		?>
+
+		<?php if ( $multiple ) : ?>
+			<?php
+				ev_btn(
+					__( 'Remove all', 'ev_framework' ),
+					'delete',
+					array(
+						'attrs' => array(
+							'class'     => 'ev-remove-all-action',
+						),
+						'style' => 'text',
+						'size'  => 'medium'
+					)
+				);
+			?>
+		<?php endif; ?>
 	</div>
 
 	<input type="hidden" data-id name="<?php echo esc_attr( $handle ); ?>[<?php echo esc_attr( $breakpoint ); ?>][<?php echo esc_attr( $density ); ?>][id]" value="<?php echo esc_attr( implode( ',', (array) $id ) ); ?>">

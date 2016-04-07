@@ -1,0 +1,151 @@
+@import "libs";
+
+// // -----------------------------------------------------------------------------
+// // $Messages
+// // -----------------------------------------------------------------------------
+
+// .ev-persistent-messages-container {
+// 	@include position( fixed, ( 32px + $baseline ) $gutter*2 null ( 160px + $gutter*2 ) );
+// 	z-index: 100;
+
+// 	@include ev-media( $media_mobile ) {
+// 		right: 10px;
+// 		left: 10px;
+// 	}
+
+// 	.folded & {
+// 		left: 36px + $gutter*2;
+
+// 		@include ev-media( $media_mobile ) {
+// 			left: 10px;
+// 		}
+// 	}
+
+// 	.admin-bar & {
+// 		@include ev-media( $media_mobile ) {
+// 			top: 46px + $baseline;
+// 		}
+// 	}
+// }
+
+// .ev-persistent-message {
+// 	padding: $baseline/2;
+// 	@include box-shadow( 0 2px 5px rgba( #000, .2 ) );
+
+// 	+ .ev-persistent-message {
+// 		margin-top: $baseline/2;
+// 	}
+
+// 	> h3 {
+// 		text-transform: uppercase;
+// 		font-size: 12px;
+// 		margin-bottom: $baseline/2;
+// 	}
+
+// 	p {
+// 		margin: 0;
+
+// 		a {
+// 			font-weight: bold;
+// 		}
+
+// 		+ p {
+// 			margin-top: $baseline;
+// 		}
+// 	}
+
+// 	.ev-close-persistent-message {
+// 		float: right;
+// 		@include opacity( 100 );
+// 		@include transition( opacity $transition_time ease );
+
+// 		&:hover {
+// 			@include opacity( 60 );
+// 		}
+
+// 		&:before {
+// 			@include icon( "\f153" );
+// 			font-size: 18px;
+// 			cursor: pointer;
+// 		}
+// 	}
+
+// 	&.ev-error {
+// 		background-color: $red;
+// 		color: $white;
+
+// 		> h3 {
+// 			color: $white;
+// 		}
+
+// 		a {
+// 			color: $white;
+
+// 			&:hover {
+// 				color: rgba( $white, .7 );
+// 			}
+// 		}
+// 	}
+
+// 	&.ev-warning {
+// 		background-color: $yellow_light;
+// 		color: $yellow_text;
+
+// 		> h3 {
+// 			color: $yellow_text;
+// 		}
+
+// 		a {
+// 			color: $yellow_text;
+
+// 			&:hover {
+// 				color: rgba( $yellow_text, .7 );
+// 			}
+// 		}
+// 	}
+
+// 	&.ev-notice {
+// 		background-color: $blue_medium;
+// 		color: $white;
+
+// 		> h3 {
+// 			color: $white;
+// 		}
+
+// 		a {
+// 			color: $white;
+
+// 			&:hover {
+// 				color: rgba( $white, .7 );
+// 			}
+// 		}
+// 	}
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Static message
+// // -----------------------------------------------------------------------------
+
+// .ev-admin-notice {
+// 	margin: $baseline/4 $gutter*2 $baseline/4 $gutter !important;
+// 	display: block;
+// }
+
+// .ev-static-notice {
+// 	display: block;
+// 	line-height: 19px;
+// 	padding: 1px 15px;
+// 	font-size: 14px;
+// 	text-align: left;
+// 	background-color: #fff;
+// 	border-left: 4px solid $blue_medium;
+// 	@include box-shadow( 0 1px 1px 0 rgba( #000, .1 ) );
+
+// 	p {
+// 		margin: .5em 0;
+//   		padding: 2px;
+//   		font-size: inherit;
+//   		font-family: inherit;
+//   		line-height: inherit;
+// 	}
+// }

@@ -1,0 +1,474 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Sortable fields
+// -----------------------------------------------------------------------------
+
+.ev-repeatable {
+	// &:not( .ev-sortable ) .ev-field-panel-controls-wrapper {
+	// 	.ev-sortable-handle {
+	// 		display: none;
+	// 	}
+	// }
+
+	// &.ev-sortable {
+	// 	.ev-field-panel-controls-wrapper .ev-field-panel-controls-inner-wrapper {
+	// 		height: $baseline*2;
+	// 	}
+	// }
+
+}
+
+[data-icon='evfw-add']:before {
+	font-family: $icons;
+	content: "\f132";
+	bottom: -1px;
+}
+
+// -----------------------------------------------------------------------------
+// $Controls panel
+// -----------------------------------------------------------------------------
+
+// .ev-field-panel-controls-wrapper {
+// 	display: none;
+// 	// @include position( absolute, -1px (-($baseline+1)) null null );
+// 	// TODO: Aggiungere bleeding edge
+
+// 	.ev-field-panel-controls-inner-wrapper {
+// 		@include size( $baseline );
+// 		border: 1px solid $grey_1;
+// 		border-left: none;
+// 		background-color: $white;
+// 		border-top-right-radius: $radius;
+// 		border-bottom-right-radius: $radius;
+// 	}
+
+// 	.ev-sortable-handle {
+// 		display: inline-block;
+
+// 		&:before {
+// 			cursor: all-scroll;
+// 			color: $grey_3;
+// 			@include icon( "\f333" );
+// 			@include size( $baseline );
+// 			font-size: 16px;
+// 			line-height: $baseline;
+// 		}
+
+// 		&:hover:before {
+// 			color: $grey_6;
+// 		}
+// 	}
+
+// 	.ev-repeatable-remove {
+// 		display: inline-block;
+
+// 		&:before {
+// 			cursor: pointer;
+// 			color: $grey_3;
+// 			@include icon( "\f153" );
+// 			@include size( $baseline );
+// 			font-size: 16px;
+// 			line-height: $baseline;
+// 		}
+
+// 		&:hover:before {
+// 			color: $red;
+// 		}
+// 	}
+// }
+
+// -----------------------------------------------------------------------------
+// $Repeatable fields
+// -----------------------------------------------------------------------------
+
+.ev-repeatable {
+
+	.ev-container-repeatable-inner-wrapper {
+		@include ui_input_standard;
+		padding: 0 $baseline/4;
+	}
+
+	.ev-bundle-fields-wrapper,
+	.ev-field-inner {
+		background-color: $white;
+		position: relative;
+		@include box-sizing( border-box );
+	}
+
+// -----------------------------------------------------------------------------
+// $Empty state
+// -----------------------------------------------------------------------------
+
+	.ev-empty-state {
+		display: none;
+	}
+
+	// Empty state
+	&.ev-no-fields {
+		.ev-container-repeatable-inner-wrapper {
+			border-style: dashed;
+
+			&:hover {
+				border-color: $blue;
+			}
+		}
+
+		.ev-empty-state {
+			display: block;
+			text-align: center;
+
+			a {
+				padding: $baseline/2 0;
+				display: block;
+
+				&:focus {
+					@include box-shadow( none );
+				}
+			}
+		}
+
+		.ev-repeat-remove-all {
+			display: none;
+		}
+	}
+
+// -----------------------------------------------------------------------------
+// $Remove all
+// -----------------------------------------------------------------------------
+
+	.ev-field-header {
+		&:not( .ev-field-header-label-hidden ):not( .ev-field-header-label-inline-hidden ) {
+			* + .ev-repeat-remove-all {
+				margin-top: $baseline/2;
+			}
+		}
+
+		&.ev-field-header-label-hidden,
+		&.ev-field-header-label-inline-hidden {
+			margin-bottom: $baseline/2;
+		}
+	}
+
+// -----------------------------------------------------------------------------
+// $Standard field repeatable
+// -----------------------------------------------------------------------------
+
+	&:not( .ev-field-bundle ) {
+		&:hover {
+			.ev-container-repeatable-inner-wrapper {
+				> .ev-field-inner {
+					border-color: $grey_3;
+				}
+			}
+		}
+
+		.ev-container-repeatable-inner-wrapper {
+			> .ev-field-inner {
+				margin-top: $baseline/4;
+				margin-bottom: $baseline/4;
+				border: 1px solid $grey_1;
+				border-radius: $radius;
+				padding: $baseline $gutter;
+
+				&:hover {
+					border-color: $grey_4;
+					@include box-shadow( #{$ui_el_shadow_hover} );
+					border-top-right-radius: 0;
+
+					> .ev-field-panel-controls-wrapper {
+						display: block;
+
+						.ev-field-panel-controls-inner-wrapper {
+							border-color: $grey_4;
+						}
+					}
+				}
+
+				.ev-field-panel-controls-wrapper + .ev-repeatable-controls {
+					display: block;
+					@include position( absolute, (-( (($baseline+2) / 2) + $baseline/8 + 2) ) 0 null 0 );
+				}
+
+				&:last-child {
+					.ev-repeatable-controls:last-child {
+						display: block;
+						@include position( absolute, null 0 (-( (($baseline+2) / 2) + $baseline/8 + 2) ) 0 );
+					}
+				}
+
+				// -------------------------------------------------------------
+				// $Sortable helper and placeholder
+				// -------------------------------------------------------------
+				&.ui-sortable-helper {
+					.ev-repeatable-controls {
+						display: none !important;
+					}
+
+					> .ev-field-panel-controls-wrapper {
+						display: block;
+					}
+				}
+
+				&.ui-sortable-placeholder {
+					border-color: $grey_3;
+					background-color: $grey_3;
+				}
+			}
+		}
+	}
+
+// -----------------------------------------------------------------------------
+// $Repeatable controls
+// -----------------------------------------------------------------------------
+
+	.ev-repeatable-controls {
+		text-align: center;
+		display: none;
+		@include opacity( 0 );
+	}
+
+	&:hover {
+		.ev-repeatable-controls {
+			@include opacity( 100 );
+		}
+	}
+
+// -----------------------------------------------------------------------------
+// $Bundle field repeatable
+// -----------------------------------------------------------------------------
+
+	&.ev-field-bundle {
+		.ev-bundle-fields-wrapper {
+			margin-top: $baseline/4;
+			margin-bottom: $baseline/4;
+
+			.ev-field-panel-controls-wrapper + .ev-repeatable-controls {
+				display: block;
+				@include position( absolute, (-( (($baseline*1.5 + 2) / 2) + $baseline/8 + 2) ) 0 null 0 );
+			}
+
+			&:hover {
+				border-color: $grey_4;
+				@include box-shadow( #{$ui_el_shadow_hover} );
+				border-top-right-radius: 0;
+
+				> .ev-field-panel-controls-wrapper {
+					display: block;
+
+					.ev-field-panel-controls-inner-wrapper {
+						border-color: $grey_4;
+					}
+				}
+			}
+
+			// -----------------------------------------------------------------
+			// $Sortable helper and placeholder
+			// -----------------------------------------------------------------
+			&.ui-sortable-helper {
+				.ev-repeatable-controls {
+					display: none !important;
+				}
+
+				> .ev-field-panel-controls-wrapper {
+					display: block;
+				}
+			}
+
+			&.ui-sortable-placeholder {
+				border-color: $grey_3;
+				background-color: $grey_3;
+			}
+		}
+
+		.ev-container-repeatable-inner-wrapper .ev-bundle-fields-wrapper:last-child {
+			.ev-repeatable-controls:last-child {
+				display: block;
+				@include position( absolute, null 0 (-( (($baseline*1.5 + 2) / 2) + $baseline/8 + 2) ) 0 );
+			}
+		}
+	}
+
+// -----------------------------------------------------------------------------
+// $Grid
+// -----------------------------------------------------------------------------
+
+	.ev-bundle-fields-wrapper-heading {
+		@include clearfix;
+		border: 1px solid $blue_1;
+		border-radius: $radius;
+		background-color: $blue_1;
+		color: $white;
+		font-weight: bold;
+		padding: $baseline/2 $baseline/4;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+
+		+ .ev-container-repeatable-inner-wrapper {
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+		}
+	}
+
+// -----------------------------------------------------------------------------
+
+}
+
+
+// .ev-repeatable-remove:before {
+// 	display: none;
+// }
+
+// .ev-repeatable {
+
+// 	.ev-repeatable-controls {
+// 		@include clearfix();
+// 		clear: both;
+// 		display: block;
+// 		margin-bottom: $baseline/4;
+
+// 		a + a {
+// 			margin-left: $gutter;
+// 		}
+
+// 		a.ev-repeat-remove-all {
+// 			color: $red;
+// 		}
+// 	}
+
+// 	.ev-no-fields {
+// 		.ev-repeat-remove-all,
+// 		.ev-repeatable-controls + .ev-repeatable-controls {
+// 			display: none;
+// 		}
+// 	}
+
+// 	.ev-container-empty .ev-repeatable-controls {
+// 		display: none;
+// 	}
+
+// 	.ev-field-inner {
+// 		float: left;
+// 		width: 100%;
+// 		clear: both;
+// 		@include box-sizing( border-box );
+// 		position: relative;
+// 		padding: $baseline/4 $baseline*1.25 $baseline/4 $baseline/2;
+// 		border: 1px solid $border_color;
+// 		border-bottom: 0;
+
+// 		&:last-child {
+// 			border-bottom: 1px solid $border_color;
+// 		}
+
+// 		&:hover {
+// 			background-color: rgba( $blue_light, .1 );
+// 			border-left-color: $blue_medium;
+// 			border-right-color: $blue_medium;
+
+// 			.ev-repeatable-remove:before {
+// 				@include opacity( 100 );
+// 			}
+
+// 			&:before,
+// 			&:after {
+// 				content: "";
+// 				display: block;
+// 				@include position( absolute, -1px null -1px null );
+// 				width: 1px;
+// 				background-color: $blue_medium;
+// 			}
+
+// 			&:before {
+// 				left: 0;
+// 			}
+
+// 			&:after {
+// 				right: 0;
+// 			}
+// 		}
+
+// 		+ .ev-field-inner {
+// 			border-top: 1px dashed $border_color;
+// 		}
+// 	}
+
+// 	.ev-repeatable-remove {
+// 		cursor: pointer;
+
+// 		&:before {
+// 			@extend %remove_icon;
+// 			margin-top: -9px;
+// 			@include position( absolute, 50% $baseline/4 null null );
+// 		}
+
+// 		&:hover:before {
+// 			color: darken( $red, 20 );
+// 		}
+// 	}
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Fields sortable
+// // -----------------------------------------------------------------------------
+
+// .ev-sortable {
+
+// 	.ev-field-inner {
+// 		padding-left: $gutter + 1;
+// 		float: left;
+// 		width: 100%;
+// 		clear: both;
+// 		@include box-sizing( border-box );
+
+// 		&:hover {
+// 			.ev-sortable-handle {
+// 				visibility: visible;
+// 			}
+// 		}
+
+// 		&.ui-sortable-helper {
+// 			border-top: 1px solid $border_color;
+// 			border-bottom: 1px solid $border_color;
+// 			background-color: $white;
+// 			@include box-shadow( 0 1px 10px rgba( #000, .1 ) );
+// 		}
+
+// 		&.ui-sortable-placeholder {
+// 			background-color: $grey_light_2;
+// 			visibility: visible !important;
+// 		}
+
+// 	}
+
+// 	.ev-sortable-handle {
+// 		@include ev_handle;
+// 		width: $gutter;
+// 		@include position( absolute, 0 null 0 0 );
+
+// 		&:before {
+// 			@include position( absolute, 50% null null 50% );
+// 			margin-left: -3px;
+// 			margin-top: -7px;
+// 		}
+// 	}
+// }
+
+// // -----------------------------------------------------------------------------
+// // $Empty state
+// // -----------------------------------------------------------------------------
+
+// .ev-empty-state {
+// 	display: none;
+// 	border: 1px solid $border_color;
+// 	background: $grey_light_2;
+// 	text-align: center;
+// 	font-size: 12px;
+// 	font-style: italic;
+// 	color: $text_light;
+// 	padding: $baseline/2 $gutter;
+
+// 	.ev-container-empty & {
+// 		display: block;
+// 	}
+// }

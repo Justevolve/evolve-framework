@@ -9,11 +9,14 @@ var modules = [
 	"components/utilities",
 	"components/grid",
 	"components/tabs",
+	"components/accordion",
 	"components/dropdown",
 	"components/icon",
 	"components/modal",
 	"components/utilities",
 ];
+
+var scss_folder = 'scss';
 
 // -----------------------------------------------------------------------------
 // MODULES UTILITIES
@@ -99,16 +102,22 @@ function get_modules_admin_scripts() {
 	scripts.push( "assets/js/admin/libs/jquery.minicolors.min.js" );
 	scripts.push( "assets/js/admin/libs/selectize.min.js" );
 	scripts.push( "assets/js/admin/libs/js-wp-editor.js" );
+	scripts.push( "assets/js/admin/libs/jquery.scrollintoview.min.js" );
 	scripts.push( "assets/js/admin/history.js" );
 	scripts.push( "assets/js/admin/tooltip.js" );
 	scripts.push( "assets/js/admin/ev.media_selector.js" );
 	scripts.push( "assets/js/admin/repeatable.js" );
 	scripts.push( "assets/js/admin/options.js" );
 	scripts.push( "assets/js/admin/image_upload.js" );
+	scripts.push( "assets/js/admin/attachment_upload.js" );
 	scripts.push( "assets/js/admin/multiple_select.js" );
 	scripts.push( "assets/js/admin/color.js" );
 	scripts.push( "assets/js/admin/editor.js" );
 	scripts.push( "assets/js/admin/icon.js" );
+	scripts.push( "assets/js/admin/field.js" );
+	scripts.push( "assets/js/admin/link.js" );
+	scripts.push( "assets/js/admin/button.js" );
+	scripts.push( "assets/js/admin/date.js" );
 
 	return scripts;
 }
@@ -133,22 +142,30 @@ module.exports = function( grunt ) {
 				sourcemap: "none"
 			},
 			admin: {
-				files: {
-					"assets/css/admin.css" : "assets/scss/admin.scss"
-				}
+				options: {
+					style: "compact",
+					quiet: true
+				},
+				files: [ {
+					expand: true,
+					cwd: "assets/" + scss_folder + "/",
+					src: [
+						"*.scss",
+						"fields/*.scss",
+						"!_utils.scss",
+						"!libs.scss",
+						"!config.scss",
+						"!import.scss",
+						"!admin.scss",
+					],
+					dest: "assets/" + scss_folder + "/compiled/",
+					ext: ".css"
+				} ]
 			}
 		},
 
 		// Concat
 		concat: {
-			js_admin_dev: {
-				options: {
-					separator: ';\n',
-					banner: '',
-				},
-				src: get_modules_admin_scripts(),
-				dest: "assets/js/min/admin.min.js"
-			},
 			prod: {
 				options: {
 					separator: '\n\n',
@@ -156,7 +173,28 @@ module.exports = function( grunt ) {
 				},
 				src: get_modules_raw_stylesheets(),
 				dest: 'scss/components-libs.scss'
+			},
+			admin_css: {
+				src: [ "assets/" + scss_folder + "/compiled/*.css", "assets/" + scss_folder + "/compiled/fields/*.css" ],
+				dest: "assets/css/admin.css"
+			},
+		},
+
+		// Append
+		'file_append': {
+			'admin_css': {
+				files: [
+					{
+						prepend: '@charset "UTF-8";\n',
+						input: "assets/css/admin.css",
+						output: "assets/css/admin.css"
+					}
+				]
 			}
+		},
+
+		clean: {
+			start: [ "assets/" + scss_folder + "/compiled" ],
 		},
 
 		// Uglify
@@ -186,27 +224,46 @@ module.exports = function( grunt ) {
 						}
 					]
 				}
-			}
+			},
+			'admin_css': {
+				files: {
+					'assets/css/admin.css': 'assets/css/admin.css',
+				},
+				options: {
+					replacements: [
+						{
+							pattern: /@charset "UTF-8";/g,
+							replacement: "",
+						}
+					]
+				}
+			},
 		},
 
 		// Watch
 		watch: {
 			admin_js_dev: {
 				files: get_modules_admin_scripts(),
-				tasks: [ "concat:js_admin_dev", "notify:done" ],
+				tasks: [ "uglify", /*"concat:js_admin_dev",*/ "notify:done" ],
 				options: {
 					spawn: false
 				}
-			},
-			admin_css: {
-				files: [ "assets/scss/admin.scss", "scss/components-libs.scss" ],
-				tasks: [ "sass:admin", "notify:done" ]
 			},
 			prod_css: {
 				files: get_modules_raw_stylesheets(),
 				tasks: [ "prod" ],
 				options: {
 					spawn: false,
+				}
+			},
+			admin_css: {
+				files: [
+					"assets/" + scss_folder + "/*.scss",
+					"assets/" + scss_folder + "/fields/*.scss"
+				],
+				tasks: [ "sass:admin", "concat:admin_css", "string-replace:admin_css", "file_append:admin_css" ],
+				options: {
+					spawn: false
 				}
 			},
 		},
@@ -259,8 +316,29 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-markdown" );
 	grunt.loadNpmTasks( "grunt-notify" );
 	grunt.loadNpmTasks( "grunt-wp-i18n" );
+	grunt.loadNpmTasks( "grunt-contrib-clean" );
+	grunt.loadNpmTasks( "grunt-file-append" );
 
 	grunt.task.run( "notify_hooks" );
+
+	// -------------------------------------------------------------------------
+	// EVENTS
+	// -------------------------------------------------------------------------
+
+	/**
+	 * Target and run specific operations according to the type of file that has
+	 * been modified.
+	 */
+	grunt.event.on( 'watch', function( action, filepath, target ) {
+		switch ( target ) {
+			case "admin_css":
+				grunt.config( 'sass.admin.files.0.src', [ filepath.replace( "assets/scss/", "" ) ] );
+
+				break;
+			default:
+				break;
+		}
+	} );
 
 	// -------------------------------------------------------------------------
 	// TASKS
@@ -285,7 +363,12 @@ module.exports = function( grunt ) {
 	 */
 	grunt.registerTask( "start", [
 		"string-replace:framework-info",
+		"clean:start",
+		"sass",
 		"concat",
+		"string-replace:admin_css",
+		"file_append:admin_css",
+		"uglify",
 		"makepot",
 		"notify:start",
 		"watch"

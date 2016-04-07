@@ -1,0 +1,39 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Divider
+// -----------------------------------------------------------------------------
+
+.ev-field-divider {
+	h3 {
+		display: inline-block;
+		font-size: 24px !important;
+		margin: 0;
+		padding: 0 !important;
+		color: $green_2;
+	}
+
+	// Section break
+	&.ev-divider-style-section_break {
+		background-color: $green_0;
+		// border-top: 1px solid $grey_1;
+		// border-bottom: 1px solid $grey_1;
+
+		h3 {
+			padding: $baseline 0 0 0 !important;
+		}
+	}
+
+	// In page divider
+	&.ev-divider-style-in_page {
+
+		.ev-field-inner-wrapper {
+			padding-bottom: $baseline/2;
+			border-bottom: 4px solid $green_0;
+		}
+	}
+}
+
+.ev-tab form .ev-field-divider.ev-divider-style-section_break:first-of-type {
+	border-top: none;
+}

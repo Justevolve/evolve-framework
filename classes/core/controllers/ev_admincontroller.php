@@ -8,7 +8,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -39,9 +39,10 @@ class Ev_AdminController extends Ev_Controller {
 	function __construct()
 	{
 		/* Add the Javascript file for admin components. */
-		$this->add_script( 'ev-admin', EV_FRAMEWORK_URI . 'assets/js/min/admin.min.js', array( 'underscore', 'jquery-ui-sortable', 'media-upload' ) );
+		$this->add_script( 'ev-admin', EV_FRAMEWORK_URI . 'assets/js/min/admin.min.js', array( 'underscore', 'jquery-ui-sortable', 'jquery-ui-datepicker', 'media-upload' ) );
 
 		/* Add the CSS file for admin components. */
+		$this->add_style( 'ev-admin-icons', EV_FRAMEWORK_URI . 'assets/css/f/evframework.css' );
 		$this->add_style( 'ev-admin', EV_FRAMEWORK_URI . 'assets/css/admin.css' );
 
 		/* Bind the enqueue of scripts and stylesheets. */
@@ -119,6 +120,22 @@ class Ev_AdminController extends Ev_Controller {
 	public function add_user_meta_box( $handle, $title, $roles = '', $fields = array() )
 	{
 		return new Ev_UserMetaBox( $handle, $title, $roles, $fields );
+	}
+
+	/**
+	 * Register and add a meta box to a term editing interface binding it to
+	 * one or more taxonomies.
+	 *
+	 * @since 0.4.0
+	 * @param string $handle A slug-like definition of the taxonomy meta box.
+	 * @param string $title A human-readable definition of the taxonomy meta box.
+	 * @param string|array $taxonomies A string or array of taxonomies.
+	 * @param array $fields An array containing a default set of fields that belong to the taxonomy meta box.
+	 * @return Ev_UserMetaBox
+	 */
+	public function add_taxonomy_meta_box( $handle, $title, $taxonomies = '', $fields = array() )
+	{
+		return new Ev_TaxonomyMetaBox( $handle, $title, $taxonomies, $fields );
 	}
 
 	/**

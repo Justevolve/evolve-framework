@@ -7,7 +7,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -31,7 +31,10 @@ class Ev_TextField extends Ev_Field {
 		}
 
 		$data['config'] = wp_parse_args( $data['config'], array(
-			'size' => ''
+			'style' => '',
+			'size' => '',
+			'full' => false,
+			'link' => false
 		) );
 
 		parent::__construct( $data );

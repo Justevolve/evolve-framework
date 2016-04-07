@@ -406,6 +406,33 @@
 
 }
 
+@mixin ev_accordion_reset() {
+	.ev-accordion {
+		@extend %clearfix !optional;
+	}
+
+	.ev-toggle {
+		@extend %clearfix !optional;
+	}
+
+	.ev-toggle-trigger {
+		@extend %clearfix !optional;
+
+		.rtl & {
+			text-align: right;
+		}
+	}
+
+	.ev-toggle-content {
+		@extend %clearfix !optional;
+		display: none;
+	}
+
+	.ev-toggle.ev-active .ev-toggle-content {
+		display: block;
+	}
+}
+
 @mixin ev_dropdown_reset() {
 
 	.ev-dropdown {
@@ -454,6 +481,7 @@
 		text-rendering: auto;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+		text-align: center;
 	}
 
 }

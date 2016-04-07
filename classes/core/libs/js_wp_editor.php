@@ -36,8 +36,8 @@ if ( ! function_exists( 'js_wp_editor' ) ) {
 			require( ABSPATH . WPINC . '/class-wp-editor.php' );
 		$set = _WP_Editors::parse_settings( 'apid', $settings );
 
-		if ( !current_user_can( 'upload_files' ) )
-			$set['media_buttons'] = false;
+		// if ( !current_user_can( 'upload_files' ) )
+			// $set['media_buttons'] = false;
 
 		// if ( $set['media_buttons'] ) {
 		// 	wp_enqueue_script( 'thickbox' );
@@ -57,11 +57,18 @@ if ( ! function_exists( 'js_wp_editor' ) ) {
 
 		$ap_vars = array(
 			'url' => get_home_url(),
-			'includes_url' => includes_url()
+			'includes_url' => includes_url(),
+			'upload_files' => current_user_can( 'upload_files' )
 		);
 
 		wp_localize_script( 'jquery', 'ap_vars', $ap_vars );
 	}
+
+	function js_wp_editor_enqueue_scripts() {
+		wp_enqueue_style( 'js-wp-editor-css', includes_url() . 'css/editor.css' );
+	}
+
+	add_action( 'admin_enqueue_scripts', 'js_wp_editor_enqueue_scripts' );
 
 	add_action( 'admin_init', 'js_wp_editor' );
 }

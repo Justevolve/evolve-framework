@@ -8,7 +8,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -64,7 +64,29 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 		/* Bind the enqueue of scripts and stylesheets. */
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), apply_filters( 'ev_frontend_enqueue_scripts_priority', 20 ) );
 
+		/* Register the components scripts. */
+		$this->_register_components_scripts();
+
 		parent::__construct();
+	}
+
+	/**
+	 * Register the components scripts.
+	 *
+	 * @since 0.4.0
+	 */
+	private function _register_components_scripts()
+	{
+		/* Base file for event bindings. */
+		$this->register_script( 'ev-base', EV_FRAMEWORK_URI . 'assets/js/base.js' );
+
+		/* Tabs. */
+		$this->register_script( 'ev-tabs', EV_FRAMEWORK_URI . 'components/tabs/js/script.js', array( 'ev-base' ) );
+		$this->register_script( 'ev-accordion', EV_FRAMEWORK_URI . 'components/accordion/js/script.js', array( 'ev-base' ) );
+
+		/* Inview. */
+		$this->register_script( 'ev-inview-lib', EV_FRAMEWORK_URI . 'components/inview/js/jquery.inview.min.js', array( 'ev-base' ) );
+		$this->register_script( 'ev-inview', EV_FRAMEWORK_URI . 'components/inview/js/script.js', array( 'ev-inview-lib' ) );
 	}
 
 	/**
@@ -135,9 +157,43 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 				'in_footer' => $in_footer,
 				'enqueue' 	=> true
 			);
+
+			$this->_scripts[$handle] = $script_data;
+		}
+		elseif ( isset( $this->_scripts[$handle] ) ) {
+			$this->_scripts[$handle]['enqueue'] = true;
+		}
+	}
+
+	/**
+	 * Add a style to be registered, enqueued and included in the page.
+	 * Essentially this method is a wrapper for the WordPress core functions
+	 * 'wp_register_script'; as such, the method accepts the very same
+	 * set of parameters.
+	 *
+	 * @since 0.1.0
+	 * @see http://codex.wordpress.org/Function_Reference/wp_register_script
+	 * @param string 	$handle 	Name of the style. Should be unique.
+	 * @param string 	$src 		URL to the style.
+	 * @param array 	$deps 		Array of the handles of all the registered styles that this style depends on, that is, the styles that must be loaded before this style.
+	 * @param string 	$ver 		String specifying the style version number, if it has one.
+	 * @param string 	$media 	String specifying the media for which this stylesheet has been defined.
+	 */
+	public function register_style( $handle, $src = null, $deps = array(), $ver = '', $media = 'all' )
+	{
+		$style_data = false;
+
+		if ( $src ) {
+			$style_data = array(
+				'src'     => $src,
+				'deps'    => $deps,
+				'ver'     => $ver,
+				'media'   => $media,
+				'enqueue' => false
+			);
 		}
 
-		$this->_scripts[$handle] = $script_data;
+		$this->_styles[$handle] = $style_data;
 	}
 
 	/**
@@ -165,14 +221,18 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 
 		if ( $src ) {
 			$style_data = array(
-				'src'   => $src,
-				'deps'  => $deps,
-				'ver'   => $ver,
-				'media' => $media,
+				'src'     => $src,
+				'deps'    => $deps,
+				'ver'     => $ver,
+				'media'   => $media,
+				'enqueue' => true
 			);
-		}
 
-		$this->_styles[$handle] = $style_data;
+			$this->_styles[$handle] = $style_data;
+		}
+		elseif ( isset( $this->_styles[$handle] ) ) {
+			$this->_styles[$handle]['enqueue'] = true;
+		}
 	}
 
 	/**
@@ -236,7 +296,9 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 				wp_register_style( $handle, $style_data['src'], $style_data['deps'], $style_data['ver'], $style_data['media'] );
 			}
 
-			$styles_to_be_enqueued[] = $handle;
+			if ( $style_data['enqueue'] === true ) {
+				$styles_to_be_enqueued[] = $handle;
+			}
 		}
 
 		/* Deregister stylesheets, if needed. */
@@ -278,6 +340,23 @@ class Ev_FrontendController extends Ev_FrontendInterface {
 				$this->_context[] = 'singular';
 				$this->_context[] = "singular-{$object->post_type}";
 				$this->_context[] = "singular-{$object->post_type}-{$object_id}";
+
+				if ( $object->post_type === 'page' ) {
+					$templates = wp_get_theme()->get_page_templates( $object );
+					$page_template = ev_get_page_template( $object_id );
+					$template = '';
+
+					if ( in_array( $page_template, array_keys( $templates ) ) ) {
+						$template = current( $templates );
+					}
+					else {
+						$template = $page_template;
+					}
+
+					$template = sanitize_title( $template );
+
+					$this->_context[] = 'page-template-' . $template;
+				}
 			}
 			elseif ( is_archive() ) {
 				/* Archive views. */

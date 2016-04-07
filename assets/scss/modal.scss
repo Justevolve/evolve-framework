@@ -1,0 +1,277 @@
+@import "libs";
+
+// -----------------------------------------------------------------------------
+// $Modal
+// -----------------------------------------------------------------------------
+
+body.ev-modal-open {
+	overflow: hidden;
+}
+
+#ev-modals-container {
+	position: relative;
+	z-index: 100001;
+}
+
+// #ev-modals-container .ev-modal-container:not( :last-child ) {
+// 	@include opacity( 0 );
+// }
+
+.ev-modal-wrapper {
+	top: 60px;
+	bottom: 60px;
+	left: 15%;
+	right: 15%;
+	background: $white;
+	@include box-sizing( border-box );
+	// overflow: hidden;
+
+	@include ev_media( $media_tablet ) {
+		left: 5%;
+		right: 5%;
+	}
+
+	@include ev_media( $media_mobile ) {
+		left: 0;
+		right: 0;
+		top: $admin_bar_mobile;
+		bottom: $admin_bar_mobile;
+	}
+
+	&.ev-loading {
+		&:before {
+			@include spinner( 20px, 3px, $grey_6 );
+			@include position( absolute, 50% null null 50% );
+			margin-left: -10px;
+			margin-top: -10px;
+		}
+	}
+}
+
+.ev-modal-header {
+	padding: $baseline/2 ($gutter*1.5 + $baseline) $baseline/2 $gutter;
+	min-height: $modal_header_height;
+	@include box-sizing( border-box );
+	@include clearfix();
+
+	h1 {
+		font-size: 16px;
+		line-height: $baseline;
+		margin: 0;
+		font-weight: bold;
+		float: left;
+		display: inline-block;
+	}
+
+	.ev-modal-header-title-controls {
+		float: left;
+		line-height: $baseline;
+		margin-left: $gutter*2;
+	}
+}
+
+.ev-modal {
+	border-top: 1px solid $grey_1;
+
+	> .ev-tabs {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: $modal_footer_height;
+
+		.ev-tabs-nav.ev-vertical {
+			overflow-y: auto;
+			@include position( absolute, 0 auto 0 0 );
+			max-width: none;
+			// width: 180px;
+			margin-right: 0;
+
+			@include ev-media( $media_mobile_small ) {
+				position: relative;
+				width: 100%;
+			}
+
+			+ .ev-tab-container {
+				overflow-y: auto;
+				overflow-x: hidden;
+				@include position( absolute, 0 0 0 null );
+
+				@include ev-media( $media_mobile_small ) {
+					position: relative;
+					left: 0;
+					width: 100%;
+					border: none;
+				}
+			}
+		}
+	}
+}
+
+.ev-modal-footer {
+	@include clearfix;
+	@include box-sizing( border-box );
+	display: inline-block;
+	width: 100%;
+	clear: both;
+	padding: $baseline/2 $gutter;
+	border-top: 1px solid $grey_1;
+	@include position( absolute, null 0 0 0 );
+	z-index: 1;
+	background: #fff;
+
+	.ev-save {
+		float: right;
+	}
+}
+
+.ev-modal-close {
+	position: relative;
+	font-size: $baseline;
+	@include size( $baseline );
+	line-height: $baseline;
+	padding-top: $baseline/2;
+	float: right;
+	margin-right: $gutter;
+	z-index: 10;
+	color: $grey_6;
+
+	&:focus {
+		@include box-shadow( none );
+	}
+
+	&:hover {
+		color: $red;
+	}
+
+	i {
+		font-style: normal;
+	}
+}
+
+.ev-modal-back {
+	float: left;
+}
+
+// -----------------------------------------------------------------------------
+// $Modal tabs
+// -----------------------------------------------------------------------------
+
+.ev-modal {
+	@include vertical_tab_style;
+
+	> .ev-tabs {
+		@include position( absolute, ($modal_header_height + 1) 0 $modal_footer_height 0 );
+		overflow-y: auto;
+		background: $grey_1;
+
+		.ev-tab-container {
+			min-height: 100%;
+		}
+	}
+
+	> .ev-tab-container {
+		@include position( absolute, ($modal_header_height + 1) 1px $modal_footer_height 0 );
+		overflow-y: auto;
+		width: auto;
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Modal container
+// -----------------------------------------------------------------------------
+
+@include ev_modal_reset();
+
+.ev-modal-container + .ev-modal-container:not( .ev-modal-container-simple ) {
+	background: transparent;
+}
+
+// -----------------------------------------------------------------------------
+// $Simple modal
+// -----------------------------------------------------------------------------
+
+.ev-modal-container + .ev-modal-container-simple {
+	top: 60 + $modal_header_height + 1;
+	bottom: 60px;
+	left: 15%;
+	right: 15%;
+	background: rgba( #000, 0.75 );
+
+	@include ev_media( $media_tablet ) {
+		left: 5%;
+		right: 5%;
+	}
+
+	@include ev_media( $media_mobile ) {
+		left: 0;
+		right: 0;
+		top: $admin_bar_mobile + $modal_header_height + 1;
+		bottom: $admin_bar_mobile;
+	}
+
+	.ev-modal-wrapper {
+		// max-height: 600px;
+		left: 60px;
+		right: 60px;
+
+		@include ev_media( $media_mobile ) {
+			top: 40px;
+			bottom: 40px;
+			left: 40px;
+			right: 40px;
+		}
+	}
+
+	+ .ev-modal-container-simple {
+		top: 60*2 + $modal_header_height + 1;
+		bottom: 60px*2;
+		left: calc( 15% + 60px );
+		right: calc( 15% + 60px );
+		background: rgba( #000, 0.8 );
+
+		@include ev_media( $media_tablet ) {
+			left: calc( 5% + 60px );
+			right: calc( 5% + 60px );
+		}
+
+		@include ev_media( $media_mobile ) {
+			left: 0;
+			right: 0;
+			top: $admin_bar_mobile + $modal_header_height + 1;
+			bottom: $admin_bar_mobile;
+		}
+
+		.ev-modal-wrapper {
+			// max-height: 600px;
+			left: 40px;
+			right: 40px;
+			top: 40px;
+			bottom: 40px;
+
+			@include ev_media( $media_mobile ) {
+				left: 40px;
+				right: 40px;
+			}
+		}
+	}
+
+	.ev-modal {
+		// border-top: none;
+
+		.ev-modal-footer {
+			// border-top: none;
+			// @include position( absolute, 100% 0 0 0 );
+			// padding: 0;
+			// border-top: none;
+			// background-color: transparent;
+			// margin-top: $baseline;
+
+			// @include ev_media( $media_mobile ) {
+			// 	padding: $baseline/2 $gutter;
+			// 	margin-top: 0;
+			// }
+		}
+
+	}
+}

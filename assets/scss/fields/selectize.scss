@@ -1,0 +1,301 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Selectize
+// -----------------------------------------------------------------------------
+
+.ev {
+	.selectize-input {
+		padding: $gutter/5;
+		border-radius: $radius;
+		display: block;
+		width: 100%;
+		position: relative;
+		float: left;
+		@include box-sizing( border-box );
+		border: 1px solid $grey_1;
+		@include transition( border-color $transition_time*2 ease );
+
+		&.has-items {
+			padding-left: $gutter/10;
+			padding-right: $gutter/10;
+		}
+
+		&:not( .has-items ):not( .disabled ) {
+			cursor: text;
+		}
+
+		&:hover:not( .disabled ) {
+			> div {
+				@include box-shadow( #{$ui_el_shadow} );
+				border-color: $grey_3;
+			}
+		}
+
+		&.dropdown-active,
+		&:hover:not( .disabled ) {
+			@include ui_input_hover;
+		}
+
+		&.dropdown-active {
+			border-color: $grey_3;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+			@include box-shadow( #{$ui_el_shadow_hover} );
+		}
+
+		> input {
+			color: $grey_6;
+			display: inline-block !important;
+			padding: ($gutter/5) 0 ($gutter/5 + 1) ($baseline/3 - 1) !important;
+			min-height: 0 !important;
+			max-height: none !important;
+			max-width: 100% !important;
+			margin: 0 $baseline/6 0 0 !important;
+			text-indent: 0 !important;
+			border: 0 none !important;
+			background: none !important;
+			line-height: inherit !important;
+			-webkit-user-select: auto !important;
+			-webkit-box-shadow: none !important;
+			box-shadow: none !important;
+			font-size: $main_fsz !important;
+			@include box-sizing( border-box );
+			float: left;
+
+			&::-ms-clear {
+				display: none;
+			}
+
+			&:after {
+				content: ' ';
+				display: block;
+				clear: left;
+			}
+
+			&:focus { outline: none !important; }
+		}
+
+		[data-value] + input {
+			padding-left: 0 !important;
+			float: none;
+		}
+
+		> div {
+			display: block;
+			float: left;
+			padding: $gutter/5 $baseline/3;
+			border: 1px solid $grey_1;
+			background-color: $white;
+			font-size: 12px;
+			border-radius: $radius - 1;
+			@include box-sizing( border-box );
+			margin: 2px $gutter/10;
+			cursor: pointer;
+			position: relative;
+
+			&:hover {
+				border-color: $grey_4 !important;
+				@include box-shadow( #{$ui_el_shadow_hover} );
+			}
+
+			.remove {
+				@include position( absolute, 50% $baseline/3 null null );
+				@include size( $baseline/2 $baseline );
+				margin-top: -$baseline/2;
+				text-align: center;
+				line-height: $baseline;
+				font-size: 16px;
+				text-decoration: none;
+				display: block;
+				color: $grey_3;
+				font-weight: bold;
+
+				&:hover {
+					color: $red;
+				}
+			}
+
+			span {
+				margin-right: $gutter/4;
+				color: $grey_4;
+			}
+
+			// Sortable ------------------------------------------------------------
+
+			&.ui-sortable-placeholder {
+				background-color: $grey_3 !important;
+				border-color: $grey_3 !important;
+				-webkit-box-shadow: none !important;
+				box-shadow: none !important;
+				max-height: $baseline + 4 !important;
+			}
+
+			&.ui-sortable-helper {
+				@include box-shadow( 0 2px 10px rgba( #000, .1 ) );
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				max-height: $baseline + 4 !important;
+			}
+
+		}
+	}
+
+	.ev-multiple-select-vertical .selectize-input.has-items {
+		padding: $gutter/10 $gutter/5;
+	}
+
+	.plugin-remove_button:not( .single ) .selectize-input > div {
+		padding-right: $baseline/3 + $baseline/2 + $baseline/3;
+	}
+
+	.ev-multiple-select-vertical .selectize-input > input {
+		left: 0 !important;
+		position: relative !important;
+	}
+
+	.ev-multiple-select-vertical .selectize-input > div {
+		width: 100%;
+		margin: $gutter/10 0;
+	}
+
+	.selectize-control {
+		position: relative;
+		@include clearfix;
+		background-color: $grey_0;
+
+	// -----------------------------------------------------------------------------
+	// $Single input
+	// -----------------------------------------------------------------------------
+
+		&.single  {
+			.selectize-input {
+				padding-right: $baseline*2;
+				cursor: pointer;
+
+				&.focus {
+					cursor: text;
+				}
+
+				&:before {
+					content: "";
+					display: block;
+					@include position( absolute, 50% $baseline/2+1 null null );
+					@include triangle( 12px, $grey_3, down );
+					margin-top: -3px;
+					@include transition( border-color $transition_time*2 ease );
+				}
+
+				&:after {
+					content: "";
+					display: block;
+					@include position( absolute, 50% $baseline*1.5 null null );
+					margin-top: -$baseline/2;
+					@include size( 0 $baseline );
+					border-left: 1px solid $grey_1;
+					@include transition( border-color $transition_time*2 ease );
+				}
+
+				&:hover {
+					&:before {
+						border-top-color: $grey_6;
+					}
+					&:after {
+						border-left-color: $grey_3;
+					}
+				}
+
+				> div {
+					background-color: transparent !important;
+					border-color: transparent !important;
+					font-size: 14px;
+					padding-right: 0;
+					margin-left: 0;
+					margin-right: 0;
+				}
+
+				&:hover:not( .disabled ) {
+					> div {
+						box-shadow: none;
+						border-color: transparent;
+					}
+				}
+
+				&.full {
+					> input {
+						margin-left: 0 !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Dropdown
+// -----------------------------------------------------------------------------
+
+.ev-multiple-select.selectize-dropdown {
+	@include position( absolute, 100% null null 0 );
+	z-index: 100001;
+
+	[data-selectable] {
+		padding: $baseline/8 $gutter/2;
+		color: $grey_4;
+		cursor: pointer;
+
+		&:first-child {
+			margin-top: $baseline/4;
+
+			&:last-child {
+				margin-bottom: $baseline/4;
+			}
+		}
+
+		&.create + [data-selectable] {
+			margin-top: $baseline/4;
+		}
+
+		&:last-child {
+			margin-bottom: $baseline/4;
+		}
+
+		&.active {
+			color: $grey_6;
+		}
+	}
+}
+
+.ev-multiple-select .selectize-dropdown-content {
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 200px;
+
+	border: 1px solid $grey_3;
+	background-color: $white;
+	margin: -1px 0 0 0;
+	@include box-sizing( border-box );
+	@include box-shadow( #{$ui_el_shadow_hover} );
+	color: $grey_4;
+	padding: 0;
+
+	.highlight {
+		background-color: lightYellow;
+		text-decoration: underline;
+		margin-right: 0;
+
+		&:after {
+			display: none;
+		}
+	}
+
+	span {
+		margin-right: 4px;
+
+		&:after {
+			content: ":";
+			display: inline-block;
+		}
+	}
+}

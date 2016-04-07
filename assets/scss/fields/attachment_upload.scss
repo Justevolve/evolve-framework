@@ -1,0 +1,266 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Attachment upload
+// -----------------------------------------------------------------------------
+
+$attachment_upload_size: $gutter*2;
+$attachment_generic    : "\f498";
+$attachment_zip        : "\f501";
+$attachment_image      : "\f128";
+$attachment_audio      : "\f500";
+$attachment_video      : "\f490";
+$attachment_text       : "\f491";
+$attachment_doc        : "\f497";
+$attachment_interactive: "\f496";
+$attachment_code       : "\f499";
+$attachment_spreadsheet: "\f495";
+
+.ev-attachment-upload-action {
+	@include clearfix;
+	margin-top: $baseline/4;
+	padding-bottom: $baseline/4;
+
+	.ev-remove-all-action {
+		float: right;
+		display: none;
+	}
+	.ev-upload-action {
+		float: left;
+	}
+
+	.ev-edit-action {
+		margin-right: $gutter/2;
+		display: none;
+	}
+}
+
+.ev-attachment-upload-container {
+	@include ui_input_standard;
+	padding: 0 $baseline/4;
+	border-radius: $radius;
+
+	&.ev-attachment-uploaded {
+		.ev-edit-action {
+			display: inline-block;
+			float: left;
+		}
+
+		.ev-remove-all-action {
+			display: inline-block;
+		}
+
+		.ev-upload-action {
+			display: none;
+		}
+	}
+}
+
+.ev-attachment-placeholder {
+	@include clearfix;
+	position: relative;
+	background-color: $white;
+	@include box-sizing( border-box );
+	border: 1px solid $grey_1;
+	border-radius: $radius - 1;
+	margin-top: $baseline/4;
+	margin-bottom: $baseline/4;
+	padding: $baseline/2 $gutter/2;
+
+	&:hover {
+		border-color: $grey_4;
+		@include box-shadow( #{$ui_el_shadow_hover} );
+		border-top-right-radius: 0;
+
+		.ev-field-panel-controls-wrapper {
+			display: block;
+
+			.ev-field-panel-controls-inner-wrapper {
+				border-color: $grey_4;
+			}
+		}
+	}
+
+	.ev-attachment-details {
+		padding-left: $attachment_upload_size + $gutter*1.5 + 1;
+
+		.ev-attachment-title {
+			display: block;
+			font-weight: bold;
+			font-size: $main_fsz;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		.ev-attachment-extension {
+			clear: both;
+			display: inline-block;
+			font-style: italic;
+			color: $grey_4;
+			margin-top: $baseline/8;
+
+			&:hover {
+				color: $blue;
+			}
+
+			&:focus {
+				@include box-shadow( none );
+			}
+		}
+	}
+
+	&.ui-sortable-placeholder {
+		background-color: $grey_3;
+		background-color: $grey_3;
+		visibility: visible !important;
+	}
+
+	&.ui-sortable-helper {
+		.ev-field-panel-controls-wrapper {
+			display: block;
+		}
+	}
+
+	.ev-attachment-placeholder-icon {
+		@include size( $attachment_upload_size );
+		float: left;
+		position: relative;
+		display: block;
+		margin-right: $gutter;
+		border-right: 1px solid $grey_2;
+		padding-right: $gutter/2;
+
+		&:before {
+			color: $grey_4;
+			@include size( $attachment_upload_size );
+			@include icon( $attachment_generic );
+			float: left;
+			line-height: $attachment_upload_size;
+			font-size: 32px;
+		}
+	}
+
+	&[class*="video"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_video;
+		}
+	}
+
+	&[class*="image"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_image;
+			font-size: 22px;
+		}
+	}
+
+	&[class*="audio"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_audio;
+		}
+	}
+
+	&[class*="zip"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_zip;
+		}
+	}
+
+	&[class*="txt"],
+	&[class*="text-plain"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_text;
+		}
+	}
+
+	&[class*="pdf"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_doc;
+		}
+	}
+
+	&[class*="html"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_code;
+		}
+	}
+
+	&[class*="key"],
+	&[class*="ppt"],
+	&[class*="keynote"],
+	&[class*="powerpoint"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_interactive;
+		}
+	}
+
+	&[class*="xls"],
+	&[class*="excel"] {
+		.ev-attachment-placeholder-icon:before {
+			content: $attachment_spreadsheet;
+		}
+	}
+}
+
+// -----------------------------------------------------------------------------
+// $Controls panel
+// -----------------------------------------------------------------------------
+
+.ev-field-panel-controls-wrapper {
+	display: none;
+	@include position( absolute, (-(1px + $gutter)) (-($baseline+1 + $gutter)) (-$gutter) null );
+	padding: $gutter $gutter $gutter 0;
+
+	.ev-field-panel-controls-inner-wrapper {
+		@include size( $baseline );
+		border: 1px solid $grey_1;
+		border-left: none;
+		background-color: $white;
+		border-top-right-radius: $radius;
+		border-bottom-right-radius: $radius;
+	}
+
+	.ev-sortable &,
+	[data-sortable] & {
+		.ev-field-panel-controls-inner-wrapper {
+			height: $baseline*2;
+
+			.ev-sortable-handle {
+				display: inline-block;
+			}
+		}
+	}
+
+	.ev-sortable-handle {
+		display: none;
+
+		&:before {
+			cursor: all-scroll;
+			color: $grey_3;
+			@include icon( "\f333" );
+			@include size( $baseline );
+			font-size: 16px;
+			line-height: $baseline;
+		}
+
+		&:hover:before {
+			color: $grey_6;
+		}
+	}
+
+	.ev-repeatable-remove {
+		display: inline-block;
+		text-decoration: none;
+
+		&:before {
+			cursor: pointer;
+			color: $grey_3;
+			@include icon( "\f153" );
+			@include size( $baseline );
+			font-size: 16px;
+			line-height: $baseline;
+		}
+
+		&:hover:before {
+			color: $red;
+		}
+	}
+}

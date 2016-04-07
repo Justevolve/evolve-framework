@@ -1,0 +1,66 @@
+// -----------------------------------------------------------------------------
+// $Config
+// -----------------------------------------------------------------------------
+
+// Dimensions
+
+$baseline       : 24px;
+$gutter         : 20px;
+$radius         : 3px;
+$transition_time: .1s;
+$main_fsz       : 14px;
+$small_fsz      : 12px;
+$big_fsz        : 16px;
+
+$modal_header_height: $baseline*2;
+$modal_footer_height: $baseline + ($baseline + 13) + 1; // footer padding + button padding + button font size + border
+
+$admin_bar_mobile: 46px;
+
+// Icons
+
+$icons   : "dashicons";
+$fontello: "evframework";
+
+// Colors
+
+$white  : #fff; // Input background focus
+$black  : #000;
+
+$grey_0 : #fcfcfc; // Input background standard
+// $grey_1 : #f0f0f0; // Input border standard
+$grey_1 : #DBDBDB; // Input border standard
+$grey_2 : #F7F7F7; // Input border focus, Input background hover
+$grey_3 : #B3B3B3; // Input border hover
+$grey_4 : #999; // Text light
+$grey_5 : #666;
+$grey_6 : #333; // Text
+
+$green  : #66CC66;
+$green_0: #F7FAF9;
+$green_1: #DAE6DA;
+$green_2: #339933;
+
+$blue   : #47AACC;
+$blue_0 : #DAE3E6;
+$blue_1 : #428DA6;
+$blue_2 : #020708;
+
+$red    : #CC4747;
+
+// Shadows
+
+$ui_el_shadow      : "0px 1px 2px rgba(0,0,0,.2)";
+$ui_el_shadow_hover: "0px 2px 3px rgba(0,0,0,.2)";
+
+
+// WordPress admin media queries
+
+$media_tablet      : "only screen and (max-width: 960px)";
+$media_mobile      : "only screen and (max-width: 782px)";
+$media_mobile_small: "only screen and (max-width: 600px)";
+
+// Resources
+
+$square_pattern: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAH0lEQVQYV2NkYGAwZkAFZ5G5jPRRgOYEVDeB3EBjBQBOZwTVonMbmQAAAABJRU5ErkJggg==";
+// $handle_img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4zwABjDACQwCqAEkZsggAb94CBcYDBvUAAAAASUVORK5CYII=";

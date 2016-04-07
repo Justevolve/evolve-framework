@@ -1,0 +1,26 @@
+@import "libs";
+
+// -----------------------------------------------------------------------------
+// $Fields input styles
+// -----------------------------------------------------------------------------
+
+.ev-field {
+	input[type="text"],
+	input[type="number"],
+	textarea {
+		max-width: 100%;
+
+		@include ev_media( $media_mobile ) {
+			width: 100%;
+		}
+	}
+
+	select {
+		max-width: 100%;
+	}
+
+	input[type=checkbox],
+	input[type=radio] {
+		margin-top: 0;
+	}
+}

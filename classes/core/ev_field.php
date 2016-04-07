@@ -9,7 +9,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -68,9 +68,11 @@ abstract class Ev_Field {
 	/**
 	 * The size of the field. Accepted values:
 	 * - 'full'
-	 * - 'large'
-	 * - 'medium'
-	 * - 'small'
+	 * - 'large' -> 'one-half', 'two-fourths'
+	 * - 'medium' -> 'one-third'
+	 * - 'small' -> 'one-fourth'
+	 * - 'three-fourths'
+	 * - 'two-thirds'
 	 *
 	 * @var string
 	 */
@@ -190,9 +192,12 @@ abstract class Ev_Field {
 	private function set_label( $label )
 	{
 		$label_types = array(
-			'inline',
-			'block',
-			'hidden'
+			'inline', // Label and help text are on the side of the field
+			'block', // Label and help text are above the field
+			'inline-hidden', // Label is hidden and help text is on the side of the field
+			'hidden', // Label is hidden and help text is above the field
+			'shifted', // Label and help text are above the field, extra padding on the side of the field
+			'shifted-hidden' // Label is hidden and help text is above the field, extra padding on the side of the field
 		);
 
 		$field_label = array(
@@ -241,7 +246,7 @@ abstract class Ev_Field {
 		$help_types = array(
 			'inline',
 			'tooltip',
-			// 'popup'
+			'popup'
 		);
 
 		$field_help = array(
@@ -314,6 +319,17 @@ abstract class Ev_Field {
 	}
 
 	/**
+	 * Get the field size.
+	 *
+	 * @since 0.4.0
+	 * @return string
+	 */
+	public function get_size()
+	{
+		return $this->_size;
+	}
+
+	/**
 	 * Set or retrieve the field default data value.
 	 *
 	 * @since 0.1.0
@@ -376,6 +392,45 @@ abstract class Ev_Field {
 	}
 
 	/**
+	 * Return a set of attributes to be applied when the field is rendered to
+	 * screen.
+	 *
+	 * @since 0.4.0
+	 * @return array An array of attributes.
+	 */
+	private function attrs()
+	{
+		$attrs = array(
+			'data-type=' . $this->_type
+		);
+
+		if ( $this->_handle ) {
+			$attrs[] = 'data-handle=' . $this->_handle;
+		}
+
+		$slave = $this->config( 'visible' );
+		$controller = $this->config( 'controller' );
+		$controller_types = array( 'select', 'checkbox', 'radio' );
+
+		if ( is_array( $slave ) ) {
+			$attrs[] = sprintf( 'data-slave=%s', key( $slave ) );
+
+			if ( is_array( current( $slave ) ) ) {
+				$slave_value = implode( ',', current( $slave ) );
+				$attrs[] = sprintf( 'data-controller-value=%s', $slave_value );
+			} else {
+				$attrs[] = sprintf( 'data-controller-value=%s', current( $slave ) );
+			}
+		}
+
+		if ( ! empty( $controller ) && in_array( $this->_type, $controller_types ) ) {
+			$attrs[] = "data-controller={$this->_handle}";
+		}
+
+		return implode( ' ', array_map( 'esc_attr', $attrs ) );
+	}
+
+	/**
 	 * Return a set of CSS classes to be applied when the field is rendered to
 	 * screen.
 	 *
@@ -387,7 +442,7 @@ abstract class Ev_Field {
 		$classes = array(
 			'ev-field',
 			'ev-field-' . $this->_type,
-			'ev-field-size-' . $this->_size
+			'ev-field-size-' . $this->get_size()
 		);
 
 		if ( $this->_break === true ) {
@@ -395,18 +450,32 @@ abstract class Ev_Field {
 		}
 
 		if ( $this->_repeatable !== false ) {
+			$values = (array) $this->value();
+
 			$classes[] = 'ev-repeatable';
 
 			if ( isset( $this->_repeatable['sortable'] ) && $this->_repeatable['sortable'] === true ) {
 				$classes[] = 'ev-sortable';
 			}
 
-			if ( isset( $this->_repeatable['append'] ) && $this->_repeatable['append'] === false ) {
-				$classes[] = 'ev-repeatable-prepend';
+			if ( empty( $values ) || isset( $values[0] ) && empty( $values[0] ) ) {
+				$classes[] = 'ev-no-fields';
 			}
 		}
 
+		if ( isset( $this->_data['config']['visible'] ) && $this->_data['config']['visible'] === false ) {
+			$classes[] = 'ev-hidden';
+		}
+
 		$classes = apply_filters( "ev_field_classes[type:{$this->_type}]", (array) $classes, $this );
+
+		if ( isset( $this->_data['config']['class'] ) && ! empty( $this->_data['config']['class'] ) ) {
+			$cl = $this->_data['config']['class'];
+
+			$classes[] = $cl;
+			$classes = apply_filters( "ev_field_classes[type:{$this->_type}][class:{$cl}]", (array) $classes, $this );
+		}
+
 
 		return array_map( 'esc_attr', $classes );
 	}
@@ -462,39 +531,32 @@ abstract class Ev_Field {
 	 * Render the field repeatable controls.
 	 *
 	 * @since 0.1.0
+	 * @param string $append The addition mode of the repeatable control.
 	 */
-	private function _render_repeatable_controls()
+	protected function _render_repeatable_controls( $mode, $size = 'small' )
 	{
-		$count = count( $this->value() );
-
-		printf( '<div class="ev-repeatable-controls" data-key="%s" data-count="%s">', esc_attr( $this->_handle ), esc_attr( $count ) );
-			if ( isset( $this->_repeatable['controls'] ) && ! empty( $this->_repeatable['controls'] ) ) {
-				foreach ( $this->_repeatable['controls'] as $action => $label ) {
-					$controls[] = printf( '<a href="#" data-action="%s" class="ev-repeat">%s</a>', esc_attr( $action ), esc_html( $label ) );
-				}
-			}
-			else {
-				printf( '<a href="#" class="ev-repeat">%s</a>', esc_html( __( 'Add', 'ev_framework' ) ) );
-			}
-
-			/* Print the repeatable field template for later use. */
-			$this->repeatable_template();
-		echo '</div>';
-
-		if ( isset( $this->_repeatable['empty_state'] ) && $this->_repeatable['empty_state'] !== '' ) {
-			echo '<div class="ev-empty-state">';
-				$empty_state = esc_html( $this->_repeatable['empty_state'] );
-				$controls = array();
-
-				foreach ( $this->_repeatable['controls'] as $action => $label ) {
-					$controls[] = sprintf( '<a href="#" data-action="%s" class="ev-repeat">%s</a>', esc_attr( $action ), esc_html( $label ) );
-				}
-
-				$empty_state = ev_sprintf_array( $empty_state, $controls );
-
-				echo $empty_state;
-			echo '</div>';
+		if ( $this->_repeatable === false ) {
+			return;
 		}
+
+		// $count = count( $this->value() );
+
+		printf( '<div class="ev-repeatable-controls">' );
+			ev_btn(
+				__( 'Add', 'ev_framework' ),
+				'confirm',
+				array(
+					'attrs' => array(
+						'data-mode' => $mode,
+						'class'     => 'ev-repeat',
+					),
+					'style'     => 'round',
+					'hide_text' => true,
+					'icon' => 'evfw-add',
+					'size' => $size
+				)
+			);
+		echo '</div>';
 	}
 
 	/**
@@ -502,7 +564,7 @@ abstract class Ev_Field {
 	 *
 	 * @since 0.1.0
 	 */
-	private function _render_label()
+	public function _render_label()
 	{
 		$label = $this->label();
 
@@ -520,28 +582,76 @@ abstract class Ev_Field {
 	{
 		$help = $this->help();
 
+		/**
+		 * Print content between the field label and field help. Useful for
+		 * outputting custom controls for the field.
+		 *
+		 * @since 0.4.0
+		 * @param Ev_Field
+		 */
+		do_action( 'ev_fw_before_field_help', $this );
+		do_action( "ev_fw_before_field_help[type:$this->_type]", $this );
+
 		if ( $help !== false && $help['text'] != '' ) {
+			$help_allowed_html = array(
+				'code' => array(),
+				'strong' => array(),
+				'b' => array(),
+				'a' => array(
+					'href' => array()
+				),
+				'br' => array()
+			);
+
 			printf( '<div class="ev-help ev-help-%s">', esc_attr( $help['type'] ) );
 				switch( $help['type'] ) {
 					case 'tooltip':
-						printf( '<div href="#" class="ev-help-handle ev-tooltip" title="%s"><span>%s</span></div>', esc_attr( $help['text'] ), __( 'Need help?', 'ev_framework' ) );
+						printf( '<div class="ev-help-handle ev-tooltip" data-title="%s"><span>%s</span></div>', esc_attr( $help['text'] ), __( 'Need help?', 'ev_framework' ) );
 						break;
-					// case 'popup':
-					// 	printf( '<div href="#" class="ev-help-handle"><span>%s</span></div>', __( 'Need help?', 'ev_framework' ) );
-					// 	break;
+					case 'popup':
+						printf( '<div class="ev-help-handle"><span>%s</span><span class="ev-help-popup-text">%s</span></div>',
+							__( 'Need help?', 'ev_framework' ),
+							wp_kses( $help['text'], $help_allowed_html )
+						);
+						break;
 					case 'inline':
 					default:
-						$help_text = wp_kses( $help['text'], array(
-							'code' => array(),
-							'strong' => array(),
-							'b' => array()
-						) );
+						$help_text = wp_kses( $help['text'], $help_allowed_html );
 
 						echo $help_text;
 						break;
 				}
 			echo '</div>';
 		}
+
+		if ( $this->_repeatable !== false ) {
+			ev_btn(
+				__( 'Remove all', 'ev_framework' ),
+				'delete',
+				array(
+					'attrs' => array(
+						'class'     => 'ev-repeat-remove-all',
+					),
+					'style' => 'text',
+					'size'  => 'large'
+				)
+			);
+
+			// printf( '<a href="#" class="ev-repeat-remove-all">%s</a>', esc_html( __( 'Remove all', 'ev_framework' ) ) );
+
+			/* Print the repeatable field template for later use. */
+			$this->repeatable_template();
+		}
+
+		/**
+		 * Print content after the field help. Useful for
+		 * outputting custom controls for the field.
+		 *
+		 * @since 0.4.0
+		 * @param Ev_Field
+		 */
+		do_action( 'ev_fw_after_field_help', $this );
+		do_action( "ev_fw_after_field_help[type:$this->_type]", $this );
 	}
 
 	/**
@@ -557,7 +667,16 @@ abstract class Ev_Field {
 		}
 
 		echo '<div class="ev-field-inner">';
-			echo '<span class="ev-sortable-handle"></span>';
+			echo '<div class="ev-field-panel-controls-wrapper">';
+				echo '<div class="ev-field-panel-controls-inner-wrapper">';
+					echo '<span class="ev-repeatable-remove"></span>';
+					echo '<span class="ev-sortable-handle"></span>';
+				echo '</div>';
+			echo '</div>';
+
+			if ( $this->_bundle === false && ! ev_is_skipped_on_saving( $this->_type ) ) {
+				$this->_render_repeatable_controls( 'prepend' );
+			}
 
 			$template = EV_FRAMEWORK_TEMPLATES_FOLDER . "fields/{$this->_type}";
 			$template = apply_filters( "ev_field_template[type:{$this->_type}]", $template );
@@ -566,7 +685,10 @@ abstract class Ev_Field {
 				'field' => $field
 			) );
 
-			echo '<span class="ev-repeatable-remove"></span>';
+			if ( $this->_bundle === false && ! ev_is_skipped_on_saving( $this->_type ) ) {
+				$this->_render_repeatable_controls( 'append' );
+			}
+
 		echo '</div>';
 	}
 
@@ -578,8 +700,19 @@ abstract class Ev_Field {
 	 */
 	private function _render_inner_repeatable()
 	{
+		$control = sprintf( '<a href="#" class="ev-repeat">%s</a>', esc_html( __( 'Add', 'ev_framework' ) ) );
+		$empty_state_html = $control;
+
+		if ( isset( $this->_repeatable['empty_state'] ) && $this->_repeatable['empty_state'] !== '' ) {
+			$empty_state_html = $this->_repeatable['empty_state'];
+		}
+
 		/* Retrieve the field value and cast it to array so that we can count how many times the field needs to be repeated. */
 		$values = (array) $this->value();
+
+		printf( '<div class="ev-empty-state" data-key="%s" data-count="%s">', esc_attr( $this->_handle ), esc_attr( count( $values ) ) );
+			echo $empty_state_html;
+		echo '</div>';
 
 		if ( empty( $values ) || isset( $values[0] ) && empty( $values[0] ) ) {
 			return;
@@ -604,6 +737,7 @@ abstract class Ev_Field {
 			$field->value( $value );
 
 			$this->render_inner( $field );
+
 			$index++;
 		}
 	}
@@ -624,6 +758,15 @@ abstract class Ev_Field {
 	}
 
 	/**
+	 * Output custom content just after the field container has been printed.
+	 *
+	 * @since 0.4.0
+	 */
+	protected function _field_container_start()
+	{
+	}
+
+	/**
 	 * Render the field interface.
 	 *
 	 * @since 0.1.0
@@ -632,31 +775,54 @@ abstract class Ev_Field {
 	{
 		$label = $this->label();
 
-		printf( '<div class="%s">', esc_attr( implode( ' ', $this->classes() ) ) );
-			echo '<div class="ev-field-header ev-field-header-label-' . esc_attr( $label["type"] ) . '">';
-				$this->_render_label();
-				$this->_render_help();
-			echo '</div>';
+		printf( '<div class="%s" %s>', esc_attr( implode( ' ', $this->classes() ) ), $this->attrs() );
+			echo '<div class="ev-field-inner-wrapper">';
 
-			$values = (array) $this->value();
-			$container_class = '';
+				$is_shifted = in_array( $label['type'], array( 'shifted', 'shifted-hidden' ) );
+				$main_label_type = $label['type'];
 
-			if ( isset( $this->_repeatable['empty_state'] ) && $this->_repeatable['empty_state'] !== '' ) {
-				if ( empty( $values ) || isset( $values[0] ) && empty( $values[0] ) ) {
-					$container_class .= ' ev-container-empty';
+				if ( $is_shifted ) {
+					$main_label_type = 'inline-hidden';
 				}
-			}
 
-			printf( '<div class="ev-container %s">', esc_attr( $container_class ) );
-				if ( $this->_repeatable !== false ) {
-					if ( ! ev_is_skipped_on_saving( $this->_type ) ) {
-						$this->_render_repeatable_controls();
+				echo '<div class="ev-field-header ev-field-header-label-' . esc_attr( $main_label_type ) . '">';
+					if ( ! $is_shifted ) {
+						$this->_render_label();
+						$this->_render_help();
 					}
-					$this->_render_inner_repeatable();
-				}
-				else {
-					$this->render_inner();
-				}
+				echo '</div>';
+
+				$values = (array) $this->value();
+				$container_class = '';
+
+				printf( '<div class="ev-container %s">', esc_attr( $container_class ) );
+					$this->_field_container_start();
+
+					if ( $is_shifted ) {
+						$shifted_label_type = 'block';
+
+						switch ( $label['type'] ) {
+							case 'shifted-hidden':
+								$shifted_label_type = 'hidden';
+								break;
+						}
+
+						echo '<div class="ev-field-header ev-field-header-label-' . esc_attr( $shifted_label_type ) . '">';
+							$this->_render_label();
+							$this->_render_help();
+						echo '</div>';
+					}
+
+					if ( $this->_repeatable !== false ) {
+						echo '<div class="ev-container-repeatable-inner-wrapper">';
+							$this->_render_inner_repeatable();
+						echo '</div>';
+					}
+					else {
+						$this->render_inner();
+					}
+				echo '</div>';
+
 			echo '</div>';
 		echo '</div>';
 	}
@@ -694,9 +860,14 @@ abstract class Ev_Field {
 			/* Ensuring that the field has a valid label. */
 			$messages[] = sprintf( 'Field "%s": missing label parameter.', $field['handle'] );
 		}
-		elseif ( array_key_exists( 'fields', $field ) && ! is_array( $field['fields'] ) ) {
-			/* Ensuring that the field has a valid set of fields, if any. */
-			$messages[] = sprintf( 'Field "%s": subfields must be in array form.', $field['handle'] );
+		elseif ( array_key_exists( 'fields', $field ) ) {
+			if ( ! is_array( $field['fields'] ) ) {
+				/* Ensuring that the field has a valid set of fields, if any. */
+				$messages[] = sprintf( 'Field "%s": subfields must be in array form.', $field['handle'] );
+			}
+			elseif ( ev_check_multi_key_exists( $field['fields'], 'repeatable' ) ) {
+				$messages[] = sprintf( 'Field "%s": repeatable fields cannot be nested.', $field['handle'] );
+			}
 		}
 		elseif ( array_key_exists( 'config', $field ) && ! is_array( $field['config'] ) ) {
 			/* Ensuring that the field has a valid set of configuration options, if any. */
@@ -707,7 +878,7 @@ abstract class Ev_Field {
 			$messages[] = sprintf( 'Field "%s": repeatable parameter must be in array/boolean form.', $field['handle'] );
 		}
 		elseif ( array_key_exists( 'size', $field ) ) {
-			$allowed_sizes = array( 'full', 'large', 'medium', 'small' );
+			$allowed_sizes = array( 'full', 'large', 'medium', 'small', 'one-half', 'two-fourths', 'one-third', 'one-fourth', 'three-fourths', 'two-thirds' );
 
 			if ( ! empty( $field['size'] ) && ! in_array( $field['size'], $allowed_sizes ) ) {
 				/* Ensuring that the field has a valid value for its size, if any. */

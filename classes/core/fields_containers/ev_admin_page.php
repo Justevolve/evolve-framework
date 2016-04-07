@@ -10,7 +10,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -118,6 +118,25 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 	}
 
 	/**
+	 * Return the title of the page when displayed in the page heading section.
+	 *
+	 * @since 0.4.0
+	 * @return string A human-readable definition of the admin page.
+	 */
+	public function heading_title()
+	{
+		$page_title = $this->title();
+		$is_group = isset( $this->_args['group'] ) && ! empty( $this->_args['group'] );
+
+		if ( $is_group ) {
+			$page_title = apply_filters( "ev_admin_page_heading_title[group:{$this->_args['group']}]", $page_title );
+			$page_title = apply_filters( "ev_admin_page_heading_title[page:{$this->handle()}][group:{$this->_args['group']}]", $page_title );
+		}
+
+		return $page_title;
+	}
+
+	/**
 	 * Get the capability that's required to access the page.
 	 *
 	 * @since  0.1.0
@@ -147,12 +166,18 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 	public function render()
 	{
 		$handle = $this->handle();
+		$class = '';
+		$is_group = isset( $this->_args['group'] ) && ! empty( $this->_args['group'] );
 
-		printf( '<div id="ev-admin-page-%s" class="ev ev-admin-page">', esc_attr( $handle ) );
+		if ( $is_group ) {
+			$class .= 'ev-admin-page-group-' . $this->_args['group'];
+		}
+
+		printf( '<div id="ev-admin-page-%s" class="ev ev-admin-page %s">', esc_attr( $handle ), esc_attr( $class ) );
 			wp_nonce_field( 'ev_admin_page', 'ev' );
 			$this->render_heading();
 
-			if ( isset( $this->_args['group'] ) ) {
+			if ( $is_group ) {
 				$this->render_group_navigation();
 			}
 
@@ -184,7 +209,6 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 			$theme = $parent_data->get( 'Name' );
 		}
 
-		$title = $this->title();
 		$pre_title = '';
 
 		if ( isset( $this->_args['group'] ) ) {
@@ -200,12 +224,16 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 
 		$pre_title = apply_filters( 'ev_admin_pages_pre_title', $pre_title );
-		$title = apply_filters( "ev_admin_page_title[page:{$this->handle()}]", $title );
+		$title = $this->heading_title();
 
 		echo '<div class="ev-admin-page-heading">';
 			printf( '<h1>%s <span>%s</span></h1>', esc_html( $pre_title ), esc_html( $title ) );
 			do_action( "ev_admin_page_subheading" );
 			do_action( "ev_admin_page_subheading[page:{$this->handle()}]" );
+
+			if ( isset( $this->_args['group'] ) ) {
+				do_action( "ev_admin_page_subheading[group:{$this->_args['group']}]" );
+			}
 		echo '</div>';
 	}
 
@@ -223,33 +251,25 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 
 		$group = $groups[$this->_args['group']];
+		$group['pages'] = apply_filters( "ev_admin_page_group_pages[group:{$this->_args['group']}]", $group['pages'] );
 
 		if ( count( $group['pages'] ) > 1 ) {
 			echo '<div class="ev-admin-page-group-nav">';
 				echo '<ul>';
 					foreach ( $group['pages'] as $page ) {
+						$page_class = isset( $_GET['page'] ) && $_GET['page'] === $page['handle'] ? 'ev-active' : '';
+						$page_class .= ' ev-group-page-' . $page['handle'];
+
 						printf(
-							'<li><a href="%s" class="%s">%s</a></li>',
+							'<li class="%s"><a href="%s">%s</a></li>',
+							esc_attr( $page_class ),
 							esc_attr( $page['url'] ),
-							isset( $_GET['page'] ) && $_GET['page'] === $page['handle'] ? esc_attr( 'ev-active' ) : '',
 							esc_html( $page['title'] )
 						);
 					}
 				echo '</ul>';
 			echo '</div>';
 		}
-	}
-
-    /**
-	 * Set the value for a specific field inside the container.
-	 *
-	 * @since 0.1.0
-	 * @param string $key The field key.
-	 * @return mixed The value of the field. Returns boolean false if the field has no value.
-	 */
-	public function set_field_value( $key = '' )
-	{
-		return ev_get_option( $key );
 	}
 
 	/**
@@ -283,6 +303,18 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		return self::_parse_fields_structure( $fields );
 	}
 
+    /**
+	 * Set the value for a specific field inside the container.
+	 *
+	 * @since 0.1.0
+	 * @param string $key The field key.
+	 * @return mixed The value of the field. Returns boolean false if the field has no value.
+	 */
+	public function set_field_value( $key = '' )
+	{
+		return ev_get_option( $key );
+	}
+
 	/**
 	 * When the page or tab is saved, save a single custom option contained in the page or tab.
 	 *
@@ -290,11 +322,22 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 	 * @param array $element The element structure.
 	 * @param string|array $element_value The element value.
 	 */
-	private function _save_single_field( $element, $value )
+	protected function _save_single_field( $element, $value )
 	{
 		$value = Ev_Field::sanitize( $element, $value );
 
 		ev_update_option( $element['handle'], $value );
+	}
+
+	/**
+	 * Delete a single custom option contained in the page or tab.
+	 *
+	 * @since 0.4.0
+	 * @param string $handle The element handle.
+	 */
+	protected function _delete_single_field( $handle )
+	{
+		ev_delete_option( $handle );
 	}
 
 	/**
@@ -316,9 +359,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		}
 
 		/* Verify the validity of the supplied nonce. */
-		$nonce = isset( $_POST['nonce'] ) ? $_POST['nonce'] : '';
-		$action = 'ev_admin_page';
-		$is_valid_nonce = wp_verify_nonce( $nonce, $action );
+		$is_valid_nonce = ev_is_post_nonce_valid( 'ev_admin_page' );
 
 		/* Check the user has the capability to save the page. */
 		$is_valid_cap = current_user_can( $this->capability() );
@@ -336,7 +377,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 					foreach ( $element['fields'] as $field ) {
 						if ( ! ev_is_skipped_on_saving( $field['type'] ) ) {
 							if ( ! isset( $_POST[$field['handle']] ) ) {
-								ev_delete_option( $field['handle'] );
+								$this->_delete_single_field( $field['handle'] );
 							}
 							else {
 								$this->_save_single_field( $field, $_POST[$field['handle']] );
@@ -349,7 +390,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 				else {
 					if ( ! ev_is_skipped_on_saving( $element['type'] ) ) {
 						if ( ! isset( $_POST[$element['handle']] ) ) {
-							ev_delete_option( $element['handle'] );
+							$this->_delete_single_field( $element['handle'] );
 						}
 						else {
 							$this->_save_single_field( $element, $_POST[$element['handle']] );
@@ -361,7 +402,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 			$type = 'success';
 			$message = apply_filters( 'ev_save_options_tab_response_message', __( 'All saved!', 'ev_framework' ), $type );
 			$heading = apply_filters( 'ev_save_options_tab_response_heading', '', $type );
-			$args = apply_filters( "ev_save_options_tab_response_args[tab:$group]", array() );
+			$args    = apply_filters( "ev_save_options_tab_response_args[tab:$group]", array() );
 
 			ev_ajax_message( $message, $type, $heading, $args );
 		}

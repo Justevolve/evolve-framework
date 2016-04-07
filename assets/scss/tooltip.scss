@@ -1,0 +1,90 @@
+@import "libs";
+
+// -----------------------------------------------------------------------------
+// $Tooltip
+// -----------------------------------------------------------------------------
+
+$tooltip_arrow_size: 16px;
+
+.ev-tooltip-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: $grey_6;
+	color: #fff;
+	max-width: 200px;
+	border-radius: $radius;
+	padding: ( $baseline/4 - 1px ) $baseline/2;
+	font-size: 11px;
+	@include box-shadow( 0 1px 4px rgba( #000, .2 ) );
+	@include ev-transition( visibility $transition_time ease, opacity $transition_time ease );
+	@include opacity( 0 );
+	visibility: hidden;
+	z-index: 2000000;
+	pointer-events: none;
+
+	&.ev-tooltip-active {
+		@include opacity( 100 );
+		visibility: visible;
+	}
+
+	&:after {
+		position: absolute;
+		content: "";
+		display: block;
+	}
+
+	&.ev-tooltip-expand-top:after {
+		top: 100%;
+		left: 50%;
+		margin-left: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $grey_6, down );
+	}
+
+	&.ev-tooltip-expand-bottom:after {
+		top: - $tooltip_arrow_size/2;
+		left: 50%;
+		margin-left: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $grey_6, up );
+	}
+
+	&.ev-tooltip-expand-left:after {
+		left: 100%;
+		top: 50%;
+		margin-top: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $grey_6, right );
+	}
+
+	&.ev-tooltip-expand-right:after {
+		left: 0;
+		top: 50%;
+		margin-top: - $tooltip_arrow_size/2;
+		margin-left: - $tooltip_arrow_size/2;
+		@include triangle( $tooltip_arrow_size, $grey_6, left );
+	}
+
+
+	// &.ev-tooltip-vertical {
+	// 	// margin-top: -10px;
+
+	// 	&:after {
+	// 		top: 100%;
+	// 		left: 50%;
+	// 		// margin-left: -8px;
+	// 		// margin-top: -2px;
+	// 		@include triangle( 16px, $grey_6, down );
+	// 	}
+	// }
+
+	// &.ev-tooltip-horizontal {
+	// 	&:after {
+	// 		top: 50%;
+	// 		left: 0;
+	// 		// margin-left: -8px;
+	// 		// margin-top: -2px;
+	// 		margin-top: -8px;
+	// 		margin-left: -8px;
+	// 		@include triangle( 16px, $grey_6, left );
+	// 	}
+	// }
+}

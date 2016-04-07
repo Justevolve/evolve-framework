@@ -9,7 +9,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -53,8 +53,14 @@ class Ev_Modal extends Ev_FieldsContainer {
 			/* Title of the modal. */
 			'title' => __( 'Edit', 'ev_framework' ),
 
+			/* Title controls. */
+			'title_controls' => '',
+
 			/* Text of the close button for the modal. */
 			'button' => __( 'OK', 'ev_framework' ),
+
+			/* Nonce of the close button for the modal. */
+			'button_nonce' => wp_create_nonce( "ev_modal_$handle" ),
 
 			/* Additional footer content. */
 			'footer_content' => ''
@@ -74,6 +80,16 @@ class Ev_Modal extends Ev_FieldsContainer {
 	{
 		echo '<div class="ev-modal-header">';
 			echo '<h1>' . esc_html( $this->title() ) . '</h1>';
+
+			if ( ! empty( $this->_config['title_controls'] ) ) {
+				printf( '<div class="ev-modal-header-title-controls">%s</div>', wp_kses( $this->_config['title_controls'], array(
+					'a' => array(
+						'href' => array(),
+						'title' => array(),
+						'target' => array()
+					)
+				) ) );
+			}
 		echo '</div>';
 
 		echo '<form class="ev ev-modal">';
@@ -86,10 +102,18 @@ class Ev_Modal extends Ev_FieldsContainer {
 				$elements = $this->elements();
 
 				if ( ! empty( $elements ) ) {
-					echo '<div class="ev-btn ev-save">';
-						echo '<input type="submit" value="">';
-						printf( '<span class="ev-btn-action">%s</span>', esc_html( $this->_config['button'] ) );
-					echo '</div>';
+					ev_btn(
+						$this->_config['button'],
+						'save',
+						array(
+							'attrs' => array(
+								'data-nonce' => $this->_config['button_nonce'],
+								'class' => 'ev-save',
+								'type' => 'submit'
+							),
+							'size' => 'medium'
+						)
+					);
 				}
 			echo '</div>';
 		echo '</form>';
@@ -131,3 +155,14 @@ class Ev_Modal extends Ev_FieldsContainer {
 	}
 
 }
+
+/**
+ * Display the container for framework-generated modals.
+ *
+ * @since 0.4.0
+ */
+function ev_modals_container_wrapper() {
+	echo '<div id="ev-modals-container"></div>';
+}
+
+add_action( 'admin_footer', 'ev_modals_container_wrapper' );

@@ -65,6 +65,21 @@
 	} );
 
 	/**
+	 * Remove all uploaded attachments.
+	 */
+	$.evf.delegate( ".ev-image-upload .ev-remove-all-action", "click", "image_upload", function() {
+		var container = $( this ).parents( ".ev-image-upload" ).first(),
+			images = $( ".ev-image-placeholder", container ),
+			input = $( "input[data-id]", container );
+
+		images.remove();
+		container.removeClass( "ev-image-uploaded" );
+		input.val( "" );
+
+		return false;
+	} );
+
+	/**
 	 * When clicking on an image upload Upload/Edit button, open a Media Library
 	 * modal that allows the user to select an image to use.
 	 */
@@ -89,9 +104,13 @@
 					value = _.pluck( selection, "id" ).join( "," );
 
 					$.each( selection, function() {
-						var image_url = this.sizes.full.url;
+						var image_url = "";
 
-						if ( this.sizes[thumb_size] ) {
+						if ( this.sizes && this.sizes.full ) {
+							image_url = this.sizes.full.url;
+						}
+
+						if ( this.sizes && this.sizes[thumb_size] ) {
 							image_url = this.sizes[thumb_size].url;
 						}
 
@@ -102,11 +121,18 @@
 					} );
 				}
 				else {
+					var image_url = "";
+
 					value = selection.id;
 
-					var image_url = selection.sizes.full.url;
+					if ( selection.sizes && selection.sizes.full ) {
+						image_url = selection.sizes.full.url;
+					}
+					else {
+						image_url = selection.url;
+					}
 
-					if ( selection.sizes[thumb_size] ) {
+					if ( selection.sizes && selection.sizes[thumb_size] ) {
 						image_url = selection.sizes[thumb_size].url;
 					}
 

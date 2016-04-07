@@ -10,7 +10,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -26,10 +26,25 @@ class Ev_MenuPage extends Ev_AdminPage {
 	public function position()
 	{
 		$position = null;
-		$position = apply_filters( "ev_admin_page_position", $position );
+		$position = apply_filters( 'ev_admin_page_position', $position );
 		$position = apply_filters( "ev_admin_page_position[page:{$this->handle()}]", $position );
 
 		return $position;
+	}
+
+	/**
+	 * Get the icon of the page in the administration menu.
+	 *
+	 * @since  0.4.0
+	 * @return mixed The icon URL of the page in the administration menu.
+	 */
+	public function icon()
+	{
+		$icon = null;
+		$icon = apply_filters( 'ev_admin_page_icon', $icon );
+		$icon = apply_filters( "ev_admin_page_icon[page:{$this->handle()}]", $icon );
+
+		return $icon;
 	}
 
 	/**
@@ -45,7 +60,7 @@ class Ev_MenuPage extends Ev_AdminPage {
 			$this->capability(),
 			$this->handle(),
 			array( $this, 'render' ),
-			null,
+			$this->icon(),
 			$this->position()
 		);
 	}

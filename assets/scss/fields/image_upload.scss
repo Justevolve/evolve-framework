@@ -1,0 +1,225 @@
+@import "../libs";
+
+// -----------------------------------------------------------------------------
+// $Image upload
+// -----------------------------------------------------------------------------
+
+$image_upload_size: $gutter*4;
+
+.ev-image-upload-container {
+	@include clearfix;
+	position: relative;
+	display: inline-block;
+
+	+ .ev-image-upload-container {
+		margin-left: $gutter/2;
+	}
+}
+
+.ev-image-upload-action {
+	display: block;
+	clear: both;
+}
+
+.ev-breakpoint-label,
+.ev-density-label {
+	display: inline-block;
+	color: $grey_4;
+	padding-bottom: $baseline/4;
+}
+
+.ev-image-upload {
+	display: inline-block;
+
+	.ev-edit-action,
+	.ev-remove-all-action {
+		display: none;
+	}
+
+	.ev-edit-action {
+		margin-right: $gutter/2;
+	}
+
+	.ev-edit-action,
+	.ev-upload-action {
+		float: left;
+	}
+
+	&.ev-image-uploaded {
+		.ev-edit-action {
+			display: inline-block;
+		}
+
+		.ev-remove-all-action {
+			display: inline-block;
+			float: right;
+		}
+
+		.ev-upload-action {
+			display: none;
+		}
+	}
+
+
+	&[data-multiple] {
+
+		.ev-image-placeholder {
+			display: none;
+		}
+
+		.ev-image-placeholder-container {
+			position: relative;
+			@include size( $image_upload_size );
+
+			&:before {
+				@include icon( "\f161" );
+				font-size: 22px;
+				@include position( absolute, 50% null null 50% );
+				@include transform( translate3d( -50%, -50%, 0 ) );
+				color: $grey_3;
+				z-index: 10;
+			}
+
+			&:after {
+				content: "";
+				display: inline-block;
+				position: relative;
+				@include ui_input_standard;
+				@include size( $image_upload_size );
+				float: left;
+				border-radius: $radius;
+				margin-bottom: $gutter/4;
+			}
+		}
+
+		&.ev-image-uploaded {
+			@include ui_input_standard;
+			padding: $baseline/4;
+
+			.ev-image-placeholder-container {
+				@include size( auto );
+
+				&:before,
+				&:after {
+					display: none;
+				}
+			}
+
+			.ev-image-placeholder {
+				display: block;
+			}
+
+			.ui-sortable-placeholder {
+				border-color: $grey_3;
+				background-color: $grey_3;
+			}
+
+			.ui-sortable-helper {
+				@include box-shadow( #{$ui_el_shadow_hover} );
+
+				.ev-upload-remove {
+					display: none !important;
+				}
+			}
+		}
+	}
+}
+
+.ev-image-placeholder {
+	@include clearfix;
+	display: inline-block;
+	position: relative;
+	@include ui_input_standard;
+	@include size( $image_upload_size );
+	float: left;
+	border-radius: $radius;
+	margin-bottom: $gutter/4;
+
+	[data-sortable] & {
+		cursor: all-scroll;
+	}
+
+	.ev-image-uploaded & {
+		@include size( auto );
+		margin-right: $gutter/4;
+
+		&:last-child {
+			margin-right: 0;
+		}
+
+		&:hover {
+			.ev-upload-remove {
+				display: block;
+			}
+		}
+	}
+
+	.ev-upload-remove {
+		text-decoration: none;
+		display: none;
+		@include position( absolute, -4px -4px null null );
+		z-index: 10;
+
+		&:before {
+			cursor: pointer;
+			color: $grey_5;
+			@include icon( "\f153" );
+			@include size( 16px );
+			font-size: 16px;
+			line-height: 16px;
+			background-color: $white;
+			border-radius: 50%;
+		}
+
+		&:hover:before {
+			color: $red;
+		}
+	}
+
+	&:before {
+		@include icon( "\f128" );
+		font-size: 22px;
+		@include position( absolute, 50% null null 50% );
+		@include transform( translate3d( -50%, -50%, 0 ) );
+		color: $grey_3;
+
+		.ev-image-uploaded & {
+			display: none;
+		}
+	}
+
+	&:hover {
+		img {
+			@include opacity( 40 );
+		}
+	}
+
+	img {
+		float: left;
+		display: none;
+		position: relative;
+		z-index: 1;
+		border-radius: $radius;
+
+		.ev-image-uploaded & {
+			display: block;
+			width: auto;
+			max-width: 100%;
+		}
+
+		.ev-image-uploaded[data-thumb-size="medium"] & {
+			max-height: $image_upload_size;
+			height: $image_upload_size;
+		}
+	}
+}
+
+.ev-image-upload-image-size-selection {
+	padding-top: $baseline/2;
+
+	> span:not( .ev-select-wrapper ) {
+		display: block;
+		color: $grey_4;
+		padding-bottom: $baseline/4;
+	}
+}

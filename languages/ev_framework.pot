@@ -1,17 +1,17 @@
-# Copyright (C) 2015 Evolve
+# Copyright (C) 2016 Evolve
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Evolve Framework 0.3.0\n"
+"Project-Id-Version: Evolve Framework 0.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Justevolve/evolve-framework\n"
 "POT-Creation-Date: 2015-07-15 20:32:43+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Evolve\n"
 "Language-Team: Evolve <info@justevolve.it>\n"
-"X-Generator: grunt-wp-i18n 0.5.3\n"
+"X-Generator: grunt-wp-i18n 0.5.4\n"
 "X-Poedit-KeywordsList: "
 "__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
 "attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
@@ -24,71 +24,289 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: classes/core/ev_field.php:477
+#: classes/core/ev_field.php:546 classes/core/ev_field.php:703
 msgid "Add"
 msgstr ""
 
-#: classes/core/ev_field.php:527
+#: classes/core/ev_field.php:609 classes/core/ev_field.php:613
 msgid "Need help?"
 msgstr ""
 
-#: classes/core/ev_fields_container.php:187
+#: classes/core/ev_field.php:629 templates/fields/attachment.php:104
+#: templates/fields/partials/image_upload.php:100
+msgid "Remove all"
+msgstr ""
+
+#: classes/core/ev_fields_container.php:197
 msgid "Save"
 msgstr ""
 
 #: classes/core/ev_media_manager.php:98
-msgid "Thumbnail"
+msgid "Full size"
 msgstr ""
 
 #: classes/core/ev_media_manager.php:104
-msgid "Medium"
-msgstr ""
-
-#: classes/core/ev_media_manager.php:110
 msgid "Large"
 msgstr ""
 
-#: classes/core/fields/ev_icon_field.php:63
-msgid "Nothing found"
+#: classes/core/ev_media_manager.php:110
+msgid "Medium"
 msgstr ""
 
-#: classes/core/fields/ev_image_field.php:89
+#: classes/core/ev_media_manager.php:116
+msgid "Thumbnail"
+msgstr ""
+
+#: classes/core/ev_simple_modal.php:40
+#: classes/core/fields_containers/ev_modal.php:60
+msgid "OK"
+msgstr ""
+
+#: classes/core/fields/ev_attachment_field.php:107
+#: classes/core/fields/ev_image_field.php:89 templates/fields/attachment.php:63
 #: templates/fields/partials/image_upload.php:49
 #: templates/fields/partials/image_upload.php:62
 msgid "Remove"
 msgstr ""
 
-#: classes/core/fields_containers/ev_admin_page.php:362
+#: classes/core/fields/ev_date_field.php:66
+msgid "Sunday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:67
+msgid "Monday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:68
+msgid "Tuesday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:69
+msgid "Wednesday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:70
+msgid "Thursday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:71
+msgid "Friday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:72
+msgid "Saturday"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:84
+msgid "January"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:85
+msgid "February"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:86
+msgid "March"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:87
+msgid "April"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:88
+#: classes/core/fields/ev_date_field.php:102
+msgid "May"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:89
+msgid "June"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:90
+msgid "July"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:91
+msgid "August"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:92
+msgid "September"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:93
+msgid "October"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:94
+msgid "November"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:95
+msgid "December"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:98
+msgid "Jan"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:99
+msgid "Feb"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:100
+msgid "Mar"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:101
+msgid "Apr"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:103
+msgid "Jun"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:104
+msgid "Jul"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:105
+msgid "Aug"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:106
+msgid "Sep"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:107
+msgid "Oct"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:108
+msgid "Nov"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:109
+msgid "Dec"
+msgstr ""
+
+#: classes/core/fields_containers/ev_admin_page.php:403
 msgid "All saved!"
 msgstr ""
 
 #: classes/core/fields_containers/ev_modal.php:54
-#: templates/fields/partials/image_upload.php:69
+#: templates/fields/attachment.php:76
+#: templates/fields/partials/image_upload.php:71
 msgid "Edit"
 msgstr ""
 
-#: classes/core/fields_containers/ev_modal.php:57
-msgid "OK"
-msgstr ""
-
 #: evolve-framework.php:13
-msgid "Evolve Framework not activated: at least WordPress 4.0 is required."
+msgid "Evolve Framework not activated: at least WordPress 4.4.0 is required."
 msgstr ""
 
-#: evolve-framework.php:455
+#: evolve-framework.php:179
+msgid "Text"
+msgstr ""
+
+#: evolve-framework.php:180
+msgid "Visual"
+msgstr ""
+
+#: evolve-framework.php:181
+msgid "Add Media"
+msgstr ""
+
+#: evolve-framework.php:185
+msgid "Insert a name for the preset"
+msgstr ""
+
+#: evolve-framework.php:188
+msgid "Insert this URL"
+msgstr ""
+
+#: evolve-framework.php:502
 msgid "Changelog"
 msgstr ""
 
-#: templates/fields/icon.php:22
-msgid "Search for an icon"
+#: includes/admin/fields.php:384
+msgid "Presets"
+msgstr ""
+
+#: includes/color.php:256
+msgid "User-defined presets"
+msgstr ""
+
+#: includes/color.php:266
+msgid "Delete preset"
+msgstr ""
+
+#: includes/color.php:271
+msgid "You haven't saved any color presets yet!"
+msgstr ""
+
+#: includes/color.php:276
+msgid "Default presets"
+msgstr ""
+
+#: includes/color.php:296
+msgid "Color presets"
+msgstr ""
+
+#: includes/icons.php:159
+msgid "Color"
+msgstr ""
+
+#: includes/icons.php:164
+msgid "Size"
+msgstr ""
+
+#: includes/icons.php:174
+msgid "Preview"
+msgstr ""
+
+#: includes/icons.php:218
+msgid "Icon"
+msgstr ""
+
+#: includes/link.php:45
+msgid "Link"
+msgstr ""
+
+#: includes/link.php:98
+msgid "Tab"
+msgstr ""
+
+#: includes/link.php:103
+msgid "Open in"
+msgstr ""
+
+#: includes/link.php:107
+msgid "Same tab"
+msgstr ""
+
+#: includes/link.php:108
+msgid "New tab"
+msgstr ""
+
+#: includes/link.php:117
+msgid "Rel attribute"
+msgstr ""
+
+#: includes/link.php:123
+msgid "Title attribute"
+msgstr ""
+
+#: includes/link.php:129
+msgid "Class attribute"
+msgstr ""
+
+#: templates/fields/attachment.php:89
+#: templates/fields/partials/image_upload.php:85
+msgid "Upload"
 msgstr ""
 
 #: templates/fields/image.php:98
 msgid "Image size"
-msgstr ""
-
-#: templates/fields/partials/image_upload.php:70
-msgid "Upload"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
@@ -121,6 +339,56 @@ msgctxt "standard desktop media query"
 msgid "Desktop"
 msgstr ""
 
+#: classes/core/fields/ev_date_field.php:75
+msgctxt "jquery ui datepicker short day name"
+msgid "Su"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:76
+msgctxt "jquery ui datepicker short day name"
+msgid "Mo"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:77
+msgctxt "jquery ui datepicker short day name"
+msgid "Tu"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:78
+msgctxt "jquery ui datepicker short day name"
+msgid "We"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:79
+msgctxt "jquery ui datepicker short day name"
+msgid "Th"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:80
+msgctxt "jquery ui datepicker short day name"
+msgid "Fr"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:81
+msgctxt "jquery ui datepicker short day name"
+msgid "Sa"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:111
+msgctxt "jquery ui datepicker prev text"
+msgid "Prev"
+msgstr ""
+
+#: classes/core/fields/ev_date_field.php:112
+msgctxt "jquery ui datepicker next text"
+msgid "Next"
+msgstr ""
+
+#: classes/core/fields/ev_icon_field.php:63
+msgctxt "no icons found"
+msgid "Nothing found"
+msgstr ""
+
 #: classes/core/fields/ev_icon_field.php:64
 msgctxt "one icon found"
 msgid "%s found"
@@ -129,4 +397,14 @@ msgstr ""
 #: classes/core/fields/ev_icon_field.php:65
 msgctxt "multiple icons found"
 msgid "%s found"
+msgstr ""
+
+#: includes/admin/fields.php:398
+msgctxt "save color preset"
+msgid "Save"
+msgstr ""
+
+#: includes/icons.php:151
+msgctxt "icon search"
+msgid "Search&hellip;"
 msgstr ""

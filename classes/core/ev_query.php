@@ -8,7 +8,7 @@
  * @since 	  0.1.0
  * @version   0.1.0
  * @author 	  Evolve <info@justevolve.it>
- * @copyright Copyright (c) 2015, Andrea Gandino, Simone Maranzana
+ * @copyright Copyright (c) 2016, Andrea Gandino, Simone Maranzana
  * @link 	  https://github.com/Justevolve/evolve-framework
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
@@ -31,6 +31,20 @@ class Ev_Query {
 	public $_query = null;
 
 	/**
+	 * Maximum number of pages in the query.
+	 *
+	 * @var integer
+	 */
+	public $max_num_pages = 1;
+
+	/**
+	 * An array of posts.
+	 *
+	 * @var array
+	 */
+	public $posts = array();
+
+	/**
 	 * Constructor for the query class.
 	 *
 	 * @since 0.1.0
@@ -39,6 +53,33 @@ class Ev_Query {
 	public function __construct( $args = array() )
 	{
 		$this->_args = $this->parse_args( $args );
+	}
+
+	/**
+	 * Get the query parameters.
+	 *
+	 * @since 0.4.0
+	 * @return array
+	 */
+	public function get_query_args()
+	{
+		return $this->_args;
+	}
+
+	/**
+	 * Get a query parameter.
+	 *
+	 * @since 0.4.0
+	 * @param string $arg The query parameter.
+	 * @return mixed
+	 */
+	public function get_query_arg( $arg )
+	{
+		if ( isset( $this->_args[$arg] ) ) {
+			return $this->_args[$arg];
+		}
+
+		return false;
 	}
 
 	/**
@@ -51,6 +92,18 @@ class Ev_Query {
 	public function set_query_arg( $arg, $value )
 	{
 		$this->_args[$arg] = $value;
+	}
+
+	/**
+	 * Set a query parameter. Alias for set_query_arg().
+	 *
+	 * @since 0.4.0
+	 * @param string $arg The query parameter.
+	 * @param mixed $value The query parameter value.
+	 */
+	public function set( $arg, $value )
+	{
+		$this->set_query_arg( $arg, $value );
 	}
 
 	/**
@@ -138,6 +191,16 @@ class Ev_Query {
 	 */
 	public function paginate()
 	{
+		$this->_args['paged'] = $this->get_current_page();
+	}
+
+	/**
+	 * Get the current page index.
+	 *
+	 * @return integer
+	 */
+	public function get_current_page()
+	{
 		$paged = 1;
 
 		if ( get_query_var( 'paged' ) ) {
@@ -147,7 +210,7 @@ class Ev_Query {
 			$paged = get_query_var( 'page' );
 		}
 
-		$this->_args['paged'] = $paged;
+		return $paged;
 	}
 
 	/**
@@ -160,7 +223,7 @@ class Ev_Query {
 	private function parse_args( $args )
 	{
 		$default_args = array(
-			'post_status' => 'publish'
+			// 'post_status' => 'publish'
 		);
 
 		$args = wp_parse_args( $args, $default_args );
@@ -175,8 +238,10 @@ class Ev_Query {
 	 */
 	private function run()
 	{
-		$this->_args = apply_filters( 'ev_query_args', $this->_args );
-		$this->_query = new WP_Query( $this->_args );
+		$this->_args         = apply_filters( 'ev_query_args', $this->_args );
+		$this->_query        = new WP_Query( $this->_args );
+		$this->max_num_pages = $this->_query->max_num_pages;
+		$this->posts         = $this->_query->posts;
 	}
 
 	/**

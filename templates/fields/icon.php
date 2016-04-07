@@ -1,10 +1,11 @@
 <?php
-	$icon_fonts = ev_get_icon_fonts();
-
 	$value  = $field->value();
+	$handle = $field->handle();
 	$set    = isset( $value['set'] ) ? $value['set'] : '';
 	$icon   = isset( $value['icon'] ) ? $value['icon'] : '';
 	$prefix = isset( $value['prefix'] ) ? $value['prefix'] : '';
+	$color  = isset( $value['color'] ) ? $value['color'] : '';
+	$size   = isset( $value['size'] ) ? $value['size'] : '';
 
 	$wrapper_class = '';
 
@@ -13,59 +14,13 @@
 	}
 ?>
 
-<div class="ev-selected-icon-wrapper <?php echo esc_attr( $wrapper_class ); ?>">
-	<i data-preview class="<?php echo esc_attr( $prefix ); ?> <?php echo esc_attr( $icon ); ?> ev-icon ev-component" aria-hidden="true"></i>
+<div class="ev-selected-icon-wrapper <?php echo esc_attr( $wrapper_class ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'ev_icon' ) ); ?>">
+	<i data-preview style="color: <?php echo esc_attr( $color ); ?>" class="<?php echo esc_attr( $prefix ); ?> <?php echo esc_attr( $icon ); ?> ev-icon ev-component" aria-hidden="true"></i>
 	<span class="ev-remove ev-icon-remove"></span>
 </div>
 
-<div class="ev-icon-search-wrapper">
-	<input type="text" placeholder="<?php esc_attr_e( 'Search for an icon', 'ev_framework' ); ?>" data-icon-search>
-	<p class="ev-icon-search-results"></p>
-</div>
-
-<div class="ev-icon-set-select-wrapper">
-	<?php
-		$font_sets = array();
-
-		foreach ( $icon_fonts as $font ) {
-			$font_sets[$font['name']] = $font['label'];
-		}
-
-		ev_select(
-			'',
-			$font_sets,
-			$set
-		);
-
-	?>
-</div>
-
-<div class="ev-icon-sets">
-	<?php foreach ( $icon_fonts as $index => $font ) : ?>
-		<?php
-			$set_class = 'ev-icon-set-' . $font['name'];
-
-			if ( $font['name'] == $set || $set == '' && $index == 0 ) {
-				$set_class .= ' ev-on';
-			}
-		?>
-		<ul class="<?php echo esc_attr( $set_class ); ?>">
-			<?php foreach ( $font['mapping'] as $set_icon ) : ?>
-				<?php
-					$icon_class = $font['prefix'] . ' ' . $set_icon . ' ev-icon ev-component';
-
-					if ( $set_icon == $icon ) {
-						$icon_class .= ' ev-selected';
-					}
-
-					$set_icon_stripped = strstr( $set_icon, '-' );
-				?>
-				<li><i data-prefix="<?php echo esc_attr( $font['prefix'] ); ?>" data-set="<?php echo esc_attr( $font['name'] ); ?>" data-icon-name="<?php echo esc_attr( $set_icon ); ?>" data-icon-stripped="<?php echo esc_attr( $set_icon_stripped ); ?>" class="<?php echo esc_attr( $icon_class ); ?>" aria-hidden="true"></i></li>
-			<?php endforeach; ?>
-		</ul>
-	<?php endforeach; ?>
-</div>
-
-<input type="hidden" data-prefix name="<?php echo esc_attr( $field->handle() ); ?>[prefix]" value="<?php echo esc_attr( $prefix ); ?>">
-<input type="hidden" data-set name="<?php echo esc_attr( $field->handle() ); ?>[set]" value="<?php echo esc_attr( $set ); ?>">
-<input type="hidden" data-icon name="<?php echo esc_attr( $field->handle() ); ?>[icon]" value="<?php echo esc_attr( $icon ); ?>">
+<input type="hidden" data-prefix name="<?php echo esc_attr( $handle ); ?>[prefix]" value="<?php echo esc_attr( $prefix ); ?>">
+<input type="hidden" data-set name="<?php echo esc_attr( $handle ); ?>[set]" value="<?php echo esc_attr( $set ); ?>">
+<input type="hidden" data-icon name="<?php echo esc_attr( $handle ); ?>[icon]" value="<?php echo esc_attr( $icon ); ?>">
+<input type="hidden" data-color name="<?php echo esc_attr( $handle ); ?>[color]" value="<?php echo esc_attr( $color ); ?>">
+<input type="hidden" data-size name="<?php echo esc_attr( $handle ); ?>[size]" value="<?php echo esc_attr( $size ); ?>">
