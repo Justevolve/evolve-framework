@@ -122,7 +122,7 @@ class Ev_Query {
 		$found = false;
 		$term = get_term_by( 'id', $term_id, $taxonomy );
 
-		if ( ! term_exists( $term->name, $taxonomy ) ) {
+		if ( ! $term || ! term_exists( $term->name, $taxonomy ) ) {
 			return;
 		}
 
@@ -161,7 +161,7 @@ class Ev_Query {
 		$found = false;
 		$term = get_term_by( 'id', $term_id, $taxonomy );
 
-		if ( ! term_exists( $term->name, $taxonomy ) ) {
+		if ( ! $term || ! term_exists( $term->name, $taxonomy ) ) {
 			return;
 		}
 
