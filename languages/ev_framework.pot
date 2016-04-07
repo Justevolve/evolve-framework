@@ -2,7 +2,7 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Evolve Framework 0.4.0\n"
+"Project-Id-Version: Evolve Framework 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Justevolve/evolve-framework\n"
 "POT-Creation-Date: 2015-07-15 20:32:43+00:00\n"
 "MIME-Version: 1.0\n"
@@ -11,7 +11,7 @@ msgstr ""
 "PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Evolve\n"
 "Language-Team: Evolve <info@justevolve.it>\n"
-"X-Generator: grunt-wp-i18n 0.5.3\n"
+"X-Generator: grunt-wp-i18n 0.5.4\n"
 "X-Poedit-KeywordsList: "
 "__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
 "attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
@@ -190,7 +190,7 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#: classes/core/fields_containers/ev_admin_page.php:400
+#: classes/core/fields_containers/ev_admin_page.php:403
 msgid "All saved!"
 msgstr ""
 
@@ -201,7 +201,7 @@ msgid "Edit"
 msgstr ""
 
 #: evolve-framework.php:13
-msgid "Evolve Framework not activated: at least WordPress 4.0 is required."
+msgid "Evolve Framework not activated: at least WordPress 4.4.0 is required."
 msgstr ""
 
 #: evolve-framework.php:179
