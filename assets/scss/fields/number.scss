@@ -5,6 +5,10 @@
 // -----------------------------------------------------------------------------
 
 .ev {
+	input[type="number"] {
+		height: auto;
+	}
+
 	input[type="number"].ev-field-number-style-small {
 		font-size: $small_fsz;
 		line-height: $baseline - 4;

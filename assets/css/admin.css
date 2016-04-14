@@ -619,6 +619,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-link-input-wrapper.ev-not-empty span { visibility: visible; }
 .ev-link-input-wrapper.ev-not-empty input { padding-top: 24px; }
 
+.ev input[type="number"] { height: auto; }
 .ev input[type="number"].ev-field-number-style-small { font-size: 12px; line-height: 20px; padding: 1px 5px; }
 
 .ev-radio-wrapper:after { content: ""; display: table; clear: both; }
