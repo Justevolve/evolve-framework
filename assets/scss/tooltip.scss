@@ -23,6 +23,10 @@ $tooltip_arrow_size: 16px;
 	z-index: 2000000;
 	pointer-events: none;
 
+	img {
+		max-width: 100%;
+	}
+
 	&.ev-tooltip-active {
 		@include opacity( 100 );
 		visibility: visible;
