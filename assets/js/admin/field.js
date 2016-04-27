@@ -11,7 +11,6 @@
 
 		var modal = new $.evf.modal( key, data, {
 			simple: true,
-
 		} );
 
 		modal.open( function( content, key, _data ) {
