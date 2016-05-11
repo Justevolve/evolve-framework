@@ -88,6 +88,8 @@
 			if ( ! modals.length ) {
 				$( "body" ).removeClass( "ev-modal-open" );
 			}
+
+			$( window ).trigger( "ev-modal-close" );
 		};
 
 		/**

@@ -28,7 +28,7 @@
 			activeClass: "ev-active",
 
 			/* Event trigger. */
-			eventTrigger: "click focus"
+			eventTrigger: "click" //focus?
 		}, config );
 
 		/**

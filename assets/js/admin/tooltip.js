@@ -37,7 +37,7 @@
 	/**
 	 * Correctly position a tooltip depending on the viewport's boundaries.
 	 */
-	function _ev_position_tooltip( $link, $container ) {
+	function _ev_position_tooltip( $link, $container, mode ) {
 		var link_height = $link.outerHeight(),
 			link_width = $link.outerWidth(),
 			livetip_height = $container.outerHeight() + ( arrow_size / 2 ),
@@ -52,8 +52,11 @@
 
 		style.left = $link.offset().left - ( livetip_width / 2 ) + ( link_width / 2 );
 
-		$container.removeClass( "ev-tooltip-expand-top ev-tooltip-expand-bottom ev-tooltip-vertical" );
+		$container.removeClass( "ev-tooltip-expand-top ev-tooltip-expand-bottom ev-tooltip-expand-left ev-tooltip-expand-right ev-tooltip-vertical ev-tooltip-horizontal" );
 
+		var mode_class = ! mode || mode == "vertical" ? "ev-tooltip-vertical" : "ev-tooltip-horizontal";
+
+		/* Vertical expansion. */
 		if ( livetip_height <= scroll ) {
 			offset_top += 2;
 			$container.addClass( "ev-tooltip-expand-top" );
@@ -65,8 +68,10 @@
 			style.top = offset_top + link_height + ( arrow_size / 2 );
 		}
 
+		/* Horizontal expansion. */
+
 		$container
-			.addClass( "ev-tooltip-vertical" )
+			.addClass( mode_class )
 			.css( style );
 	};
 
@@ -88,7 +93,8 @@
 		 * Configuration.
 		 */
 		config = $.extend( true, {}, {
-			'class': ''
+			'class': '',
+			'mode': 'horizontal'
 		}, config );
 
 		ev_seek_and_destroy_tooltips();
@@ -106,10 +112,10 @@
 			} );
 
 		$( window ).on( "resize scroll", function() {
-			_ev_position_tooltip( $link, $container );
-		} )
+			_ev_position_tooltip( $link, $container, config.mode );
+		} );
 
-		_ev_position_tooltip( $link, $container );
+		_ev_position_tooltip( $link, $container, config.mode );
 
 		$container.show();
 
