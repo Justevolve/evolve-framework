@@ -439,8 +439,8 @@ body.ev-modal-open { overflow: hidden; }
 .ev .ev-date-input { cursor: pointer; }
 .ev .ev-date-input:focus { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
 
-.ui-datepicker { background: #fff; border: 1px solid #66CC66; border-radius: 3px; border-top-left-radius: 0; line-height: 30px; display: none; margin-top: -1px; overflow: hidden; }
-.ui-datepicker .ui-datepicker-header { position: relative; background: #fcfcfc; line-height: 30px; }
+.ui-datepicker { background: #fff; border: 1px solid #DBDBDB; border-radius: 3px; border-top-left-radius: 0; line-height: 30px; display: none; margin-top: -1px; overflow: hidden; box-shadow: 0px 2px 3px rgba(0,0,0,.2); }
+.ui-datepicker .ui-datepicker-header { background: #fcfcfc; position: relative; line-height: 30px; }
 .ui-datepicker .ui-datepicker-header .ui-datepicker-prev, .ui-datepicker .ui-datepicker-header .ui-datepicker-next { font-weight: bold; cursor: pointer; text-align: center; color: #333; position: absolute; top: 0; bottom: 0; }
 .ui-datepicker .ui-datepicker-header .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-header .ui-datepicker-next span { display: none; }
 .ui-datepicker .ui-datepicker-header .ui-datepicker-prev:before, .ui-datepicker .ui-datepicker-header .ui-datepicker-next:before { font-size: 14px; margin-top: 8px; position: relative; }
@@ -452,7 +452,7 @@ body.ev-modal-open { overflow: hidden; }
 .ui-datepicker .ui-datepicker-header .ui-datepicker-title { text-align: center; padding: 0 5px; font-weight: bold; }
 .ui-datepicker .ui-datepicker-calendar { border-spacing: 0; }
 .ui-datepicker .ui-datepicker-calendar th, .ui-datepicker .ui-datepicker-calendar td { text-align: center; width: 30px; height: 30px; }
-.ui-datepicker .ui-datepicker-calendar th { font-weight: normal; font-style: italic; color: #999; }
+.ui-datepicker .ui-datepicker-calendar th { font-weight: normal; font-style: italic; color: #B3B3B3; background: #fcfcfc; border-bottom: 1px solid #DBDBDB; }
 .ui-datepicker .ui-datepicker-calendar td { cursor: pointer; }
 .ui-datepicker .ui-datepicker-calendar td:hover { background: rgba(0, 0, 0, 0.05); }
 .ui-datepicker .ui-datepicker-calendar td.ui-datepicker-unselectable:hover { background: transparent; }
@@ -512,7 +512,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-icon-sets-controls-field-wrapper + * { margin-top: 24px; }
 .ev-icon-sets-controls-field-wrapper label { font-weight: bold; font-size: 14px; color: #333; cursor: default; display: block; margin-bottom: 6px; }
 
-.ev .ev-icon-search-wrapper { padding: 24px 20px; height: 96px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; background-color: #DBDBDB; position: relative; margin-left: 300px; box-shadow: -1px 0 0 #DBDBDB; }
+.ev .ev-icon-search-wrapper { padding: 24px 20px; height: 96px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; background-color: #fcfcfc; position: relative; margin-left: 300px; box-shadow: -1px 0 0 #DBDBDB; }
 @media only screen and (max-width: 782px) { .ev .ev-icon-search-wrapper { margin-left: 50%; } }
 .ev .ev-icon-search-wrapper input[type="text"] { display: block; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; line-height: 24px; padding: 12px 10px; }
 .ev .ev-icon-search-wrapper input[type="text"]:focus { border-color: #DBDBDB; outline: none; box-shadow: none; }
@@ -602,12 +602,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-link-url-wrapper .selectize-control.single .selectize-input:before, .ev-link-url-wrapper .selectize-control.single .selectize-input:after { display: none; }
 .ev-link-modal-expanded .ev-link-url-wrapper .selectize-control.single .selectize-input:before, .ev-link-modal-expanded .ev-link-url-wrapper .selectize-control.single .selectize-input:after { display: block; }
 
-.ev-link-trigger { align-items: center; margin-top: 20px; margin-bottom: 20px; padding: 0 8px 0 2px; cursor: pointer; position: absolute; top: 0; right: 20px; bottom: 0; }
-.ev-link-trigger:hover span { background-color: #DBDBDB; }
-.ev-link-trigger span { display: inline-block; border: 1px solid #B3B3B3; padding: 2px 6px; border-radius: 3px; margin-top: 7px; }
-.ev-link-modal-expanded .ev-link-trigger { display: none; }
-
-.ev-link-inner-wrapper { display: none; padding: 20px; border-top: 1px solid #DBDBDB; }
+.ev-link-inner-wrapper { padding: 20px; border-top: 1px solid #DBDBDB; }
 .ev-link-inner-wrapper input[type="text"] { width: 100%; }
 .ev-link-modal-expanded .ev-link-inner-wrapper { display: block; }
 

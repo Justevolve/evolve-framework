@@ -4,8 +4,6 @@
 // $Date input
 // -----------------------------------------------------------------------------
 
-// TODO: fare lo stile al dropdown di selezione della data
-
 .ev {
 	input[type="text"].ev-field-date-style-small {
 		font-size: $small_fsz;
@@ -31,17 +29,18 @@ $datepicker_base: 30px;
 
 .ui-datepicker {
 	background: #fff;
-	border: 1px solid $green;
+	border: 1px solid $grey_1;
 	border-radius: $radius;
 	border-top-left-radius: 0;
 	line-height: $datepicker_base;
 	display: none;
 	margin-top: -1px;
 	overflow: hidden;
+	@include box-shadow( #{$ui_el_shadow_hover} );
 
 	.ui-datepicker-header {
-		position: relative;
 		background: $grey_0;
+		position: relative;
 		line-height: $datepicker_base;
 
 		.ui-datepicker-prev,
@@ -105,7 +104,9 @@ $datepicker_base: 30px;
 		th {
 			font-weight: normal;
 			font-style: italic;
-			color: $grey_4;
+			color: $grey_3;
+			background: $grey_0;
+			border-bottom: 1px solid $grey_1;
 		}
 
 		td {

@@ -93,11 +93,11 @@
 		return false;
 	} );
 
-	$.evf.delegate( ".ev-link-trigger", "click", "link", function() {
-		$( '.ev-modal-container[data-key="ev-link"]').addClass( 'ev-link-modal-expanded' );
+	// $.evf.delegate( ".ev-link-trigger", "click", "link", function() {
+	// 	$( '.ev-modal-container[data-key="ev-link"]').addClass( 'ev-link-modal-expanded' );
 
-		return false;
-	} );
+	// 	return false;
+	// } );
 
 	/**
 	 * Check if a string represents a URL.

@@ -78,35 +78,7 @@
 	}
 }
 
-.ev-link-trigger {
-	align-items: center;
-	margin-top: $gutter;
-	margin-bottom: $gutter;
-	padding: 0 8px 0 2px;
-	cursor: pointer;
-	@include position( absolute, 0 $gutter 0 null );
-
-	&:hover {
-		span {
-			background-color: $grey_1;
-		}
-	}
-
-	span {
-		display: inline-block;
-		border: 1px solid $grey_3;
-		padding: 2px 6px;
-		border-radius: $radius;
-		margin-top: 7px;
-	}
-
-	.ev-link-modal-expanded & {
-		display: none;
-	}
-}
-
 .ev-link-inner-wrapper {
-	display: none;
 	padding: $gutter;
 	border-top: 1px solid $grey_1;
 

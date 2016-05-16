@@ -157,7 +157,7 @@
 	padding: $baseline $gutter;
 	height: $baseline*4;
 	@include box-sizing( border-box );
-	background-color: $grey_1;
+	background-color: $grey_0;
 	position: relative;
 	margin-left: 300px;
 	@include box-shadow( -1px 0 0 $grey_1 );

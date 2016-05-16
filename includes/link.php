@@ -95,7 +95,7 @@ function ev_link_modal_load() {
 
 		$content .= '</select>';
 
-		$content .= sprintf( '<span class="ev-link-trigger"><span>%s</span></span>', esc_html( __( 'Tab', 'ev_framework' ) ) );
+		// $content .= sprintf( '<span class="ev-link-trigger"><span>%s</span></span>', esc_html( __( 'Tab', 'ev_framework' ) ) );
 	$content .= '</div>';
 
 	$content .= '<div class="ev-link-inner-wrapper">';
