@@ -80,10 +80,14 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 			return $groups;
 		}
 
+		$url = admin_url( sprintf( '%s?page=%s', $this->_base, $this->handle() ) );
+		$url = apply_filters( 'ev_admin_page_group_url', $url, $this->handle() );
+		$url = apply_filters( "ev_admin_page_group_url[page:{$this->handle()}]", $url );
+
 		$groups[$this->_args['group']]['pages'][] = array(
 			'handle' => $this->handle(),
 			'title'  => $this->title(),
-			'url'    => admin_url( sprintf( '%s?page=%s', $this->_base, $this->handle() ) )
+			'url'    => $url
 		);
 
 		return $groups;

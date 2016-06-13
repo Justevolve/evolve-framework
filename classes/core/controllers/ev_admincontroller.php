@@ -86,6 +86,22 @@ class Ev_AdminController extends Ev_Controller {
 	}
 
 	/**
+	 * Register and add a page to the admin interface creating a new paged
+	 * appended to the appearance menu.
+	 *
+	 * @since 1.0.0
+	 * @param string $handle A slug-like definition of the page.
+	 * @param string $title A human-readable definition of the page.
+	 * @param array $fields An array containing a default set of fields that belong to the menu page.
+	 * @param array $args An array containing a set of arguments that define the admin page.
+	 * @return Ev_MenuPage
+	 */
+	public function add_theme_page( $handle, $title, $fields = array(), $args = array() )
+	{
+		return new Ev_ThemePage( $handle, $title, $fields, $args );
+	}
+
+	/**
 	 * Register and add a subpage to a page in the admin menu.
 	 *
 	 * @since 0.1.0
