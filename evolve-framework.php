@@ -382,6 +382,9 @@ class Ev_Framework {
 		/* Admin menu page fields container. */
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_menu_page.php' );
 
+		/* Admin theme menu page fields container. */
+		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_theme_page.php' );
+
 		/* Admin submenu page fields container. */
 		require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'core/fields_containers/ev_submenu_page.php' );
 
