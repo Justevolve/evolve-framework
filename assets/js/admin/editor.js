@@ -15,7 +15,7 @@
 			id = id.replace( /\[/g, "_" );
 			id = id.replace( /\]/g, "_" );
 
-			$(this).attr( "id", id + "-" + window.evf_ui_rich_textareas );
+			$( this ).attr( "id", id + "-" + window.evf_ui_rich_textareas );
 
 			$( this ).wp_editor();
 		} );

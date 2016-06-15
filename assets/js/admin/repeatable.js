@@ -59,6 +59,8 @@
 
 			ev_sortable_dragged_height = sortable.outerHeight();
 
+			$.evSaveRichTextareas( sortable );
+
 			$( "#wpbody" ).css( "padding-bottom", ev_sortable_dragged_height + 10 );
 
 			return false;
@@ -126,6 +128,8 @@
 						}
 					} );
 				} );
+
+				$( document ).trigger( "ev-repeatable-sortable-stop", [ $( ui.item ) ] );
 			}
 		} );
 	} );

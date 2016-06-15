@@ -30,7 +30,23 @@
  */
 
 ;(function( $, window ) {
+	$( document ).on( "ev-repeatable-sortable-stop", function( e, field ) {
+		var textarea = $( ".wp-editor-area", field ).first(),
+			id = textarea.attr( "id" ),
+			wrap = textarea.parents( ".wp-editor-wrap" ).first(),
+			clone = textarea.clone();
+
+		clone.removeClass( "wp-editor-area" );
+		clone.removeAttr( "aria-hidden" );
+		clone.removeAttr( "style" );
+
+		wrap.replaceWith( clone );
+		tinymce.remove( '#' + id );
+		clone.wp_editor( {} );
+	} );
+
 	$.fn.wp_editor = function( options ) {
+		var self = $( this );
 
 		if( !$(this).is('textarea') )
 			console.warn('Element must be a textarea');
@@ -145,6 +161,7 @@
 				console.warn('Element must be a textarea');
 			else {
 				var current_id = $(this).attr('id');
+
 				$.each( options.mceInit, function( key, value ) {
 					if( $.type( value ) == 'string' )
 					options.mceInit[key] = value.replace(id_regexp, current_id);
