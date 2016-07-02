@@ -36,11 +36,11 @@
 		background-color: $blue_0;
 		border-color: $blue_0;
 		border-radius: $radius;
+	}
 
-		&.ev-link-on {
-			background-color: $blue;
-			border-color: $blue;
-		}
+	&.ev-link-on .ev-btn.ev-link-ctrl-btn {
+		background-color: $blue;
+		border-color: $blue;
 	}
 }
 
@@ -57,8 +57,14 @@
 	.ev-modal-wrapper {
 		max-height: 500px;
 	}
+
 	.ev-modal-wrapper-inner {
 		padding-top: $modal_header_height + 1;
+	}
+
+	.ev-link-ctrls-wrapper {
+		@include position( absolute, ($modal_header_height + 1) 0 ($modal_footer_height + 1) 0 );
+		overflow-y: auto;
 	}
 }
 

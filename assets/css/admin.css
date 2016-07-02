@@ -593,10 +593,11 @@ body.ev-modal-open { overflow: hidden; }
 
 .ev-link-ctrl { position: absolute; top: 6px; right: 6px; display: inline-block; }
 .ev-link-ctrl .ev-btn.ev-link-ctrl-btn { background-color: #DAE3E6; border-color: #DAE3E6; border-radius: 3px; }
-.ev-link-ctrl .ev-btn.ev-link-ctrl-btn.ev-link-on { background-color: #47AACC; border-color: #47AACC; }
+.ev-link-ctrl.ev-link-on .ev-btn.ev-link-ctrl-btn { background-color: #47AACC; border-color: #47AACC; }
 
 .ev-modal-container[data-key="ev-link"] .ev-modal-wrapper { max-height: 500px; }
 .ev-modal-container[data-key="ev-link"] .ev-modal-wrapper-inner { padding-top: 49px; }
+.ev-modal-container[data-key="ev-link"] .ev-link-ctrls-wrapper { position: absolute; top: 49px; right: 0; bottom: 63px; left: 0; overflow-y: auto; }
 
 .ev-link-url-wrapper { padding: 20px; position: relative; }
 .ev-link-url-wrapper .selectize-control.single .selectize-input:before, .ev-link-url-wrapper .selectize-control.single .selectize-input:after { display: none; }

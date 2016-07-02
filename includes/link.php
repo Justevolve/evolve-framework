@@ -83,52 +83,54 @@ function ev_link_modal_load() {
 	$class  = isset( $data['class'] ) ? $data['class'] : '';
 
 	$content = '';
-	$content .= '<div class="ev-link-url-wrapper">';
-		$content .= sprintf( '<select name="url" data-nonce="%s">', esc_attr( wp_create_nonce( 'ev_link_search_entries' ) ) );
+	$content = '<div class="ev-link-ctrls-wrapper">';
+		$content .= '<div class="ev-link-url-wrapper">';
+			$content .= sprintf( '<select name="url" data-nonce="%s">', esc_attr( wp_create_nonce( 'ev_link_search_entries' ) ) );
 
-		if ( $url != '' ) {
-			$content .= sprintf( '<option value="%s" data-data="%s" selected></option>',
-				esc_attr( $url ),
-				htmlspecialchars( json_encode( ev_find_single_entry( $url ) ), ENT_QUOTES, 'UTF-8' )
-			);
-		}
+			if ( $url != '' ) {
+				$content .= sprintf( '<option value="%s" data-data="%s" selected></option>',
+					esc_attr( $url ),
+					htmlspecialchars( json_encode( ev_find_single_entry( $url ) ), ENT_QUOTES, 'UTF-8' )
+				);
+			}
 
-		$content .= '</select>';
+			$content .= '</select>';
 
-		// $content .= sprintf( '<span class="ev-link-trigger"><span>%s</span></span>', esc_html( __( 'Tab', 'ev_framework' ) ) );
-	$content .= '</div>';
-
-	$content .= '<div class="ev-link-inner-wrapper">';
-		$content .= '<div class="ev-link-radio-wrapper">';
-			$content .= sprintf( '<p>%s</p>', esc_html( __( 'Open in', 'ev_framework' ) ) );
-			$content .= ev_radio(
-				'target',
-				array(
-					''       => __( 'Same tab', 'ev_framework' ),
-					'_blank' => __( 'New tab', 'ev_framework' ),
-				),
-				$target,
-				array( 'switch', 'small' ),
-				false
-			);
+			// $content .= sprintf( '<span class="ev-link-trigger"><span>%s</span></span>', esc_html( __( 'Tab', 'ev_framework' ) ) );
 		$content .= '</div>';
 
-		$content .= '<div class="ev-link-input-wrapper">';
-			$label = __( 'Rel attribute', 'ev_framework' );
-			$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ), esc_attr( $label ) );
-			$content .= sprintf( '<span>%s</span>', $label );
-		$content .= '</div>';
+		$content .= '<div class="ev-link-inner-wrapper">';
+			$content .= '<div class="ev-link-radio-wrapper">';
+				$content .= sprintf( '<p>%s</p>', esc_html( __( 'Open in', 'ev_framework' ) ) );
+				$content .= ev_radio(
+					'target',
+					array(
+						''       => __( 'Same tab', 'ev_framework' ),
+						'_blank' => __( 'New tab', 'ev_framework' ),
+					),
+					$target,
+					array( 'switch', 'small' ),
+					false
+				);
+			$content .= '</div>';
 
-		$content .= '<div class="ev-link-input-wrapper">';
-			$label = __( 'Title attribute', 'ev_framework' );
-			$content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ), esc_attr( $label ) );
-			$content .= sprintf( '<span>%s</span>', $label );
-		$content .= '</div>';
+			$content .= '<div class="ev-link-input-wrapper">';
+				$label = __( 'Rel attribute', 'ev_framework' );
+				$content .= sprintf( '<input type="text" name="rel" value="%s" placeholder="rel">', esc_attr( $rel ), esc_attr( $label ) );
+				$content .= sprintf( '<span>%s</span>', $label );
+			$content .= '</div>';
 
-		$content .= '<div class="ev-link-input-wrapper">';
-			$label = __( 'Class attribute', 'ev_framework' );
-			$content .= sprintf( '<input type="text" name="class" value="%s" placeholder="class">', esc_attr( $class ), esc_attr( $label ) );
-			$content .= sprintf( '<span>%s</span>', $label );
+			$content .= '<div class="ev-link-input-wrapper">';
+				$label = __( 'Title attribute', 'ev_framework' );
+				$content .= sprintf( '<input type="text" name="title" value="%s" placeholder="title">', esc_attr( $title ), esc_attr( $label ) );
+				$content .= sprintf( '<span>%s</span>', $label );
+			$content .= '</div>';
+
+			$content .= '<div class="ev-link-input-wrapper">';
+				$label = __( 'Class attribute', 'ev_framework' );
+				$content .= sprintf( '<input type="text" name="class" value="%s" placeholder="class">', esc_attr( $class ), esc_attr( $label ) );
+				$content .= sprintf( '<span>%s</span>', $label );
+			$content .= '</div>';
 		$content .= '</div>';
 	$content .= '</div>';
 
