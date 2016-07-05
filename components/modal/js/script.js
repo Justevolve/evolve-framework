@@ -72,6 +72,7 @@
 		var self = this;
 
 		self.config = config;
+		self.scroll = 0;
 
 		/**
 		 * Close the modal.
@@ -88,6 +89,11 @@
 			if ( ! modals.length ) {
 				$( "body" ).removeClass( "ev-modal-open" );
 			}
+
+			setTimeout( function() {
+				$.scrollTo( self.scroll );
+				self.scroll = 0;
+			}, 200 ); // TODO: find a way to prevent random scrolling in page
 
 			$( window ).trigger( "ev-modal-close" );
 		};
@@ -121,6 +127,7 @@
 				throw new Error( "Content is not a function." );
 			}
 
+			self.scroll = $( window ).scrollTop();
 			var origin = ".ev-modal-container[data-key='" + key + "']";
 
 			$( origin ).remove();
