@@ -24,8 +24,12 @@
 	$handle_suffix = '';
 
 	if ( is_array( $value ) || $link !== false ) {
-		$text_value = isset( $value['text'] ) ? $value['text'] : '';
-		$handle_suffix = '[text]';
+		$text_value = '';
+
+		if ( isset( $value['text'] ) ) {
+			$text_value = $value['text'];
+			$handle_suffix = '[text]';
+		}
 	}
 ?>
 
