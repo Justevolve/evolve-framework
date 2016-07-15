@@ -18,6 +18,7 @@
 		padding: 1px $baseline/2 1px $baseline*1.5;
 		font-size: $small_fsz;
 		line-height: $baseline - 4;
+		min-height: ($baseline - 4) + 2 + 2;
 	}
 
 	.ev-sub-label {

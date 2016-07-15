@@ -19,6 +19,7 @@
 		@include box-sizing( border-box );
 		margin: 0;
 		line-height: $baseline;
+		min-height: $baseline + $baseline/2 + 2;
 		padding: $baseline/4 $gutter/2;
 		border-radius: $radius;
 		@include transition( padding $transition_time*2 ease, background-color $transition_time*2 ease, border-color $transition_time*2 ease );

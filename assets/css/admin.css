@@ -369,7 +369,7 @@ body.ev-modal-open { overflow: hidden; }
 
 .ev .minicolors input[type="text"] { padding-left: 48px; font-family: monospace; }
 .ev .minicolors input[type="text"]:hover { background-color: #fff; }
-.ev .ev-color-style-small .minicolors input[type="text"] { padding: 1px 12px 1px 36px; font-size: 12px; line-height: 20px; }
+.ev .ev-color-style-small .minicolors input[type="text"] { padding: 1px 12px 1px 36px; font-size: 12px; line-height: 20px; min-height: 24px; }
 .ev .ev-sub-label { color: #999; margin-bottom: 6px; display: inline-block; }
 .ev .ev-color-input-wrapper { display: inline-block; }
 .ev .ev-color-input-wrapper + .ev-color-input-wrapper { margin-left: 20px; }
@@ -580,7 +580,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-image-upload-image-size-selection { padding-top: 12px; }
 .ev-image-upload-image-size-selection > span:not(.ev-select-wrapper) { display: block; color: #999; padding-bottom: 6px; }
 
-.ev input[type="text"], .ev input[type="number"], .ev input[type="url"], .ev input[type="password"], .ev input[type="email"], .ev input[type="tel"], .ev textarea:not(.ev-rich) { border: 1px solid #DBDBDB; background-color: #fcfcfc; font-size: 14px; box-shadow: none; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; margin: 0; line-height: 24px; padding: 6px 10px; border-radius: 3px; -webkit-transition: padding 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; -moz-transition: padding 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; transition: padding 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; }
+.ev input[type="text"], .ev input[type="number"], .ev input[type="url"], .ev input[type="password"], .ev input[type="email"], .ev input[type="tel"], .ev textarea:not(.ev-rich) { border: 1px solid #DBDBDB; background-color: #fcfcfc; font-size: 14px; box-shadow: none; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; margin: 0; line-height: 24px; min-height: 38px; padding: 6px 10px; border-radius: 3px; -webkit-transition: padding 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; -moz-transition: padding 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; transition: padding 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; }
 .ev input[type="text"]:hover, .ev input[type="number"]:hover, .ev input[type="url"]:hover, .ev input[type="password"]:hover, .ev input[type="email"]:hover, .ev input[type="tel"]:hover, .ev textarea:not(.ev-rich):hover { background-color: #F7F7F7; border-color: #B3B3B3; }
 .ev input[type="text"]:focus, .ev input[type="number"]:focus, .ev input[type="url"]:focus, .ev input[type="password"]:focus, .ev input[type="email"]:focus, .ev input[type="tel"]:focus, .ev textarea:not(.ev-rich):focus { background-color: #fff; border-color: #66CC66; }
 .ev textarea { line-height: 1.5; }
@@ -699,6 +699,7 @@ input[type="radio"]:checked + .ev-radio.ev-graphic-radio:before { border-color: 
 .ev-select-wrapper:before { content: ""; display: block; position: absolute; top: 50%; right: 13px; height: 0; width: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 6px solid #B3B3B3; margin-top: -3px; -webkit-transition: border-color 0.2s ease; -moz-transition: border-color 0.2s ease; transition: border-color 0.2s ease; }
 .ev-select-wrapper:after { content: ""; display: block; position: absolute; top: 50%; right: 36px; margin-top: -12px; width: 0px; height: 24px; border-left: 1px solid #DBDBDB; -webkit-transition: border-color 0.2s ease; -moz-transition: border-color 0.2s ease; transition: border-color 0.2s ease; }
 .ev-select-wrapper select { font-size: 14px; padding: 6px 48px 6px 10px; -webkit-appearance: none; -moz-appearance: none; -ms-appearance: none; -o-appearance: none; appearance: none; margin: 0; border: none; height: auto; line-height: 24px; background-color: transparent; box-shadow: none; cursor: pointer; position: relative; z-index: 10; }
+.ev-select-wrapper select::-ms-expand { display: none; }
 
 .ev .selectize-input { padding: 4px; border-radius: 3px; display: block; width: 100%; position: relative; float: left; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border: 1px solid #DBDBDB; -webkit-transition: border-color 0.2s ease; -moz-transition: border-color 0.2s ease; transition: border-color 0.2s ease; }
 .ev .selectize-input.has-items { padding-left: 2px; padding-right: 2px; }

@@ -85,5 +85,9 @@
 		cursor: pointer;
 		position: relative;
 		z-index: 10;
+
+		&::-ms-expand {
+		    display: none;
+		}
 	}
 }
