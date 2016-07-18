@@ -2,7 +2,7 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Evolve Framework 1.0.0\n"
+"Project-Id-Version: Evolve Framework 1.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/Justevolve/evolve-framework\n"
 "POT-Creation-Date: 2015-07-15 20:32:43+00:00\n"
 "MIME-Version: 1.0\n"
@@ -272,27 +272,27 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: includes/link.php:103
+#: includes/link.php:104
 msgid "Open in"
 msgstr ""
 
-#: includes/link.php:107
+#: includes/link.php:108
 msgid "Same tab"
 msgstr ""
 
-#: includes/link.php:108
+#: includes/link.php:109
 msgid "New tab"
 msgstr ""
 
-#: includes/link.php:117
+#: includes/link.php:118
 msgid "Rel attribute"
 msgstr ""
 
-#: includes/link.php:123
+#: includes/link.php:124
 msgid "Title attribute"
 msgstr ""
 
-#: includes/link.php:129
+#: includes/link.php:130
 msgid "Class attribute"
 msgstr ""
 
