@@ -247,7 +247,15 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 		/* Sanitizing the field value. */
 		$value = Ev_Field::sanitize( $element, $value );
 
+		/* Update the value in the database. */
 		update_post_meta( $post_id, $element['handle'], $value );
+
+		/* Fire an event after the field has been saved. */
+		$metabox_handle = $this->_handle;
+		$field_handle = $element['handle'];
+		$post_type = get_post_type( $post_id );
+
+		do_action( "ev_metabox_single_field_saved[post_type:{$post_type}][metabox:{$metabox_handle}][field:{$field_handle}]", $post_id, $value );
 	}
 
 	/**

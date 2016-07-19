@@ -22,7 +22,7 @@ abstract class Ev_FieldsContainer {
 	 *
 	 * @var string
 	 */
-	private $_handle = '';
+	protected $_handle = '';
 
 	/**
 	 * A human-readable definition of the fields container. This string should
