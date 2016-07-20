@@ -1,6 +1,37 @@
 "use strict";
 
 (function($){
+	function is_scalar( obj ) {
+		return ( /string|number|boolean/ ).test( typeof obj );
+	};
+
+	/**
+	 * Deep extend an object.
+	 */
+	$.evExtendObject = function( obj, defaults ) {
+		if ( is_scalar( obj ) ) {
+			return obj;
+		}
+
+		var new_obj = obj;
+
+		$.each( defaults, function( key, value ) {
+			if ( typeof new_obj[key] === "undefined" ) {
+				if ( is_scalar( defaults[key] ) ) {
+					new_obj[key] = value;
+				}
+				else {
+					new_obj[key] = {};
+				}
+			}
+			else if ( is_scalar( new_obj[key] ) ) {
+				new_obj[key] = $.evExtendObject( new_obj[key], defaults[key] );
+			}
+		} );
+
+		return new_obj;
+	};
+
 	$.evSaveRichTextareas = function( context ) {
 		if ( typeof tinymce !== 'undefined' ) {
 			$( ".ev-rich", context ).each( function() {
