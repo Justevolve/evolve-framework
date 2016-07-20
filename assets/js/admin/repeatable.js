@@ -19,8 +19,8 @@
 		}
 
 		$( element ).scrollintoview( {
-			duration: 400,
-			easing: "easeInOutCubic",
+			duration: 300,
+			// easing: "easeInOutCubic",
 			direction: "vertical",
 			offset: 40
 		} );
@@ -187,7 +187,7 @@
 		};
 
 		var update_names = function( count, field ) {
-			$( ".ev-field", field ).each( function() {
+			$( ".ev-field-inner", field ).each( function() {
 				var control = $( ".ev-repeatable-controls", this ).first(),
 					count = parseInt( empty_state.attr( "data-count" ), 10 );
 
@@ -216,7 +216,7 @@
 				html.appendTo( container );
 			}
 
-			update_names( count, html );
+			update_names( count, field );
 
 			field.removeClass( "ev-no-fields" );
 
