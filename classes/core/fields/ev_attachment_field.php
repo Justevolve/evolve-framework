@@ -84,7 +84,7 @@ function ev_attachment_upload_generic_placeholder_template() {
 		<span class="ev-attachment-placeholder-icon" data-id="%s" alt=""></span>
 		<div class="ev-attachment-details">
 			<span class="ev-attachment-title">%s</span>
-			<a href="%s" target="_blank" class="ev-attachment-extension">%s</a>
+			<a href="%s" target="_blank" rel="noopener noreferrer" class="ev-attachment-extension">%s</a>
 		</div>
 	</div>';
 

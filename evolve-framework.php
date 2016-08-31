@@ -500,7 +500,7 @@ class Ev_Framework {
 		$framework_changelog_url = 'https://github.com/Justevolve/evolve-framework/releases';
 
 		if ( $framework_changelog_url !== '' ) {
-			$plugin_meta[] = sprintf( '<a target="_blank" data-changelog href="%s">%s</a>',
+			$plugin_meta[] = sprintf( '<a target="_blank" rel="noopener noreferrer" data-changelog href="%s">%s</a>',
 				esc_url( $framework_changelog_url ),
 				esc_html( __( 'Changelog', 'ev_framework' ) )
 			);
