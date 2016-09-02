@@ -72,7 +72,7 @@
 		var self = this;
 
 		self.config = config;
-		self.scroll = 0;
+		// self.scroll = 0;
 
 		/**
 		 * Close the modal.
@@ -82,7 +82,7 @@
 
 			$( ".ev-modal-container[data-key='" + key + "']" ).nextAll( ".ev-modal-container" ).remove();
 			$( ".ev-modal-container[data-key='" + key + "']" ).remove();
-			$( window ).trigger( "resize" );
+			// $( window ).trigger( "resize" );
 
 			var modals = $( ".ev-modal-container" );
 
@@ -90,10 +90,10 @@
 				$( "body" ).removeClass( "ev-modal-open" );
 			}
 
-			setTimeout( function() {
-				$.scrollTo( self.scroll );
-				self.scroll = 0;
-			}, 200 ); // TODO: find a way to prevent random scrolling in page
+			// setTimeout( function() {
+			// 	$.scrollTo( self.scroll );
+			// 	self.scroll = 0;
+			// }, 200 );
 
 			$( window ).trigger( "ev-modal-close" );
 		};
@@ -127,7 +127,7 @@
 				throw new Error( "Content is not a function." );
 			}
 
-			self.scroll = $( window ).scrollTop();
+			// self.scroll = $( window ).scrollTop();
 			var origin = ".ev-modal-container[data-key='" + key + "']";
 
 			$( origin ).remove();

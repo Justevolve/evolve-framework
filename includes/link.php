@@ -167,6 +167,10 @@ function ev_link_open( $data, $echo = true ) {
 		$url = get_permalink( $url );
 	}
 
+	if ( $target == '_blank' ) {
+		$rel .= ' noopener noreferrer';
+	}
+
 	$link = sprintf( '<a href="%s"', esc_attr( $url ) );
 
 	if ( $target ) {

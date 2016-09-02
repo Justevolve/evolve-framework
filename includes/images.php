@@ -78,11 +78,19 @@ function ev_fw_get_image( $id, $size = 'full' ) {
  * @return string The attachment ID image size URL.
  */
 function ev_get_image( $id, $size = 'full' ) {
-	if ( ! empty( $id ) && is_array( $image = wp_get_attachment_image_src( $id, $size ) ) ) {
-		return esc_url( current( $image ) );
+	if ( empty( $id ) ) {
+		return '';
 	}
 
-	return '';
+	$image = wp_get_attachment_image_src( $id, $size );
+
+	if ( ! is_array( $image ) ) {
+		return '';
+	}
+
+	$image = trim( current( $image ) );
+
+	return $image;
 }
 
 /**
