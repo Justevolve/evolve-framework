@@ -129,10 +129,6 @@ class Ev_Framework_Updater {
 			return $transient;
 		}
 
-		if ( empty( $this->githubAPIResult ) ) {
-			return $transient;
-		}
-
 		/* Get plugin & GitHub release information. */
 		$this->initPluginData();
 		$this->getRepoReleaseInfo();
@@ -152,6 +148,7 @@ class Ev_Framework_Updater {
 			$obj = new stdClass();
 			$obj->slug = $this->slug;
 			$obj->plugin = $this->baseslug;
+			$obj->version = $this->githubAPIResult->tag_name;
 			$obj->new_version = $this->githubAPIResult->tag_name;
 			$obj->url = $this->pluginData["PluginURI"];
 			$obj->package = $package;
@@ -185,6 +182,7 @@ class Ev_Framework_Updater {
 		$response->plugin_name  = $this->pluginData["Name"];
 		$response->name  = $this->pluginData["Name"];
 		$response->version = $this->githubAPIResult->tag_name;
+		$response->new_version = $this->githubAPIResult->tag_name;
 		$response->author = $this->pluginData["AuthorName"];
 		$response->homepage = $this->pluginData["PluginURI"];
 
