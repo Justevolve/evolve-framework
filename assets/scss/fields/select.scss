@@ -15,8 +15,10 @@
 	&.ev-select-style-small {
 		select {
 			font-size: $small_fsz;
-			padding-top: 0;
-			padding-bottom: 0;
+			padding-top: 3px;
+			padding-bottom: 3px;
+			float: left;
+			height: $baseline;
 		}
 
 		&:after {
@@ -78,8 +80,9 @@
 		@include appearance( none );
 		margin: 0;
 		border: none;
-		height: auto;
-		line-height: $baseline;
+		height: $baseline*1.5;
+		line-height: inherit;
+		// line-height: $baseline;
 		background-color: transparent;
 		@include box-shadow( none );
 		cursor: pointer;
