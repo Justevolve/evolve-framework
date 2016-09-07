@@ -2,7 +2,7 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Evolve Framework 1.0.4\n"
+"Project-Id-Version: Evolve Framework 1.0.5\n"
 "Report-Msgid-Bugs-To: https://github.com/Justevolve/evolve-framework\n"
 "POT-Creation-Date: 2015-07-15 20:32:43+00:00\n"
 "MIME-Version: 1.0\n"
@@ -204,27 +204,27 @@ msgstr ""
 msgid "Evolve Framework not activated: at least WordPress 4.4.0 is required."
 msgstr ""
 
-#: evolve-framework.php:179
+#: evolve-framework.php:186
 msgid "Text"
 msgstr ""
 
-#: evolve-framework.php:180
+#: evolve-framework.php:187
 msgid "Visual"
 msgstr ""
 
-#: evolve-framework.php:181
+#: evolve-framework.php:188
 msgid "Add Media"
 msgstr ""
 
-#: evolve-framework.php:185
+#: evolve-framework.php:192
 msgid "Insert a name for the preset"
 msgstr ""
 
-#: evolve-framework.php:188
+#: evolve-framework.php:195
 msgid "Insert this URL"
 msgstr ""
 
-#: evolve-framework.php:505
+#: evolve-framework.php:501
 msgid "Changelog"
 msgstr ""
 

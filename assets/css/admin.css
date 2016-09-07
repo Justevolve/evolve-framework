@@ -48,7 +48,7 @@ body.ev-modal-open { overflow: hidden; }
 .ev-modal .ev-tabs-nav.ev-vertical + .ev-tab-container { width: 85%; }
 .ev-modal .ev-tab-container { border-right: 0; border-bottom: 0; border-top: 0; position: relative; z-index: 1; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 .ev-modal > .ev-tabs { position: absolute; top: 49px; right: 0; bottom: 62px; left: 0; overflow-y: auto; background: #DBDBDB; }
-.ev-modal > .ev-tabs .ev-tab-container { min-height: 100%; }
+.ev-modal > .ev-tabs .ev-tab-container { min-height: 100%; -webkit-transform: translate3d(0, 0, 0); -moz-transform: translate3d(0, 0, 0); -ms-transform: translate3d(0, 0, 0); -o-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
 .ev-modal > .ev-tab-container { position: absolute; top: 49px; right: 1px; bottom: 62px; left: 0; overflow-y: auto; width: auto; }
 
 .ev-modal-container { position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: rgba(0, 0, 0, 0.7); z-index: 10000; }
