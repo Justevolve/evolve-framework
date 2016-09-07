@@ -129,10 +129,6 @@ class Ev_Framework_Updater {
 			return $transient;
 		}
 
-		if ( empty( $this->githubAPIResult ) ) {
-			return $transient;
-		}
-
 		/* Get plugin & GitHub release information. */
 		$this->initPluginData();
 		$this->getRepoReleaseInfo();
@@ -152,6 +148,7 @@ class Ev_Framework_Updater {
 			$obj = new stdClass();
 			$obj->slug = $this->slug;
 			$obj->plugin = $this->baseslug;
+			$obj->version = $this->githubAPIResult->tag_name;
 			$obj->new_version = $this->githubAPIResult->tag_name;
 			$obj->url = $this->pluginData["PluginURI"];
 			$obj->package = $package;
@@ -185,6 +182,7 @@ class Ev_Framework_Updater {
 		$response->plugin_name  = $this->pluginData["Name"];
 		$response->name  = $this->pluginData["Name"];
 		$response->version = $this->githubAPIResult->tag_name;
+		$response->new_version = $this->githubAPIResult->tag_name;
 		$response->author = $this->pluginData["AuthorName"];
 		$response->homepage = $this->pluginData["PluginURI"];
 
@@ -201,36 +199,41 @@ class Ev_Framework_Updater {
 		$response->download_link = $downloadLink;
 
 		/* We're going to parse the GitHub markdown release notes, include the parser. */
-		// require_once( plugin_dir_path( __FILE__ ) . "Parsedown.php" );
+		if ( ! class_exists( 'Parsedown' ) ) {
+			require_once dirname( __FILE__ ) . '/Parsedown.php';
+		}
+
+		$description = $this->pluginData['Description'];
+		$changelog = $this->githubAPIResult->body;
+
+		if ( class_exists( 'Parsedown' ) ) {
+			$readme = EV_FRAMEWORK_FOLDER . 'README.md';
+
+			if ( file_exists( $readme ) ) {
+				$description = Parsedown::instance()->parse( implode( '', file( $readme ) ) );
+			}
+
+			$changelog = Parsedown::instance()->parse( $this->githubAPIResult->body );
+		}
 
 		/* Create tabs in the lightbox. */
 		$response->sections = array(
-			'description' => $this->pluginData["Description"],
-			'changelog' => class_exists( "Parsedown" )
-				? Parsedown::instance()->parse( $this->githubAPIResult->body )
-				: $this->githubAPIResult->body
+			'description' => $description,
+			'changelog' => $changelog
 		);
 
 		/* Gets the required version of WP if available. */
 		$matches = null;
 		preg_match( "/requires:\s([\d\.]+)/i", $this->githubAPIResult->body, $matches );
-		if ( ! empty( $matches ) ) {
-			if ( is_array( $matches ) ) {
-				if ( count( $matches ) > 1 ) {
-					$response->requires = $matches[1];
-				}
-			}
+		if ( ! empty( $matches ) && is_array( $matches ) && count( $matches ) > 1 ) {
+			$response->requires = $matches[1];
 		}
 
 		/* Gets the tested version of WP if available. */
 		$matches = null;
 		preg_match( "/tested:\s([\d\.]+)/i", $this->githubAPIResult->body, $matches );
-		if ( ! empty( $matches ) ) {
-			if ( is_array( $matches ) ) {
-				if ( count( $matches ) > 1 ) {
-					$response->tested = $matches[1];
-				}
-			}
+		if ( ! empty( $matches ) && is_array( $matches ) && count( $matches ) > 1 ) {
+			$response->tested = $matches[1];
 		}
 
 		return $response;

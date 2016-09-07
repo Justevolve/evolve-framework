@@ -23,7 +23,7 @@ if ( ! ( version_compare( $wp_version, '4.4.0' ) >= 0 ) ) {
  * Plugin Name: Evolve Framework
  * Plugin URI: https://github.com/Justevolve/evolve-framework
  * Description: A WordPress development framework.
- * Version: 1.0.3
+ * Version: 1.0.5
  * Author: Evolve
  * Author URI: http://justevolve.it
  * Text Domain: ev_framework
@@ -96,6 +96,13 @@ class Ev_Framework {
 	private $_config = array();
 
 	/**
+	 * Framework updater.
+	 *
+	 * @var Ev_Framework_Updater
+	 */
+	private $_updater = null;
+
+	/**
 	 * Contructor for the main framework class. This function defines a list of
 	 * constants used throughout the framework and bootstraps the framework
 	 * and launch the inclusion of files and libraries.
@@ -108,7 +115,7 @@ class Ev_Framework {
 		define( 'EV_FW', true );
 
 		/* Framework version number. */
-		define( 'EV_FRAMEWORK_VERSION', '1.0.3' );
+		define( 'EV_FRAMEWORK_VERSION', '1.0.5' );
 
 		/* Theme folder. */
 		define( 'EV_THEME_FOLDER', trailingslashit( get_template_directory() ) );
@@ -216,19 +223,8 @@ class Ev_Framework {
 		$this->_media = new Ev_MediaManager();
 
 		/* Load the update notifier. */
-		add_action( 'admin_init', array( $this, 'load_update_notifier' ) );
-	}
-
-	/**
-	 * Load the update notifier.
-	 *
-	 * @since 0.1.0
-	 */
-	public function load_update_notifier()
-	{
-		if ( $this->_can_update() ) {
-			/* Instantiate the updater. */
-		    new Ev_Framework_Updater( __FILE__, 'Justevolve', 'evolve-framework' );
+		if ( $this->_updater === null && is_admin() && $this->_can_update() ) {
+			$this->_updater = new Ev_Framework_Updater( __FILE__, 'Justevolve', 'evolve-framework' );
 		}
 	}
 
@@ -500,7 +496,7 @@ class Ev_Framework {
 		$framework_changelog_url = 'https://github.com/Justevolve/evolve-framework/releases';
 
 		if ( $framework_changelog_url !== '' ) {
-			$plugin_meta[] = sprintf( '<a target="_blank" data-changelog href="%s">%s</a>',
+			$plugin_meta[] = sprintf( '<a target="_blank" rel="noopener noreferrer" data-changelog href="%s">%s</a>',
 				esc_url( $framework_changelog_url ),
 				esc_html( __( 'Changelog', 'ev_framework' ) )
 			);
