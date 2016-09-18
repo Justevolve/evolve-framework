@@ -29,7 +29,10 @@
 
 		.ev-tab-trigger {
 			display: block;
-			outline: none;
+
+			&:focus {
+				outline: none;
+			}
 		}
 
 		// Vertical tabs nav
