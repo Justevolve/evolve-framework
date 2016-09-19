@@ -67,39 +67,14 @@ class Ev_Framework_Updater {
 	 * @param string $accessToken Private access token on Github.
 	 */
 	function __construct( $pluginFile, $gitHubUsername, $gitHubProjectName, $accessToken = '' ) {
-		add_filter( 'site_transient_update_plugins', array( $this, 'requestUpdate' ) );
-		add_filter( 'transient_update_plugins', array( $this, 'requestUpdate' ) );
-		add_filter( 'upgrader_post_install', array( $this, 'postInstall' ), 10, 3 );
+		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'setTransitent' ) );
 		add_filter( 'plugins_api', array( $this, 'setPluginInfo' ), 10, 3 );
+		add_filter( 'upgrader_post_install', array( $this, 'postInstall' ), 10, 3 );
 
 		$this->pluginFile  = $pluginFile;
 		$this->username    = $gitHubUsername;
 		$this->repo        = $gitHubProjectName;
 		$this->accessToken = $accessToken;
-
-		$this->initPluginData();
-	}
-
-	/**
-	 * Attempt to request an update.
-	 *
-	 * @since 1.0.0
-	 * @param stdClass $update_plugins
-	 * @return stdClass
-	 */
-	public function requestUpdate( $update_plugins )
-	{
-		if ( ! is_object( $update_plugins ) ) {
-			return $update_plugins;
-		}
-
-		if ( ! isset( $update_plugins->response ) || ! is_array( $update_plugins->response ) ) {
-			$update_plugins->response = array();
-		}
-
-		$update_plugins->response['evolve-framework/evolve-framework.php'] = $this->setPluginInfo();
-
-		return $update_plugins;
 	}
 
 	/**
@@ -143,6 +118,50 @@ class Ev_Framework_Updater {
 	}
 
 	/**
+	 * Push in plugin version information to get the update notification.
+	 *
+	 * @param string $transient The transient data.
+	 * @return stdClass
+	 */
+	public function setTransitent( $transient ) {
+		/* If we have checked the plugin data before, don't re-check. */
+		if ( empty( $transient->checked ) ) {
+			return $transient;
+		}
+
+		if ( empty( $this->githubAPIResult ) ) {
+			return $transient;
+		}
+
+		/* Get plugin & GitHub release information. */
+		$this->initPluginData();
+		$this->getRepoReleaseInfo();
+
+		/* Check the versions if we need to do an update. */
+		$doUpdate = version_compare( $this->githubAPIResult->tag_name, $transient->checked[$this->baseslug] );
+
+		/* Update the transient to include our updated plugin data. */
+		if ( $doUpdate == 1 ) {
+			$package = $this->githubAPIResult->zipball_url;
+
+			/* Include the access token for private GitHub repos. */
+			if ( ! empty( $this->accessToken ) ) {
+				$package = esc_url( add_query_arg( array( "access_token" => $this->accessToken ), $package ) );
+			}
+
+			$obj = new stdClass();
+			$obj->slug = $this->slug;
+			$obj->plugin = $this->baseslug;
+			$obj->new_version = $this->githubAPIResult->tag_name;
+			$obj->url = $this->pluginData["PluginURI"];
+			$obj->package = $package;
+			$transient->response[$this->baseslug] = $obj;
+		}
+
+		return $transient;
+	}
+
+	/**
 	 * Push in plugin version information to display in the details lightbox.
 	 *
 	 * @param boolean $false
@@ -152,7 +171,7 @@ class Ev_Framework_Updater {
 	 */
 	public function setPluginInfo( $false, $action, $response ) {
 		/* Get plugin & GitHub release information. */
-		// $this->initPluginData();
+		$this->initPluginData();
 		$this->getRepoReleaseInfo();
 
 		/* If nothing is found, do nothing. */

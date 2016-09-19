@@ -216,7 +216,9 @@ class Ev_Framework {
 		$this->_media = new Ev_MediaManager();
 
 		/* Load the update notifier. */
-		add_action( 'admin_init', array( $this, 'load_update_notifier' ) );
+		if ( is_admin() ) {
+			$this->load_update_notifier();
+		}
 	}
 
 	/**
