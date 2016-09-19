@@ -248,11 +248,7 @@
 	border-top-color: $color;
 	border-left-color: $color;
 	border-radius: 50%;
-	-webkit-animation: spinner 400ms linear infinite;
-	-moz-animation:    spinner 400ms linear infinite;
-	-ms-animation:     spinner 400ms linear infinite;
-	-o-animation:      spinner 400ms linear infinite;
-	animation:         spinner 400ms linear infinite;
+	@include animation( spinner 400ms linear infinite );
 }
 
 // // -----------------------------------------------------------------------------

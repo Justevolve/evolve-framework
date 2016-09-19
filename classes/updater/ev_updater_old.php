@@ -67,52 +67,14 @@ class Ev_Framework_Updater {
 	 * @param string $accessToken Private access token on Github.
 	 */
 	function __construct( $pluginFile, $gitHubUsername, $gitHubProjectName, $accessToken = '' ) {
-		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'requestUpdate' ) );
-		// add_filter( 'site_transient_update_plugins', array( $this, 'requestUpdate' ) );
-		// add_filter( 'transient_update_plugins', array( $this, 'requestUpdate' ) );
-		add_filter( 'upgrader_post_install', array( $this, 'postInstall' ), 10, 3 );
+		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'setTransitent' ) );
 		add_filter( 'plugins_api', array( $this, 'setPluginInfo' ), 10, 3 );
+		add_filter( 'upgrader_post_install', array( $this, 'postInstall' ), 10, 3 );
 
 		$this->pluginFile  = $pluginFile;
 		$this->username    = $gitHubUsername;
 		$this->repo        = $gitHubProjectName;
 		$this->accessToken = $accessToken;
-	}
-
-	/**
-	 * Attempt to request an update.
-	 *
-	 * @since 1.0.0
-	 * @param stdClass $update_plugins
-	 * @return stdClass
-	 */
-	public function requestUpdate( $update_plugins )
-	{
-		if ( ! is_object( $update_plugins ) ) {
-			return $update_plugins;
-		}
-
-		if ( ! isset( $update_plugins->response ) || ! is_array( $update_plugins->response ) ) {
-			$update_plugins->response = array();
-		}
-
-		$response = new stdClass();
-		$response->slug = $this->slug;
-
-		$info = $this->setPluginInfo( false, '', $response );
-
-		if ( $info !== false ) {
-			$obj              = new stdClass();
-			$obj->slug        = $this->slug;
-			$obj->new_version = $info->new_version;
-			$obj->url         = $this->pluginData["PluginURI"];
-			$obj->package     = $info->package;
-			$obj->tested      = isset( $info->tested ) ? $info->tested : null;
-
-			$update_plugins->response['evolve-framework/evolve-framework.php'] = $obj;
-		}
-
-		return $update_plugins;
 	}
 
 	/**
@@ -135,27 +97,68 @@ class Ev_Framework_Updater {
 		}
 
 		/* Query the GitHub API. */
-		$url = "https://raw.githubusercontent.com/{$this->username}/{$this->repo}/stable/README.md";
+		$url = "https://api.github.com/repos/{$this->username}/{$this->repo}/releases";
+
+		/* We need the access token for private repos. */
+		if ( ! empty( $this->accessToken ) ) {
+			$url = esc_url( add_query_arg( array( "access_token" => $this->accessToken ), $url ) );
+		}
 
 		/* Get the results. */
-		$body = wp_remote_retrieve_body( wp_remote_get( $url ) );
-		$result = new stdClass();
-		$result->body = $body;
+		$this->githubAPIResult = wp_remote_retrieve_body( wp_remote_get( $url ) );
 
-		preg_match_all( '/(\n\n### )(\d\.\d\.?\d?)/', $body, $versions );
-
-		if ( isset( $versions[2] ) && isset( $versions[2][0] ) && ! empty( $versions[2][0] ) ) {
-			$result->tag_name = $versions[2][0];
-			$result->zipball_url = "https://github.com/{$this->username}/{$this->repo}/archive/{$result->tag_name}.zip";
+		if ( ! empty( $this->githubAPIResult ) ) {
+			$this->githubAPIResult = @json_decode( $this->githubAPIResult );
 		}
 
-		preg_match_all( '/(Last updated on: )(.*)/', $body, $date );
+		/* Use only the latest release. */
+		if ( is_array( $this->githubAPIResult ) && isset( $this->githubAPIResult[0] ) ) {
+			$this->githubAPIResult = $this->githubAPIResult[0];
+		}
+	}
 
-		if ( isset( $date[2] ) && isset( $date[2][0] ) && ! empty( $date[2][0] ) ) {
-			$result->published_at = $date[2][0];
+	/**
+	 * Push in plugin version information to get the update notification.
+	 *
+	 * @param string $transient The transient data.
+	 * @return stdClass
+	 */
+	public function setTransitent( $transient ) {
+		/* If we have checked the plugin data before, don't re-check. */
+		if ( empty( $transient->checked ) ) {
+			return $transient;
 		}
 
-		$this->githubAPIResult = $result;
+		if ( empty( $this->githubAPIResult ) ) {
+			return $transient;
+		}
+
+		/* Get plugin & GitHub release information. */
+		$this->initPluginData();
+		$this->getRepoReleaseInfo();
+
+		/* Check the versions if we need to do an update. */
+		$doUpdate = version_compare( $this->githubAPIResult->tag_name, $transient->checked[$this->baseslug] );
+
+		/* Update the transient to include our updated plugin data. */
+		if ( $doUpdate == 1 ) {
+			$package = $this->githubAPIResult->zipball_url;
+
+			/* Include the access token for private GitHub repos. */
+			if ( ! empty( $this->accessToken ) ) {
+				$package = esc_url( add_query_arg( array( "access_token" => $this->accessToken ), $package ) );
+			}
+
+			$obj = new stdClass();
+			$obj->slug = $this->slug;
+			$obj->plugin = $this->baseslug;
+			$obj->new_version = $this->githubAPIResult->tag_name;
+			$obj->url = $this->pluginData["PluginURI"];
+			$obj->package = $package;
+			$transient->response[$this->baseslug] = $obj;
+		}
+
+		return $transient;
 	}
 
 	/**
@@ -178,17 +181,12 @@ class Ev_Framework_Updater {
 
 		/* Add our plugin information. */
 		$response->last_updated = $this->githubAPIResult->published_at;
-		$response->slug         = $this->slug;
+		$response->slug = $this->slug;
 		$response->plugin_name  = $this->pluginData["Name"];
-		$response->name         = $this->pluginData["Name"];
-		$response->version      = $this->githubAPIResult->tag_name;
-		$response->new_version  = $this->githubAPIResult->tag_name;
-		$response->author       = $this->pluginData["AuthorName"];
-		$response->homepage     = $this->pluginData["PluginURI"];
-
-		if ( ! version_compare( $response->version, EV_FRAMEWORK_VERSION ) > 0 ) {
-			return false;
-		}
+		$response->name  = $this->pluginData["Name"];
+		$response->version = $this->githubAPIResult->tag_name;
+		$response->author = $this->pluginData["AuthorName"];
+		$response->homepage = $this->pluginData["PluginURI"];
 
 		/* This is our release download zip file. */
 		$downloadLink = $this->githubAPIResult->zipball_url;
@@ -200,12 +198,10 @@ class Ev_Framework_Updater {
 				$downloadLink
 			);
 		}
-
-		$response->package = $downloadLink;
 		$response->download_link = $downloadLink;
 
 		/* We're going to parse the GitHub markdown release notes, include the parser. */
-		require_once( plugin_dir_path( __FILE__ ) . "Parsedown.php" );
+		// require_once( plugin_dir_path( __FILE__ ) . "Parsedown.php" );
 
 		/* Create tabs in the lightbox. */
 		$response->sections = array(
@@ -229,7 +225,6 @@ class Ev_Framework_Updater {
 		/* Gets the tested version of WP if available. */
 		$matches = null;
 		preg_match( "/tested:\s([\d\.]+)/i", $this->githubAPIResult->body, $matches );
-
 		if ( ! empty( $matches ) ) {
 			if ( is_array( $matches ) ) {
 				if ( count( $matches ) > 1 ) {

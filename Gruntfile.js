@@ -18,6 +18,19 @@ var modules = [
 
 var scss_folder = 'scss';
 
+function getCurrentDate() {
+	var d = new Date();
+
+    function pad(n) {return n<10 ? '0'+n : n}
+
+    return d.getUTCFullYear()+'-'
+         + pad(d.getUTCMonth()+1)+'-'
+         + pad(d.getUTCDate())+'T'
+         + pad(d.getUTCHours())+':'
+         + pad(d.getUTCMinutes())+':'
+         + pad(d.getUTCSeconds())+'Z'
+}
+
 // -----------------------------------------------------------------------------
 // MODULES UTILITIES
 // -----------------------------------------------------------------------------
@@ -208,6 +221,19 @@ module.exports = function( grunt ) {
 
 		// Replace
 		'string-replace': {
+			'readme': {
+				files: {
+					'README.md': 'README.md',
+				},
+				options: {
+					replacements: [
+						{
+							pattern: /Last updated on: (.*)/,
+							replacement: "Last updated on: " + getCurrentDate()
+						}
+					]
+				}
+			},
 			'framework-info': {
 				files: {
 					'evolve-framework.php': 'evolve-framework.php',
@@ -363,6 +389,7 @@ module.exports = function( grunt ) {
 	 */
 	grunt.registerTask( "start", [
 		"string-replace:framework-info",
+		"string-replace:readme",
 		"clean:start",
 		"sass",
 		"concat",

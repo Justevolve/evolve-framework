@@ -82,7 +82,7 @@ $image_upload_size: $gutter*4;
 
 			&:after {
 				content: "";
-				display: inline-block;
+				// display: inline-block;
 				position: relative;
 				@include ui_input_standard;
 				@include size( $image_upload_size );
@@ -127,7 +127,7 @@ $image_upload_size: $gutter*4;
 
 .ev-image-placeholder {
 	@include clearfix;
-	display: inline-block;
+	// display: inline-block;
 	position: relative;
 	@include ui_input_standard;
 	@include size( $image_upload_size );

@@ -60,7 +60,7 @@ body.ev-modal-open {
 		margin: 0;
 		font-weight: bold;
 		float: left;
-		display: inline-block;
+		// display: inline-block;
 	}
 
 	.ev-modal-header-title-controls {
@@ -167,6 +167,7 @@ body.ev-modal-open {
 
 		.ev-tab-container {
 			min-height: 100%;
+			@include transform( translate3d(0,0,0) );
 		}
 	}
 
