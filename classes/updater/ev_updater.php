@@ -76,8 +76,6 @@ class Ev_Framework_Updater {
 		$this->username    = $gitHubUsername;
 		$this->repo        = $gitHubProjectName;
 		$this->accessToken = $accessToken;
-
-		$this->initPluginData();
 	}
 
 	/**
@@ -97,7 +95,10 @@ class Ev_Framework_Updater {
 			$update_plugins->response = array();
 		}
 
-		$update_plugins->response['evolve-framework/evolve-framework.php'] = $this->setPluginInfo();
+		$response = new stdClass();
+		$response->slug = $this->slug;
+
+		$update_plugins->response['evolve-framework/evolve-framework.php'] = $this->setPluginInfo( false, '', $response );
 
 		return $update_plugins;
 	}
@@ -152,7 +153,7 @@ class Ev_Framework_Updater {
 	 */
 	public function setPluginInfo( $false, $action, $response ) {
 		/* Get plugin & GitHub release information. */
-		// $this->initPluginData();
+		$this->initPluginData();
 		$this->getRepoReleaseInfo();
 
 		/* If nothing is found, do nothing. */
@@ -162,12 +163,13 @@ class Ev_Framework_Updater {
 
 		/* Add our plugin information. */
 		$response->last_updated = $this->githubAPIResult->published_at;
-		$response->slug = $this->slug;
+		$response->slug         = $this->slug;
 		$response->plugin_name  = $this->pluginData["Name"];
-		$response->name  = $this->pluginData["Name"];
-		$response->version = $this->githubAPIResult->tag_name;
-		$response->author = $this->pluginData["AuthorName"];
-		$response->homepage = $this->pluginData["PluginURI"];
+		$response->name         = $this->pluginData["Name"];
+		$response->version      = $this->githubAPIResult->tag_name;
+		$response->new_version  = $this->githubAPIResult->tag_name;
+		$response->author       = $this->pluginData["AuthorName"];
+		$response->homepage     = $this->pluginData["PluginURI"];
 
 		/* This is our release download zip file. */
 		$downloadLink = $this->githubAPIResult->zipball_url;
@@ -179,10 +181,12 @@ class Ev_Framework_Updater {
 				$downloadLink
 			);
 		}
+
+		$response->package = $downloadLink;
 		$response->download_link = $downloadLink;
 
 		/* We're going to parse the GitHub markdown release notes, include the parser. */
-		// require_once( plugin_dir_path( __FILE__ ) . "Parsedown.php" );
+		require_once( plugin_dir_path( __FILE__ ) . "Parsedown.php" );
 
 		/* Create tabs in the lightbox. */
 		$response->sections = array(
