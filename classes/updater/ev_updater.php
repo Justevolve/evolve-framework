@@ -70,7 +70,7 @@ class Ev_Framework_Updater {
 		add_filter( 'site_transient_update_plugins', array( $this, 'requestUpdate' ) );
 		add_filter( 'transient_update_plugins', array( $this, 'requestUpdate' ) );
 		add_filter( 'upgrader_post_install', array( $this, 'postInstall' ), 10, 3 );
-		add_filter( 'plugins_api', array( $this, 'setPluginInfo' ), 10, 3 );
+		// add_filter( 'plugins_api', array( $this, 'setPluginInfo' ), 10, 3 );
 
 		$this->pluginFile  = $pluginFile;
 		$this->username    = $gitHubUsername;
@@ -127,24 +127,27 @@ class Ev_Framework_Updater {
 		}
 
 		/* Query the GitHub API. */
-		$url = "https://api.github.com/repos/{$this->username}/{$this->repo}/releases";
-
-		/* We need the access token for private repos. */
-		if ( ! empty( $this->accessToken ) ) {
-			$url = esc_url( add_query_arg( array( "access_token" => $this->accessToken ), $url ) );
-		}
+		$url = "https://raw.githubusercontent.com/{$this->username}/{$this->repo}/stable/README.md";
 
 		/* Get the results. */
-		$this->githubAPIResult = wp_remote_retrieve_body( wp_remote_get( $url ) );
+		$body = wp_remote_retrieve_body( wp_remote_get( $url ) );
+		$result = new stdClass();
+		$result->body = $body;
 
-		if ( ! empty( $this->githubAPIResult ) ) {
-			$this->githubAPIResult = @json_decode( $this->githubAPIResult );
+		preg_match_all( '/(\n\n### )(\d\.\d\.?\d?)/', $body, $versions );
+
+		if ( isset( $versions[2] ) && isset( $versions[2][0] ) && ! empty( $versions[2][0] ) ) {
+			$result->tag_name = $versions[2][0];
+			$result->zipball_url = "https://github.com/{$this->username}/{$this->repo}/archive/{$result->tag_name}.zip";
 		}
 
-		/* Use only the latest release. */
-		if ( is_array( $this->githubAPIResult ) && isset( $this->githubAPIResult[0] ) ) {
-			$this->githubAPIResult = $this->githubAPIResult[0];
+		preg_match_all( '/(Last updated on: )(.*)/', $body, $date );
+
+		if ( isset( $date[2] ) && isset( $date[2][0] ) && ! empty( $date[2][0] ) ) {
+			$result->published_at = $date[2][0];
 		}
+
+		$this->githubAPIResult = $result;
 	}
 
 	/**
