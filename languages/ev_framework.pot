@@ -204,27 +204,27 @@ msgstr ""
 msgid "Evolve Framework not activated: at least WordPress 4.4.0 is required."
 msgstr ""
 
-#: evolve-framework.php:186
+#: evolve-framework.php:179
 msgid "Text"
 msgstr ""
 
-#: evolve-framework.php:187
+#: evolve-framework.php:180
 msgid "Visual"
 msgstr ""
 
-#: evolve-framework.php:188
+#: evolve-framework.php:181
 msgid "Add Media"
 msgstr ""
 
-#: evolve-framework.php:192
+#: evolve-framework.php:185
 msgid "Insert a name for the preset"
 msgstr ""
 
-#: evolve-framework.php:195
+#: evolve-framework.php:188
 msgid "Insert this URL"
 msgstr ""
 
-#: evolve-framework.php:501
+#: evolve-framework.php:507
 msgid "Changelog"
 msgstr ""
 

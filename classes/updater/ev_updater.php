@@ -67,10 +67,11 @@ class Ev_Framework_Updater {
 	 * @param string $accessToken Private access token on Github.
 	 */
 	function __construct( $pluginFile, $gitHubUsername, $gitHubProjectName, $accessToken = '' ) {
-		add_filter( 'site_transient_update_plugins', array( $this, 'requestUpdate' ) );
-		add_filter( 'transient_update_plugins', array( $this, 'requestUpdate' ) );
+		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'requestUpdate' ) );
+		// add_filter( 'site_transient_update_plugins', array( $this, 'requestUpdate' ) );
+		// add_filter( 'transient_update_plugins', array( $this, 'requestUpdate' ) );
 		add_filter( 'upgrader_post_install', array( $this, 'postInstall' ), 10, 3 );
-		// add_filter( 'plugins_api', array( $this, 'setPluginInfo' ), 10, 3 );
+		add_filter( 'plugins_api', array( $this, 'setPluginInfo' ), 10, 3 );
 
 		$this->pluginFile  = $pluginFile;
 		$this->username    = $gitHubUsername;
@@ -101,7 +102,14 @@ class Ev_Framework_Updater {
 		$info = $this->setPluginInfo( false, '', $response );
 
 		if ( $info !== false ) {
-			$update_plugins->response['evolve-framework/evolve-framework.php'] = $info;
+			$obj              = new stdClass();
+			$obj->slug        = $this->slug;
+			$obj->new_version = $info->new_version;
+			$obj->url         = $this->pluginData["PluginURI"];
+			$obj->package     = $info->package;
+			$obj->tested      = isset( $info->tested ) ? $info->tested : null;
+
+			$update_plugins->response['evolve-framework/evolve-framework.php'] = $obj;
 		}
 
 		return $update_plugins;
@@ -221,6 +229,7 @@ class Ev_Framework_Updater {
 		/* Gets the tested version of WP if available. */
 		$matches = null;
 		preg_match( "/tested:\s([\d\.]+)/i", $this->githubAPIResult->body, $matches );
+
 		if ( ! empty( $matches ) ) {
 			if ( is_array( $matches ) ) {
 				if ( count( $matches ) > 1 ) {

@@ -6,11 +6,20 @@ A WordPress development framework.
 
 ## Changelog
 
-Last updated on: 2016-09-02T13:04:20Z
+Last updated on: 2016-09-19T14:29:23Z
+Requires: 4.5
+Tested: 4.6.1
+
+### 1.0.5
+
+* Fixed update notification system.
+* Minor css fixes.
+* Dropped IE6/7 compatibility on main reset file.
+* Minor bug fixes.
 
 ### 1.0.4
 
-* Security: fixed potential vulnerability that involved target="_blank" links,
+* Security: fixed potential vulnerability that involved target="_blank" links.
 
 ### 1.0.3
 
