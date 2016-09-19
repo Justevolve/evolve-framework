@@ -98,7 +98,11 @@ class Ev_Framework_Updater {
 		$response = new stdClass();
 		$response->slug = $this->slug;
 
-		$update_plugins->response['evolve-framework/evolve-framework.php'] = $this->setPluginInfo( false, '', $response );
+		$info = $this->setPluginInfo( false, '', $response );
+
+		if ( $info !== false ) {
+			$update_plugins->response['evolve-framework/evolve-framework.php'] = $info;
+		}
 
 		return $update_plugins;
 	}
@@ -170,6 +174,10 @@ class Ev_Framework_Updater {
 		$response->new_version  = $this->githubAPIResult->tag_name;
 		$response->author       = $this->pluginData["AuthorName"];
 		$response->homepage     = $this->pluginData["PluginURI"];
+
+		if ( ! version_compare( $response->version, EV_FRAMEWORK_VERSION ) > 0 ) {
+			return false;
+		}
 
 		/* This is our release download zip file. */
 		$downloadLink = $this->githubAPIResult->zipball_url;
