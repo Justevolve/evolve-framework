@@ -590,7 +590,7 @@ body.ev-modal-open { overflow: hidden; }
 
 .ev-link-ctrl { position: absolute; top: 6px; right: 6px; display: inline-block; }
 .ev-link-ctrl .ev-btn.ev-link-ctrl-btn { background-color: #DAE3E6; border-color: #DAE3E6; border-radius: 3px; }
-.ev-link-ctrl.ev-link-on .ev-btn.ev-link-ctrl-btn { background-color: #47AACC; border-color: #47AACC; }
+.ev-link-ctrl .ev-btn.ev-link-ctrl-btn.ev-link-on { background-color: #47AACC; border-color: #47AACC; }
 
 .ev-modal-container[data-key="ev-link"] .ev-modal-wrapper { max-height: 500px; }
 .ev-modal-container[data-key="ev-link"] .ev-modal-wrapper-inner { padding-top: 49px; }
@@ -637,7 +637,7 @@ input[type="radio"]:checked + .ev-radio.ev-graphic-radio:before { border-color: 
 
 .ev-radio-style-switch { display: inline-block; position: relative; }
 .ev-radio-style-switch input[type="radio"]:checked + .ev-radio span { color: #fff; border-color: #66CC66; background-color: #66CC66; }
-.ev-radio-style-switch .ev-radio { float: none; clear: none; margin-top: 0; margin-right: 5px; }
+.ev-radio-style-switch .ev-radio { clear: none; margin-top: 0; margin-right: 5px; }
 .ev-radio-style-switch .ev-radio:before, .ev-radio-style-switch .ev-radio:after { display: none; }
 .ev-radio-style-switch .ev-radio span { display: block; position: relative; z-index: 1; font-size: 14px; line-height: 24px; padding: 7px 10px; border: 1px solid #DBDBDB; background-color: #fcfcfc; }
 .ev-radio-style-switch .ev-radio:hover span { background-color: #F7F7F7; border-color: #B3B3B3; }
