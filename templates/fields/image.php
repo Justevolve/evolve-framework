@@ -97,10 +97,12 @@ else {
 
 						echo '<span>' . esc_html( __( 'Image size', 'ev_framework' ) ) . '</span>';
 
+						$is_value = isset( $value[$breakpoint_key] ) && isset( $value[$breakpoint_key][1] ) && isset( $value[$breakpoint_key][1]['image_size'] ) ? $value[$breakpoint_key][1]['image_size'] : '';
+
 						ev_select(
 							$field->handle() . "[$breakpoint_key]" . '[1][image_size]',
 							ev_get_image_sizes_for_select(),
-							isset( $value[$breakpoint_key][1]['image_size'] ) ? $value[$breakpoint_key][1]['image_size'] : '',
+							$is_value,
 							'small'
 						);
 
