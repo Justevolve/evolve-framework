@@ -2,6 +2,30 @@
 	"use strict";
 
 	/**
+	 * RGB(a) to Hex.
+	 */
+	function _rgb2hex( rgb ){
+		rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+
+		return (rgb && rgb.length === 4) ? "#" +
+			("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+			("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+			("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+	}
+
+	/**
+	 * RGB(a) to Hex.
+	 */
+	function _rgb2opacity( rgb ){
+		rgb = rgb.replace( "rgba(", "" );
+		rgb = rgb.replace( ")", "" );
+		rgb = rgb.replace( " ", "" );
+		rgb = rgb.split( "," );
+
+		return rgb[rgb.length-1];
+	}
+
+	/**
 	 * Select a color from the palette.
 	 */
 	$.evf.delegate( ".ev-color-preset", "click", "color", function() {
@@ -120,6 +144,8 @@
 			ctrl = $( this ),
 			wrapper = ctrl.parents( ".ev-color-wrapper" ).first(),
 			input = $( ".ev-color-input", wrapper ),
+			opacity = input.attr( "data-opacity" ),
+			opacity_input = $( "[data-input-color-opacity]", wrapper ),
 			data = {
 				"hex": input.val()
 			};
@@ -129,6 +155,21 @@
 
 			save: function( data, after_save, nonce ) {
 				if ( data["hex"] ) {
+					if ( opacity ) {
+						if ( data["hex"].indexOf( "#" ) === -1 ) {
+							opacity_input.val( _rgb2opacity( data["hex"] ) );
+						}
+						else {
+							opacity_input.val( "1" );
+						}
+
+						input.attr( "data-opacity", opacity_input.val() );
+					}
+
+					if ( ! opacity && data["hex"].indexOf( "rgba(" ) !== -1 ) {
+						data["hex"] = _rgb2hex( data["hex"] );
+					}
+
 					input
 						.val( data["hex"] )
 						.trigger( "keyup" );
@@ -179,7 +220,7 @@
 						input.css( "border-color", value );
 
 						if ( opacity !== undefined ) {
-							$( "[data-input-color-opacity]", wrapper ).val( opacity );
+							$( "[data-input-color-opacity]", wrapper ).val( op );
 						}
 
 						if ( value !== '' ) {
@@ -193,6 +234,7 @@
 
 			if ( opacity !== undefined ) {
 				options.opacity = true;
+				options.format = "rgb";
 			}
 
 			$( this )

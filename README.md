@@ -6,7 +6,7 @@ A WordPress development framework.
 
 ## Changelog
 
-Last updated on: 2016-09-26T14:25:31Z
+Last updated on: 2016-10-11T09:24:20Z
 Requires: 4.5
 Tested: 4.6.1
 
