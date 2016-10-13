@@ -104,6 +104,10 @@
 		if ( hex ) {
 			var preset_name = prompt( ev_framework.color.new_preset_name );
 
+			if ( ! preset_name ) {
+				return false;
+			}
+
 			ev_idle_button( ctrl );
 
 			$.post(
