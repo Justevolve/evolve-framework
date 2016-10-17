@@ -273,6 +273,13 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 					}
 				echo '</ul>';
 			echo '</div>';
+
+			do_action( "ev_admin_page_group_nav_after" );
+			do_action( "ev_admin_page_group_nav_after[page:{$this->handle()}]" );
+
+			if ( isset( $this->_args['group'] ) ) {
+				do_action( "ev_admin_page_group_nav_after[group:{$this->_args['group']}]" );
+			}
 		}
 	}
 

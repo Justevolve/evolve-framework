@@ -36,11 +36,11 @@
 		background-color: $blue_0;
 		border-color: $blue_0;
 		border-radius: $radius;
-	}
 
-	&.ev-link-on .ev-btn.ev-link-ctrl-btn {
-		background-color: $blue;
-		border-color: $blue;
+		&.ev-link-on {
+			background-color: $blue;
+			border-color: $blue;
+		}
 	}
 }
 

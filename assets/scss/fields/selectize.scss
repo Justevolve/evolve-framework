@@ -16,6 +16,12 @@
 		border: 1px solid $grey_1;
 		@include transition( border-color $transition_time*2 ease );
 
+		&.disabled {
+			opacity: .5;
+			border-style: dashed;
+			cursor: not-allowed;
+		}
+
 		&.has-items {
 			padding-left: $gutter/10;
 			padding-right: $gutter/10;
