@@ -6,9 +6,16 @@ A WordPress development framework.
 
 ## Changelog
 
-Last updated on: 2016-09-26T14:25:31Z
+Last updated on: 2016-10-17T09:56:40Z
 Requires: 4.5
 Tested: 4.6.1
+
+### 1.0.6
+
+* Fixed behavior on the color field,
+* Fixed a style issue with the switch radio field and the link text field attribute,
+* Improved select disabled style,
+* Added a new hook "ev_admin_page_group_nav_after" after admin page group nav
 
 ### 1.0.5
 

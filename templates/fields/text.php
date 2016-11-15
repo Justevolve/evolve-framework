@@ -26,8 +26,11 @@
 	if ( is_array( $value ) || $link !== false ) {
 		$text_value = '';
 
-		if ( isset( $value['text'] ) ) {
-			$text_value = $value['text'];
+		if ( isset( $value['text'] ) || empty( $value ) ) {
+			if ( isset( $value['text'] ) ) {
+				$text_value = $value['text'];
+			}
+
 			$handle_suffix = '[text]';
 		}
 	}

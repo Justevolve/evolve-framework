@@ -33,7 +33,7 @@ function ev_color_hex_to_rgb( $hex ) {
  * @param string $hex The hex color code.
  * @return float
  */
-function ec_color_get_yiq( $hex ) {
+function ev_color_get_yiq( $hex ) {
 	$rgb = ev_color_hex_to_rgb( $hex );
 
 	return (($rgb[0]*299)+($rgb[1]*587)+($rgb[2]*114))/1000;
@@ -47,7 +47,7 @@ function ec_color_get_yiq( $hex ) {
  * @return boolean
  */
 function ev_color_is_bright( $hex ) {
-	$yiq = ec_color_get_yiq( $hex );
+	$yiq = ev_color_get_yiq( $hex );
 	$threshold = (int) apply_filters( 'ev_color_is_bright_threshold', 204 ); // Based on #ccc
 
 	return $yiq > $threshold;
