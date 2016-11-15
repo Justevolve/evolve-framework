@@ -13,10 +13,7 @@
 #
 #
 
-if ( class_exists( 'Parsedown' ) ) {
-    return;
-}
-
+if ( ! class_exists( 'Parsedown' ) ) :
 class Parsedown
 {
     # ~
@@ -1540,3 +1537,4 @@ class Parsedown
                           'time',
     );
 }
+endif;
