@@ -13,6 +13,10 @@
 #
 #
 
+if ( class_exists( 'Parsedown' ) ) {
+    return;
+}
+
 class Parsedown
 {
     # ~
