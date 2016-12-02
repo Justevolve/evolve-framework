@@ -542,3 +542,28 @@ function ev_get_page_template( $post_id ) {
 
 	return $page_template;
 }
+
+/**
+ * Perform action hooks according to the context and optionally external data.
+ *
+ * @since 1.0.7
+ * @param string $key The hook key.
+ * @param array $data The external data.
+ */
+function ev_do_action( $key, $data = array() ) {
+	do_action( $key );
+
+	/* Optionally filter the passed data. */
+	$data = apply_filters( "ev_do_action_data", $data );
+	$data = apply_filters( "${key}_data", $data );
+
+	$context = ev_get_context();
+
+	foreach ( $context as $k => $v ) {
+		do_action( $key . "[context:$v]" );
+	}
+
+	foreach ( $data as $k => $v ) {
+		do_action( $key . "[$k:$v]" );
+	}
+}
