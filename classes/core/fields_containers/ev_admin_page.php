@@ -55,6 +55,9 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 
 		parent::__construct( $handle, $title, $fields );
 
+		/* Register default fields. */
+		add_filter( "ev_admin_page_default_fields[page:{$this->handle()}]", array( $this, 'default_fields' ) );
+
 		/* Register the admin page in WordPress. */
 		add_action( 'admin_menu', array( $this, 'register' ) );
 
@@ -65,6 +68,18 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 
 		/* Register the saving action for the page tabs. */
 		add_action( "ev_save_options_tab[page:{$this->handle()}]", array( $this, 'save' ) );
+	}
+
+	/**
+	 * Register a list of default fields.
+	 *
+	 * @since 1.0.7
+	 * @param array $fields An array of fields.
+	 * @return array
+	 */
+	public function default_fields( $fields )
+	{
+		return $this->_fields;
 	}
 
 	/**
@@ -172,9 +187,14 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 		$handle = $this->handle();
 		$class = '';
 		$is_group = isset( $this->_args['group'] ) && ! empty( $this->_args['group'] );
+		$is_vertical = isset( $this->_args['vertical'] ) && $this->_args['vertical'] === true;
 
 		if ( $is_group ) {
-			$class .= 'ev-admin-page-group-' . $this->_args['group'];
+			$class .= ' ev-admin-page-group-' . $this->_args['group'];
+		}
+
+		if ( $is_vertical ) {
+			$class .= ' ev-admin-page-group-vertical';
 		}
 
 		printf( '<div id="ev-admin-page-%s" class="ev ev-admin-page %s">', esc_attr( $handle ), esc_attr( $class ) );
@@ -263,12 +283,23 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 					foreach ( $group['pages'] as $page ) {
 						$page_class = isset( $_GET['page'] ) && $_GET['page'] === $page['handle'] ? 'ev-active' : '';
 						$page_class .= ' ev-group-page-' . $page['handle'];
+						$nav = '';
+
+						if ( isset( $this->_args['vertical'] ) && $this->_args['vertical'] === true ) {
+							$vertical_elements = self::_elements( $page['handle'] );
+
+							ob_start();
+							self::render_elements_nav( $vertical_elements, key( $vertical_elements ) );
+							$nav = ob_get_contents();
+							ob_end_flush();
+						}
 
 						printf(
-							'<li class="%s"><a href="%s">%s</a></li>',
+							'<li class="%s"><a href="%s">%s</a>%s</li>',
 							esc_attr( $page_class ),
 							esc_attr( $page['url'] ),
-							esc_html( $page['title'] )
+							esc_html( $page['title'] ),
+							$nav
 						);
 					}
 				echo '</ul>';
@@ -284,20 +315,22 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 	}
 
 	/**
-	 * Return the list of the elements that belong to the fields container.
+	 * Get the page elements.
 	 *
-	 * @since 0.1.0
-	 * @return array An array of field data.
+	 * @since 1.0.7
+	 * @param string $handle The page handle.
+	 * @return array
 	 */
-	public function elements()
+	public static function _elements( $handle )
 	{
-		$fields = apply_filters( "ev_admin_page[page:{$this->handle()}]", $this->_fields );
+		$fields = apply_filters( "ev_admin_page_default_fields[page:{$handle}]", array() );
+		$fields = apply_filters( "ev_admin_page[page:{$handle}]", $fields );
 
 		foreach ( $fields as &$field ) {
 			if ( isset( $field['type'] ) && isset( $field['handle'] ) && isset( $field['fields'] ) && $field['type'] === 'group' ) {
 				$group_handle = $field['handle'];
 
-				$field = apply_filters( "ev_admin_page[page:{$this->handle()}][group:{$group_handle}]", $field );
+				$field = apply_filters( "ev_admin_page[page:{$handle}][group:{$group_handle}]", $field );
 			}
 		}
 
@@ -312,6 +345,17 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 
 		/* Ensuring that the structure contains only the fields the current user actually has access to. */
 		return self::_parse_fields_structure( $fields );
+	}
+
+	/**
+	 * Return the list of the elements that belong to the fields container.
+	 *
+	 * @since 0.1.0
+	 * @return array An array of field data.
+	 */
+	public function elements()
+	{
+		return self::_elements( $this->handle() );
 	}
 
     /**
