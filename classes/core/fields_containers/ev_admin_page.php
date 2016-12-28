@@ -291,7 +291,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 							ob_start();
 							self::render_elements_nav( $vertical_elements, key( $vertical_elements ) );
 							$nav = ob_get_contents();
-							ob_end_flush();
+							ob_end_clean();
 						}
 
 						printf(
