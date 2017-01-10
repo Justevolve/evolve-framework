@@ -27,6 +27,8 @@
 	box-shadow: 2px 1px 10px rgba( $black, .1 );
 	border-radius: $radius;
 	border: 1px solid $grey_1;
+	margin-top: $baseline;
+	overflow: hidden;
 
 	.ev-admin-page-heading,
 	.ev-admin-page-group-nav {
@@ -37,16 +39,46 @@
 	}
 
 		.ev-admin-page-group-nav {
+			@include clearfix();
+
 			li {
 				display: block;
 				clear: both;
 
+				&.ev-active {
+					ul {
+						display: block;
+						border-bottom: 1px solid rgba( $grey_1, .3 );
+						background-color: $grey_0;
+
+						a {
+							background-color: transparent;
+							color: $grey_4;
+							font-weight: normal;
+						}
+					}
+
+					> a:hover {
+						background-color: $green;
+					}
+				}
+
+				&:last-child {
+					ul {
+						border-bottom: none;
+					}
+				}
+
 				a {
 					border: none !important;
+
+					&:hover {
+						background-color: rgba( $grey_1, .2 );
+					}
 				}
 
 				ul {
-					display: block;
+					display: none;
 					width: 100%;
 					padding-right: 0;
 				}
@@ -57,6 +89,16 @@
 					a {
 						padding: $baseline/4 $gutter;
 						border-radius: 0;
+						font-weight: normal;
+
+						&:hover {
+							background-color: rgba( $grey_1, .2 );
+						}
+
+						&.ev-active {
+							font-weight: bold;
+							color: $grey_6;
+						}
 					}
 				}
 			}
@@ -88,12 +130,6 @@
 		}
 	}
 
-	// .ev-admin-page-side-nav + .ev-tabs,
-	// .ev-admin-page-side-nav + .ev-tab-container {
-	// 	@include flex-grow( 1 );
-	// 	border-left: 1px solid $grey_1;
-	// }
-
 	.ev-admin-page-content-wrapper {
 		@include flex-grow( 1 );
 		border-left: 1px solid $grey_1;
@@ -117,7 +153,7 @@
 	}
 
 	.ev-admin-page-heading {
-		padding: $baseline $gutter;
+		padding: $baseline*1.5 $gutter;
 		text-align: center;
 	}
 }

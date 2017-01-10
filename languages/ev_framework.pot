@@ -190,7 +190,7 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#: classes/core/fields_containers/ev_admin_page.php:458
+#: classes/core/fields_containers/ev_admin_page.php:475
 msgid "All saved!"
 msgstr ""
 
