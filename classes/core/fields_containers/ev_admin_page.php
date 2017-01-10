@@ -199,21 +199,36 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 
 		printf( '<div id="ev-admin-page-%s" class="ev ev-admin-page %s">', esc_attr( $handle ), esc_attr( $class ) );
 			wp_nonce_field( 'ev_admin_page', 'ev' );
-			$this->render_heading();
 
-			if ( $is_group ) {
-				$this->render_group_navigation();
+			if ( $is_vertical ) {
+				echo '<div class="ev-admin-page-inner-wrapper">';
+					echo '<div class="ev-admin-page-side-nav">';
 			}
 
-			/**
-			 * Hook before page elements are shown. Good for static pages or
-			 * pages that want to display a different kind of form.
-			 *
-			 * @since 0.3.0
-			 */
-			do_action( "ev_admin_page_content[page:{$handle}]" );
+					$this->render_heading();
 
-			$this->render_elements();
+					if ( $is_group ) {
+						$this->render_group_navigation();
+					}
+
+				if ( $is_vertical ) {
+					echo '</div>';
+				}
+
+				/**
+				 * Hook before page elements are shown. Good for static pages or
+				 * pages that want to display a different kind of form.
+				 *
+				 * @since 0.3.0
+				 */
+				do_action( "ev_admin_page_content[page:{$handle}]" );
+
+				$this->render_elements();
+
+			if ( $is_vertical ) {
+				echo '</div>';
+			}
+
 			echo '<div class="ev-persistent-messages-container"></div>';
 		echo '</div>';
 	}

@@ -19,6 +19,99 @@
 }
 
 // -----------------------------------------------------------------------------
+// $Vertical layout
+// -----------------------------------------------------------------------------
+
+.ev-admin-page.ev-admin-page-group-vertical {
+	background-color: $white;
+	box-shadow: 2px 1px 10px rgba( $black, .1 );
+	border-radius: $radius;
+	border: 1px solid $grey_1;
+
+	.ev-admin-page-heading,
+	.ev-admin-page-group-nav {
+		margin: 0;
+		padding: 0;
+		border: none;
+		box-sizing: border-box;
+	}
+
+		.ev-admin-page-group-nav {
+			li {
+				display: block;
+				clear: both;
+
+				a {
+					border: none;
+				}
+
+				ul {
+					display: block;
+					width: 100%;
+					padding-right: 0;
+				}
+
+				li {
+					display: block;
+				}
+			}
+		}
+
+	.ev-tab-container {
+		border: none;
+		width: 100% !important;
+		float: none !important;
+		height: 100%;
+
+		.ev-tab {
+			height: 100%;
+
+			> form {
+				height: 100%;
+				@include display( flex );
+				@include flex-direction( column );
+				@include justify-content( space-between );
+
+				.ev-form-submit-container {
+				}
+			}
+		}
+	}
+
+	.ev-tabs .ev-tabs-nav.ev-vertical {
+		display: none;
+	}
+
+	.ev-admin-page-side-nav + .ev-tabs,
+	.ev-admin-page-side-nav + .ev-tab-container {
+		@include flex-grow( 1 );
+		border-left: 1px solid $grey_1;
+	}
+
+	.ev-admin-page-side-nav {
+		width: 240px;
+		min-width: 240px;
+		max-width: 240px;
+		@include flex-grow( 1 );
+	}
+
+	.ev-admin-page-inner-wrapper {
+		@include display( flex );
+	}
+
+	.ev-form-submit-container {
+		.ev-btn {
+			float: right;
+		}
+	}
+
+	.ev-admin-page-heading {
+		padding: $baseline $gutter;
+		text-align: center;
+	}
+}
+
+// -----------------------------------------------------------------------------
 // $Page heading
 // -----------------------------------------------------------------------------
 
