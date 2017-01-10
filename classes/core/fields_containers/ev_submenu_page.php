@@ -52,9 +52,9 @@ class Ev_SubmenuPage extends Ev_MenuPage {
 	 */
 	public function group( $groups )
 	{
-		if ( ! array_key_exists( $this->_args['group'], $groups ) ) {
-			return $groups;
-		}
+		// if ( ! array_key_exists( $this->_args['group'], $groups ) ) {
+		// 	return $groups;
+		// }
 
 		$data = array(
 			'handle' => $this->handle(),
