@@ -42,6 +42,22 @@
 			var container = null,
 				triggerEl = $( trigger );
 
+			if ( $( config.triggersClass + "[id='" + triggerEl[0].id + "']" ).length > 1 && triggerEl.parents( ".ev-tabs" ).length == 0 ) {
+				// Handling tab nav proxies
+
+				$( config.triggersClass )
+					.removeClass( config.activeClass )
+					.removeAttr( "aria-selected" );
+
+				$( config.triggersClass + "[id='" + triggerEl[0].id + "']" ).not( triggerEl ).trigger( config.eventTrigger + "." + config.namespace );
+
+				triggerEl
+					.addClass( config.activeClass )
+					.attr( "aria-selected", "true" );
+
+				return false;
+			}
+
 			if ( typeof element === "object" ) {
 				container = $( root );
 			}
