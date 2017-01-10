@@ -213,6 +213,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 
 				if ( $is_vertical ) {
 					echo '</div>';
+					echo '<div class="ev-admin-page-content-wrapper">';
 				}
 
 				/**
@@ -226,6 +227,7 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 				$this->render_elements();
 
 			if ( $is_vertical ) {
+					echo '</div>';
 				echo '</div>';
 			}
 

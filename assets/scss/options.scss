@@ -42,7 +42,7 @@
 				clear: both;
 
 				a {
-					border: none;
+					border: none !important;
 				}
 
 				ul {
@@ -53,6 +53,11 @@
 
 				li {
 					display: block;
+
+					a {
+						padding: $baseline/4 $gutter;
+						border-radius: 0;
+					}
 				}
 			}
 		}
@@ -71,19 +76,25 @@
 				@include display( flex );
 				@include flex-direction( column );
 				@include justify-content( space-between );
-
-				.ev-form-submit-container {
-				}
 			}
 		}
 	}
 
-	.ev-tabs .ev-tabs-nav.ev-vertical {
-		display: none;
+	.ev-tabs {
+		height: 100%;
+
+		.ev-tabs-nav.ev-vertical {
+			display: none;
+		}
 	}
 
-	.ev-admin-page-side-nav + .ev-tabs,
-	.ev-admin-page-side-nav + .ev-tab-container {
+	// .ev-admin-page-side-nav + .ev-tabs,
+	// .ev-admin-page-side-nav + .ev-tab-container {
+	// 	@include flex-grow( 1 );
+	// 	border-left: 1px solid $grey_1;
+	// }
+
+	.ev-admin-page-content-wrapper {
 		@include flex-grow( 1 );
 		border-left: 1px solid $grey_1;
 	}
