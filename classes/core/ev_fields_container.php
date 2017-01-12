@@ -427,7 +427,7 @@ abstract class Ev_FieldsContainer {
 	 * @since 0.2.0
 	 * @param array $errors An array of error messages.
 	 */
-	protected function _output_field_errors( $errors )
+	protected static function _output_field_errors( $errors )
 	{
 		echo '<pre>';
 

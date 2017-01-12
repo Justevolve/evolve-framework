@@ -141,7 +141,7 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 		$valid = self::_validate_fields_structure( $fields );
 
 		if ( $valid !== true ) {
-			$this->_output_field_errors( $valid );
+			self::_output_field_errors( $valid );
 
 			return false;
 		}
