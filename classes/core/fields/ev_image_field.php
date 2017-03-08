@@ -86,7 +86,7 @@ function ev_image_upload_placeholder_template() {
 			$placeholder_html,
 			'{{ id }}',
 			'{{ url }}',
-			__( 'Remove', 'ev_framework' )
+			esc_html__( 'Remove', 'ev_framework' )
 		);
 	echo '</script>';
 }
