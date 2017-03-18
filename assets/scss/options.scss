@@ -117,7 +117,10 @@
 				height: 100%;
 				@include display( flex );
 				@include flex-direction( column );
-				@include justify-content( space-between );
+				@include justify-content( flex-start );
+				padding-bottom: 63px + 1 + 12;
+				position: relative;
+				box-sizing: border-box;
 			}
 		}
 	}
@@ -147,6 +150,10 @@
 	}
 
 	.ev-form-submit-container {
+		@include position( absolute, null 0 0 0 );
+		height: 63px;
+		margin-top: 0;
+
 		.ev-btn {
 			float: right;
 		}
