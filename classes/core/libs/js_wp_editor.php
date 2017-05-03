@@ -30,7 +30,7 @@
  *			$('textarea').wp_editor( options );
  */
 
-if ( ! function_exists( 'js_wp_editor' ) ) {
+if ( ! function_exists( 'js_wp_editor' ) && ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
 	function js_wp_editor( $settings = array() ) {
 		if ( ! class_exists( '_WP_Editors' ) )
 			require( ABSPATH . WPINC . '/class-wp-editor.php' );
