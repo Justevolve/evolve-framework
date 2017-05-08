@@ -186,7 +186,7 @@ class Ev_Framework_Updater {
 		$response->author       = $this->pluginData["AuthorName"];
 		$response->homepage     = $this->pluginData["PluginURI"];
 
-		if ( ! version_compare( $response->version, EV_FRAMEWORK_VERSION ) > 0 ) {
+		if ( version_compare( $response->version, EV_FRAMEWORK_VERSION ) <= 0 ) {
 			return false;
 		}
 

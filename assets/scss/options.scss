@@ -19,6 +19,153 @@
 }
 
 // -----------------------------------------------------------------------------
+// $Vertical layout
+// -----------------------------------------------------------------------------
+
+.ev-admin-page.ev-admin-page-group-vertical {
+	background-color: $white;
+	box-shadow: 2px 1px 10px rgba( $black, .1 );
+	border-radius: $radius;
+	border: 1px solid $grey_1;
+	margin-top: $baseline;
+	overflow: hidden;
+
+	.ev-admin-page-heading,
+	.ev-admin-page-group-nav {
+		margin: 0;
+		padding: 0;
+		border: none;
+		box-sizing: border-box;
+	}
+
+		.ev-admin-page-group-nav {
+			@include clearfix();
+
+			li {
+				display: block;
+				clear: both;
+
+				&.ev-active {
+					ul {
+						display: block;
+						border-bottom: 1px solid rgba( $grey_1, .3 );
+						background-color: $grey_0;
+
+						a {
+							background-color: transparent;
+							color: $grey_4;
+							font-weight: normal;
+						}
+					}
+
+					> a:hover {
+						background-color: $green;
+					}
+				}
+
+				&:last-child {
+					ul {
+						border-bottom: none;
+					}
+				}
+
+				a {
+					border: none !important;
+
+					&:hover {
+						background-color: rgba( $grey_1, .2 );
+					}
+				}
+
+				ul {
+					display: none;
+					width: 100%;
+					padding-right: 0;
+				}
+
+				li {
+					display: block;
+
+					a {
+						padding: $baseline/4 $gutter;
+						border-radius: 0;
+						font-weight: normal;
+
+						&:hover {
+							background-color: rgba( $grey_1, .2 );
+						}
+
+						&.ev-active {
+							font-weight: bold;
+							color: $grey_6;
+						}
+					}
+				}
+			}
+		}
+
+	.ev-tab-container {
+		border: none;
+		width: 100% !important;
+		float: none !important;
+		height: 100%;
+
+		.ev-tab {
+			height: 100%;
+
+			> form {
+				height: 100%;
+				@include display( flex );
+				@include flex-direction( column );
+				@include justify-content( flex-start );
+				padding-bottom: 63px + 1 + 12;
+				position: relative;
+				box-sizing: border-box;
+			}
+		}
+	}
+
+	.ev-tabs {
+		height: 100%;
+
+		.ev-tabs-nav.ev-vertical {
+			display: none;
+		}
+	}
+
+	.ev-admin-page-content-wrapper {
+		@include flex-grow( 1 );
+		border-left: 1px solid $grey_1;
+	}
+
+	.ev-admin-page-side-nav {
+		width: 240px;
+		min-width: 240px;
+		max-width: 240px;
+		@include flex-grow( 1 );
+	}
+
+	.ev-admin-page-inner-wrapper {
+		@include display( flex );
+	}
+
+	.ev-form-submit-container {
+		@include position( absolute, null 0 0 0 );
+		height: 63px;
+		margin-top: 0;
+
+		.ev-btn {
+			float: right;
+		}
+	}
+
+	.ev-admin-page-heading {
+		padding: $baseline*1.5 $gutter;
+		text-align: center;
+	}
+}
+
+// -----------------------------------------------------------------------------
 // $Page heading
 // -----------------------------------------------------------------------------
 

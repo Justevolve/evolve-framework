@@ -214,6 +214,41 @@ abstract class Ev_FieldsContainer {
 	}
 
 	/**
+	 * Render the elements navigation.
+	 *
+	 * @since 1.0.7
+	 * @param array $elements An array of elements.
+	 * @param string $current_key The array current key.
+	 */
+	public static function render_elements_nav( $elements, $current_key )
+	{
+		/* If the elements are grouped and we have more than one group, display their navigation. */
+		echo '<ul class="ev-groups-nav ev-tabs-nav ev-vertical ev-align-left" role="tablist">';
+			foreach ( $elements as $index => $element ) {
+				$class = '';
+
+				if ( isset( $_GET['tab'] ) ) {
+					if ( $_GET['tab'] === $element['handle'] ) {
+						$class = 'ev-active';
+					}
+				}
+				elseif ( $index == $current_key ) {
+					$class = 'ev-active';
+				}
+
+				printf(
+					'<li><a id="%s" role="tab" aria-controls="ev-tab-%s" class="ev-tab-trigger %s" href="#%s">%s</a></li>',
+					esc_attr( $element['handle'] ),
+					esc_attr( $element['handle'] ),
+					esc_attr( $class ),
+					esc_attr( $element['handle'] ),
+					esc_html( $element['label'] )
+				);
+			}
+		echo '</ul>';
+	}
+
+	/**
 	 * Render the fields container fields.
 	 *
 	 * @since 0.1.0
@@ -233,30 +268,7 @@ abstract class Ev_FieldsContainer {
 			if ( $has_tabs ) {
 				printf( '<div class="ev-tabs ev-component" data-push="%s">', esc_attr( $this->_tabs_push_method ) );
 
-				/* If the elements are grouped and we have more than one group, display their navigation. */
-				echo '<ul class="ev-groups-nav ev-tabs-nav ev-vertical ev-align-left" role="tablist">';
-					foreach ( $elements as $index => $element ) {
-						$class = '';
-
-						if ( isset( $_GET['tab'] ) ) {
-							if ( $_GET['tab'] === $element['handle'] ) {
-								$class = 'ev-active';
-							}
-						}
-						elseif ( $index == $current_key ) {
-							$class = 'ev-active';
-						}
-
-						printf(
-							'<li><a id="%s" role="tab" aria-controls="ev-tab-%s" class="ev-tab-trigger %s" href="#%s">%s</a></li>',
-							esc_attr( $element['handle'] ),
-							esc_attr( $element['handle'] ),
-							esc_attr( $class ),
-							esc_attr( $element['handle'] ),
-							esc_html( $element['label'] )
-						);
-					}
-				echo '</ul>';
+				self::render_elements_nav( $elements, $current_key );
 			}
 
 			echo '<div class="ev-tab-container">';
@@ -415,7 +427,7 @@ abstract class Ev_FieldsContainer {
 	 * @since 0.2.0
 	 * @param array $errors An array of error messages.
 	 */
-	protected function _output_field_errors( $errors )
+	protected static function _output_field_errors( $errors )
 	{
 		echo '<pre>';
 
