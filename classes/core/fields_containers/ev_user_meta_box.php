@@ -177,6 +177,10 @@ class Ev_UserMetaBox extends Ev_FieldsContainer {
 	 */
 	public function save( $user_id )
 	{
+		if ( empty( $_POST ) ) {
+			return;
+		}
+
 		if ( ! ev_user_can_save_user_meta( $user_id, 'ev_user_meta_box' ) ) {
 			return;
 		}

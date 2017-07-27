@@ -266,6 +266,10 @@ class Ev_MetaBox extends Ev_FieldsContainer {
 	 */
 	public function save( $post_id )
 	{
+		if ( empty( $_POST ) ) {
+			return;
+		}
+
 		if ( ! ev_user_can_save( $post_id, 'ev_meta_box' ) ) {
 			return;
 		}
