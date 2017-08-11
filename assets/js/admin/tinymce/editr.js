@@ -6,21 +6,28 @@
 	}
 
 	tinymce.PluginManager.add( 'ev_editr', function( editor, url ) {
-		function editr( klass ) {
+		/**
+		 * Apply a format.
+		 */
+		function editr( format ) {
 			var block = [ "p", "div", "blockquote" ],
 				text = editor.selection.getContent( {
 					'format': 'html'
 				} ),
-				node = editor.selection.getNode();
+				node = editor.selection.getNode(),
+				klass = format.class;
 
 			if ( text.length ) {
 				if ( node.nodeName.toLowerCase() == "body" ) {
-					// Check for random nbsps
-					editor.selection.setContent( '<div class="' + klass + '">' + text + '</div>' );
+					editor.execCommand( 'mceInsertContent', false, '<div class="' + klass + '">' + text + '</div>' );
 				}
 				else {
 					if ( block.indexOf( node.nodeName.toLowerCase() ) !== -1 && node.innerHTML == text ) {
 						editor.dom.toggleClass( node, klass );
+
+						if ( ! node.classList.length && node.nodeName.toLowerCase() != "p" ) {
+							editor.dom.setOuterHTML( node, node.innerHTML );
+						}
 					}
 					else {
 						if ( node.classList.contains( klass ) ) {
@@ -45,7 +52,7 @@
 			menuItems.push( {
 				text: format.text,
 				onclick: function() {
-					editr( format.class );
+					editr( format );
 				}
 			} );
 		} );
