@@ -307,6 +307,9 @@ class Ev_Framework {
 			/* Fields utilities. */
 			require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'admin/fields.php' );
 
+			/* Editor extension. */
+			require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'admin/editor.php' );
+
 			/* Updater. */
 			require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'updater/ev_updater.php' );
 		}
