@@ -88,6 +88,45 @@
 				expected_value = expected_value.replace( "!=", "" );
 				check = expected_value == ctrl_value;
 			}
+			else if ( expected_value.indexOf( "count" ) === 0 ) {
+				var separator = expected_value.charAt( 5 ),
+					num = expected_value.split( separator ),
+					condition = false;
+
+				if ( isNaN( num ) ) {
+					var num_string = ( "" + expected_value );
+
+					var _num = parseInt( num_string.match(/\d+/)[0], 10 );
+
+					condition = num_string.replace( _num, "" );
+					condition = condition.replace( "count", "" );
+					condition = condition.replace( separator, "" );
+
+					num = _num;
+				}
+				else {
+					num = parseInt( num[ 1 ], 10 );
+				}
+
+				if ( ctrl_value.indexOf( separator ) !== -1 ) {
+					if ( ! condition ) {
+						check = ctrl_value.split( separator ).length != num;
+					}
+					else {
+						switch ( condition ) {
+							case '>':
+								check = ctrl_value.split( separator ).length <= num;
+								break;
+							case '<':
+								check = ctrl_value.split( separator ).length >= num;
+								break;
+						}
+					}
+				}
+				else {
+					check = true;
+				}
+			}
 			else {
 				check = expected_value != ctrl_value;
 			}
