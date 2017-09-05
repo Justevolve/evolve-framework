@@ -23,7 +23,7 @@ if ( ! ( version_compare( $wp_version, '4.4.0' ) >= 0 ) ) {
  * Plugin Name: Evolve Framework
  * Plugin URI: https://github.com/Justevolve/evolve-framework
  * Description: A WordPress development framework.
- * Version: 1.0.7
+ * Version: 1.0.8
  * Author: Evolve
  * Author URI: http://justevolve.it
  * Text Domain: ev_framework
@@ -108,7 +108,7 @@ class Ev_Framework {
 		define( 'EV_FW', true );
 
 		/* Framework version number. */
-		define( 'EV_FRAMEWORK_VERSION', '1.0.7' );
+		define( 'EV_FRAMEWORK_VERSION', '1.0.8' );
 
 		/* Theme folder. */
 		define( 'EV_THEME_FOLDER', trailingslashit( get_template_directory() ) );
@@ -306,6 +306,9 @@ class Ev_Framework {
 		if ( is_admin() ) {
 			/* Fields utilities. */
 			require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'admin/fields.php' );
+
+			/* Editor extension. */
+			require_once( EV_FRAMEWORK_INCLUDES_FOLDER . 'admin/editor.php' );
 
 			/* Updater. */
 			require_once( EV_FRAMEWORK_CLASSES_FOLDER . 'updater/ev_updater.php' );

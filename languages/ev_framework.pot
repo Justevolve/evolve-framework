@@ -2,9 +2,9 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Evolve Framework 1.0.7\n"
+"Project-Id-Version: Evolve Framework 1.0.8\n"
 "Report-Msgid-Bugs-To: https://github.com/Justevolve/evolve-framework\n"
-"POT-Creation-Date: 2015-07-15 20:32:43+00:00\n"
+"POT-Creation-Date: 2017-08-14 13:38:30+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -224,7 +224,7 @@ msgstr ""
 msgid "Insert this URL"
 msgstr ""
 
-#: evolve-framework.php:507
+#: evolve-framework.php:510
 msgid "Changelog"
 msgstr ""
 
