@@ -124,6 +124,10 @@
 			create: true,
 			createOnBlur: true,
 			maxItems: 1,
+			onDropdownOpen: function( dropdown ) {
+				$( dropdown ).addClass( "ev-multiple-select" );
+				// $( window ).trigger( "resize" );
+			},
 			load: function( query, callback ) {
 				if ( ! query.length || ev_is_url( query ) ) {
 					return callback();

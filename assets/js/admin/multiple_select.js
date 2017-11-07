@@ -22,9 +22,10 @@
 				dropdownParent: "body",
 				create: create,
 				maxItems: max,
-				// onDropdownOpen: function() {
-				// 	$( window ).trigger( "resize" );
-				// },
+				onDropdownOpen: function( dropdown ) {
+					$( dropdown ).addClass( "ev-multiple-select" );
+					// $( window ).trigger( "resize" );
+				},
 				load: function( query, callback ) {
 					if ( ! query.length ) {
 						return callback();
@@ -109,9 +110,10 @@
 				dropdownParent: "body",
 				maxItems: max,
 				create: false,
-				// onDropdownOpen: function() {
-				// 	$( window ).trigger( "resize" );
-				// },
+				onDropdownOpen: function( dropdown ) {
+					$( dropdown ).addClass( "ev-multiple-select" );
+					// $( window ).trigger( "resize" );
+				},
 				render: {
 					item: function( item, escape ) {
 						var html = '<div>';
