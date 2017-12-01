@@ -598,7 +598,8 @@ abstract class Ev_Field {
 				'strong' => array(),
 				'b' => array(),
 				'a' => array(
-					'href' => array()
+					'href' => array(),
+					'target' => array()
 				),
 				'br' => array()
 			);
