@@ -138,6 +138,10 @@
 	 * When clicking on a repeatable remove button, remove its parent field.
 	 */
 	$.evf.delegate( ".ev-repeatable-remove", "click", "repeatable", function() {
+		if ( $( this ).parents( ".ev-attachment-placeholder" ).length ) {
+			return false;
+		}
+
 		var field = $( this ).parents( ".ev-field" ).first(),
 			container = $( ".ev-container, .ev-bundle-fields-wrapper", field ).first(),
 			current_field = $( this ).parents( ".ev-field-inner, .ev-bundle-fields-wrapper" ).first();
