@@ -31,7 +31,36 @@
 	 */
 	function ev_repeatable_replace_at( string, index, character, how_many ) {
 		return string.substr( 0, index ) + character + string.substr( index + how_many );
-	}
+	};
+
+	/**
+	 * Adjust indexes.
+	 */
+	var ev_repeatable_adjust_indexes = function( fields, depth ) {
+		fields.each( function( index, field ) {
+			$( "[name]", field ).each( function() {
+				var name_attr = $( this ).attr( "name" ),
+					reg = new RegExp( /\[\d+\]/g ),
+					matches = name_attr.match( reg ),
+					i = 0;
+
+				if ( matches && matches.length ) {
+					for ( var j=0; j<matches.length; j++ ) {
+						matches[j] = j === depth - 1 ? "[" + index + "]" : matches[j];
+					}
+
+					var match = null;
+
+					while ( ( match = reg.exec( name_attr ) ) !== null ) {
+						name_attr = ev_repeatable_replace_at( name_attr, match.index, "[" + index + "]", matches[i].length );
+						i++;
+					}
+
+					$( this ).attr( "name", name_attr );
+				}
+			} );
+		} );
+	};
 
 	/**
 	 * Adding the sortable component to the UI building queue.
@@ -105,29 +134,7 @@
 					fields = $( "> .ev-field-inner, .ev-bundle-fields-wrapper", sortable ),
 					depth = $( ui.item ).parents( ".ev-repeatable" ).length;
 
-				fields.each( function( index, field ) {
-					$( "[name]", field ).each( function() {
-						var name_attr = $( this ).attr( "name" ),
-							reg = new RegExp( /\[\d+\]/g ),
-							matches = name_attr.match( reg ),
-							i = 0;
-
-						if ( matches && matches.length ) {
-							for ( var j=0; j<matches.length; j++ ) {
-								matches[j] = j === depth - 1 ? "[" + index + "]" : matches[j];
-							}
-
-							var match = null;
-
-							while ( ( match = reg.exec( name_attr ) ) !== null ) {
-								name_attr = ev_repeatable_replace_at( name_attr, match.index, matches[i], matches[i].length );
-								i++;
-							}
-
-							$( this ).attr( "name", name_attr );
-						}
-					} );
-				} );
+				ev_repeatable_adjust_indexes( fields, depth );
 
 				$( document ).trigger( "ev-repeatable-sortable-stop", [ $( ui.item ) ] );
 			}
@@ -221,6 +228,11 @@
 			}
 
 			update_names( count, field );
+
+			var fields = $( "> .ev-field-inner, .ev-bundle-fields-wrapper", container ),
+				depth = $( field ).parents( ".ev-repeatable" ).length;
+
+			ev_repeatable_adjust_indexes( fields, depth );
 
 			field.removeClass( "ev-no-fields" );
 

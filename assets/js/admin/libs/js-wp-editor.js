@@ -31,8 +31,13 @@
 
 ;(function( $, window ) {
 	$( document ).on( "ev-repeatable-sortable-stop", function( e, field ) {
-		var textarea = $( ".wp-editor-area", field ).first(),
-			id = textarea.attr( "id" ),
+		var textarea = $( ".wp-editor-area", field ).first();
+
+		if ( textarea.length === 0 ) {
+			return;
+		}
+
+		var id = textarea.attr( "id" ),
 			wrap = textarea.parents( ".wp-editor-wrap" ).first(),
 			clone = textarea.clone();
 
