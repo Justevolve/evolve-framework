@@ -14,6 +14,7 @@ function ev_sprintf_array( $format, $markers ) {
 
 /**
  * Search a subvalue in an array based on a collection of parameters.
+ * E.g. ev_array_search_index( $fields, array( 'handle' => 'value' ) )
  *
  * @since 0.4.0
  * @param $array array The array.
