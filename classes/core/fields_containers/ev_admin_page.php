@@ -55,6 +55,26 @@ abstract class Ev_AdminPage extends Ev_FieldsContainer {
 
 		parent::__construct( $handle, $title, $fields );
 
+		if ( empty( $this->_fields ) ) {
+			return;
+		}
+
+		$all_fields = wp_list_pluck( $this->_fields, 'fields' );
+		$proceed = false;
+
+		if ( ! empty( $all_fields ) ) {
+			foreach ( $all_fields as $fld ) {
+				if ( ! empty( $fld ) ) {
+					$proceed = true;
+					break;
+				}
+			}
+
+			if ( ! $proceed ) {
+				return;
+			}
+		}
+
 		/* Register default fields. */
 		add_filter( "ev_admin_page_default_fields[page:{$this->handle()}]", array( $this, 'default_fields' ) );
 
