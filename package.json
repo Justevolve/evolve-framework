@@ -4,7 +4,7 @@
 	"folder": "evolve-framework",
 	"version": "1.0.10",
 	"wordpress": {
-	  "text_domain": "ev_framework"
+		"text_domain": "ev_framework"
 	},
 	"devDependencies": {
 		"grunt": "~0.4.1",
