@@ -14,7 +14,10 @@
 				monthNames     : ev_date_field.monthNames,
 				prevText       : ev_date_field.prevText,
 				nextText       : ev_date_field.nextText,
-				showAnim: ""
+				showAnim: "",
+				beforeShow: function( input, ist ) {
+					ist.dpDiv.addClass( "ev-datepicker-dropdown" );
+				}
 			} );
 		} );
 	} );

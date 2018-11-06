@@ -27,121 +27,123 @@
 
 $datepicker_base: 30px;
 
-.ui-datepicker {
-	background: #fff;
-	border: 1px solid $grey_1;
-	border-radius: $radius;
-	border-top-left-radius: 0;
-	line-height: $datepicker_base;
-	display: none;
-	margin-top: -1px;
-	overflow: hidden;
-	@include box-shadow( #{$ui_el_shadow_hover} );
-
-	.ui-datepicker-header {
-		background: $grey_0;
-		position: relative;
+.ev-datepicker-dropdown {
+	&.ui-datepicker {
+		background: #fff;
+		border: 1px solid $grey_1;
+		border-radius: $radius;
+		border-top-left-radius: 0;
 		line-height: $datepicker_base;
+		display: none;
+		margin-top: -1px;
+		overflow: hidden;
+		@include box-shadow( #{$ui_el_shadow_hover} );
 
-		.ui-datepicker-prev,
-		.ui-datepicker-next {
-			font-weight: bold;
-			cursor: pointer;
-			text-align: center;
-			color: #333;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-
-			span {
-				display: none;
-			}
-
-			&:before {
-				font-size: 14px;
-				margin-top: ( $datepicker_base - 14px ) / 2;
-				position: relative;
-			}
-
-			&:hover {
-				color: $green;
-			}
-		}
-
-		.ui-datepicker-prev {
-			left: 0;
-			padding-left: 5px;
-
-			&:before {
-				@include icon( "\f341" );
-			}
-		}
-
-		.ui-datepicker-next {
-			right: 0;
-			padding-right: 5px;
-
-			&:before {
-				@include icon( "\f345" );
-			}
-		}
-
-		.ui-datepicker-title {
-			text-align: center;
-			padding: 0 5px;
-			font-weight: bold;
-		}
-	}
-
-	.ui-datepicker-calendar {
-		border-spacing: 0;
-
-		th, td {
-			text-align: center;
-			@include size( $datepicker_base );
-		}
-
-		th {
-			font-weight: normal;
-			font-style: italic;
-			color: $grey_3;
+		.ui-datepicker-header {
 			background: $grey_0;
-			border-bottom: 1px solid $grey_1;
-		}
+			position: relative;
+			line-height: $datepicker_base;
 
-		td {
-			cursor: pointer;
-
-			&:hover {
-				background: rgba( #000, .05 );
-			}
-
-			&.ui-datepicker-unselectable:hover {
-				background: transparent;
-			}
-
-			&.ui-datepicker-today a {
+			.ui-datepicker-prev,
+			.ui-datepicker-next {
 				font-weight: bold;
-				color: $green;
-			}
+				cursor: pointer;
+				text-align: center;
+				color: #333;
+				position: absolute;
+				top: 0;
+				bottom: 0;
 
-			&.ui-datepicker-current-day {
-				background: $green;
+				span {
+					display: none;
+				}
 
-				a {
-					color: $white;
-					font-weight: bold;
+				&:before {
+					font-size: 14px;
+					margin-top: ( $datepicker_base - 14px ) / 2;
+					position: relative;
+				}
+
+				&:hover {
+					color: $green;
 				}
 			}
 
-			a {
-				text-decoration: none;
-				color: $black;
-				box-shadow: none;
+			.ui-datepicker-prev {
+				left: 0;
+				padding-left: 5px;
 
-				&:focus {
-					outline: none;
+				&:before {
+					@include icon( "\f341" );
+				}
+			}
+
+			.ui-datepicker-next {
+				right: 0;
+				padding-right: 5px;
+
+				&:before {
+					@include icon( "\f345" );
+				}
+			}
+
+			.ui-datepicker-title {
+				text-align: center;
+				padding: 0 5px;
+				font-weight: bold;
+			}
+		}
+
+		.ui-datepicker-calendar {
+			border-spacing: 0;
+
+			th, td {
+				text-align: center;
+				@include size( $datepicker_base );
+			}
+
+			th {
+				font-weight: normal;
+				font-style: italic;
+				color: $grey_3;
+				background: $grey_0;
+				border-bottom: 1px solid $grey_1;
+			}
+
+			td {
+				cursor: pointer;
+
+				&:hover {
+					background: rgba( #000, .05 );
+				}
+
+				&.ui-datepicker-unselectable:hover {
+					background: transparent;
+				}
+
+				&.ui-datepicker-today a {
+					font-weight: bold;
+					color: $green;
+				}
+
+				&.ui-datepicker-current-day {
+					background: $green;
+
+					a {
+						color: $white;
+						font-weight: bold;
+					}
+				}
+
+				a {
+					text-decoration: none;
+					color: $black;
 					box-shadow: none;
+
+					&:focus {
+						outline: none;
+						box-shadow: none;
+					}
 				}
 			}
 		}
