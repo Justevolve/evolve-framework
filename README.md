@@ -6,13 +6,13 @@ A WordPress development framework.
 
 ## Changelog
 
-<<<<<<< HEAD
-Last updated on: 2018-11-06T10:37:54Z
-=======
-Last updated on: 2018-05-15T12:12:17Z
->>>>>>> f96e1df7dd7af94aa2c4e1feb8917e060e4c5e16
+Last updated on: 2018-11-06T10:39:55Z
 Requires: 4.5
 Tested: 4.9.6
+
+### 1.0.11
+
+* Fixed compatibility with multiple instances of jQuery UI Datepicker
 
 ### 1.0.10
 

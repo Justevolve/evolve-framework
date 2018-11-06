@@ -23,7 +23,7 @@ if ( ! ( version_compare( $wp_version, '4.4.0' ) >= 0 ) ) {
  * Plugin Name: Evolve Framework
  * Plugin URI: https://github.com/Justevolve/evolve-framework
  * Description: A WordPress development framework.
- * Version: 1.0.10
+ * Version: 1.0.11
  * Author: Evolve
  * Author URI: http://justevolve.it
  * Text Domain: ev_framework
@@ -108,7 +108,7 @@ class Ev_Framework {
 		define( 'EV_FW', true );
 
 		/* Framework version number. */
-		define( 'EV_FRAMEWORK_VERSION', '1.0.10' );
+		define( 'EV_FRAMEWORK_VERSION', '1.0.11' );
 
 		/* Theme folder. */
 		define( 'EV_THEME_FOLDER', trailingslashit( get_template_directory() ) );
