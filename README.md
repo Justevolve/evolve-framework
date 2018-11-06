@@ -6,9 +6,30 @@ A WordPress development framework.
 
 ## Changelog
 
-Last updated on: 2018-11-06T10:35:58Z
+<<<<<<< HEAD
+Last updated on: 2018-11-06T10:37:54Z
+=======
+Last updated on: 2018-05-15T12:12:17Z
+>>>>>>> f96e1df7dd7af94aa2c4e1feb8917e060e4c5e16
 Requires: 4.5
-Tested: 4.6.1
+Tested: 4.9.6
+
+### 1.0.10
+
+* Added shortcodes support for links.
+* Minor bug fixes.
+
+### 1.0.9
+
+* Fixed an issue with dropdown controls in links fields.
+
+### 1.0.8
+
+* Minor bug fixes.
+
+### 1.0.7
+
+* Minor bug fixes.
 
 ### 1.0.6
 

@@ -99,7 +99,7 @@
 	$.evf.ui.add( "input.ev-multiple-select-input", function() {
 		$( this ).each( function() {
 			var options = $.parseJSON( $( this ).attr( "data-options" ) ),
-				max = $( this ).attr( "data-max" ) ? parseInt( $( this ).attr( "data-max" ), 10 ) : options.length;
+				max = $( this ).attr( "data-max" ) ? parseInt( $( this ).attr( "data-max" ), 10 ) : options.length + 1;
 
 			$( this ).selectize( {
 				plugins: ['remove_button', 'drag_drop'],

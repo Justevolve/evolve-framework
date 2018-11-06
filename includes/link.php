@@ -165,6 +165,8 @@ function ev_link_open( $data, $echo = true ) {
 
 	if ( is_numeric( $url ) ) {
 		$url = get_permalink( $url );
+	} else {
+		$url = do_shortcode( $url );
 	}
 
 	if ( $target == '_blank' ) {
