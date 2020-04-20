@@ -779,8 +779,8 @@ abstract class Ev_Field {
 		printf( '<div class="%s" %s>', esc_attr( implode( ' ', $this->classes() ) ), $this->attrs() );
 			echo '<div class="ev-field-inner-wrapper">';
 
-				$is_shifted = in_array( $label['type'], array( 'shifted', 'shifted-hidden' ) );
-				$main_label_type = $label['type'];
+				$is_shifted = isset( $label[ 'type' ] ) && in_array( $label[ 'type' ], array( 'shifted', 'shifted-hidden' ) );
+				$main_label_type = isset( $label[ 'type' ] ) ? $label[ 'type' ] : '';
 
 				if ( $is_shifted ) {
 					$main_label_type = 'inline-hidden';
