@@ -59,11 +59,11 @@ add_filter( 'ev_field_types', 'ev_register_icon_field_type' );
  * @since 0.1.0
  */
 function ev_icon_field_i18n() {
-	wp_localize_script( 'jquery', 'ev_icon_field', array(
+	wp_localize_script( 'ev-admin', 'ev_icon_field', array(
 		'0' => _x( 'Nothing found', 'no icons found', 'ev_framework' ),
 		'1' => _x( '%s found', 'one icon found', 'ev_framework' ),
 		'2' => _x( '%s found', 'multiple icons found', 'ev_framework' ),
 	) );
 }
 
-add_action( 'admin_enqueue_scripts', 'ev_icon_field_i18n' );
+add_action( 'admin_enqueue_scripts', 'ev_icon_field_i18n', 50 );

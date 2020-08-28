@@ -23,7 +23,7 @@ if ( ! ( version_compare( $wp_version, '4.4.0' ) >= 0 ) ) {
  * Plugin Name: Evolve Framework
  * Plugin URI: https://github.com/Justevolve/evolve-framework
  * Description: A WordPress development framework.
- * Version: 1.0.11
+ * Version: 1.0.12
  * Author: Evolve
  * Author URI: http://justevolve.it
  * Text Domain: ev_framework
@@ -108,7 +108,7 @@ class Ev_Framework {
 		define( 'EV_FW', true );
 
 		/* Framework version number. */
-		define( 'EV_FRAMEWORK_VERSION', '1.0.11' );
+		define( 'EV_FRAMEWORK_VERSION', '1.0.12' );
 
 		/* Theme folder. */
 		define( 'EV_THEME_FOLDER', trailingslashit( get_template_directory() ) );
@@ -161,7 +161,7 @@ class Ev_Framework {
 		load_plugin_textdomain( 'ev_framework', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 		/* Localize framework strings. */
-		add_action( 'admin_enqueue_scripts', array( $this, 'i18n_strings' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'i18n_strings' ), 50 );
 	}
 
 	/**
@@ -173,7 +173,7 @@ class Ev_Framework {
 	{
 		global $wp_version;
 
-		wp_localize_script( 'jquery', 'ev_framework', array(
+		wp_localize_script( 'ev-admin', 'ev_framework', array(
 			'wp_version' => $wp_version,
 			'editor' => array(
 				'text' => __( 'Text', 'ev_framework' ),

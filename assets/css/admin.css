@@ -152,7 +152,7 @@ body.ev-modal-open { overflow: hidden; }
 @media only screen and (max-width: 960px) { .ev-admin-page .ev-tabs-nav.ev-vertical { width: 25%; } }
 @media only screen and (max-width: 782px) { .ev-admin-page .ev-tabs-nav.ev-vertical { width: 100%; padding-right: 0; margin-bottom: 24px; } }
 .ev-admin-page .ev-tabs-nav.ev-vertical li { margin-bottom: 0; }
-.ev-admin-page .ev-tabs-nav.ev-vertical li a { display: block; position: relative; font-size: 13px; padding: 12px 13.33333px; text-decoration: none; color: #999; border-radius: 3px; font-weight: bold; -webkit-transition: none; -moz-transition: none; transition: none; }
+.ev-admin-page .ev-tabs-nav.ev-vertical li a { display: block; position: relative; font-size: 13px; padding: 12px 13.3333333333px; text-decoration: none; color: #999; border-radius: 3px; font-weight: bold; -webkit-transition: none; -moz-transition: none; transition: none; }
 .ev-admin-page .ev-tabs-nav.ev-vertical li a:focus { box-shadow: none; }
 .ev-admin-page .ev-tabs-nav.ev-vertical li a:hover { color: #333; background-color: rgba(255, 255, 255, 0.5); }
 .ev-admin-page .ev-tabs-nav.ev-vertical li a.ev-active { background-color: #66CC66; color: #fff; }
@@ -783,9 +783,9 @@ input[type="radio"]:checked + .ev-radio.ev-graphic-radio:before { border-color: 
 .ev-field.ev-field-size-full { width: 100%; clear: both; }
 .ev-field.ev-field-size-large, .ev-field.ev-field-size-one-half, .ev-field.ev-field-size-two-fourths { width: 50%; }
 @media only screen and (max-width: 782px) { .ev-field.ev-field-size-large, .ev-field.ev-field-size-one-half, .ev-field.ev-field-size-two-fourths { width: 100%; } }
-.ev-field.ev-field-size-medium, .ev-field.ev-field-size-one-third { width: 33.33333%; }
+.ev-field.ev-field-size-medium, .ev-field.ev-field-size-one-third { width: 33.3333333333%; }
 @media only screen and (max-width: 782px) { .ev-field.ev-field-size-medium, .ev-field.ev-field-size-one-third { width: 100%; } }
-.ev-field.ev-field-size-two-thirds { width: 66.66667%; }
+.ev-field.ev-field-size-two-thirds { width: 66.6666666667%; }
 @media only screen and (max-width: 960px) { .ev-field.ev-field-size-two-thirds { width: 50%; } }
 @media only screen and (max-width: 782px) { .ev-field.ev-field-size-two-thirds { width: 100%; } }
 .ev-field.ev-field-size-small, .ev-field.ev-field-size-one-fourth { width: 25%; }

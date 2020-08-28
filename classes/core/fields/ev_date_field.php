@@ -61,7 +61,7 @@ add_filter( 'ev_field_types', 'ev_register_date_field_type' );
  * @since 0.1.0
  */
 function ev_date_field_i18n() {
-	wp_localize_script( 'jquery', 'ev_date_field', array(
+	wp_localize_script( 'ev-admin', 'ev_date_field', array(
 		'dayNames' => array(
 			__( 'Sunday' ),
 			__( 'Monday' ),
@@ -113,4 +113,4 @@ function ev_date_field_i18n() {
 	) );
 }
 
-add_action( 'admin_enqueue_scripts', 'ev_date_field_i18n' );
+add_action( 'admin_enqueue_scripts', 'ev_date_field_i18n', 50 );

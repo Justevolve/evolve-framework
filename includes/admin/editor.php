@@ -36,7 +36,7 @@ add_filter( 'mce_external_plugins', 'ev_editr_register_tinymce_javascript' );
  * @since 1.0.8
  */
 function ev_editr_localize() {
-	wp_localize_script( 'jquery', 'ev_editr', apply_filters( 'ev_editr_formats', array() ) );
+	wp_localize_script( 'ev-admin', 'ev_editr', apply_filters( 'ev_editr_formats', array() ) );
 }
 
-add_action( 'admin_enqueue_scripts', 'ev_editr_localize' );
+add_action( 'admin_enqueue_scripts', 'ev_editr_localize', 50 );
