@@ -2,7 +2,7 @@
 	"name": "Evolve-Framework",
 	"title": "Evolve Framework",
 	"folder": "evolve-framework",
-	"version": "1.0.12",
+	"version": "1.0.11",
 	"wordpress": {
 		"text_domain": "ev_framework"
 	},
