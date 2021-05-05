@@ -97,6 +97,26 @@
 	 * Adding the multiple select component to the UI building queue.
 	 */
 	$.evf.ui.add( "input.ev-multiple-select-input", function() {
+		function decodeHTMLEntities(text) {
+		    var entities = [
+		        ['amp', '&'],
+		        ['apos', '\''],
+		        ['#x27', '\''],
+		        ['#x2F', '/'],
+		        ['#39', '\''],
+		        ['#47', '/'],
+		        ['lt', '<'],
+		        ['gt', '>'],
+		        ['nbsp', ' '],
+		        ['quot', '"']
+		    ];
+
+		    for (var i = 0, max = entities.length; i < max; ++i)
+		        text = text.replace(new RegExp('&'+entities[i][0]+';', 'g'), entities[i][1]);
+
+		    return text;
+		}
+
 		$( this ).each( function() {
 			var options = $.parseJSON( $( this ).attr( "data-options" ) ),
 				max = $( this ).attr( "data-max" ) ? parseInt( $( this ).attr( "data-max" ), 10 ) : options.length + 1;

@@ -170,6 +170,9 @@ function ev_multiple_select( $name, $data, $selected = '', $args = array() ) {
 		$label = is_array( $texts ) && isset( $texts['label'] ) ? $texts['label'] : $texts;
 		$spec = is_array( $texts ) && isset( $texts['spec'] ) ? $texts['spec'] : '';
 
+		$label = str_replace( '&#039;', '\'', $label );
+		$label = html_entity_decode( $label );
+
 		$structured_data[] = array(
 			'val'   => $val,
 			'label' => $label,
