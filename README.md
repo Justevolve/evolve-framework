@@ -10,6 +10,10 @@ Last updated on: 2021-05-05T14:56:09Z
 Requires: 4.5
 Tested: 4.9.6
 
+### 1.0.13
+
+* Fixed PHP 8.1 compatibility issues.
+
 ### 1.0.12
 
 * Fixed accent issue on multiple select elements.
